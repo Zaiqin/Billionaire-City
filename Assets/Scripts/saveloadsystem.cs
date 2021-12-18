@@ -39,8 +39,14 @@ public class saveloadsystem : MonoBehaviour
         Property pp = obj.GetComponent<Property>();
         pp.initialise(prop);
 
+        // getting z pos
+        float[] coords = { (float)pos.x, (float)pos.y };
+        float xFactor = (coords[0] -= 45) / 1000;
+        float yFactor = coords[1] / 10;
+        float zPos = xFactor + yFactor;
+
         // spawning property, add name of object
-        pp.transform.position = new Vector3((float)(pos.x+1), (float)(pos.y-1), -8f); //bottom left tile of hq is tile 0,0
+        pp.transform.position = new Vector3((float)(pos.x+1), (float)(pos.y-1), zPos); //bottom left tile of hq is tile 0,0
         pp.transform.parent = PropertiesParent.transform;
         pp.transform.position += new Vector3(-1f, 1.64f, 0f); //Offset vector so that bottom left tile is the tilename that the property is on
         pp.transform.localScale = new Vector2(1f, 1f);

@@ -19,7 +19,7 @@ public class ppDragButton : MonoBehaviour
     public Tilemap map;
     public TileBase greenGrass, tileGrass;
 
-    private float getZ(float[] coords) //range of y is 3 to -3, range of x is -44 to 45
+    public float getZ(float[] coords) //range of y is 3 to -3, range of x is -44 to 45
     {
         float result;
         //print("x is at " + coords[0] + ", y is at " + coords[1]);
