@@ -59,7 +59,7 @@ public class ppDragButton : MonoBehaviour
         externalAudioPlayer.GetComponent<AudioSource>().PlayOneShot(buildSound);
         ppDrag.SetActive(false);
 
-        if (pp.obj.GetComponent<PropertyStats>().propType == "House")
+        if (pCard.type == "House")
         {
             pp.obj.transform.GetChild(0).gameObject.AddComponent<BoxCollider2D>();
             pp.obj.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2; //shows contract

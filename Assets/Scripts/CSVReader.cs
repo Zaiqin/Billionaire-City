@@ -130,6 +130,26 @@ public class CSVReader : MonoBehaviour
             tempArray[i].XP = string.IsNullOrEmpty(data[(cols * (masterNo + 2)) + 21]) ? 0 : int.Parse(data[(cols * (masterNo + 2)) + 21]);
             tempArray[i].level = string.IsNullOrEmpty(data[(cols * (masterNo + 2)) + 22]) ? 0 : int.Parse(data[(cols * (masterNo + 2)) + 22]);
             //---------------------------------
+
+            //--- Determine type of property ------
+            if (tempArray[i].threemins != 0)
+            {
+                tempArray[i].type = "House";
+            }
+            else if (tempArray[i].decoBonus != 0)
+            {
+                tempArray[i].type = "Deco";
+            }
+            else if (tempArray[i].buildTime.Contains("days"))
+            {
+                tempArray[i].type = "Wonder";
+            }
+            else
+            {
+                tempArray[i].type = "Commerce";
+            }
+            // ------------------------------------
+
             // Addition of PropertyCard Image and Property Image ---------------------------------------------
             // Addition of Property Card ie bgImage ---------------------------------
             if (bgSprites.ContainsKey(bgImagePath)) //check if cannot find url

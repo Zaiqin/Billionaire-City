@@ -6,7 +6,7 @@ internal class Property
 {
     public UnityEngine.GameObject obj;
 
-    public void init(PropertyCard pcard, Sprite contractStarSprite, string type)
+    public void init(PropertyCard pcard, Sprite contractStarSprite)
     {
         obj = new GameObject();
         SpriteRenderer renderer = obj.AddComponent<SpriteRenderer>();
@@ -20,7 +20,7 @@ internal class Property
         pstats.number = 10;
         obj.AddComponent<BoxCollider2D>();
 
-        if (type == "House")
+        if (pcard.type == "House")
         {
             Debug.Log("here here is hosue");
             GameObject contract = new GameObject();
@@ -64,7 +64,6 @@ internal class PropertyStats : MonoBehaviour, IPointerClickHandler
     public int zPos;
     public int number;
     public PropertyCard pCard;
-    public string propType;
 
     void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
     {

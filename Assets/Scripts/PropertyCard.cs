@@ -7,6 +7,7 @@ public class PropertyCard
     public string propName;
     public string cost;
     public string space;
+    public string type;
     public int tenants;
     public int threemins;
     public int thirtymins;

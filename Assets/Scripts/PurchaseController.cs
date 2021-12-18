@@ -17,28 +17,14 @@ public class PurchaseController : MonoBehaviour
     [SerializeField]
     Sprite contractStarSprite;
 
-    public void purchaseProperty(PropertyCard prop)
+    public void purchaseProperty(PropertyCard prop) //called when buy button is pressed with sufficient balance
     {
         print("spawning property into game");
         Property pp = new Property();
-        string type;
-        if (prop.threemins != 0)
-        {
-            type = "House";
-        }
-        else if (prop.decoBonus != 0)
-        {
-            type = "Deco";
-        }
-        else if (prop.buildTime.Contains("days"))
-        {
-            type = "Wonder";
-        }
-        else
-        {
-            type = "Commerce";
-        }
-        pp.init(prop, contractStarSprite,type);
+
+        pp.init(prop, contractStarSprite); //Creation of the Property
+
+        // Finding and spawning at center of the screen, add name of object
         Vector2 centerScreenPos = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 2, 0));
         Vector3Int cellPos = map.WorldToCell(centerScreenPos);
         pp.obj.transform.position = new Vector3((float)(cellPos.x), (float)(cellPos.y), -8f); //bottom left tile of hq is tile 0,0
@@ -48,26 +34,14 @@ public class PurchaseController : MonoBehaviour
         string loc = "(" + (cellPos.x-1) + "," + (cellPos.y+1) + ")";
         pp.obj.name += loc;
 
+        // adding components
         pp.obj.AddComponent<Draggable>();
         pp.obj.GetComponent<Draggable>().dragEnabled = true;
         pp.obj.AddComponent<BlinkingProperty>();
         pp.obj.GetComponent<BlinkingProperty>().StartBlink();
         pp.obj.GetComponent<PropertyStats>().pCard = prop;
 
-        if (prop.threemins != 0)
-        {
-            pp.obj.GetComponent<PropertyStats>().propType = "House";
-        } else if (prop.decoBonus != 0)
-        {
-            pp.obj.GetComponent<PropertyStats>().propType = "Deco";
-        } else if (prop.buildTime.Contains("days"))
-        {
-            pp.obj.GetComponent<PropertyStats>().propType = "Wonder";
-        } else
-        {
-            pp.obj.GetComponent<PropertyStats>().propType = "Commerce";
-        }
-
+        // unhide propertyDrag buttons and placing it at grid center of property
         ppDrag.SetActive(true);
         ppDrag.transform.position = new Vector3(pp.obj.transform.position.x + (float.Parse(prop.space.Substring(0, 1))) / 2, pp.obj.transform.position.y - 1f, ppDrag.transform.position.z);
         
