@@ -34,11 +34,11 @@ public class Draggable : MonoBehaviour
         if (this.transform.parent == pendingParent.transform)
         {
             transform.position = new Vector3((float)agridPosition.x, (float)agridPosition.y, transform.position.z);
-            transform.position += new Vector3(-1f, -0.35f, 0f); //offset vector
+            transform.position += new Vector3(-1f, -0.32f, 0f); //offset vector
             ppDrag.transform.position = new Vector3(transform.position.x + (float.Parse(pStats.pCard.space.Substring(0, 1))) / 2, transform.position.y - 1f, ppDrag.transform.position.z);
-            string loc = pStats.pCard.displayName + "(" + agridPosition.x + "," + agridPosition.y + ")";
+            string loc = pStats.pCard.displayName + "(" + (agridPosition.x-1) + "," + (agridPosition.y-1) + ")";
             this.name = loc;
-            XY[0] = (float)agridPosition.x; XY[1] = (float)agridPosition.y;
+            XY[0] = (float)agridPosition.x-1; XY[1] = (float)agridPosition.y-1;
         }
     }
 
