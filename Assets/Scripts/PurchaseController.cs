@@ -25,7 +25,7 @@ public class PurchaseController : MonoBehaviour
         // Adding property component and initialising it
         obj.AddComponent<Property>();
         Property pp = obj.GetComponent<Property>();
-        pp.initialise(prop, contractStarSprite);
+        pp.initialise(prop);
 
         // Finding and spawning at center of the screen, add name of object
         Vector2 centerScreenPos = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 2, 0));

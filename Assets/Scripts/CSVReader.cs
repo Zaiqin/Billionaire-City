@@ -9,7 +9,16 @@ public class CSVReader : MonoBehaviour
     [SerializeField]
     private TextAsset textAssetData;
 
+    // Database of all Cards in the game --------------------------------------------------------
+    public Dictionary<String, PropertyCard> CardDatabase = new Dictionary<string, PropertyCard>();
+
+    /* ------------------------------------------------------------------------------------------
+     2D Array of PropertyCards, only purpose is to get 4 arrays of each type for the shop
+     without having to extract from CardDatabase Dictionary for each tab, having to select portions of it
+     which requires needing to get no for each type, index range for each property type
+    --------------------------------------------------------------------------------------------*/
     public PropertyCard[][] propertyCardArrays = new PropertyCard[4][];
+    // ------------------------------------------------------------------------------------------
 
     public void ReadCSV()
     {
@@ -172,6 +181,8 @@ public class CSVReader : MonoBehaviour
                 print("Cannot locate property sprite for " + propImagePath);
             }
             // -----------------------------------------------------------------------------------------------
+            CardDatabase.Add(tempArray[i].displayName, tempArray[i]);
+            // END OF INITIALISATION OF PROPERTY, BELOW IS TO DETECT LAST OF EACH TYPE OF PROPERTY ----------
 
             // IF REACH LAST OF EACH TYPE, RESET i SO THAT WHEN IT LOOPS AGAIN IT IS i=0, SO NEXT ARRAY WILL START FROM i=0.
             if (data[cols * (masterNo + 2) + 17] == "LAST HOUSE")
@@ -201,7 +212,6 @@ public class CSVReader : MonoBehaviour
                 propertyCardArrays[3] = tempArray; // Set wonderArray to tempArray
                 i = -1;
             }
-
             masterNo++;
         }
         print("Completed reading CSV data");

@@ -36,17 +36,19 @@ public class ppDragButton : MonoBehaviour
     public void dragConfirm()
     {
         Property pp;
+
+        // Getting Property and changing parents -----------
         pp = pendingParent.transform.GetChild(0).gameObject.GetComponent<Property>();
-        //print("obj name is in drag confirm is " + pp.obj.name);
         pp.transform.position = new Vector3(pp.transform.position.x, pp.transform.position.y, getZ(pp.GetComponent<Draggable>().XY));
         pp.transform.parent = propParent.transform;
 
+        // ------------- removing blinking and draggable -----------------------------
         pp.GetComponent<BlinkingProperty>().StopBlink();
         pp.GetComponent<Renderer>().material.color = Color.white;
         pp.GetComponent<Draggable>().dragEnabled = false;
-        PropertyCard pCard = pp.GetComponent<Property>().Card;
-        //print("built a " + pp.obj.GetComponent<PropertyStats>().propType);
 
+        // Deducting money ---------------
+        PropertyCard pCard = pp.GetComponent<Property>().Card;
         if (pCard.cost.Contains("Gold"))
         {
             stats.updateStats(diffgold: -(int.Parse(pCard.cost.Remove(pCard.cost.Length - 5))));
@@ -56,9 +58,12 @@ public class ppDragButton : MonoBehaviour
             stats.updateStats(diffmoney: -(int.Parse(pCard.cost)));
             stats.updateStats(diffxp: pCard.XP);
         }
+        // -------------------------------
+
         externalAudioPlayer.GetComponent<AudioSource>().PlayOneShot(buildSound);
         ppDrag.SetActive(false);
 
+        // adding the contract collider and sorting its order -----------
         if (pCard.type == "House")
         {
             pp.transform.GetChild(0).gameObject.AddComponent<BoxCollider2D>();

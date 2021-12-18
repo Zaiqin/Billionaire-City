@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class Property : MonoBehaviour, IPointerClickHandler
 {
     public PropertyCard Card;
-    public void initialise(PropertyCard pcard, Sprite contractStarSprite)
+    public void initialise(PropertyCard pcard)
     {
         // Adding propertySprite
         SpriteRenderer renderer = this.gameObject.AddComponent<SpriteRenderer>();
@@ -23,6 +23,7 @@ public class Property : MonoBehaviour, IPointerClickHandler
             GameObject contract = new GameObject();
             contract.name = "Contract";
             SpriteRenderer contractStarrenderer = contract.AddComponent<SpriteRenderer>();
+            Sprite contractStarSprite = Resources.Load<Sprite>("contractStar");
             contractStarrenderer.sprite = Sprite.Create(contractStarSprite.texture, new Rect(0, 0, contractStarSprite.texture.width, contractStarSprite.texture.height), new Vector2(0.5f, 0.5f), 850);
             contract.AddComponent<scaleLerper>();
             contractStarrenderer.sortingOrder = 0; // Hides it
