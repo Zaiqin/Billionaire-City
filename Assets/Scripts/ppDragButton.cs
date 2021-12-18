@@ -35,16 +35,16 @@ public class ppDragButton : MonoBehaviour
 
     public void dragConfirm()
     {
-        Property pp = new Property();
-        pp.obj = pendingParent.transform.GetChild(0).gameObject;
+        Property pp;
+        pp = pendingParent.transform.GetChild(0).gameObject.GetComponent<Property>();
         //print("obj name is in drag confirm is " + pp.obj.name);
-        pp.obj.transform.position = new Vector3(pp.obj.transform.position.x, pp.obj.transform.position.y, getZ(pp.obj.GetComponent<Draggable>().XY));
-        pp.obj.transform.parent = propParent.transform;
+        pp.transform.position = new Vector3(pp.transform.position.x, pp.transform.position.y, getZ(pp.GetComponent<Draggable>().XY));
+        pp.transform.parent = propParent.transform;
 
-        pp.obj.GetComponent<BlinkingProperty>().StopBlink();
-        pp.obj.GetComponent<Renderer>().material.color = Color.white;
-        pp.obj.GetComponent<Draggable>().dragEnabled = false;
-        PropertyCard pCard = pp.obj.GetComponent<PropertyStats>().pCard;
+        pp.GetComponent<BlinkingProperty>().StopBlink();
+        pp.GetComponent<Renderer>().material.color = Color.white;
+        pp.GetComponent<Draggable>().dragEnabled = false;
+        PropertyCard pCard = pp.GetComponent<Property>().Card;
         //print("built a " + pp.obj.GetComponent<PropertyStats>().propType);
 
         if (pCard.cost.Contains("Gold"))
@@ -61,8 +61,8 @@ public class ppDragButton : MonoBehaviour
 
         if (pCard.type == "House")
         {
-            pp.obj.transform.GetChild(0).gameObject.AddComponent<BoxCollider2D>();
-            pp.obj.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2; //shows contract
+            pp.transform.GetChild(0).gameObject.AddComponent<BoxCollider2D>();
+            pp.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2; //shows contract
         }
 
         // --------------------- Swapping to green border grass -------------
@@ -72,10 +72,11 @@ public class ppDragButton : MonoBehaviour
 
     public void dragCancel()
     {
-        Property pp = new Property();
-        pp.obj = pendingParent.transform.GetChild(0).gameObject;
-        Destroy(pp.obj);
+        Destroy(pendingParent.transform.GetChild(0).gameObject);
         externalAudioPlayer.GetComponent<AudioSource>().PlayOneShot(touchSound);
         ppDrag.SetActive(false);
+        // --------------------- Swapping to green border grass -------------
+        map.SwapTile(greenGrass, tileGrass);
+        // ------------------------------------------------------------------
     }
 }

@@ -38,15 +38,15 @@ public class HQstats : MonoBehaviour
         long propValue = 0;
         foreach (Transform child in PropertiesParent.transform)
         {
-            if (child.gameObject.GetComponent<PropertyStats>() != null)
+            if (child.gameObject.GetComponent<Property>() != null)
             {
-                if (child.gameObject.GetComponent<PropertyStats>().pCard.cost.Contains("Gold"))
+                if (child.gameObject.GetComponent<Property>().Card.cost.Contains("Gold"))
                 {
-                    propValue += int.Parse(child.gameObject.GetComponent<PropertyStats>().pCard.cost.Remove(child.gameObject.GetComponent<PropertyStats>().pCard.cost.Length - 5)) * 60000;
+                    propValue += int.Parse(child.gameObject.GetComponent<Property>().Card.cost.Remove(child.gameObject.GetComponent<Property>().Card.cost.Length - 5)) * 60000;
                 }
                 else
                 {
-                    propValue += int.Parse(child.gameObject.GetComponent<PropertyStats>().pCard.cost);
+                    propValue += int.Parse(child.gameObject.GetComponent<Property>().Card.cost);
                 }
             }
         }

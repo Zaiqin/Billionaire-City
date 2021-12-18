@@ -2,34 +2,31 @@
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-internal class Property
+public class Property : MonoBehaviour, IPointerClickHandler
 {
-    public UnityEngine.GameObject obj;
-
-    public void init(PropertyCard pcard, Sprite contractStarSprite)
+    public PropertyCard Card;
+    public void initialise(PropertyCard pcard, Sprite contractStarSprite)
     {
-        obj = new GameObject();
-        SpriteRenderer renderer = obj.AddComponent<SpriteRenderer>();
+        // Adding propertySprite
+        SpriteRenderer renderer = this.gameObject.AddComponent<SpriteRenderer>();
         renderer.sprite = pcard.propImage;
         renderer.sprite = Sprite.Create(pcard.propImage.texture, new Rect(0, 0, pcard.propImage.texture.width, pcard.propImage.texture.height), new Vector2(0f, 0f), 32);
         renderer.sortingOrder = 1;
 
-        obj.name = pcard.displayName;
-
-        PropertyStats pstats = obj.AddComponent<PropertyStats>();
-        pstats.number = 10;
-        obj.AddComponent<BoxCollider2D>();
+        Card = pcard;
+        this.name = pcard.displayName;
+        this.gameObject.AddComponent<BoxCollider2D>();
 
         if (pcard.type == "House")
         {
-            Debug.Log("here here is hosue");
+            print("here here is house");
             GameObject contract = new GameObject();
             contract.name = "Contract";
             SpriteRenderer contractStarrenderer = contract.AddComponent<SpriteRenderer>();
             contractStarrenderer.sprite = Sprite.Create(contractStarSprite.texture, new Rect(0, 0, contractStarSprite.texture.width, contractStarSprite.texture.height), new Vector2(0.5f, 0.5f), 850);
             contract.AddComponent<scaleLerper>();
-            contractStarrenderer.sortingOrder = 0; //hides it
-            contract.transform.parent = obj.transform;
+            contractStarrenderer.sortingOrder = 0; // Hides it
+            contract.transform.parent = this.transform;
             contract.transform.localPosition = new Vector3(float.Parse(pcard.space.Substring(0, 1)) / 2, float.Parse(pcard.space.Substring(pcard.space.Length - 1)) / 2, 0f);
 
             contract.AddComponent<contractScript>();
@@ -39,33 +36,8 @@ internal class Property
             Debug.Log("this not a house");
         }
     }
-}
 
-public class contractScript : MonoBehaviour, IPointerClickHandler
-{
-    public int testNumber;
-    public PropertyCard propCard;
-    
-    void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
-    {
-        print("clicked on contract");
-        GameObject canvas = GameObject.Find("Canvas");
-        GameObject contractMenu = canvas.transform.GetChild(canvas.transform.childCount - 1).gameObject;
-        contractMenu.SetActive(true);
-        GameObject contractController = GameObject.Find("Contract Scroll Controller");
-        contractController.GetComponent<RecyclableScrollerContract>().pCard = propCard;
-        contractController.GetComponent<RecyclableScrollerContract>().userReloadData();
-        
-    }
-}
-
-internal class PropertyStats : MonoBehaviour, IPointerClickHandler
-{
-    public int zPos;
-    public int number;
-    public PropertyCard pCard;
-
-    void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
+    public void OnPointerClick(PointerEventData eventData)
     {
         print("From property.cs clicked on" + this.name);
         GameObject propParent = GameObject.Find("Properties");
@@ -73,7 +45,7 @@ internal class PropertyStats : MonoBehaviour, IPointerClickHandler
         if (this.transform.parent == propParent.transform)
         {
             infoPanel.SetActive(true);
-            infoPanel.transform.GetChild(0).GetComponent<Text>().text = pCard.displayName;
+            infoPanel.transform.GetChild(0).GetComponent<Text>().text = this.Card.displayName;
             GameObject hqmenu = GameObject.Find("HQStats");
             if (hqmenu != null)
             {
@@ -83,46 +55,18 @@ internal class PropertyStats : MonoBehaviour, IPointerClickHandler
     }
 }
 
-/*
- 
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
-
-internal class Property
+public class contractScript : MonoBehaviour, IPointerClickHandler
 {
-    public GameObject obj;
-
-    public void init(PropertyCard pcard)
-    {
-        obj = new GameObject();
-        SpriteRenderer renderer = obj.AddComponent<SpriteRenderer>();
-        renderer.sprite = pcard.propImage;
-        renderer.sprite = Sprite.Create(pcard.propImage.texture, new Rect(0, 0, pcard.propImage.texture.width, pcard.propImage.texture.height), new Vector2(0f, 0f), 32);
-        renderer.sortingOrder = 2;
-
-        obj.name = pcard.displayName;
-
-        PropertyStats pstats = obj.AddComponent<PropertyStats>();
-        pstats.number = 10;
-        obj.AddComponent<BoxCollider2D>();
-    }
-}
-
-internal class PropertyStats : MonoBehaviour, IPointerClickHandler
-{
-    public int zPos;
-    public int number;
-    public PropertyCard pCard;
-    public string propType;
-
+    public int testNumber;
+    public PropertyCard propCard;
     void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
     {
-        print("clicke dme mememememe " + this.name);
+        print("clicked on contract");
+        GameObject canvas = GameObject.Find("Canvas");
+        GameObject contractMenu = canvas.transform.GetChild(canvas.transform.childCount - 1).gameObject;
+        contractMenu.SetActive(true);
+        GameObject contractController = GameObject.Find("Contract Scroll Controller");
+        contractController.GetComponent<RecyclableScrollerContract>().pCard = propCard;
+        contractController.GetComponent<RecyclableScrollerContract>().userReloadData();
     }
 }
-
-
- * */
