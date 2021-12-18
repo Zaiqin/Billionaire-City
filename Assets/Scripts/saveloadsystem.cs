@@ -24,8 +24,17 @@ public class saveloadsystem : MonoBehaviour
     [ContextMenu("Load Game")]
     public void LoadMyGame()
     {
-        print("going to load Bungalow at 3,-3");
-        loadProperty("Bungalow", new Vector2Int(3, -3));
+        print("Loading Default Properties");
+        loadProperty("Japanese Tree", new Vector2Int(-1, -2));
+        loadProperty("Fountain", new Vector2Int(-1, -4));
+        loadProperty("Pizzeria", new Vector2Int(-7, 0));
+        loadProperty("Townhouse", new Vector2Int(-5, -4));
+        loadProperty("Cypress Tree", new Vector2Int(2, -4));
+        loadProperty("Bungalow", new Vector2Int(3, -4));
+        loadProperty("Townhouse Luxury", new Vector2Int(6, 0));
+        loadProperty("Bungalow Luxury", new Vector2Int(-11, -3));
+        loadProperty("Cypress Tree", new Vector2Int(2, -7));
+        print("Successfully Loaded Game");
     }
 
     public void loadProperty(string propName, Vector2Int pos) //propName must be the display form, not camelCase; eg Bungalow Luxury, not bungalowlux
@@ -58,11 +67,13 @@ public class saveloadsystem : MonoBehaviour
         pp.GetComponent<Draggable>().dragEnabled = false;
         pp.gameObject.AddComponent<BlinkingProperty>();
         pp.gameObject.GetComponent<BlinkingProperty>().StopBlink();
-        // adding collider to contract and sorting its order ------
-        pp.transform.GetChild(0).gameObject.AddComponent<BoxCollider2D>();
-        pp.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2; //shows contract
 
-        print("reached herer");
-
+        if (pp.Card.type == "House") // check to only do these thats only for houses
+        {
+            // adding collider to contract and sorting its order ------
+            pp.transform.GetChild(0).gameObject.AddComponent<BoxCollider2D>();
+            pp.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2; //shows contract
+        }
+        print("Successfully loaded in " + propName + "at: x:" + pos.x + "y:" + pos.y);
     }
 }
