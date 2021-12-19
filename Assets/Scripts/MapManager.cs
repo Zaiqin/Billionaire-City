@@ -79,7 +79,7 @@ public class MapManager : MonoBehaviour
             {
                 print("clickedTile.name is " + clickedTile.name + ", tilebase is " + clickedTile);
 
-                if (((i == 1) && clickedTile.name.Contains("Grass")) || ((i == 1) && (delete == true)) || (clickedTile.name.Contains("road") && (i > 1)))
+                if (((i == 1) && clickedTile.name.Contains("greenGrass")) || ((i == 1) && (delete == true)) || (clickedTile.name.Contains("road") && (i > 1)))
                 {
                     string calcTile = TileChecker.calcTile(map, clickedTile, gridPosition.x, gridPosition.y);
 
@@ -91,10 +91,10 @@ public class MapManager : MonoBehaviour
                         createdTile.sprite = Resources.Load<Tile>(createPath).sprite;
                         createdTile.name = calcTile;
 
+
                         if ((i == 1) && (delete == true))
                         {
-                            createdTile.sprite = Resources.Load<Tile>("roadTiles/tileGrass").sprite;
-                            createdTile.name = "tileGrass";
+                            createdTile = map.GetTile<Tile>(new Vector3Int(-1, 0, 0)); //grass below hq
                         }
                         if (isMouseOverUI() == false)
                         {
@@ -129,7 +129,7 @@ public class MapManager : MonoBehaviour
             Vector3Int gridPosition = map.WorldToCell(mousePosition);
 
             Tile clickedTile = map.GetTile<Tile>(gridPosition);
-            if (clickedTile.name.Contains("tileGrass"))
+            if (clickedTile.name.Contains("greenGrass"))
             {
                 roadFunction(gridPosition, false);
             }
