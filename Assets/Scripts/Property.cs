@@ -24,7 +24,7 @@ public class Property : MonoBehaviour, IPointerClickHandler
             contract.name = "Contract";
             SpriteRenderer contractStarrenderer = contract.AddComponent<SpriteRenderer>();
             Sprite contractStarSprite = Resources.Load<Sprite>("contractStar");
-            contractStarrenderer.sprite = Sprite.Create(contractStarSprite.texture, new Rect(0, 0, contractStarSprite.texture.width, contractStarSprite.texture.height), new Vector2(0.5f, 0.5f), 850);
+            contractStarrenderer.sprite = Sprite.Create(contractStarSprite.texture, new Rect(0, 0, contractStarSprite.texture.width, contractStarSprite.texture.height), new Vector2(0.5f, 0.5f), 980);
             contract.AddComponent<scaleLerper>();
             contractStarrenderer.sortingOrder = 0; // Hides it
             contract.transform.parent = this.transform;
