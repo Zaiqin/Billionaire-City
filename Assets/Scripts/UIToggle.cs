@@ -113,8 +113,10 @@ public class UIToggle : MonoBehaviour
         infoPanel.SetActive(false);
 
         // Destroy any pending properties
-        Destroy(pendingParent.transform.GetChild(0).gameObject);
-        ppDrag.SetActive(false);
+        if (pendingParent.transform.childCount != 0) {
+            Destroy(pendingParent.transform.GetChild(0).gameObject);
+            ppDrag.SetActive(false);
+        }
     }
 
 }
