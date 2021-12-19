@@ -18,6 +18,20 @@ public class Statistics : MonoBehaviour
 
     public Image xpFill;
 
+    [Header("Input Values into Game:")]
+    // for inputting into inspector
+    public long inputMoney;
+    public long inputGold;
+    public long inputLevel;
+    public long inputXP;
+
+    
+    [ContextMenu("Input Values into Game")]
+    public void inputValues()
+    {
+        updateStats(inputMoney, inputGold, inputLevel, inputXP);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
