@@ -77,7 +77,7 @@ public class MapManager : MonoBehaviour
 
             if (clickedTile != null)
             {
-                print("clickedTile.name is " + clickedTile.name + ", tilebase is " + clickedTile);
+                //print("clickedTile.name is " + clickedTile.name + ", tilebase is " + clickedTile);
 
                 if (((i == 1) && clickedTile.name.Contains("greenGrass")) || ((i == 1) && (delete == true)) || (clickedTile.name.Contains("road") && (i > 1)))
                 {
@@ -104,11 +104,11 @@ public class MapManager : MonoBehaviour
                 }
             } else
             {
-                print("clicked tile is nil");
+                //print("clicked tile is nil");
             }
 
             i++;
-            print("i is now " + i);
+            //print("i is now " + i);
             if ((i == 14) && (cycle == 1))
             {
                 i = 1;

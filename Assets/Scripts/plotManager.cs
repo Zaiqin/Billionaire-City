@@ -25,6 +25,8 @@ public class plotManager : MonoBehaviour
     public AudioSource myFx;
     public AudioClip deleteSound;
 
+    public GameObject floatingValue;
+
     private bool isMouseOverUI()
     {
         return EventSystem.current.IsPointerOverGameObject();
@@ -56,6 +58,10 @@ public class plotManager : MonoBehaviour
         int cycle = 1;
         int i = 1;
         Vector3Int gridPosition = input;
+
+        // For the deduction of $1000 for building plot
+        Tile initialCenterTile = map.GetTile<Tile>(gridPosition);
+
         while ((i < 15) && cycle < 3) // cycle 1 extra time to reupdate clicked tile
         {
             gridPosition = input;
@@ -79,7 +85,7 @@ public class plotManager : MonoBehaviour
 
             if (clickedTile != null)
             {
-                print("clickedTile.name is " + clickedTile.name + ", tilebase is " + clickedTile);
+                //print("clickedTile.name is " + clickedTile.name + ", tilebase is " + clickedTile);
 
                 if (((i == 1) && clickedTile.name.Contains("greenGrass")) || ((i == 1) && (delete == true)) || (clickedTile.name.Contains("plot") && (i > 1)))
                 {
@@ -97,19 +103,10 @@ public class plotManager : MonoBehaviour
                         if ((i == 1) && (delete == true))
                         {
                             createdTile = map.GetTile<Tile>(new Vector3Int(-1, 0, 0)); //grass below hq
-                            print("set to grass tile" + createdTile.name);
+                            //print("set to grass tile" + createdTile.name);
                         }
                         if ((isMouseOverUI() == false) || (forced == true))
                         {
-                            /*if (createdTile.name.Contains("plot"))
-                            {
-                                stats.GetComponent<Statistics>().updateStats(-1000, 0, 0, 0);
-                                print("deducting 1k");
-                            }
-                            if ((delete == true) && ((i == 1) && cycle == 1)){
-                                stats.GetComponent<Statistics>().updateStats(1000, 0, 0, 0);
-                                print("adding 1k");
-                            }*/
                             map.SetTile(gridPosition, createdTile);
                         }
                     }
@@ -117,16 +114,31 @@ public class plotManager : MonoBehaviour
             }
             else
             {
-                print("clicked tile is nil");
+                //print("clicked tile is nil");
             }
 
             i++;
-            print("i is now " + i);
+            //print("i is now " + i);
             if ((i == 14) && (cycle == 1))
             {
                 i = 1;
                 cycle = 2;
             }
+        }
+
+        // For deduction and adding back $1k if removed plot but not used to build house;
+        //print("initial center tile is " + initialCenterTile.name + ", final center tile is " + map.GetTile<Tile>(gridPosition).name);
+        if (initialCenterTile.name.Contains("plot") && map.GetTile<Tile>(gridPosition).name.Contains("Grass") && forced == false)
+        {
+            stats.GetComponent<Statistics>().updateStats(1000, 0, 0, 0);
+            //print("adding 1k");
+        }
+        if (initialCenterTile.name.Contains("Grass") && map.GetTile<Tile>(gridPosition).name.Contains("plot"))
+        {
+            stats.GetComponent<Statistics>().updateStats(-1000, 0, 0, 0);
+            //print("deducting 1k");
+            GameObject value = Instantiate(floatingValue, gridPosition, Quaternion.identity) as GameObject;
+            value.transform.GetChild(0).GetComponent<TextMesh>().text = "-$1000";
         }
         //float walkingSpeed = dataFromTiles[clickedTile].walkingSpeed;
 

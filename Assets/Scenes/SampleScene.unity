@@ -55682,6 +55682,7 @@ MonoBehaviour:
   deleteToggle: {fileID: 1580363176}
   myFx: {fileID: 1580363178}
   deleteSound: {fileID: 8300000, guid: 17bc089c9bea4441daa1ce381c5aa89a, type: 3}
+  floatingValue: {fileID: 0}
 --- !u!1 &208941323
 GameObject:
   m_ObjectHideFlags: 0
@@ -66682,6 +66683,7 @@ MonoBehaviour:
   deleteToggle: {fileID: 1580363176}
   myFx: {fileID: 1580363178}
   deleteSound: {fileID: 8300000, guid: 17bc089c9bea4441daa1ce381c5aa89a, type: 3}
+  floatingValue: {fileID: 0}
 --- !u!1 &1636394977
 GameObject:
   m_ObjectHideFlags: 0
@@ -68587,6 +68589,8 @@ MonoBehaviour:
   deleteToggle: {fileID: 1580363176}
   myFx: {fileID: 1580363178}
   deleteSound: {fileID: 8300000, guid: 17bc089c9bea4441daa1ce381c5aa89a, type: 3}
+  floatingValue: {fileID: 9064805593216121806, guid: 7c1bfcb18bbf7444a9df0d55a1bb2201,
+    type: 3}
 --- !u!1 &2080538343
 GameObject:
   m_ObjectHideFlags: 0
