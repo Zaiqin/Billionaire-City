@@ -51,7 +51,7 @@ public class Draggable : MonoBehaviour
 
     public void buildCheck(PropertyCard card, float[] XY)
     {
-        print("called build check");
+        //print("called build check");
         int spaceX = int.Parse(card.space.Substring(0, 1));
         int spaceY = int.Parse(card.space.Substring(card.space.Length - 1));
         bool result = true;
@@ -62,7 +62,7 @@ public class Draggable : MonoBehaviour
             TileBase Tile = map.GetTile(new Vector3Int(x, y, 0));
             //print("checking " + x + "," + y);
             if (!Tile.name.Contains("plot")){
-                print("setting false");
+                //print("setting false");
                 result = false;
                 break;
             }
@@ -72,7 +72,7 @@ public class Draggable : MonoBehaviour
                 x = (int)XY[0]; y += 1;
             }
         }
-        print("result is " + result);
+        //print("result is " + result);
         buildable = result;
     }
 

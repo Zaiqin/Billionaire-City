@@ -49,21 +49,25 @@ public class CameraMovement : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity);
         if (hit.collider != null && hit.collider.gameObject.GetComponent<Draggable>() != null )
         {
-            //print("mouseoverui hit building named " + hit.collider.gameObject.name);
-            if (hit.collider.gameObject.GetComponent<Draggable>().dragEnabled == false)
+            print("mouseoverui hit building named " + hit.collider.gameObject.name);
+            if (hit.collider.gameObject.GetComponent<Draggable>().dragEnabled == true)
             {
-                //print("hit building that is not draggable");
-                return false;
+                //print("hit building that is draggable");
+                print("drag enabled == true");
+                return true;
+                
             } else
             {
                 //print("hit building that is draggable");
             }
         } else
         {
-            //print("no building detected");
+            print("no building detected");
         }
         //print("sending defualt ");
-        return EventSystem.current.IsPointerOverGameObject();
+        print("returning false");
+        return false;
+        
     }
 
     private void PanCamera() {

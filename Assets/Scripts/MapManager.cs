@@ -28,7 +28,19 @@ public class MapManager : MonoBehaviour
 
     private bool isMouseOverUI()
     {
-        return EventSystem.current.IsPointerOverGameObject();
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity);
+        if (hit.collider != null)
+        {
+            //print("hit building that is draggable");
+            print("road drag is set to true");
+            return true;
+
+        }
+
+        //print("sending defualt ");
+        print("returning false");
+        return false;
     }
 
     private void Start()
@@ -96,7 +108,6 @@ public class MapManager : MonoBehaviour
                         string createPath = "roadTiles/" + calcTile;
                         createdTile.sprite = Resources.Load<Tile>(createPath).sprite;
                         createdTile.name = calcTile;
-
 
                         if ((i == 1) && (delete == true))
                         {

@@ -947,6 +947,7 @@ GameObject:
   m_Component:
   - component: {fileID: 76223688}
   - component: {fileID: 76223689}
+  - component: {fileID: 76223690}
   m_Layer: 5
   m_Name: ShopParent
   m_TagString: ShopToggle
@@ -987,6 +988,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shopToggle: {fileID: 52499401}
+--- !u!58 &76223690
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 76223687}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.21231352, y: 0.21219723}
+  serializedVersion: 2
+  m_Radius: 44.234035
 --- !u!1 &83482000
 GameObject:
   m_ObjectHideFlags: 0
@@ -56181,6 +56198,7 @@ GameObject:
   - component: {fileID: 287795620}
   - component: {fileID: 287795619}
   - component: {fileID: 287795621}
+  - component: {fileID: 287795622}
   m_Layer: 5
   m_Name: plotToggle
   m_TagString: Untagged
@@ -56421,6 +56439,22 @@ MonoBehaviour:
   map: {fileID: 179093922}
   greenGrass: {fileID: 11400000, guid: ed9bdc427593d5f4fa5d4bce0fd199b8, type: 2}
   tileGrass: {fileID: 11400000, guid: b3e8f3a2e14494bcc9001c2bd1e27c1f, type: 2}
+--- !u!58 &287795622
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 287795616}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.21231352, y: 0.21219723}
+  serializedVersion: 2
+  m_Radius: 44.234035
 --- !u!1 &374950764
 GameObject:
   m_ObjectHideFlags: 0
@@ -57666,6 +57700,7 @@ GameObject:
   - component: {fileID: 584236252}
   - component: {fileID: 584236254}
   - component: {fileID: 584236255}
+  - component: {fileID: 584236256}
   m_Layer: 5
   m_Name: ronaldToggle
   m_TagString: Untagged
@@ -57934,6 +57969,22 @@ MonoBehaviour:
   stats: {fileID: 973017965}
   levelText: {fileID: 1706317499}
   particle: {fileID: 1346344652}
+--- !u!58 &584236256
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 584236249}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.21231352, y: 0.21219723}
+  serializedVersion: 2
+  m_Radius: 44.234035
 --- !u!1 &603615505
 GameObject:
   m_ObjectHideFlags: 0
@@ -58663,6 +58714,7 @@ GameObject:
   - component: {fileID: 760845341}
   - component: {fileID: 760845345}
   - component: {fileID: 760845344}
+  - component: {fileID: 760845346}
   m_Layer: 5
   m_Name: ZoomInButton
   m_TagString: Untagged
@@ -58910,6 +58962,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!58 &760845346
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 760845339}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.39267483, y: 0.21219726}
+  serializedVersion: 2
+  m_Radius: 37.19988
 --- !u!1 &776026746
 GameObject:
   m_ObjectHideFlags: 0
@@ -59147,6 +59215,7 @@ GameObject:
   - component: {fileID: 864276389}
   - component: {fileID: 864276388}
   - component: {fileID: 864276390}
+  - component: {fileID: 864276391}
   m_Layer: 5
   m_Name: roadToggle
   m_TagString: Untagged
@@ -59387,6 +59456,22 @@ MonoBehaviour:
   map: {fileID: 179093922}
   greenGrass: {fileID: 11400000, guid: ed9bdc427593d5f4fa5d4bce0fd199b8, type: 2}
   tileGrass: {fileID: 11400000, guid: b3e8f3a2e14494bcc9001c2bd1e27c1f, type: 2}
+--- !u!58 &864276391
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 864276385}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.21231352, y: 0.21219723}
+  serializedVersion: 2
+  m_Radius: 44.234035
 --- !u!1 &871913138
 GameObject:
   m_ObjectHideFlags: 0
@@ -65933,6 +66018,7 @@ GameObject:
   - component: {fileID: 1580363178}
   - component: {fileID: 1580363177}
   - component: {fileID: 1580363179}
+  - component: {fileID: 1580363180}
   m_Layer: 5
   m_Name: deleteToggle
   m_TagString: Untagged
@@ -66173,6 +66259,22 @@ MonoBehaviour:
   map: {fileID: 179093922}
   greenGrass: {fileID: 11400000, guid: ed9bdc427593d5f4fa5d4bce0fd199b8, type: 2}
   tileGrass: {fileID: 11400000, guid: b3e8f3a2e14494bcc9001c2bd1e27c1f, type: 2}
+--- !u!58 &1580363180
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1580363174}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.21231352, y: 0.21219723}
+  serializedVersion: 2
+  m_Radius: 44.234035
 --- !u!1 &1588660828
 GameObject:
   m_ObjectHideFlags: 0
@@ -67201,6 +67303,7 @@ GameObject:
   - component: {fileID: 1680335061}
   - component: {fileID: 1680335065}
   - component: {fileID: 1680335064}
+  - component: {fileID: 1680335066}
   m_Layer: 5
   m_Name: ZoomoutButton
   m_TagString: Untagged
@@ -67448,6 +67551,22 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!58 &1680335066
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1680335059}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.39267483, y: 0.21219726}
+  serializedVersion: 2
+  m_Radius: 37.19988
 --- !u!1 &1706317497
 GameObject:
   m_ObjectHideFlags: 0
