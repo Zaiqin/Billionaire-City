@@ -55424,6 +55424,7 @@ GameObject:
   - component: {fileID: 184177509}
   - component: {fileID: 184177508}
   - component: {fileID: 184177507}
+  - component: {fileID: 184177512}
   m_Layer: 5
   m_Name: ppDragDone
   m_TagString: Untagged
@@ -55662,6 +55663,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 184177505}
   m_CullTransparentMesh: 1
+--- !u!114 &184177512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 184177505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac761c3518106db4f9e5f4cbb14d4d3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  map: {fileID: 179093922}
+  tileDatas: []
+  stats: {fileID: 973017964}
+  plotToggle: {fileID: 287795618}
+  deleteToggle: {fileID: 1580363176}
+  myFx: {fileID: 1580363178}
+  deleteSound: {fileID: 8300000, guid: 17bc089c9bea4441daa1ce381c5aa89a, type: 3}
 --- !u!1 &208941323
 GameObject:
   m_ObjectHideFlags: 0
@@ -57019,6 +57039,7 @@ MonoBehaviour:
   - 0
   - 0
   dragEnabled: 0
+  buildable: 0
 --- !u!114 &502592029
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59696,9 +59717,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0d46481ec4cb495cb461245a686015a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  money: 10000000
-  gold: 200000
-  level: 20
+  money: 380000
+  gold: 0
+  level: 1
   xp: 0
   moneyText: {fileID: 1718816115}
   goldText: {fileID: 1364769763}
@@ -66390,6 +66411,7 @@ GameObject:
   - component: {fileID: 1612019531}
   - component: {fileID: 1612019530}
   - component: {fileID: 1612019529}
+  - component: {fileID: 1612019534}
   m_Layer: 5
   m_Name: ppDragCancel
   m_TagString: Untagged
@@ -66641,6 +66663,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1612019527}
   m_CullTransparentMesh: 1
+--- !u!114 &1612019534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1612019527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac761c3518106db4f9e5f4cbb14d4d3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  map: {fileID: 179093922}
+  tileDatas: []
+  stats: {fileID: 973017964}
+  plotToggle: {fileID: 287795618}
+  deleteToggle: {fileID: 1580363176}
+  myFx: {fileID: 1580363178}
+  deleteSound: {fileID: 8300000, guid: 17bc089c9bea4441daa1ce381c5aa89a, type: 3}
 --- !u!1 &1636394977
 GameObject:
   m_ObjectHideFlags: 0
@@ -68541,6 +68582,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   map: {fileID: 179093922}
   tileDatas: []
+  stats: {fileID: 973017964}
   plotToggle: {fileID: 287795618}
   deleteToggle: {fileID: 1580363176}
   myFx: {fileID: 1580363178}

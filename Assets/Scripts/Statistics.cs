@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class Statistics : MonoBehaviour
 {
-
     public long money;
     public long gold;
     public long level;

@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class ppDragButton : MonoBehaviour
 {
-
     [SerializeField]
     private GameObject pendingParent, propParent, ppDrag, externalAudioPlayer;
 
@@ -33,6 +32,27 @@ public class ppDragButton : MonoBehaviour
         //at y=-1, when x is -10 and -1, -0.1
     }
 
+    private void removePlots(PropertyCard card, float[] XY)
+    {
+        print("removing plots");
+        int spaceX = int.Parse(card.space.Substring(0, 1));
+        int spaceY = int.Parse(card.space.Substring(card.space.Length - 1));
+
+        int x = (int)XY[0]; int y = (int)XY[1];
+        for (int i = 0; i < spaceX * spaceY; i++)
+        {
+            TileBase Tile = map.GetTile(new Vector3Int(x, y, 0));
+            //call plot function here
+            this.GetComponent<plotManager>().plotFunction(new Vector3Int(x, y,0), true, true);
+            x += 1;
+            if (x == ((int)XY[0] + spaceX))
+            {
+                x = (int)XY[0]; y += 1;
+            }
+        }
+        print("removed");
+    }
+
     public void dragConfirm()
     {
         Property pp;
@@ -40,7 +60,7 @@ public class ppDragButton : MonoBehaviour
 
         if (pp.GetComponent<Draggable>().buildable == true)
         {
-
+            removePlots(pp.Card, pp.GetComponent<Draggable>().XY);
             // Setting position and parent to main properties -----------
             pp.transform.position = new Vector3(pp.transform.position.x, pp.transform.position.y, getZ(pp.GetComponent<Draggable>().XY));
             pp.transform.parent = propParent.transform;

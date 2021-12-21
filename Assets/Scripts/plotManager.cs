@@ -16,6 +16,8 @@ public class plotManager : MonoBehaviour
 
     private Dictionary<TileBase, TileData> dataFromTiles;
 
+    [SerializeField]
+    private GameObject stats;
 
     [SerializeField]
     private Toggle plotToggle, deleteToggle;
@@ -48,7 +50,7 @@ public class plotManager : MonoBehaviour
     }
 
 
-    private void plotFunction(Vector3Int input, bool delete)
+    public void plotFunction(Vector3Int input, bool delete, bool forced = false)
     {
         print("plotFunction called");
         int cycle = 1;
@@ -95,9 +97,19 @@ public class plotManager : MonoBehaviour
                         if ((i == 1) && (delete == true))
                         {
                             createdTile = map.GetTile<Tile>(new Vector3Int(-1, 0, 0)); //grass below hq
+                            print("set to grass tile" + createdTile.name);
                         }
-                        if (isMouseOverUI() == false)
+                        if ((isMouseOverUI() == false) || (forced == true))
                         {
+                            /*if (createdTile.name.Contains("plot"))
+                            {
+                                stats.GetComponent<Statistics>().updateStats(-1000, 0, 0, 0);
+                                print("deducting 1k");
+                            }
+                            if ((delete == true) && ((i == 1) && cycle == 1)){
+                                stats.GetComponent<Statistics>().updateStats(1000, 0, 0, 0);
+                                print("adding 1k");
+                            }*/
                             map.SetTile(gridPosition, createdTile);
                         }
                     }
