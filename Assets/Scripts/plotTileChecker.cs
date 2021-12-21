@@ -5,7 +5,6 @@ using UnityEngine.Tilemaps;
 
 public class plotTileChecker : MonoBehaviour
 {
-
     public static string calcTile(Tilemap map, TileBase centerTile, int column, int row)
     {
 

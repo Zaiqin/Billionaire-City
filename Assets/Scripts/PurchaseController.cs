@@ -44,6 +44,9 @@ public class PurchaseController : MonoBehaviour
         pp.GetComponent<BlinkingProperty>().StartBlink();
         print("reached herer");
 
+        float[] xy = new[] { (float)cellPos.x - 1, (float)cellPos.y + 1 };
+        //pp.gameObject.GetComponent<Draggable>().buildCheck(pp.Card,xy); check if can build at where it first spawned
+
         // unhide propertyDrag buttons and placing it at grid center of property
         ppDrag.SetActive(true);
         ppDrag.transform.position = new Vector3(pp.transform.position.x + (float.Parse(prop.space.Substring(0, 1))) / 2, pp.transform.position.y - 1f, ppDrag.transform.position.z);
