@@ -23,6 +23,9 @@ public class MapManager : MonoBehaviour
     public AudioSource myFx;
     public AudioClip deleteSound;
 
+    [SerializeField]
+    public GameObject splashObject;
+
     private bool isMouseOverUI()
     {
         return EventSystem.current.IsPointerOverGameObject();
@@ -54,6 +57,9 @@ public class MapManager : MonoBehaviour
         int cycle = 1;
         int i = 1;
         Vector3Int gridPosition = input;
+
+        Tile initialCenterTile = map.GetTile<Tile>(gridPosition);
+
         while ((i < 15) && cycle < 3) // cycle 1 extra time to reupdate clicked tile
         {
             gridPosition = input;
@@ -114,6 +120,10 @@ public class MapManager : MonoBehaviour
                 i = 1;
                 cycle = 2;
             }
+        }
+        if (initialCenterTile.name.Contains("Grass") && map.GetTile<Tile>(gridPosition).name.Contains("road"))
+        {
+            GameObject splash = Instantiate(splashObject, new Vector3(gridPosition.x + (float)0.5, gridPosition.y + (float)1.4, (float)gridPosition.z), Quaternion.identity) as GameObject;
         }
         //float walkingSpeed = dataFromTiles[clickedTile].walkingSpeed;
 
