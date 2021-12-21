@@ -828,6 +828,7 @@ MonoBehaviour:
   infoPanel: {fileID: 374950764}
   pendingParent: {fileID: 58940600}
   ppDrag: {fileID: 737003508}
+  propParent: {fileID: 0}
   toggles: []
   map: {fileID: 179093922}
   greenGrass: {fileID: 11400000, guid: ed9bdc427593d5f4fa5d4bce0fd199b8, type: 2}
@@ -56435,6 +56436,7 @@ MonoBehaviour:
   infoPanel: {fileID: 374950764}
   pendingParent: {fileID: 58940600}
   ppDrag: {fileID: 737003508}
+  propParent: {fileID: 0}
   toggles: []
   map: {fileID: 179093922}
   greenGrass: {fileID: 11400000, guid: ed9bdc427593d5f4fa5d4bce0fd199b8, type: 2}
@@ -57949,6 +57951,7 @@ MonoBehaviour:
   infoPanel: {fileID: 374950764}
   pendingParent: {fileID: 58940600}
   ppDrag: {fileID: 737003508}
+  propParent: {fileID: 0}
   toggles: []
   map: {fileID: 179093922}
   greenGrass: {fileID: 11400000, guid: ed9bdc427593d5f4fa5d4bce0fd199b8, type: 2}
@@ -59452,6 +59455,7 @@ MonoBehaviour:
   infoPanel: {fileID: 374950764}
   pendingParent: {fileID: 58940600}
   ppDrag: {fileID: 737003508}
+  propParent: {fileID: 2080538343}
   toggles: []
   map: {fileID: 179093922}
   greenGrass: {fileID: 11400000, guid: ed9bdc427593d5f4fa5d4bce0fd199b8, type: 2}
@@ -66255,6 +66259,7 @@ MonoBehaviour:
   infoPanel: {fileID: 374950764}
   pendingParent: {fileID: 58940600}
   ppDrag: {fileID: 737003508}
+  propParent: {fileID: 0}
   toggles: []
   map: {fileID: 179093922}
   greenGrass: {fileID: 11400000, guid: ed9bdc427593d5f4fa5d4bce0fd199b8, type: 2}

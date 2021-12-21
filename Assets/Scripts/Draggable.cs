@@ -52,24 +52,27 @@ public class Draggable : MonoBehaviour
     public void buildCheck(PropertyCard card, float[] XY)
     {
         //print("called build check");
-        int spaceX = int.Parse(card.space.Substring(0, 1));
-        int spaceY = int.Parse(card.space.Substring(card.space.Length - 1));
         bool result = true;
-
-        int x = (int)XY[0]; int y = (int)XY[1];
-        for (int i = 0; i < spaceX * spaceY; i++)
+        if (card.type != "Deco")
         {
-            TileBase Tile = map.GetTile(new Vector3Int(x, y, 0));
-            //print("checking " + x + "," + y);
-            if (!Tile.name.Contains("plot")){
-                //print("setting false");
-                result = false;
-                break;
-            }
-            x += 1;
-            if (x == ((int)XY[0] + spaceX))
+            int spaceX = int.Parse(card.space.Substring(0, 1));
+            int spaceY = int.Parse(card.space.Substring(card.space.Length - 1));
+            int x = (int)XY[0]; int y = (int)XY[1];
+            for (int i = 0; i < spaceX * spaceY; i++)
             {
-                x = (int)XY[0]; y += 1;
+                TileBase Tile = map.GetTile(new Vector3Int(x, y, 0));
+                //print("checking " + x + "," + y);
+                if (!Tile.name.Contains("plot"))
+                {
+                    //print("setting false");
+                    result = false;
+                    break;
+                }
+                x += 1;
+                if (x == ((int)XY[0] + spaceX))
+                {
+                    x = (int)XY[0]; y += 1;
+                }
             }
         }
         //print("result is " + result);
