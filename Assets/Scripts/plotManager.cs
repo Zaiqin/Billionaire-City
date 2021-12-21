@@ -25,7 +25,7 @@ public class plotManager : MonoBehaviour
     public AudioSource myFx;
     public AudioClip deleteSound;
 
-    public GameObject floatingValue;
+    public GameObject floatingValue, hq;
 
     private bool isMouseOverUI()
     {
@@ -131,6 +131,7 @@ public class plotManager : MonoBehaviour
         if (initialCenterTile.name.Contains("plot") && map.GetTile<Tile>(gridPosition).name.Contains("Grass") && forced == false)
         {
             stats.GetComponent<Statistics>().updateStats(1000, 0, 0, 0);
+            hq.GetComponent<HQstats>().noOfPlots -= 1;
             //print("adding 1k");
         }
         if (initialCenterTile.name.Contains("Grass") && map.GetTile<Tile>(gridPosition).name.Contains("plot"))
@@ -139,6 +140,7 @@ public class plotManager : MonoBehaviour
             //print("deducting 1k");
             GameObject value = Instantiate(floatingValue, gridPosition, Quaternion.identity) as GameObject;
             value.transform.GetChild(0).GetComponent<TextMesh>().text = "-$1000";
+            hq.GetComponent<HQstats>().noOfPlots += 1;
         }
         //float walkingSpeed = dataFromTiles[clickedTile].walkingSpeed;
 

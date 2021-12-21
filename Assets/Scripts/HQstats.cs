@@ -17,6 +17,8 @@ public class HQstats : MonoBehaviour
     [SerializeField]
     private Text money, gold, property, land, total;
 
+    public int noOfPlots;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -51,8 +53,8 @@ public class HQstats : MonoBehaviour
             }
         }
         property.text = "$" + propValue.ToString("#,##0");
-        land.text = "$0";
-        total.text = "$" + (stats.money + goldvalue).ToString("#,##0");
+        land.text = "$" + (noOfPlots*1000).ToString("#,##0");
+        total.text = "$" + (stats.money + goldvalue + (noOfPlots*1000)).ToString("#,##0");
     }
 
     public void clickedHQ()
