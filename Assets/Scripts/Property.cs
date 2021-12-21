@@ -17,6 +17,11 @@ public class Property : MonoBehaviour, IPointerClickHandler
         this.name = pcard.displayName;
         this.gameObject.AddComponent<BoxCollider2D>();
 
+        float x = float.Parse(pcard.space.Substring(0, 1));
+        float y = float.Parse(pcard.space.Substring(pcard.space.Length -1));
+        this.gameObject.GetComponent<BoxCollider2D>().size = new Vector2(x, y);
+        this.gameObject.GetComponent<BoxCollider2D>().offset = new Vector2(x/2, y/2);
+
         if (pcard.type == "House")
         {
             print("here here is house");
