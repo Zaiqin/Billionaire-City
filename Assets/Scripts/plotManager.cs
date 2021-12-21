@@ -133,13 +133,17 @@ public class plotManager : MonoBehaviour
             stats.GetComponent<Statistics>().updateStats(1000, 0, 0, 0);
             hq.GetComponent<HQstats>().noOfPlots -= 1;
             //print("adding 1k");
+            GameObject value = Instantiate(floatingValue, new Vector3(gridPosition.x + (float)0.5, (float)gridPosition.y + 2, (float)gridPosition.z), Quaternion.identity) as GameObject;
+            value.transform.GetChild(0).GetComponent<TextMesh>().text = "-$1000";
+            value.transform.GetChild(0).GetComponent<TextMesh>().color = new Color(168f/255f, 255f/255f, 4f/255f);
         }
         if (initialCenterTile.name.Contains("Grass") && map.GetTile<Tile>(gridPosition).name.Contains("plot"))
         {
             stats.GetComponent<Statistics>().updateStats(-1000, 0, 0, 0);
             //print("deducting 1k");
-            GameObject value = Instantiate(floatingValue, gridPosition, Quaternion.identity) as GameObject;
+            GameObject value = Instantiate(floatingValue, new Vector3(gridPosition.x+(float)0.5, (float)gridPosition.y+2, (float)gridPosition.z), Quaternion.identity) as GameObject;
             value.transform.GetChild(0).GetComponent<TextMesh>().text = "-$1000";
+            value.transform.GetChild(0).GetComponent<TextMesh>().color = new Color(197f / 255f, 17f / 255f, 0f / 255f);
             hq.GetComponent<HQstats>().noOfPlots += 1;
         }
         //float walkingSpeed = dataFromTiles[clickedTile].walkingSpeed;
