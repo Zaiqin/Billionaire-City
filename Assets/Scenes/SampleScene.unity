@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 21214420}
   - component: {fileID: 21214419}
   - component: {fileID: 21214421}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Wonders Tab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -828,7 +828,6 @@ MonoBehaviour:
   infoPanel: {fileID: 374950764}
   pendingParent: {fileID: 58940600}
   ppDrag: {fileID: 737003508}
-  propParent: {fileID: 0}
   toggles: []
   map: {fileID: 179093922}
   greenGrass: {fileID: 11400000, guid: ed9bdc427593d5f4fa5d4bce0fd199b8, type: 2}
@@ -1083,7 +1082,7 @@ GameObject:
   - component: {fileID: 164259737}
   - component: {fileID: 164259736}
   - component: {fileID: 164259738}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Commerces Tab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56436,7 +56435,6 @@ MonoBehaviour:
   infoPanel: {fileID: 374950764}
   pendingParent: {fileID: 58940600}
   ppDrag: {fileID: 737003508}
-  propParent: {fileID: 0}
   toggles: []
   map: {fileID: 179093922}
   greenGrass: {fileID: 11400000, guid: ed9bdc427593d5f4fa5d4bce0fd199b8, type: 2}
@@ -56468,6 +56466,7 @@ GameObject:
   - component: {fileID: 374950765}
   - component: {fileID: 374950767}
   - component: {fileID: 374950766}
+  - component: {fileID: 374950768}
   m_Layer: 5
   m_Name: infoPanel
   m_TagString: Untagged
@@ -56533,6 +56532,32 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 374950764}
   m_CullTransparentMesh: 1
+--- !u!61 &374950768
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 374950764}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -1.7446289, y: 0.8723297}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 283.64142, y: 302.83292}
+  m_EdgeRadius: 0
 --- !u!1 &386740024
 GameObject:
   m_ObjectHideFlags: 0
@@ -57361,7 +57386,7 @@ GameObject:
   - component: {fileID: 523200278}
   - component: {fileID: 523200277}
   - component: {fileID: 523200276}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57951,7 +57976,6 @@ MonoBehaviour:
   infoPanel: {fileID: 374950764}
   pendingParent: {fileID: 58940600}
   ppDrag: {fileID: 737003508}
-  propParent: {fileID: 0}
   toggles: []
   map: {fileID: 179093922}
   greenGrass: {fileID: 11400000, guid: ed9bdc427593d5f4fa5d4bce0fd199b8, type: 2}
@@ -58990,7 +59014,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 776026747}
-  m_Layer: 5
+  - component: {fileID: 776026748}
+  m_Layer: 6
   m_Name: contractsParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59019,6 +59044,32 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!61 &776026748
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 776026746}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 10.700012, y: -34.135033}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 857.0802, y: 436.8396}
+  m_EdgeRadius: 0
 --- !u!1 &805826341
 GameObject:
   m_ObjectHideFlags: 0
@@ -59455,7 +59506,6 @@ MonoBehaviour:
   infoPanel: {fileID: 374950764}
   pendingParent: {fileID: 58940600}
   ppDrag: {fileID: 737003508}
-  propParent: {fileID: 2080538343}
   toggles: []
   map: {fileID: 179093922}
   greenGrass: {fileID: 11400000, guid: ed9bdc427593d5f4fa5d4bce0fd199b8, type: 2}
@@ -59488,7 +59538,7 @@ GameObject:
   - component: {fileID: 871913141}
   - component: {fileID: 871913140}
   - component: {fileID: 871913142}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Houses Tab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66259,7 +66309,6 @@ MonoBehaviour:
   infoPanel: {fileID: 374950764}
   pendingParent: {fileID: 58940600}
   ppDrag: {fileID: 737003508}
-  propParent: {fileID: 0}
   toggles: []
   map: {fileID: 179093922}
   greenGrass: {fileID: 11400000, guid: ed9bdc427593d5f4fa5d4bce0fd199b8, type: 2}
@@ -66809,7 +66858,8 @@ GameObject:
   - component: {fileID: 1636394980}
   - component: {fileID: 1636394979}
   - component: {fileID: 1636394982}
-  m_Layer: 5
+  - component: {fileID: 1636394983}
+  m_Layer: 6
   m_Name: Tab Content
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66919,6 +66969,32 @@ MonoBehaviour:
   selectedTab: {fileID: 871913142}
   firstButton: {fileID: 871913142}
   rect: {fileID: 1857201643}
+--- !u!61 &1636394983
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1636394977}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.79045105, y: 48.182426}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 191.47717, y: 233.66423}
+  m_EdgeRadius: 0
 --- !u!1 &1637385151
 GameObject:
   m_ObjectHideFlags: 0
@@ -67868,7 +67944,7 @@ GameObject:
   - component: {fileID: 1755082403}
   - component: {fileID: 1755082402}
   - component: {fileID: 1755082404}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Deco Tab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68099,7 +68175,8 @@ GameObject:
   - component: {fileID: 1880557709}
   - component: {fileID: 1880557711}
   - component: {fileID: 1880557710}
-  m_Layer: 5
+  - component: {fileID: 1880557712}
+  m_Layer: 6
   m_Name: BG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68163,6 +68240,32 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1880557708}
   m_CullTransparentMesh: 0
+--- !u!61 &1880557712
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1880557708}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -2.0580444, y: 3.8320007}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 972.2018, y: 436.0653}
+  m_EdgeRadius: 0
 --- !u!1 &1891966597
 GameObject:
   m_ObjectHideFlags: 0
