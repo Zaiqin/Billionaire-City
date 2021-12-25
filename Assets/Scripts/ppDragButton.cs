@@ -7,7 +7,7 @@ using UnityEngine;
 public class ppDragButton : MonoBehaviour
 {
     [SerializeField]
-    private GameObject pendingParent, propParent, ppDrag, externalAudioPlayer;
+    private GameObject pendingParent, propParent, ppDrag, externalAudioPlayer, saveloadsystem;
 
     [SerializeField]
     private Statistics stats;
@@ -20,10 +20,11 @@ public class ppDragButton : MonoBehaviour
 
     public float getZ(float[] coords) //range of y is 3 to -3, range of x is -44 to 45
     {
+        float[] c = new[] { coords[0], coords[1] }; //create new float array that is not connected to Draggable.XY
         float result;
         //print("x is at " + coords[0] + ", y is at " + coords[1]);
-        float xFactor = (coords[0] -= 45)/1000;
-        float yFactor = coords[1] / 10;
+        float xFactor = (c[0] -= 45)/1000;
+        float yFactor = c[1] / 10;
         result = xFactor + yFactor;/*
         print("xFactor is " + xFactor + ", yFactor is " + yFactor);
         print("result is " + result);*/
@@ -88,14 +89,18 @@ public class ppDragButton : MonoBehaviour
             ppDrag.SetActive(false);
 
             // adding the contract collider and sorting its order -----------
-            if (pCard.type == "House")
+/*            if (pCard.type == "House")
             {
                 pp.transform.GetChild(0).gameObject.AddComponent<BoxCollider2D>();
                 pp.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2; //shows contract
-            }
+            }*/
 
             // --------------------- Swapping to green border grass -------------
             map.SwapTile(greenGrass, tileGrass);
+            // ------------------------------------------------------------------
+
+            // --------------------- Save Game ----------------------------------
+            saveloadsystem.GetComponent<saveloadsystem>().saveGame();
             // ------------------------------------------------------------------
         }
     }

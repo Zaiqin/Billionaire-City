@@ -324,6 +324,7 @@ MonoBehaviour:
   csv: {fileID: 1673960464}
   map: {fileID: 179093922}
   PropertiesParent: {fileID: 2080538343}
+  Stats: {fileID: 973017964}
 --- !u!4 &25462476
 Transform:
   m_ObjectHideFlags: 0
@@ -55484,6 +55485,7 @@ MonoBehaviour:
   propParent: {fileID: 2080538343}
   ppDrag: {fileID: 737003508}
   externalAudioPlayer: {fileID: 1820829991}
+  saveloadsystem: {fileID: 25462474}
   stats: {fileID: 973017965}
   buildSound: {fileID: 8300000, guid: af8e188edf22047efbe5414eb16f16df, type: 3}
   touchSound: {fileID: 8300000, guid: bd5423d63b2c64bff84c70238339e6d6, type: 3}
@@ -55702,7 +55704,7 @@ MonoBehaviour:
   floatingValue: {fileID: 0}
   hq: {fileID: 0}
   splashObject: {fileID: 0}
-  mainCam: {fileID: 0}
+  mainCam: {fileID: 519420031}
 --- !u!1 &208941323
 GameObject:
   m_ObjectHideFlags: 0
@@ -66616,6 +66618,7 @@ MonoBehaviour:
   propParent: {fileID: 2080538343}
   ppDrag: {fileID: 737003508}
   externalAudioPlayer: {fileID: 1820829991}
+  saveloadsystem: {fileID: 0}
   stats: {fileID: 973017965}
   buildSound: {fileID: 8300000, guid: af8e188edf22047efbe5414eb16f16df, type: 3}
   touchSound: {fileID: 8300000, guid: bd5423d63b2c64bff84c70238339e6d6, type: 3}
@@ -66847,7 +66850,7 @@ MonoBehaviour:
   floatingValue: {fileID: 0}
   hq: {fileID: 0}
   splashObject: {fileID: 0}
-  mainCam: {fileID: 0}
+  mainCam: {fileID: 519420031}
 --- !u!1 &1636394977
 GameObject:
   m_ObjectHideFlags: 0

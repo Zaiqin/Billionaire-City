@@ -78,4 +78,42 @@ public class Statistics : MonoBehaviour
         xpFill.fillAmount = 0.5f;
         print("updated stats");
     }
+
+    public void setStats(long m, long g, long l, long x)
+    {
+        money = m;
+        gold = g;
+        level = l;
+        xp = x;
+        if (money >= 100000000)
+        {
+            string temp = money.ToString("#,##0");
+            moneyText.text = "$" + temp.Substring(0, temp.Length - 8) + "M";
+        }
+        else
+        {
+            moneyText.text = "$" + money.ToString("#,##0");
+        }
+        if (gold >= 100000000)
+        {
+            string temp = gold.ToString("#,##0");
+            goldText.text = temp.Substring(0, temp.Length - 8) + "M";
+        }
+        else
+        {
+            goldText.text = gold.ToString("#,##0");
+        }
+        levelText.text = level.ToString();
+        if (xp >= 100000000)
+        {
+            string temp = xp.ToString("#,##0");
+            xpText.text = temp.Substring(0, temp.Length - 8) + "M";
+        }
+        else
+        {
+            xpText.text = xp.ToString("#,##0");
+        }
+        xpFill.fillAmount = 0.5f;
+        print("set stats");
+    }
 }

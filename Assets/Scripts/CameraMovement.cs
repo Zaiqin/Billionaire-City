@@ -25,6 +25,7 @@ public class CameraMovement : MonoBehaviour
     {
         // Disable multi touch
         Input.multiTouchEnabled = false;
+        dragging = false;
     }
 
     // Start is called before the first frame update

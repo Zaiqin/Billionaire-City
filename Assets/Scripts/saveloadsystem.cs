@@ -2,27 +2,95 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using System;
+
+[Serializable]
+public class propertySaveForm {
+
+    public string propName;
+    public int locX;
+    public int locY;
+
+    public propertySaveForm(string n, float[] v)
+    {
+        propName = n; locX = (int)v[0]; locY = (int)v[1];
+    }
+}
+
+[Serializable]
+public class statsSaveForm
+{
+    public long money;
+    public long gold;
+    public long level;
+    public long xp;
+
+    public statsSaveForm(long m, long g, long l, long x)
+    {
+        money = m; gold = g; level = l; xp = x;
+    }
+}
 
 public class saveloadsystem : MonoBehaviour
 {
     public CSVReader csv;
     public Tilemap map;
-    public GameObject PropertiesParent;
+    public GameObject PropertiesParent, Stats;
 
-    // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
-        
+        print("Attempting to Load Save Game");
+        loadSaveGame();
     }
 
-    // Update is called once per frame
-    void Update()
+    [ContextMenu("Save Game")]
+    public void saveGame()
     {
-        
+        print("Saving Game");
+        List<propertySaveForm> propSaveList = new List<propertySaveForm>();
+        foreach (Transform child in PropertiesParent.transform)
+        {
+            if (child.GetComponent<Property>() != null) {
+                print("saving: " + child.GetComponent<Property>().Card.displayName);
+                propSaveList.Add(new propertySaveForm(child.GetComponent<Property>().Card.displayName, child.GetComponent<Draggable>().XY));
+            }
+        }
+        FileHandler.SaveToJSON<propertySaveForm>(propSaveList, "propsSave.json");
+
+        List<statsSaveForm> statsSaveList = new List<statsSaveForm>();
+        statsSaveList.Add(new statsSaveForm(Stats.GetComponent<Statistics>().money, Stats.GetComponent<Statistics>().gold, Stats.GetComponent<Statistics>().level, Stats.GetComponent<Statistics>().xp));
+        FileHandler.SaveToJSON<statsSaveForm>(statsSaveList, "statsSave.json");
+        print("Game saved");
     }
-    
-    [ContextMenu("Load Game")]
-    public void LoadMyGame()
+
+    [ContextMenu("Load From Save")]
+    public void loadSaveGame()
+    {
+        List<propertySaveForm> list = new List<propertySaveForm>();
+        list = FileHandler.ReadListFromJSON<propertySaveForm>("propsSave.json");
+        List<statsSaveForm> statslist = new List<statsSaveForm>();
+        statslist = FileHandler.ReadListFromJSON<statsSaveForm>("statsSave.json");
+        
+        if (list.Count == 0)
+        {
+            print("No Save Game found, loading new game");
+            LoadNewGame();
+        }
+        else
+        {
+            print("Save Game Found, loading from save");
+            foreach (var p in list)
+            {
+                loadProperty(p.propName, new Vector2Int(p.locX, p.locY));
+                print("loaded: " + p.propName);
+            }
+            //neeed to load stats
+            
+        }
+    }
+
+    [ContextMenu("Load New Game")]
+    public void LoadNewGame()
     {
         print("Loading Default Properties");
         loadProperty("Japanese Tree", new Vector2Int(-1, -2));
@@ -39,7 +107,7 @@ public class saveloadsystem : MonoBehaviour
 
     public void loadProperty(string propName, Vector2Int pos) //propName must be the display form, not camelCase; eg Bungalow Luxury, not bungalowlux
     {
-        print("loading and spawning property into game from load save");
+        //print("loading and spawning property into game from load save");
         PropertyCard prop = csv.CardDatabase[propName];
         GameObject obj = new GameObject(); // Creating game object for property
 
@@ -64,16 +132,17 @@ public class saveloadsystem : MonoBehaviour
 
         // adding components
         pp.gameObject.AddComponent<Draggable>();
+        pp.gameObject.GetComponent<Draggable>().XY = new[] { (float)pos.x, (float)pos.y};
         pp.GetComponent<Draggable>().dragEnabled = false;
         pp.gameObject.AddComponent<BlinkingProperty>();
         pp.gameObject.GetComponent<BlinkingProperty>().StopBlink();
 
-        if (pp.Card.type == "House") // check to only do these thats only for houses
+/*        if (pp.Card.type == "House") // check to only do these thats only for houses
         {
             // adding collider to contract and sorting its order ------
             pp.transform.GetChild(0).gameObject.AddComponent<BoxCollider2D>();
             pp.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2; //shows contract
-        }
-        print("Successfully loaded in " + propName + "at: x:" + pos.x + "y:" + pos.y);
+        }*/
+        //print("Successfully loaded in " + propName + " at: x:" + pos.x + "y:" + pos.y);
     }
 }

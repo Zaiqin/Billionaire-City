@@ -22,9 +22,8 @@ public class Property : MonoBehaviour, IPointerClickHandler
         this.gameObject.GetComponent<BoxCollider2D>().size = new Vector2(x, y);
         this.gameObject.GetComponent<BoxCollider2D>().offset = new Vector2(x/2, y/2);
 
-        if (pcard.type == "House")
+/*        if (pcard.type == "House")
         {
-            print("here here is house");
             GameObject contract = new GameObject();
             contract.name = "Contract";
             SpriteRenderer contractStarrenderer = contract.AddComponent<SpriteRenderer>();
@@ -40,7 +39,7 @@ public class Property : MonoBehaviour, IPointerClickHandler
         } else
         {
             Debug.Log("this not a house");
-        }
+        }*/
     }
 
     public void OnPointerClick(PointerEventData eventData)
