@@ -19,6 +19,12 @@ public class CameraMovement : MonoBehaviour
 	private Vector3 dragOrigin;
     private bool startOnGrid;
 
+    private void Awake()
+    {
+        // Disable multi touch
+        Input.multiTouchEnabled = false;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
