@@ -27,6 +27,8 @@ public class plotManager : MonoBehaviour
 
     public GameObject floatingValue, hq, splashObject;
 
+    public Camera mainCam;
+
     private bool isMouseOverUI()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -119,7 +121,10 @@ public class plotManager : MonoBehaviour
                         }
                         if ((isMouseOverUI() == false) || (forced == true))
                         {
-                            map.SetTile(gridPosition, createdTile);
+                            if (mainCam.GetComponent<CameraMovement>().dragging == false)
+                            {
+                                map.SetTile(gridPosition, createdTile);
+                            }
                         }
                     }
                 }

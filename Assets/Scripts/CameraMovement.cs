@@ -19,6 +19,8 @@ public class CameraMovement : MonoBehaviour
 	private Vector3 dragOrigin;
     private bool startOnGrid;
 
+    public bool dragging = false;
+
     private void Awake()
     {
         // Disable multi touch
@@ -35,6 +37,11 @@ public class CameraMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetMouseButtonDown(0))
+        {
+            print("set drag to false");
+            dragging = false;
+        }
         if (Input.GetMouseButton(0))
         {
             PanCamera(); //called when mouse button is pressed down and remains down
@@ -81,8 +88,7 @@ public class CameraMovement : MonoBehaviour
     }
 
     private void PanCamera() {
-    	// save pos of mouse in wolrld space when drag starts (first time clicked}
-
+        // save pos of mouse in wolrld space when drag starts (first time clicked}
     	if(Input.GetMouseButtonDown(0) && !isMouseOverUI(Input.mousePosition)) {
             //print("mouse is not under UI");
     		dragOrigin = cam.ScreenToWorldPoint(Input.mousePosition);
@@ -97,8 +103,8 @@ public class CameraMovement : MonoBehaviour
             cam.transform.position += difference;
             hqMenu.SetActive(false);
             infoPanel.SetActive(false);
-            //print("moving map in camera movements");
-           }
+            dragging = true;
+        }
     	
     }
 

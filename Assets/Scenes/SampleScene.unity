@@ -349,7 +349,7 @@ GameObject:
   - component: {fileID: 30962815}
   - component: {fileID: 30962817}
   - component: {fileID: 30962816}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: offImg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -554,7 +554,7 @@ GameObject:
   - component: {fileID: 52499398}
   - component: {fileID: 52499400}
   - component: {fileID: 52499402}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: shopToggle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -948,7 +948,7 @@ GameObject:
   - component: {fileID: 76223688}
   - component: {fileID: 76223689}
   - component: {fileID: 76223690}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: ShopParent
   m_TagString: ShopToggle
   m_Icon: {fileID: 0}
@@ -55702,6 +55702,7 @@ MonoBehaviour:
   floatingValue: {fileID: 0}
   hq: {fileID: 0}
   splashObject: {fileID: 0}
+  mainCam: {fileID: 0}
 --- !u!1 &208941323
 GameObject:
   m_ObjectHideFlags: 0
@@ -56199,7 +56200,7 @@ GameObject:
   - component: {fileID: 287795619}
   - component: {fileID: 287795621}
   - component: {fileID: 287795622}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: plotToggle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56721,7 +56722,7 @@ GameObject:
   - component: {fileID: 448186507}
   - component: {fileID: 448186509}
   - component: {fileID: 448186508}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: offImg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56797,7 +56798,7 @@ GameObject:
   - component: {fileID: 484292397}
   - component: {fileID: 484292399}
   - component: {fileID: 484292398}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: offImg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57207,6 +57208,7 @@ MonoBehaviour:
   ShopMenu: {fileID: 252825800}
   hqMenu: {fileID: 1053581159}
   infoPanel: {fileID: 374950764}
+  dragging: 0
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -57728,7 +57730,7 @@ GameObject:
   - component: {fileID: 584236254}
   - component: {fileID: 584236255}
   - component: {fileID: 584236256}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: ronaldToggle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58742,7 +58744,7 @@ GameObject:
   - component: {fileID: 760845345}
   - component: {fileID: 760845344}
   - component: {fileID: 760845346}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: ZoomInButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59270,7 +59272,7 @@ GameObject:
   - component: {fileID: 864276388}
   - component: {fileID: 864276390}
   - component: {fileID: 864276391}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: roadToggle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59630,7 +59632,7 @@ GameObject:
   - component: {fileID: 890329296}
   - component: {fileID: 890329298}
   - component: {fileID: 890329297}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: onImg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -60377,7 +60379,7 @@ GameObject:
   - component: {fileID: 1286480122}
   - component: {fileID: 1286480124}
   - component: {fileID: 1286480123}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: onImg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -65445,7 +65447,7 @@ GameObject:
   - component: {fileID: 1352673690}
   - component: {fileID: 1352673692}
   - component: {fileID: 1352673691}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -65878,7 +65880,7 @@ GameObject:
   - component: {fileID: 1452698676}
   - component: {fileID: 1452698678}
   - component: {fileID: 1452698677}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66073,7 +66075,7 @@ GameObject:
   - component: {fileID: 1580363177}
   - component: {fileID: 1580363179}
   - component: {fileID: 1580363180}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: deleteToggle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66416,7 +66418,7 @@ GameObject:
   - component: {fileID: 1604636475}
   - component: {fileID: 1604636477}
   - component: {fileID: 1604636476}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: offImg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66492,7 +66494,7 @@ GameObject:
   - component: {fileID: 1607134452}
   - component: {fileID: 1607134454}
   - component: {fileID: 1607134453}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: offImg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66845,6 +66847,7 @@ MonoBehaviour:
   floatingValue: {fileID: 0}
   hq: {fileID: 0}
   splashObject: {fileID: 0}
+  mainCam: {fileID: 0}
 --- !u!1 &1636394977
 GameObject:
   m_ObjectHideFlags: 0
@@ -67385,7 +67388,7 @@ GameObject:
   - component: {fileID: 1680335065}
   - component: {fileID: 1680335064}
   - component: {fileID: 1680335066}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: ZoomoutButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68277,7 +68280,7 @@ GameObject:
   - component: {fileID: 1891966598}
   - component: {fileID: 1891966600}
   - component: {fileID: 1891966599}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: onImg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68352,7 +68355,7 @@ GameObject:
   - component: {fileID: 1940862659}
   - component: {fileID: 1940862661}
   - component: {fileID: 1940862660}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: onImg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68686,7 +68689,7 @@ GameObject:
   - component: {fileID: 2045416437}
   - component: {fileID: 2045416439}
   - component: {fileID: 2045416438}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: onImg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68790,6 +68793,7 @@ MonoBehaviour:
   deleteSound: {fileID: 8300000, guid: 17bc089c9bea4441daa1ce381c5aa89a, type: 3}
   splashObject: {fileID: 1976408486320943345, guid: 916150befd6ee214ab9864791ccbabea,
     type: 3}
+  mainCam: {fileID: 519420031}
 --- !u!4 &2061975115
 Transform:
   m_ObjectHideFlags: 0
@@ -68828,6 +68832,7 @@ MonoBehaviour:
   hq: {fileID: 502592024}
   splashObject: {fileID: 1976408486320943345, guid: 916150befd6ee214ab9864791ccbabea,
     type: 3}
+  mainCam: {fileID: 519420031}
 --- !u!1 &2080538343
 GameObject:
   m_ObjectHideFlags: 0

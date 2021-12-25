@@ -26,6 +26,8 @@ public class MapManager : MonoBehaviour
     [SerializeField]
     public GameObject splashObject;
 
+    public Camera mainCam;
+
     private bool isMouseOverUI() //return true if mouse is over ui
     {
         //print("ismosueoverui result is " + EventSystem.current.IsPointerOverGameObject());
@@ -131,7 +133,10 @@ public class MapManager : MonoBehaviour
                         }
                         if (isMouseOverUI() == false)
                         {
-                            map.SetTile(gridPosition, createdTile);
+                            if (mainCam.GetComponent<CameraMovement>().dragging == false)
+                            {
+                                map.SetTile(gridPosition, createdTile);
+                            }
                         }
                     }
                 }
