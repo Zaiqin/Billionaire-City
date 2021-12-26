@@ -62,6 +62,15 @@ public class saveloadsystem : MonoBehaviour
         print("Game saved");
     }
 
+    [ContextMenu("Save Stats")]
+    public void saveStats()
+    {
+        print("Saving Stats");
+        statsSaveForm statsSaveObj = new statsSaveForm(Stats.GetComponent<Statistics>().money, Stats.GetComponent<Statistics>().gold, Stats.GetComponent<Statistics>().level, Stats.GetComponent<Statistics>().xp);
+        FileHandler.SaveToJSON<statsSaveForm>(statsSaveObj, "statsSave.json");
+        print("Stats saved");
+    }
+
     [ContextMenu("Load From Save")]
     public void loadSaveGame()
     {

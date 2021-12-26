@@ -24,7 +24,8 @@ public class Statistics : MonoBehaviour
     public long inputLevel;
     public long inputXP;
 
-    
+    public GameObject saveloadobj;
+
     [ContextMenu("Input Values into Game")]
     public void inputValues()
     {
@@ -77,6 +78,7 @@ public class Statistics : MonoBehaviour
         }
         xpFill.fillAmount = 0.5f;
         print("updated stats");
+        saveloadobj.GetComponent<saveloadsystem>().saveStats();
     }
 
     public void setStats(long m, long g, long l, long x)

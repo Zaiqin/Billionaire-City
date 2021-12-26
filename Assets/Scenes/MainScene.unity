@@ -59877,6 +59877,7 @@ MonoBehaviour:
   inputGold: 0
   inputLevel: 0
   inputXP: 0
+  saveloadobj: {fileID: 25462474}
 --- !u!4 &973017966
 Transform:
   m_ObjectHideFlags: 0
