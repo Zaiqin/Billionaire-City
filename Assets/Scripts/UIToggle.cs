@@ -112,7 +112,10 @@ public class UIToggle : MonoBehaviour
         hqMenu.SetActive(false);
         infoPanel.SetActive(false);
         delPanel.SetActive(false);
-        delPanel.transform.GetChild(2).GetComponent<delConfirm>().selProp.GetComponent<SpriteRenderer>().color = Color.white;
+        if (delPanel.transform.GetChild(2).GetComponent<delConfirm>().selProp != null)
+        {
+            delPanel.transform.GetChild(2).GetComponent<delConfirm>().selProp.GetComponent<SpriteRenderer>().color = Color.white;
+        }
 
         // Destroy any pending properties
         if (pendingParent.transform.childCount != 0) {
