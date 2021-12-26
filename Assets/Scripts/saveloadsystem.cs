@@ -57,9 +57,8 @@ public class saveloadsystem : MonoBehaviour
         }
         FileHandler.SaveToJSON<propertySaveForm>(propSaveList, "propsSave.json");
 
-        List<statsSaveForm> statsSaveList = new List<statsSaveForm>();
-        statsSaveList.Add(new statsSaveForm(Stats.GetComponent<Statistics>().money, Stats.GetComponent<Statistics>().gold, Stats.GetComponent<Statistics>().level, Stats.GetComponent<Statistics>().xp));
-        FileHandler.SaveToJSON<statsSaveForm>(statsSaveList, "statsSave.json");
+        statsSaveForm statsSaveObj = new statsSaveForm(Stats.GetComponent<Statistics>().money, Stats.GetComponent<Statistics>().gold, Stats.GetComponent<Statistics>().level, Stats.GetComponent<Statistics>().xp);
+        FileHandler.SaveToJSON<statsSaveForm>(statsSaveObj, "statsSave.json");
         print("Game saved");
     }
 
@@ -68,8 +67,8 @@ public class saveloadsystem : MonoBehaviour
     {
         List<propertySaveForm> list = new List<propertySaveForm>();
         list = FileHandler.ReadListFromJSON<propertySaveForm>("propsSave.json");
-        List<statsSaveForm> statslist = new List<statsSaveForm>();
-        statslist = FileHandler.ReadListFromJSON<statsSaveForm>("statsSave.json");
+        statsSaveForm statsObj;
+        statsObj = FileHandler.ReadFromJSON<statsSaveForm>("statsSave.json");
         
         if (list.Count == 0)
         {
@@ -85,7 +84,7 @@ public class saveloadsystem : MonoBehaviour
                 print("loaded: " + p.propName);
             }
             //neeed to load stats
-            
+            Stats.GetComponent<Statistics>().setStats(statsObj.money, statsObj.gold, statsObj.level, statsObj.xp);
         }
     }
 
