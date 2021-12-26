@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -11,7 +12,7 @@ public class Property : MonoBehaviour, IPointerClickHandler
         SpriteRenderer renderer = this.gameObject.AddComponent<SpriteRenderer>();
         renderer.sprite = pcard.propImage;
         renderer.sprite = Sprite.Create(pcard.propImage.texture, new Rect(0, 0, pcard.propImage.texture.width, pcard.propImage.texture.height), new Vector2(0f, 0f), 32);
-        renderer.sortingOrder = 1;
+        renderer.sortingOrder = 2;
 
         Card = pcard;
         this.name = pcard.displayName;
@@ -27,7 +28,7 @@ public class Property : MonoBehaviour, IPointerClickHandler
             GameObject contract = new GameObject();
             contract.name = "Contract";
             SpriteRenderer contractStarrenderer = contract.AddComponent<SpriteRenderer>();
-            Sprite contractStarSprite = Resources.Load<Sprite>("contractStar");
+            Sprite contractStarSprite = Resources.Load<Sprite>("contract");
             contractStarrenderer.sprite = Sprite.Create(contractStarSprite.texture, new Rect(0, 0, contractStarSprite.texture.width, contractStarSprite.texture.height), new Vector2(0.5f, 0.5f), 980);
             contract.AddComponent<scaleLerper>();
             contractStarrenderer.sortingOrder = 0; // Hides it
@@ -39,7 +40,7 @@ public class Property : MonoBehaviour, IPointerClickHandler
         }
         else
         {
-            Debug.Log("this not a house");
+            //Debug.Log("this not a house");
         }
     }
 
@@ -95,7 +96,8 @@ public class Property : MonoBehaviour, IPointerClickHandler
             else if (this.transform.parent == propParent.transform)
             {
                 infoPanel.SetActive(true);
-                infoPanel.transform.GetChild(0).GetComponent<Text>().text = this.Card.displayName;
+                infoPanel.GetComponent<infoScript>().selProp = this.gameObject;
+
                 GameObject hqmenu = GameObject.Find("HQStats");
                 if (hqmenu != null)
                 {
@@ -109,7 +111,7 @@ public class Property : MonoBehaviour, IPointerClickHandler
 
 public class contractScript : MonoBehaviour, IPointerClickHandler
 {
-    public int testNumber;
+    public string signTime = "notsigned";
     public PropertyCard propCard;
     void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
     {
@@ -122,6 +124,20 @@ public class contractScript : MonoBehaviour, IPointerClickHandler
             GameObject contractController = GameObject.Find("Contract Scroll Controller");
             contractController.GetComponent<RecyclableScrollerContract>().pCard = propCard;
             contractController.GetComponent<RecyclableScrollerContract>().userReloadData();
+
+            GameObject.Find("SignController").GetComponent<signController>().selProperty = this.gameObject.transform.parent.gameObject;
+        }
+    }
+
+    private void Update()
+    {
+        var dateAndTimeVar = System.DateTime.Now;
+        if (signTime != "notsigned")
+        {
+            if (dateAndTimeVar >= DateTime.Parse(signTime))
+            {
+                this.gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2;
+            }
         }
     }
 }

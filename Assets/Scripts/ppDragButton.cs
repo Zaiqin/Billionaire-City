@@ -65,6 +65,7 @@ public class ppDragButton : MonoBehaviour
             // Setting position and parent to main properties -----------
             pp.transform.position = new Vector3(pp.transform.position.x, pp.transform.position.y, getZ(pp.GetComponent<Draggable>().XY));
             pp.transform.parent = propParent.transform;
+            pp.GetComponent<SpriteRenderer>().sortingOrder = 1;
 
             // ------------- removing blinking and draggable -----------------------------
             pp.GetComponent<BlinkingProperty>().StopBlink();

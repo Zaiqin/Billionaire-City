@@ -10,10 +10,10 @@ public class propertySaveForm {
     public string propName;
     public int locX;
     public int locY;
-
-    public propertySaveForm(string n, float[] v)
+    public string signTime;
+    public propertySaveForm(string n, float[] v, string t = "notsigned")
     {
-        propName = n; locX = (int)v[0]; locY = (int)v[1];
+        propName = n; locX = (int)v[0]; locY = (int)v[1]; signTime = t;
     }
 }
 
@@ -52,7 +52,13 @@ public class saveloadsystem : MonoBehaviour
         {
             if (child.GetComponent<Property>() != null) {
                 print("saving: " + child.GetComponent<Property>().Card.displayName);
-                propSaveList.Add(new propertySaveForm(child.GetComponent<Property>().Card.displayName, child.GetComponent<Draggable>().XY));
+                if (child.GetComponent<Property>().Card.type == "House")
+                {
+                    propSaveList.Add(new propertySaveForm(child.GetComponent<Property>().Card.displayName, child.GetComponent<Draggable>().XY, child.transform.GetChild(0).GetComponent<contractScript>().signTime));
+                } else
+                {
+                    propSaveList.Add(new propertySaveForm(child.GetComponent<Property>().Card.displayName, child.GetComponent<Draggable>().XY));
+                }
             }
         }
         FileHandler.SaveToJSON<propertySaveForm>(propSaveList, "propsSave.json");
@@ -83,13 +89,14 @@ public class saveloadsystem : MonoBehaviour
         {
             print("No Save Game found, loading new game");
             LoadNewGame();
+            saveGame();
         }
         else
         {
             print("Save Game Found, loading from save");
             foreach (var p in list)
             {
-                loadProperty(p.propName, new Vector2Int(p.locX, p.locY));
+                loadProperty(p.propName, new Vector2Int(p.locX, p.locY), p.signTime);
                 print("loaded: " + p.propName);
             }
             //neeed to load stats
@@ -104,16 +111,16 @@ public class saveloadsystem : MonoBehaviour
         loadProperty("Japanese Tree", new Vector2Int(-1, -2));
         loadProperty("Fountain", new Vector2Int(-1, -4));
         loadProperty("Pizzeria", new Vector2Int(-7, 0));
-        loadProperty("Townhouse", new Vector2Int(-5, -4));
+        loadProperty("Townhouse", new Vector2Int(-5, -4), "notsigned");
         loadProperty("Cypress Tree", new Vector2Int(2, -4));
-        loadProperty("Bungalow", new Vector2Int(3, -4));
-        loadProperty("Townhouse Luxury", new Vector2Int(6, 0));
-        loadProperty("Bungalow Luxury", new Vector2Int(-11, -3));
+        loadProperty("Bungalow", new Vector2Int(3, -4), "notsigned");
+        loadProperty("Townhouse Luxury", new Vector2Int(6, 0), "notsigned");
+        loadProperty("Bungalow Luxury", new Vector2Int(-11, -3), "notsigned");
         loadProperty("Cypress Tree", new Vector2Int(2, -7));
         print("Successfully Loaded Game");
     }
 
-    public void loadProperty(string propName, Vector2Int pos) //propName must be the display form, not camelCase; eg Bungalow Luxury, not bungalowlux
+    public void loadProperty(string propName, Vector2Int pos, string signTime = "notsigned") //propName must be the display form, not camelCase; eg Bungalow Luxury, not bungalowlux
     {
         //print("loading and spawning property into game from load save");
         PropertyCard prop = csv.CardDatabase[propName];
@@ -135,6 +142,7 @@ public class saveloadsystem : MonoBehaviour
         pp.transform.parent = PropertiesParent.transform;
         pp.transform.position += new Vector3(-1f, 1.64f, 0f); //Offset vector so that bottom left tile is the tilename that the property is on
         pp.transform.localScale = new Vector2(1f, 1f);
+        pp.GetComponent<SpriteRenderer>().sortingOrder = 1;
         string loc = "(" + (pos.x) + "," + (pos.y) + ")";
         pp.name += loc;
 
@@ -144,12 +152,24 @@ public class saveloadsystem : MonoBehaviour
         pp.GetComponent<Draggable>().dragEnabled = false;
         pp.gameObject.AddComponent<BlinkingProperty>();
         pp.gameObject.GetComponent<BlinkingProperty>().StopBlink();
-
         if (pp.Card.type == "House") // check to only do these thats only for houses
         {
+            pp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signTime = signTime;
             // adding collider to contract and sorting its order ------
             pp.transform.GetChild(0).gameObject.AddComponent<BoxCollider2D>();
-            pp.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2; //shows contract
+            var dateAndTimeVar = System.DateTime.Now;
+            print("going check contract for " + pp.name + "which is signtime " + pp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signTime);
+            if (pp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signTime == "notsigned") {
+                pp.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2; //shows contract
+                print("notsigned");
+            } else if (dateAndTimeVar >= DateTime.Parse(pp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signTime)) {
+                pp.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2; //shows contract
+                print("sign over timea alre");
+            } else {
+                pp.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0; //hide contract
+                print("sign still ongoiing");
+            }
+            
         }
         //print("Successfully loaded in " + propName + " at: x:" + pos.x + "y:" + pos.y);
     }

@@ -32,6 +32,7 @@ public class ContractCell : MonoBehaviour, ICell
         print("signed contract");
         GameObject.Find("contractsParent").gameObject.SetActive(false);
         GameObject.Find("ExternalAudioPlayer").GetComponent<AudioSource>().PlayOneShot(touchSound);
+        GameObject.Find("SignController").GetComponent<signController>().signer(_cellIndex);
     }
 
     //This is called from the SetCell method in DataSource
