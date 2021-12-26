@@ -875,7 +875,7 @@ GameObject:
   - component: {fileID: 75489308}
   - component: {fileID: 75489310}
   - component: {fileID: 75489309}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: sale
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56124,7 +56124,8 @@ GameObject:
   - component: {fileID: 279790749}
   - component: {fileID: 279790751}
   - component: {fileID: 279790750}
-  m_Layer: 5
+  - component: {fileID: 279790752}
+  m_Layer: 6
   m_Name: expansion1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56189,6 +56190,32 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 279790748}
   m_CullTransparentMesh: 1
+--- !u!61 &279790752
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 279790748}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.48706055, y: -0.69551086}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2332.647, y: 779.62646}
+  m_EdgeRadius: 0
 --- !u!1 &287795616
 GameObject:
   m_ObjectHideFlags: 0
@@ -56752,7 +56779,8 @@ GameObject:
   - component: {fileID: 394208429}
   - component: {fileID: 394208431}
   - component: {fileID: 394208430}
-  m_Layer: 5
+  - component: {fileID: 394208432}
+  m_Layer: 6
   m_Name: expansion1 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56817,6 +56845,32 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 394208428}
   m_CullTransparentMesh: 1
+--- !u!61 &394208432
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 394208428}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.486969, y: -0.69555664}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1551.9844, y: 1162.3042}
+  m_EdgeRadius: 0
 --- !u!1 &448186506
 GameObject:
   m_ObjectHideFlags: 0
@@ -58547,7 +58601,8 @@ GameObject:
   - component: {fileID: 705234540}
   - component: {fileID: 705234542}
   - component: {fileID: 705234541}
-  m_Layer: 5
+  - component: {fileID: 705234543}
+  m_Layer: 6
   m_Name: expansion1 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58612,6 +58667,32 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705234539}
   m_CullTransparentMesh: 1
+--- !u!61 &705234543
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 705234539}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.486969, y: -0.69555664}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1551.9844, y: 1162.3042}
+  m_EdgeRadius: 0
 --- !u!1 &716976422
 GameObject:
   m_ObjectHideFlags: 0
@@ -59481,7 +59562,7 @@ GameObject:
   - component: {fileID: 833125264}
   - component: {fileID: 833125266}
   - component: {fileID: 833125265}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: sale
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59995,7 +60076,8 @@ GameObject:
   - component: {fileID: 908147472}
   - component: {fileID: 908147474}
   - component: {fileID: 908147473}
-  m_Layer: 5
+  - component: {fileID: 908147475}
+  m_Layer: 6
   m_Name: expansion1 (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -60060,6 +60142,32 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 908147471}
   m_CullTransparentMesh: 1
+--- !u!61 &908147475
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 908147471}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.486969, y: -0.69555664}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1551.9844, y: 1162.3042}
+  m_EdgeRadius: 0
 --- !u!850595691 &959972160
 LightingSettings:
   m_ObjectHideFlags: 0
@@ -60377,7 +60485,7 @@ GameObject:
   - component: {fileID: 1134317906}
   - component: {fileID: 1134317908}
   - component: {fileID: 1134317907}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: sale
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -60547,7 +60655,7 @@ GameObject:
   - component: {fileID: 1167399203}
   - component: {fileID: 1167399205}
   - component: {fileID: 1167399204}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: sale
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66794,7 +66902,8 @@ GameObject:
   - component: {fileID: 1588660829}
   - component: {fileID: 1588660831}
   - component: {fileID: 1588660830}
-  m_Layer: 5
+  - component: {fileID: 1588660832}
+  m_Layer: 6
   m_Name: expansion2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66859,6 +66968,32 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1588660828}
   m_CullTransparentMesh: 1
+--- !u!61 &1588660832
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1588660828}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.48706055, y: -0.69551086}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2332.647, y: 779.62646}
+  m_EdgeRadius: 0
 --- !u!1 &1604636474
 GameObject:
   m_ObjectHideFlags: 0
@@ -67718,7 +67853,7 @@ GameObject:
   - component: {fileID: 1666945614}
   - component: {fileID: 1666945616}
   - component: {fileID: 1666945615}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: sale
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68386,7 +68521,8 @@ GameObject:
   - component: {fileID: 1710263853}
   - component: {fileID: 1710263855}
   - component: {fileID: 1710263854}
-  m_Layer: 5
+  - component: {fileID: 1710263856}
+  m_Layer: 6
   m_Name: expansion1 (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68451,6 +68587,32 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1710263852}
   m_CullTransparentMesh: 1
+--- !u!61 &1710263856
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1710263852}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.486969, y: -0.69555664}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1551.9844, y: 1162.3042}
+  m_EdgeRadius: 0
 --- !u!1 &1718816113
 GameObject:
   m_ObjectHideFlags: 0
@@ -69057,7 +69219,7 @@ GameObject:
   - component: {fileID: 1943576146}
   - component: {fileID: 1943576148}
   - component: {fileID: 1943576147}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: sale
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69240,7 +69402,8 @@ GameObject:
   - component: {fileID: 1967714177}
   - component: {fileID: 1967714179}
   - component: {fileID: 1967714178}
-  m_Layer: 5
+  - component: {fileID: 1967714180}
+  m_Layer: 6
   m_Name: expansion2 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69305,6 +69468,32 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1967714176}
   m_CullTransparentMesh: 1
+--- !u!61 &1967714180
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1967714176}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.48706055, y: -0.69551086}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2332.647, y: 779.62646}
+  m_EdgeRadius: 0
 --- !u!1 &2045416436
 GameObject:
   m_ObjectHideFlags: 0
@@ -69503,7 +69692,7 @@ GameObject:
   - component: {fileID: 2090844540}
   - component: {fileID: 2090844542}
   - component: {fileID: 2090844541}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: sale
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69689,7 +69878,7 @@ GameObject:
   - component: {fileID: 2141114205}
   - component: {fileID: 2141114207}
   - component: {fileID: 2141114206}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: sale
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69764,7 +69953,8 @@ GameObject:
   - component: {fileID: 2147363005}
   - component: {fileID: 2147363007}
   - component: {fileID: 2147363006}
-  m_Layer: 5
+  - component: {fileID: 2147363008}
+  m_Layer: 6
   m_Name: expansion1 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69829,3 +70019,29 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2147363004}
   m_CullTransparentMesh: 1
+--- !u!61 &2147363008
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2147363004}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.48706055, y: -0.69551086}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2332.647, y: 779.62646}
+  m_EdgeRadius: 0
