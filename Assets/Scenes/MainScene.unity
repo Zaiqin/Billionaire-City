@@ -57382,12 +57382,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 519420031}
   zoomStep: 1
-  minCamSize: 1
-  maxCamSize: 20
+  minCamSize: 4
+  maxCamSize: 18
   ShopMenu: {fileID: 252825800}
   hqMenu: {fileID: 1053581159}
   infoPanel: {fileID: 374950764}
   dragging: 0
+  map: {fileID: 179093922}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0

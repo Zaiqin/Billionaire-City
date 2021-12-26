@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.EventSystems;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Tilemaps;
 
 public class CameraMovement : MonoBehaviour
 {
@@ -21,11 +22,21 @@ public class CameraMovement : MonoBehaviour
 
     public bool dragging = false;
 
+    private float mapMinX, mapMaxX, mapMinY, mapMaxY;
+
+    public Tilemap map;
+
     private void Awake()
     {
         // Disable multi touch
         Input.multiTouchEnabled = false;
         dragging = false;
+
+        mapMinX = (map.transform.position.x - map.localBounds.size.x / 2f) + 2.5f;
+        mapMaxX = (map.transform.position.x + map.localBounds.size.x / 2f) - 2.5f;
+
+        mapMinY = map.transform.position.y - map.localBounds.size.y / 2f;
+        mapMaxY = map.transform.position.y + map.localBounds.size.y / 2f;
     }
 
     // Start is called before the first frame update
@@ -106,7 +117,9 @@ public class CameraMovement : MonoBehaviour
         if (Input.GetMouseButton(0) && startOnGrid == true && ShopMenu.activeSelf == false && difference != Vector3.zero) {
             //print("origin " + dragOrigin + "newPosition " + cam.ScreenToWorldPoint(Input.mousePosition) + " =difference " + difference);
             // move the camera by that dist
-            cam.transform.position += difference;
+
+            cam.transform.position = ClampCamera(cam.transform.position + difference);
+            //cam.transform.position += difference;
             hqMenu.SetActive(false);
             infoPanel.SetActive(false);
             dragging = true;
@@ -117,11 +130,30 @@ public class CameraMovement : MonoBehaviour
     public void ZoomIn() {
     	float newSize = cam.orthographicSize - zoomStep;
     	cam.orthographicSize = Mathf.Clamp(newSize, minCamSize, maxCamSize);
+
+        cam.transform.position = ClampCamera(cam.transform.position);
     }
 
     public void ZoomOut() {
     	float newSize = cam.orthographicSize + zoomStep;
     	cam.orthographicSize = Mathf.Clamp(newSize, minCamSize, maxCamSize);
-        
+
+        cam.transform.position = ClampCamera(cam.transform.position);
+    }
+
+    private Vector3 ClampCamera(Vector3 targetPosition)
+    {
+        float camHeight = cam.orthographicSize;
+        float camWidth = cam.orthographicSize * cam.aspect;
+
+        float minX = mapMinX + camWidth;
+        float maxX = mapMaxX - camWidth;
+        float minY = mapMinY + camHeight;
+        float maxY = mapMaxY - camHeight;
+
+        float newX = Mathf.Clamp(targetPosition.x, minX, maxX);
+        float newY = Mathf.Clamp(targetPosition.y, minY, maxY);
+
+        return new Vector3(newX, newY, targetPosition.z);
     }
 }
