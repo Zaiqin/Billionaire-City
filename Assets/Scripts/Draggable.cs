@@ -43,7 +43,6 @@ public class Draggable : MonoBehaviour
                 string loc = pCard.displayName + "(" + (agridPosition.x - 1) + "," + (agridPosition.y - 1) + ")";
                 this.name = loc;
                 XY[0] = (float)agridPosition.x - 1; XY[1] = (float)agridPosition.y - 1;
-                print("xy[0] is " + XY[0]);
                 buildCheck(this.pCard, this.GetComponent<Draggable>().XY);
             }
         }

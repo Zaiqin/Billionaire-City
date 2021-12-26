@@ -22,7 +22,7 @@ public class Property : MonoBehaviour, IPointerClickHandler
         this.gameObject.GetComponent<BoxCollider2D>().size = new Vector2(x, y);
         this.gameObject.GetComponent<BoxCollider2D>().offset = new Vector2(x/2, y/2);
 
-/*        if (pcard.type == "House")
+        if (pcard.type == "House")
         {
             GameObject contract = new GameObject();
             contract.name = "Contract";
@@ -36,10 +36,11 @@ public class Property : MonoBehaviour, IPointerClickHandler
 
             contract.AddComponent<contractScript>();
             contract.GetComponent<contractScript>().propCard = pcard;
-        } else
+        }
+        else
         {
             Debug.Log("this not a house");
-        }*/
+        }
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -112,12 +113,15 @@ public class contractScript : MonoBehaviour, IPointerClickHandler
     public PropertyCard propCard;
     void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
     {
-        print("clicked on contract");
-        GameObject canvas = GameObject.Find("Canvas");
-        GameObject contractMenu = canvas.transform.GetChild(canvas.transform.childCount - 1).gameObject;
-        contractMenu.SetActive(true);
-        GameObject contractController = GameObject.Find("Contract Scroll Controller");
-        contractController.GetComponent<RecyclableScrollerContract>().pCard = propCard;
-        contractController.GetComponent<RecyclableScrollerContract>().userReloadData();
+        if (GameObject.Find("Main Camera").GetComponent<CameraMovement>().dragging == false && GameObject.Find("Main Camera").GetComponent<SpriteDetector>().isMouseOverUI() == false)
+        {
+            print("clicked on contract");
+            GameObject canvas = GameObject.Find("Canvas");
+            GameObject contractMenu = canvas.transform.GetChild(canvas.transform.childCount - 2).gameObject;
+            contractMenu.SetActive(true);
+            GameObject contractController = GameObject.Find("Contract Scroll Controller");
+            contractController.GetComponent<RecyclableScrollerContract>().pCard = propCard;
+            contractController.GetComponent<RecyclableScrollerContract>().userReloadData();
+        }
     }
 }

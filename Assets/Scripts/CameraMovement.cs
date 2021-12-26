@@ -52,7 +52,7 @@ public class CameraMovement : MonoBehaviour
             startOnGrid = false;
             dragging = false;
         }
-        print("dragging is " + dragging);
+        //print("dragging is " + dragging);
     }
 
 

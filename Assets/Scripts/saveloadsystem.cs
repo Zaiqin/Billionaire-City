@@ -145,12 +145,12 @@ public class saveloadsystem : MonoBehaviour
         pp.gameObject.AddComponent<BlinkingProperty>();
         pp.gameObject.GetComponent<BlinkingProperty>().StopBlink();
 
-/*        if (pp.Card.type == "House") // check to only do these thats only for houses
+        if (pp.Card.type == "House") // check to only do these thats only for houses
         {
             // adding collider to contract and sorting its order ------
             pp.transform.GetChild(0).gameObject.AddComponent<BoxCollider2D>();
             pp.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2; //shows contract
-        }*/
+        }
         //print("Successfully loaded in " + propName + " at: x:" + pos.x + "y:" + pos.y);
     }
 }

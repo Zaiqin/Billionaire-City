@@ -165,7 +165,7 @@ public class TileChecker : MonoBehaviour
 
         // -------------------------------------------
         string id = "road" + number.ToString();
-        print("final id is " + id);
+        //print("final id is " + id);
         //print("-------stopped function tileCheck--------");
         return id;
 }

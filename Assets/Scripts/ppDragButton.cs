@@ -89,11 +89,11 @@ public class ppDragButton : MonoBehaviour
             ppDrag.SetActive(false);
 
             // adding the contract collider and sorting its order -----------
-/*            if (pCard.type == "House")
+            if (pCard.type == "House")
             {
                 pp.transform.GetChild(0).gameObject.AddComponent<BoxCollider2D>();
                 pp.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2; //shows contract
-            }*/
+            }
 
             // --------------------- Swapping to green border grass -------------
             map.SwapTile(greenGrass, tileGrass);
