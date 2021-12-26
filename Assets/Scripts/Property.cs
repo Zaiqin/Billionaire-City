@@ -186,6 +186,10 @@ public class moneyPickupScript : MonoBehaviour, IPointerClickHandler
             {
                 GameObject.Find("Stats").GetComponent<Statistics>().updateStats(diffmoney: profit, diffxp: 100);
                 GameObject.Find("ExternalAudioPlayer").GetComponent<AudioSource>().PlayOneShot(Resources.Load<AudioClip>("Audio/money"));
+
+                GameObject value = Instantiate(Resources.Load<GameObject>("floatingParent"), new Vector3(this.gameObject.transform.parent.transform.position.x + (float.Parse(this.gameObject.transform.parent.GetComponent<Property>().Card.space.Substring(0, 1))) / 2, this.gameObject.transform.parent.transform.position.y + 2.8f, -5f), Quaternion.identity) as GameObject;
+                value.transform.GetChild(0).GetComponent<TextMesh>().text = "+ $" + profit;
+                value.transform.GetChild(0).GetComponent<TextMesh>().color = new Color(168f / 255f, 255f / 255f, 4f / 255f);
             }
 
             this.gameObject.transform.parent.GetChild(0).GetComponent<contractScript>().signTime = "notsigned";
