@@ -32,8 +32,8 @@ public class CameraMovement : MonoBehaviour
         Input.multiTouchEnabled = false;
         dragging = false;
 
-        mapMinX = (map.transform.position.x - map.localBounds.size.x / 2f) + 2.5f;
-        mapMaxX = (map.transform.position.x + map.localBounds.size.x / 2f) - 2.5f;
+        mapMinX = map.transform.position.x - map.localBounds.size.x / 2f;
+        mapMaxX = map.transform.position.x + map.localBounds.size.x / 2f;
 
         mapMinY = map.transform.position.y - map.localBounds.size.y / 2f;
         mapMaxY = map.transform.position.y + map.localBounds.size.y / 2f;
@@ -42,7 +42,7 @@ public class CameraMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        cam.orthographicSize = Mathf.Clamp(6.0f, 1.0f, 10.0f);
+        cam.orthographicSize = Mathf.Clamp(6.0f, minCamSize, maxCamSize);
         print("Zoomed out");
     }
 
