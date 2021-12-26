@@ -6,9 +6,16 @@ using System;
 
 public class infoScript : MonoBehaviour
 {
-    public GameObject selProp, nameText, timeText;
+    public GameObject selProp, nameText, timeText, fill;
 
     // Update is called once per frame
+    private void Start()
+    {
+        nameText.GetComponent<Text>().text = "";
+        timeText.GetComponent<Text>().text = "";
+        fill.SetActive(false);
+    }
+
     void Update()
     {
         nameText.GetComponent<Text>().text = selProp.GetComponent<Property>().Card.displayName;
@@ -19,6 +26,9 @@ public class infoScript : MonoBehaviour
                 var diff = DateTime.Parse(selProp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signTime) - System.DateTime.Now;
                 if (diff > TimeSpan.Zero)
                 {
+                    fill.SetActive(true);
+                    fill.GetComponent<Image>().fillAmount = 1f;
+                    
                     if (diff.Days != 0)
                     {
                         timeText.GetComponent<Text>().text = string.Format("{0:D2} Days {1:D2} hrs", diff.Days, diff.Hours);
@@ -39,16 +49,19 @@ public class infoScript : MonoBehaviour
                 else
                 {
                     timeText.GetComponent<Text>().text = "No Contract Signed";
+                    fill.SetActive(false);
                 }
             }
             else
             {
                 timeText.GetComponent<Text>().text = "No Contract Signed";
+                fill.SetActive(false);
             }
         }
         else
         {
             timeText.GetComponent<Text>().text = "";
+            fill.SetActive(false);
         }
     }
 }
