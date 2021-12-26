@@ -28,6 +28,8 @@ public class MapManager : MonoBehaviour
 
     public Camera mainCam;
 
+    public bool startInUI;
+
     private bool isMouseOverUI() //return true if mouse is over ui
     {
         //print("ismosueoverui result is " + EventSystem.current.IsPointerOverGameObject());
@@ -51,6 +53,7 @@ public class MapManager : MonoBehaviour
             }
             if (hit.collider.gameObject.layer == 6)
             {
+                //print("return layer 6");
                 return true;
             }
         } else
@@ -131,7 +134,7 @@ public class MapManager : MonoBehaviour
                         {
                             createdTile = map.GetTile<Tile>(new Vector3Int(-1, 0, 0)); //grass below hq
                         }
-                        if (isMouseOverUI() == false)
+                        if (isMouseOverUI() == false && startInUI == false)
                         {
                             if (mainCam.GetComponent<CameraMovement>().dragging == false)
                             {
@@ -165,6 +168,11 @@ public class MapManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetMouseButtonDown(0) && isMouseOverUI() == true)
+        {
+            startInUI = true;
+        }
+
         if ((roadToggle.isOn == true) && (Input.GetMouseButtonUp(0)))
         {
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -176,7 +184,7 @@ public class MapManager : MonoBehaviour
                 roadFunction(gridPosition, false);
             }
         }
-        if ((deleteToggle.isOn == true) && (Input.GetMouseButtonUp(0)))
+        if ((deleteToggle.isOn == true) && (Input.GetMouseButtonUp(0)) && startInUI == false)
         {
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector3Int gridPosition = map.WorldToCell(mousePosition);
@@ -196,6 +204,7 @@ public class MapManager : MonoBehaviour
 
             Tile aclickedTile = map.GetTile<Tile>(agridPosition);
             print("clicked on tile: " + aclickedTile.name + " at position: " + agridPosition);
+            startInUI = false;
         }
     }
 }

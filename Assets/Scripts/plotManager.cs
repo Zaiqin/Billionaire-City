@@ -29,20 +29,40 @@ public class plotManager : MonoBehaviour
 
     public Camera mainCam;
 
-    private bool isMouseOverUI()
+    private bool startInUI;
+
+    private bool isMouseOverUI() //return true if mouse is over ui
     {
+        //print("ismosueoverui result is " + EventSystem.current.IsPointerOverGameObject());
+
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity);
         if (hit.collider != null)
         {
-            //print("hit building that is draggable");
-            print("plot drag is set to true");
-            return true;
-
+            if (hit.collider.gameObject.GetComponent<Draggable>() != null)
+            {
+                //print("mouseoverui hit building named " + hit.collider.gameObject.name);
+                if (hit.collider.gameObject.GetComponent<Draggable>().dragEnabled == true)
+                {
+                    //print("hit building that is draggable");
+                    return true;
+                }
+                else
+                {
+                    //print("hit building that is draggable");
+                }
+            }
+            if (hit.collider.gameObject.layer == 6)
+            {
+                //print("return true for layer 6");
+                return true;
+            }
         }
-
-        //print("sending defualt ");
-        print("returning false");
+        else
+        {
+            //no collider detected
+        }
+        //print("returning false");
         return false;
     }
 
@@ -172,6 +192,11 @@ public class plotManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetMouseButtonDown(0) && isMouseOverUI() == true)
+        {
+            startInUI = true;
+        }
+
         if ((plotToggle.isOn == true) && (Input.GetMouseButtonUp(0)))
         {
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -203,6 +228,7 @@ public class plotManager : MonoBehaviour
 
             Tile aclickedTile = map.GetTile<Tile>(agridPosition);
             print("clicked on tile: " + aclickedTile.name + " at position: " + agridPosition);
+            startInUI = false;
         }
     }
 }

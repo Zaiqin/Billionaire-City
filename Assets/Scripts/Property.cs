@@ -44,62 +44,65 @@ public class Property : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        print("From property.cs clicked on" + this.name);
-        GameObject propParent = GameObject.Find("Properties");
-        GameObject infoPanel = GameObject.Find("Canvas").transform.GetChild(0).gameObject;
-
-        if (GameObject.Find("deleteToggle").GetComponent<Toggle>().isOn == true)
+        if (GameObject.Find("Main Camera").GetComponent<CameraMovement>().dragging == false)
         {
-            print("show del popup");
-            GameObject delPopup = GameObject.Find("Canvas").transform.GetChild(1).gameObject;
-            delPopup.SetActive(true);
-            // Deducting money ---------------
-            long refund;
-            if (this.Card.cost.Contains("Gold"))
+            print("From property.cs clicked on" + this.name);
+            GameObject propParent = GameObject.Find("Properties");
+            GameObject infoPanel = GameObject.Find("Canvas").transform.GetChild(0).gameObject;
+
+            if (GameObject.Find("deleteToggle").GetComponent<Toggle>().isOn == true)
             {
-                refund = (long)(21000 * double.Parse(this.Card.cost.Remove(this.Card.cost.Length - 5)));
-                if (refund >= 100000000)
+                print("show del popup");
+                GameObject delPopup = GameObject.Find("Canvas").transform.GetChild(1).gameObject;
+                delPopup.SetActive(true);
+                // Deducting money ---------------
+                long refund;
+                if (this.Card.cost.Contains("Gold"))
                 {
-                    string temp = refund.ToString("#,##0");
-                    delPopup.transform.GetChild(1).GetComponent<Text>().text = "$" + temp.Substring(0, temp.Length - 8) + "M";
+                    refund = (long)(21000 * double.Parse(this.Card.cost.Remove(this.Card.cost.Length - 5)));
+                    if (refund >= 100000000)
+                    {
+                        string temp = refund.ToString("#,##0");
+                        delPopup.transform.GetChild(1).GetComponent<Text>().text = "$" + temp.Substring(0, temp.Length - 8) + "M";
+                    }
+                    else
+                    {
+                        delPopup.transform.GetChild(1).GetComponent<Text>().text = "$" + refund.ToString("#,##0");
+                    }
+                    print("refund convert from gold is " + refund);
                 }
                 else
                 {
-                    delPopup.transform.GetChild(1).GetComponent<Text>().text = "$" + refund.ToString("#,##0");
+                    refund = (long)(0.35 * double.Parse(this.Card.cost));
+                    if (refund >= 100000000)
+                    {
+                        string temp = refund.ToString("#,##0");
+                        delPopup.transform.GetChild(1).GetComponent<Text>().text = "$" + temp.Substring(0, temp.Length - 8) + "M";
+                    }
+                    else
+                    {
+                        delPopup.transform.GetChild(1).GetComponent<Text>().text = "$" + refund.ToString("#,##0");
+                    }
+                    print("refund is " + refund);
                 }
-                print("refund convert from gold is " + refund);
-            }
-            else
-            {
-                refund = (long)(0.35 * double.Parse(this.Card.cost));
-                if (refund >= 100000000)
-                {
-                    string temp = refund.ToString("#,##0");
-                    delPopup.transform.GetChild(1).GetComponent<Text>().text = "$" + temp.Substring(0, temp.Length - 8) + "M";
-                }
-                else
-                {
-                    delPopup.transform.GetChild(1).GetComponent<Text>().text = "$" + refund.ToString("#,##0");
-                }
-                print("refund is " + refund);
-            }
-            // -------------------------------
-            delPopup.transform.GetChild(2).GetComponent<delConfirm>().refundValue = refund;
-            delPopup.transform.GetChild(2).GetComponent<delConfirm>().selProp = this.gameObject;
-            this.gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+                // -------------------------------
+                delPopup.transform.GetChild(2).GetComponent<delConfirm>().refundValue = refund;
+                delPopup.transform.GetChild(2).GetComponent<delConfirm>().selProp = this.gameObject;
+                this.gameObject.GetComponent<SpriteRenderer>().color = Color.red;
 
-        } else if (this.transform.parent == propParent.transform)
-        {
-            infoPanel.SetActive(true);
-            infoPanel.transform.GetChild(0).GetComponent<Text>().text = this.Card.displayName;
-            GameObject hqmenu = GameObject.Find("HQStats");
-            if (hqmenu != null)
-            {
-                hqmenu.SetActive(false);
             }
+            else if (this.transform.parent == propParent.transform)
+            {
+                infoPanel.SetActive(true);
+                infoPanel.transform.GetChild(0).GetComponent<Text>().text = this.Card.displayName;
+                GameObject hqmenu = GameObject.Find("HQStats");
+                if (hqmenu != null)
+                {
+                    hqmenu.SetActive(false);
+                }
+            }
+
         }
-
-        
     }
 }
 

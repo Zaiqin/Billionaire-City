@@ -829,6 +829,7 @@ MonoBehaviour:
   infoPanel: {fileID: 374950764}
   pendingParent: {fileID: 58940600}
   ppDrag: {fileID: 737003508}
+  delPanel: {fileID: 529775927}
   toggles: []
   map: {fileID: 179093922}
   greenGrass: {fileID: 11400000, guid: ed9bdc427593d5f4fa5d4bce0fd199b8, type: 2}
@@ -56438,6 +56439,7 @@ MonoBehaviour:
   infoPanel: {fileID: 374950764}
   pendingParent: {fileID: 58940600}
   ppDrag: {fileID: 737003508}
+  delPanel: {fileID: 529775927}
   toggles: []
   map: {fileID: 179093922}
   greenGrass: {fileID: 11400000, guid: ed9bdc427593d5f4fa5d4bce0fd199b8, type: 2}
@@ -56469,6 +56471,7 @@ GameObject:
   - component: {fileID: 326032530}
   - component: {fileID: 326032532}
   - component: {fileID: 326032531}
+  - component: {fileID: 326032533}
   m_Layer: 6
   m_Name: bg
   m_TagString: Untagged
@@ -56533,6 +56536,32 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 326032529}
   m_CullTransparentMesh: 1
+--- !u!61 &326032533
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326032529}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.49996948, y: -0.11462402}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 470.28583, y: 319.89313}
+  m_EdgeRadius: 0
 --- !u!1 &374950764
 GameObject:
   m_ObjectHideFlags: 0
@@ -57208,6 +57237,7 @@ MonoBehaviour:
   land: {fileID: 2111853006}
   total: {fileID: 805826345}
   noOfPlots: 0
+  mainCam: {fileID: 519420031}
 --- !u!114 &502592030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58122,6 +58152,7 @@ MonoBehaviour:
   infoPanel: {fileID: 374950764}
   pendingParent: {fileID: 58940600}
   ppDrag: {fileID: 737003508}
+  delPanel: {fileID: 529775927}
   toggles: []
   map: {fileID: 179093922}
   greenGrass: {fileID: 11400000, guid: ed9bdc427593d5f4fa5d4bce0fd199b8, type: 2}
@@ -59763,6 +59794,7 @@ MonoBehaviour:
   infoPanel: {fileID: 374950764}
   pendingParent: {fileID: 58940600}
   ppDrag: {fileID: 737003508}
+  delPanel: {fileID: 529775927}
   toggles: []
   map: {fileID: 179093922}
   greenGrass: {fileID: 11400000, guid: ed9bdc427593d5f4fa5d4bce0fd199b8, type: 2}
@@ -66724,6 +66756,7 @@ MonoBehaviour:
   infoPanel: {fileID: 374950764}
   pendingParent: {fileID: 58940600}
   ppDrag: {fileID: 737003508}
+  delPanel: {fileID: 529775927}
   toggles: []
   map: {fileID: 179093922}
   greenGrass: {fileID: 11400000, guid: ed9bdc427593d5f4fa5d4bce0fd199b8, type: 2}
@@ -69382,6 +69415,7 @@ MonoBehaviour:
   splashObject: {fileID: 1976408486320943345, guid: 916150befd6ee214ab9864791ccbabea,
     type: 3}
   mainCam: {fileID: 519420031}
+  startInUI: 0
 --- !u!4 &2061975115
 Transform:
   m_ObjectHideFlags: 0

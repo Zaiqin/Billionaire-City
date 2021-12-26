@@ -19,6 +19,8 @@ public class HQstats : MonoBehaviour
 
     public int noOfPlots;
 
+    public Camera mainCam;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -59,17 +61,21 @@ public class HQstats : MonoBehaviour
 
     public void clickedHQ()
     {
-        print("open hq");
-        if (hqMenu.activeSelf == false && dragButtons.activeSelf == false)
+        if (mainCam.GetComponent<CameraMovement>().dragging == false)
         {
-            calcHQ();
-            hqMenu.SetActive(true);
-            externalAudioPlayer.GetComponent<AudioSource>().PlayOneShot(touchSound);
-            infoPanel.SetActive(false);
-            shopMenu.SetActive(false);
-        } else
-        {
-            hqMenu.SetActive(false);
+            print("open hq");
+            if (hqMenu.activeSelf == false && dragButtons.activeSelf == false)
+            {
+                calcHQ();
+                hqMenu.SetActive(true);
+                externalAudioPlayer.GetComponent<AudioSource>().PlayOneShot(touchSound);
+                infoPanel.SetActive(false);
+                shopMenu.SetActive(false);
+            }
+            else
+            {
+                hqMenu.SetActive(false);
+            }
         }
     }
 }
