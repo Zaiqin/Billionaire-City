@@ -184,7 +184,7 @@ public class moneyPickupScript : MonoBehaviour, IPointerClickHandler
             }
             if (profit != 0)
             {
-                GameObject.Find("Stats").GetComponent<Statistics>().updateStats(diffmoney: profit, diffxp: 100);
+                GameObject.Find("Stats").GetComponent<Statistics>().updateStats(diffmoney: profit, diffxp: propCard.XP);
                 GameObject.Find("ExternalAudioPlayer").GetComponent<AudioSource>().PlayOneShot(Resources.Load<AudioClip>("Audio/money"));
 
                 GameObject value = Instantiate(Resources.Load<GameObject>("floatingParent"), new Vector3(this.gameObject.transform.parent.transform.position.x + (float.Parse(this.gameObject.transform.parent.GetComponent<Property>().Card.space.Substring(0, 1))) / 2, this.gameObject.transform.parent.transform.position.y + 2.8f, -5f), Quaternion.identity) as GameObject;
