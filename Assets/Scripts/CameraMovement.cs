@@ -50,12 +50,15 @@ public class CameraMovement : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             startOnGrid = false;
-            dragging = false;
+            Invoke("setDrag", 0.01f);
         }
         //print("dragging is " + dragging);
     }
 
-
+    void setDrag()
+    {
+        dragging = false;
+    }
 
     private bool isMouseOverUI(Vector3 pos) //return true if mouse is over ui
     {

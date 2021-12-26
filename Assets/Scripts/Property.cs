@@ -184,8 +184,8 @@ public class moneyPickupScript : MonoBehaviour, IPointerClickHandler
             }
             if (profit != 0)
             {
-                GameObject.Find("Stats").GetComponent<Statistics>().updateStats(diffmoney: profit);
-                GameObject.Find("ExternalAudioPlayer").GetComponent<AudioSource>().PlayOneShot(Resources.Load<AudioClip>("money"));
+                GameObject.Find("Stats").GetComponent<Statistics>().updateStats(diffmoney: profit, diffxp: 100);
+                GameObject.Find("ExternalAudioPlayer").GetComponent<AudioSource>().PlayOneShot(Resources.Load<AudioClip>("Audio/money"));
             }
 
             this.gameObject.transform.parent.GetChild(0).GetComponent<contractScript>().signTime = "notsigned";
