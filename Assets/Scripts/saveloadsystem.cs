@@ -11,9 +11,10 @@ public class propertySaveForm {
     public int locX;
     public int locY;
     public string signTime;
-    public propertySaveForm(string n, float[] v, string t = "notsigned")
+    public int signIndex;
+    public propertySaveForm(string n, float[] v, string t = "notsigned", int i = -1)
     {
-        propName = n; locX = (int)v[0]; locY = (int)v[1]; signTime = t;
+        propName = n; locX = (int)v[0]; locY = (int)v[1]; signTime = t; signIndex = i;
     }
 }
 
@@ -54,7 +55,7 @@ public class saveloadsystem : MonoBehaviour
                 print("saving: " + child.GetComponent<Property>().Card.displayName);
                 if (child.GetComponent<Property>().Card.type == "House")
                 {
-                    propSaveList.Add(new propertySaveForm(child.GetComponent<Property>().Card.displayName, child.GetComponent<Draggable>().XY, child.transform.GetChild(0).GetComponent<contractScript>().signTime));
+                    propSaveList.Add(new propertySaveForm(child.GetComponent<Property>().Card.displayName, child.GetComponent<Draggable>().XY, child.transform.GetChild(0).GetComponent<contractScript>().signTime, child.transform.GetChild(0).GetComponent<contractScript>().signIndex));
                 } else
                 {
                     propSaveList.Add(new propertySaveForm(child.GetComponent<Property>().Card.displayName, child.GetComponent<Draggable>().XY));
@@ -96,7 +97,7 @@ public class saveloadsystem : MonoBehaviour
             print("Save Game Found, loading from save");
             foreach (var p in list)
             {
-                loadProperty(p.propName, new Vector2Int(p.locX, p.locY), p.signTime);
+                loadProperty(p.propName, new Vector2Int(p.locX, p.locY), p.signTime, p.signIndex);
                 print("loaded: " + p.propName);
             }
             //neeed to load stats
@@ -120,7 +121,7 @@ public class saveloadsystem : MonoBehaviour
         print("Successfully Loaded Game");
     }
 
-    public void loadProperty(string propName, Vector2Int pos, string signTime = "notsigned") //propName must be the display form, not camelCase; eg Bungalow Luxury, not bungalowlux
+    public void loadProperty(string propName, Vector2Int pos, string signTime = "notsigned", int signIndex = -1) //propName must be the display form, not camelCase; eg Bungalow Luxury, not bungalowlux
     {
         //print("loading and spawning property into game from load save");
         PropertyCard prop = csv.CardDatabase[propName];
@@ -155,18 +156,28 @@ public class saveloadsystem : MonoBehaviour
         if (pp.Card.type == "House") // check to only do these thats only for houses
         {
             pp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signTime = signTime;
+            pp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signIndex = signIndex;
             // adding collider to contract and sorting its order ------
             pp.transform.GetChild(0).gameObject.AddComponent<BoxCollider2D>();
+            // add collider to money
+            pp.transform.GetChild(1).gameObject.AddComponent<BoxCollider2D>();
             var dateAndTimeVar = System.DateTime.Now;
             print("going check contract for " + pp.name + "which is signtime " + pp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signTime);
             if (pp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signTime == "notsigned") {
-                pp.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2; //shows contract
+                pp.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2;
+                pp.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
                 print("notsigned");
             } else if (dateAndTimeVar >= DateTime.Parse(pp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signTime)) {
-                pp.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2; //shows contract
+                pp.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
+                pp.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2;
                 print("sign over timea alre");
+            } else if (dateAndTimeVar < DateTime.Parse(pp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signTime)) {
+                pp.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
+                pp.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
             } else {
-                pp.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0; //hide contract
+                pp.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
+                pp.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2;
+                pp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signIndex = signIndex;
                 print("sign still ongoiing");
             }
             

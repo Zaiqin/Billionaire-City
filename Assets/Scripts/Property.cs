@@ -25,6 +25,7 @@ public class Property : MonoBehaviour, IPointerClickHandler
 
         if (pcard.type == "House")
         {
+            // ---------------------- Contract Object ---------------------
             GameObject contract = new GameObject();
             contract.name = "Contract";
             SpriteRenderer contractStarrenderer = contract.AddComponent<SpriteRenderer>();
@@ -34,9 +35,21 @@ public class Property : MonoBehaviour, IPointerClickHandler
             contractStarrenderer.sortingOrder = 0; // Hides it
             contract.transform.parent = this.transform;
             contract.transform.localPosition = new Vector3(float.Parse(pcard.space.Substring(0, 1)) / 2, float.Parse(pcard.space.Substring(pcard.space.Length - 1)) / 2, 0f);
-
             contract.AddComponent<contractScript>();
             contract.GetComponent<contractScript>().propCard = pcard;
+
+            // ----------------------- Money Object -----------------------------
+            GameObject money = new GameObject();
+            money.name = "Money";
+            SpriteRenderer moneyrenderer = money.AddComponent<SpriteRenderer>();
+            Sprite moneySprite = Resources.Load<Sprite>("moneyPickup");
+            moneyrenderer.sprite = Sprite.Create(moneySprite.texture, new Rect(0, 0, moneySprite.texture.width, moneySprite.texture.height), new Vector2(0.5f, 0.5f), 980);
+            money.AddComponent<scaleLerper>();
+            moneyrenderer.sortingOrder = 0; // Hides it
+            money.transform.parent = this.transform;
+            money.transform.localPosition = new Vector3(float.Parse(pcard.space.Substring(0, 1)) / 2, float.Parse(pcard.space.Substring(pcard.space.Length - 1)) / 2, 0f);
+            money.AddComponent<moneyPickupScript>();
+            money.AddComponent<moneyPickupScript>().propCard = pcard;
         }
         else
         {
@@ -112,6 +125,7 @@ public class Property : MonoBehaviour, IPointerClickHandler
 public class contractScript : MonoBehaviour, IPointerClickHandler
 {
     public string signTime = "notsigned";
+    public int signIndex = -1;
     public PropertyCard propCard;
     void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
     {
@@ -136,8 +150,47 @@ public class contractScript : MonoBehaviour, IPointerClickHandler
         {
             if (dateAndTimeVar >= DateTime.Parse(signTime))
             {
-                this.gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2;
+                this.gameObject.transform.parent.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder = 2;
             }
+        }
+    }
+}
+
+public class moneyPickupScript : MonoBehaviour, IPointerClickHandler
+{
+    public PropertyCard propCard;
+    void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
+    {
+        if (GameObject.Find("Main Camera").GetComponent<CameraMovement>().dragging == false && GameObject.Find("Main Camera").GetComponent<SpriteDetector>().isMouseOverUI() == false)
+        {
+            print("clicked on money");
+            this.gameObject.transform.parent.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = 2;
+            this.gameObject.transform.parent.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder = 0;
+
+            print("collecting index " + this.gameObject.transform.parent.GetChild(0).GetComponent<contractScript>().signIndex);
+            int profit;
+            switch (this.gameObject.transform.parent.GetChild(0).GetComponent<contractScript>().signIndex)
+            {
+                case 0: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.threemins; break;
+                case 1: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.thirtymins; break;
+                case 2: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.onehour; break;
+                case 3: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.fourhours; break;
+                case 4: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.eighthours; break;
+                case 5: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.twelvehours; break;
+                case 6: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.oneday; break;
+                case 7: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.twodays; break;
+                case 8: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.threedays; break;
+                default: profit = 0; break;
+            }
+            if (profit != 0)
+            {
+                GameObject.Find("Stats").GetComponent<Statistics>().updateStats(diffmoney: profit);
+                GameObject.Find("ExternalAudioPlayer").GetComponent<AudioSource>().PlayOneShot(Resources.Load<AudioClip>("money"));
+            }
+
+            this.gameObject.transform.parent.GetChild(0).GetComponent<contractScript>().signTime = "notsigned";
+            this.gameObject.transform.parent.GetChild(0).GetComponent<contractScript>().signIndex = -1;
+            GameObject.Find("SaveLoadSystem").GetComponent<saveloadsystem>().saveGame();
         }
     }
 }
