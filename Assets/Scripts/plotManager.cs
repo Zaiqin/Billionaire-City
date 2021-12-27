@@ -187,7 +187,10 @@ public class plotManager : MonoBehaviour
         //float walkingSpeed = dataFromTiles[clickedTile].walkingSpeed;
 
         //print("Walking speed on " + clickedTile + " at position " + gridPosition + " is " + walkingSpeed);
-        saveObj.GetComponent<saveloadsystem>().saveTilemap();
+        if (forced == false)
+        {
+            saveObj.GetComponent<saveloadsystem>().saveTilemap();
+        }
     }
 
     // Update is called once per frame
