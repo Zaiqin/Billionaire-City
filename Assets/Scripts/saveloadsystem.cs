@@ -32,6 +32,27 @@ public class statsSaveForm
     }
 }
 
+[Serializable]
+public class tileSaveForm
+{
+    public float x;
+    public float y;
+    public string texName;
+
+    public tileSaveForm(Vector3Int v, string texture)
+    {
+        x = v.x; y = v.y; 
+        if (texture == "greenGrass")
+        {
+            texName = "tileGrass";
+        } else
+        {
+            texName = texture;
+        }
+            
+    }
+}
+
 public class saveloadsystem : MonoBehaviour
 {
     public CSVReader csv;
@@ -48,6 +69,7 @@ public class saveloadsystem : MonoBehaviour
     public void saveGame()
     {
         print("Saving Game");
+        // ------------ Saving properties -------------------------------
         List<propertySaveForm> propSaveList = new List<propertySaveForm>();
         foreach (Transform child in PropertiesParent.transform)
         {
@@ -64,8 +86,27 @@ public class saveloadsystem : MonoBehaviour
         }
         FileHandler.SaveToJSON<propertySaveForm>(propSaveList, "propsSave.json");
 
+        // ------------ Saving stats -------------------------------
         statsSaveForm statsSaveObj = new statsSaveForm(Stats.GetComponent<Statistics>().money, Stats.GetComponent<Statistics>().gold, Stats.GetComponent<Statistics>().level, Stats.GetComponent<Statistics>().xp);
         FileHandler.SaveToJSON<statsSaveForm>(statsSaveObj, "statsSave.json");
+
+        // ------------ Saving tilemap -------------------------------
+        List<tileSaveForm> tileSaveList = new List<tileSaveForm>();
+        BoundsInt bounds = map.cellBounds;
+        for (int x = bounds.xMin; x < bounds.xMax; x++)
+        {
+            for (int y = bounds.yMin; y < bounds.yMax; y++)
+            {
+                Vector3Int pos = new Vector3Int(x, y, 0);
+                TileBase tile = map.GetTile(pos);
+                if (tile != null)
+                {
+                    tileSaveForm tF = new tileSaveForm(pos, tile.name);
+                    tileSaveList.Add(tF);
+                }
+            }
+        }
+        FileHandler.SaveToJSON<tileSaveForm>(tileSaveList, "tileSave.json");
         print("Game saved");
     }
 
@@ -78,6 +119,29 @@ public class saveloadsystem : MonoBehaviour
         print("Stats saved");
     }
 
+    [ContextMenu("Save Tilemap")]
+    public void saveTilemap()
+    {
+        print("Saving Tilemap");
+        List<tileSaveForm> tileSaveList = new List<tileSaveForm>();
+        BoundsInt bounds = map.cellBounds;
+        for (int x = bounds.xMin; x < bounds.xMax; x++)
+        {
+            for (int y = bounds.yMin; y < bounds.yMax; y++)
+            {
+                Vector3Int pos = new Vector3Int(x, y, 0);
+                TileBase tile = map.GetTile(pos);
+                if (tile != null)
+                {
+                    tileSaveForm tF = new tileSaveForm(pos, tile.name);
+                    tileSaveList.Add(tF);
+                }
+            }
+        }
+        FileHandler.SaveToJSON<tileSaveForm>(tileSaveList, "tileSave.json");
+        print("Tilemap saved");
+    }
+
     [ContextMenu("Load From Save")]
     public void loadSaveGame()
     {
@@ -85,7 +149,9 @@ public class saveloadsystem : MonoBehaviour
         list = FileHandler.ReadListFromJSON<propertySaveForm>("propsSave.json");
         statsSaveForm statsObj;
         statsObj = FileHandler.ReadFromJSON<statsSaveForm>("statsSave.json");
-        
+        List<tileSaveForm> tilelist = new List<tileSaveForm>();
+        tilelist = FileHandler.ReadListFromJSON<tileSaveForm>("tileSave.json");
+
         if (list.Count == 0)
         {
             print("No Save Game found, loading new game");
@@ -95,13 +161,28 @@ public class saveloadsystem : MonoBehaviour
         else
         {
             print("Save Game Found, loading from save");
+            // ----------- Loading Properties ---------------
             foreach (var p in list)
             {
                 loadProperty(p.propName, new Vector2Int(p.locX, p.locY), p.signTime, p.signIndex);
                 print("loaded: " + p.propName);
             }
-            //neeed to load stats
+            // ----------- Loading Statistics ---------------
             Stats.GetComponent<Statistics>().setStats(statsObj.money, statsObj.gold, statsObj.level, statsObj.xp);
+            // ----------- Loading Tilemap ------------------
+            foreach (var item in tilelist)
+            {
+                Vector3Int pos = new Vector3Int((int)item.x, (int)item.y, 0);
+                if (item.texName.Contains("road") || item.texName.Contains("Grass"))
+                {
+                    map.SetTile(pos, Resources.Load<TileBase>("roadTiles/" + item.texName));
+                    print("loaded road" + item.texName + "at pos " + pos);
+                } else if (item.texName.Contains("plot"))
+                {
+                    map.SetTile(pos, Resources.Load<TileBase>("plotTiles/" + item.texName));
+                    print("loaded plot" + item.texName + "at pos " + pos);
+                }
+            }
         }
     }
 

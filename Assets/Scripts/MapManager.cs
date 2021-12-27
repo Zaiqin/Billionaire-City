@@ -24,7 +24,7 @@ public class MapManager : MonoBehaviour
     public AudioClip deleteSound;
 
     [SerializeField]
-    public GameObject splashObject;
+    public GameObject splashObject, saveObj;
 
     public Camera mainCam;
 
@@ -163,6 +163,7 @@ public class MapManager : MonoBehaviour
         //float walkingSpeed = dataFromTiles[clickedTile].walkingSpeed;
 
         //print("Walking speed on " + clickedTile + " at position " + gridPosition + " is " + walkingSpeed);
+        saveObj.GetComponent<saveloadsystem>().saveTilemap();
     }
 
     // Update is called once per frame

@@ -25,7 +25,7 @@ public class plotManager : MonoBehaviour
     public AudioSource myFx;
     public AudioClip deleteSound;
 
-    public GameObject floatingValue, hq, splashObject;
+    public GameObject floatingValue, hq, splashObject, saveObj;
 
     public Camera mainCam;
 
@@ -187,6 +187,7 @@ public class plotManager : MonoBehaviour
         //float walkingSpeed = dataFromTiles[clickedTile].walkingSpeed;
 
         //print("Walking speed on " + clickedTile + " at position " + gridPosition + " is " + walkingSpeed);
+        saveObj.GetComponent<saveloadsystem>().saveTilemap();
     }
 
     // Update is called once per frame
