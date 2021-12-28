@@ -49,18 +49,28 @@ public class infoScript : MonoBehaviour
                         timeText.GetComponent<Text>().text = string.Format("{0:D2} seconds", diff.Seconds);
                     }
 
+                    long tempIncome;
                     switch (selProp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signIndex)
                     {
-                        case 0: incomeText.GetComponent<Text>().text = "$" + selProp.GetComponent<Property>().Card.threemins.ToString("#,##0"); break;
-                        case 1: incomeText.GetComponent<Text>().text = "$" + selProp.GetComponent<Property>().Card.thirtymins.ToString("#,##0"); break;
-                        case 2: incomeText.GetComponent<Text>().text = "$" + selProp.GetComponent<Property>().Card.onehour.ToString("#,##0"); break;
-                        case 3: incomeText.GetComponent<Text>().text = "$" + selProp.GetComponent<Property>().Card.fourhours.ToString("#,##0"); break;
-                        case 4: incomeText.GetComponent<Text>().text = "$" + selProp.GetComponent<Property>().Card.eighthours.ToString("#,##0"); break;
-                        case 5: incomeText.GetComponent<Text>().text = "$" + selProp.GetComponent<Property>().Card.twelvehours.ToString("#,##0"); break;
-                        case 6: incomeText.GetComponent<Text>().text = "$" + selProp.GetComponent<Property>().Card.oneday.ToString("#,##0"); break;
-                        case 7: incomeText.GetComponent<Text>().text = "$" + selProp.GetComponent<Property>().Card.twodays.ToString("#,##0"); break;
-                        case 8: incomeText.GetComponent<Text>().text = "$" + selProp.GetComponent<Property>().Card.threedays.ToString("#,##0"); break;
-                        default: incomeText.GetComponent<Text>().text = "$" + selProp.GetComponent<Property>().Card.threemins.ToString("#,##0"); break;
+                        case 0: tempIncome = (long)selProp.GetComponent<Property>().Card.threemins; break;
+                        case 1: tempIncome = (long)selProp.GetComponent<Property>().Card.thirtymins; break;
+                        case 2: tempIncome = (long)selProp.GetComponent<Property>().Card.onehour; break;
+                        case 3: tempIncome = (long)selProp.GetComponent<Property>().Card.fourhours; break;
+                        case 4: tempIncome = (long)selProp.GetComponent<Property>().Card.eighthours; break;
+                        case 5: tempIncome = (long)selProp.GetComponent<Property>().Card.twelvehours; break;
+                        case 6: tempIncome = (long)selProp.GetComponent<Property>().Card.oneday; break;
+                        case 7: tempIncome = (long)selProp.GetComponent<Property>().Card.twodays; break;
+                        case 8: tempIncome = (long)selProp.GetComponent<Property>().Card.threedays; break;
+                        default: tempIncome = (long)selProp.GetComponent<Property>().Card.threemins; break;
+                    }
+                    if (tempIncome >= 100000000)
+                    {
+                        string temp = tempIncome.ToString("#,##0");
+                        incomeText.GetComponent<Text>().text = "$" + temp.Substring(0, temp.Length - 8) + "M";
+                    }
+                    else
+                    {
+                        incomeText.GetComponent<Text>().text = "$" + tempIncome.ToString("#,##0");
                     }
                 }
                 else
