@@ -12,9 +12,10 @@ public class propertySaveForm {
     public int locY;
     public string signTime;
     public int signIndex;
-    public propertySaveForm(string n, float[] v, string t = "notsigned", int i = -1)
+    public string signCreationTime;
+    public propertySaveForm(string n, float[] v, string t = "notsigned", int i = -1, string ct = "notsigned")
     {
-        propName = n; locX = (int)v[0]; locY = (int)v[1]; signTime = t; signIndex = i;
+        propName = n; locX = (int)v[0]; locY = (int)v[1]; signTime = t; signIndex = i; signCreationTime = ct;
     }
 }
 
@@ -77,7 +78,7 @@ public class saveloadsystem : MonoBehaviour
                 print("saving: " + child.GetComponent<Property>().Card.displayName);
                 if (child.GetComponent<Property>().Card.type == "House")
                 {
-                    propSaveList.Add(new propertySaveForm(child.GetComponent<Property>().Card.displayName, child.GetComponent<Draggable>().XY, child.transform.GetChild(0).GetComponent<contractScript>().signTime, child.transform.GetChild(0).GetComponent<contractScript>().signIndex));
+                    propSaveList.Add(new propertySaveForm(child.GetComponent<Property>().Card.displayName, child.GetComponent<Draggable>().XY, child.transform.GetChild(0).GetComponent<contractScript>().signTime, child.transform.GetChild(0).GetComponent<contractScript>().signIndex, child.transform.GetChild(0).GetComponent<contractScript>().signCreationTime));
                 } else
                 {
                     propSaveList.Add(new propertySaveForm(child.GetComponent<Property>().Card.displayName, child.GetComponent<Draggable>().XY));
@@ -164,7 +165,7 @@ public class saveloadsystem : MonoBehaviour
             // ----------- Loading Properties ---------------
             foreach (var p in list)
             {
-                loadProperty(p.propName, new Vector2Int(p.locX, p.locY), p.signTime, p.signIndex);
+                loadProperty(p.propName, new Vector2Int(p.locX, p.locY), p.signTime, p.signIndex, p.signCreationTime);
                 print("loaded: " + p.propName);
             }
             // ----------- Loading Statistics ---------------
@@ -202,7 +203,7 @@ public class saveloadsystem : MonoBehaviour
         print("Successfully Loaded Game");
     }
 
-    public void loadProperty(string propName, Vector2Int pos, string signTime = "notsigned", int signIndex = -1) //propName must be the display form, not camelCase; eg Bungalow Luxury, not bungalowlux
+    public void loadProperty(string propName, Vector2Int pos, string signTime = "notsigned", int signIndex = -1, string signCreationTime = "notsigned") //propName must be the display form, not camelCase; eg Bungalow Luxury, not bungalowlux
     {
         //print("loading and spawning property into game from load save");
         PropertyCard prop = csv.CardDatabase[propName];
@@ -247,18 +248,22 @@ public class saveloadsystem : MonoBehaviour
             if (pp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signTime == "notsigned") {
                 pp.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2;
                 pp.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
+                pp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signCreationTime = "notsigned";
                 print("notsigned");
             } else if (dateAndTimeVar >= DateTime.Parse(pp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signTime)) {
                 pp.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
                 pp.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2;
+                pp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signCreationTime = signCreationTime;
                 print("sign over timea alre");
             } else if (dateAndTimeVar < DateTime.Parse(pp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signTime)) {
                 pp.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
                 pp.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
+                pp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signCreationTime = signCreationTime;
             } else {
                 pp.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
                 pp.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2;
                 pp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signIndex = signIndex;
+                pp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signCreationTime = signCreationTime;
                 print("sign still ongoiing");
             }
             

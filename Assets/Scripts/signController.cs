@@ -28,6 +28,7 @@ public class signController : MonoBehaviour
         }
         string datetime = theTime.ToString("yyyy/MM/dd HH:mm:ss");
         selProperty.transform.GetChild(0).gameObject.GetComponent<contractScript>().signTime = datetime;
+        selProperty.transform.GetChild(0).gameObject.GetComponent<contractScript>().signCreationTime = System.DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
         print("sign time is " + datetime);
         stats.GetComponent<Statistics>().updateStats(diffmoney: -cost);
         saveObj.GetComponent<saveloadsystem>().saveGame();

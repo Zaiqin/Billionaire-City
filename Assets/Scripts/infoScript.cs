@@ -6,7 +6,7 @@ using System;
 
 public class infoScript : MonoBehaviour
 {
-    public GameObject selProp, nameText, timeText, fill;
+    public GameObject selProp, nameText, timeText, fill, incomeText;
 
     // Update is called once per frame
     private void Start()
@@ -24,10 +24,13 @@ public class infoScript : MonoBehaviour
             if (selProp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signTime != "notsigned")
             {
                 var diff = DateTime.Parse(selProp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signTime) - System.DateTime.Now;
+
                 if (diff > TimeSpan.Zero)
                 {
+                    TimeSpan fullSpan = DateTime.Parse(selProp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signTime) - DateTime.Parse(selProp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signCreationTime);
+                    TimeSpan remainingSpan = DateTime.Parse(selProp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signTime) - System.DateTime.Now;
                     fill.SetActive(true);
-                    fill.GetComponent<Image>().fillAmount = 1f;
+                    fill.GetComponent<Image>().fillAmount = (float)(remainingSpan.TotalSeconds / fullSpan.TotalSeconds);
                     
                     if (diff.Days != 0)
                     {
@@ -44,6 +47,20 @@ public class infoScript : MonoBehaviour
                     else if (diff.Seconds != 0)
                     {
                         timeText.GetComponent<Text>().text = string.Format("{0:D2} seconds", diff.Seconds);
+                    }
+
+                    switch (selProp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signIndex)
+                    {
+                        case 0: incomeText.GetComponent<Text>().text = "$" + selProp.GetComponent<Property>().Card.threemins.ToString("#,##0"); break;
+                        case 1: incomeText.GetComponent<Text>().text = "$" + selProp.GetComponent<Property>().Card.thirtymins.ToString("#,##0"); break;
+                        case 2: incomeText.GetComponent<Text>().text = "$" + selProp.GetComponent<Property>().Card.onehour.ToString("#,##0"); break;
+                        case 3: incomeText.GetComponent<Text>().text = "$" + selProp.GetComponent<Property>().Card.fourhours.ToString("#,##0"); break;
+                        case 4: incomeText.GetComponent<Text>().text = "$" + selProp.GetComponent<Property>().Card.eighthours.ToString("#,##0"); break;
+                        case 5: incomeText.GetComponent<Text>().text = "$" + selProp.GetComponent<Property>().Card.twelvehours.ToString("#,##0"); break;
+                        case 6: incomeText.GetComponent<Text>().text = "$" + selProp.GetComponent<Property>().Card.oneday.ToString("#,##0"); break;
+                        case 7: incomeText.GetComponent<Text>().text = "$" + selProp.GetComponent<Property>().Card.twodays.ToString("#,##0"); break;
+                        case 8: incomeText.GetComponent<Text>().text = "$" + selProp.GetComponent<Property>().Card.threedays.ToString("#,##0"); break;
+                        default: incomeText.GetComponent<Text>().text = "$" + selProp.GetComponent<Property>().Card.threemins.ToString("#,##0"); break;
                     }
                 }
                 else

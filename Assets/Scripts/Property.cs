@@ -126,6 +126,7 @@ public class contractScript : MonoBehaviour, IPointerClickHandler
 {
     public string signTime = "notsigned";
     public int signIndex = -1;
+    public string signCreationTime = "notsigned";
     public PropertyCard propCard;
     void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
     {
@@ -193,6 +194,7 @@ public class moneyPickupScript : MonoBehaviour, IPointerClickHandler
             }
 
             this.gameObject.transform.parent.GetChild(0).GetComponent<contractScript>().signTime = "notsigned";
+            this.gameObject.transform.parent.GetChild(0).GetComponent<contractScript>().signCreationTime= "notsigned";
             this.gameObject.transform.parent.GetChild(0).GetComponent<contractScript>().signIndex = -1;
             GameObject.Find("SaveLoadSystem").GetComponent<saveloadsystem>().saveGame();
         }
