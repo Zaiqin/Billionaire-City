@@ -63,14 +63,18 @@ public class infoScript : MonoBehaviour
                         case 8: tempIncome = (long)selProp.GetComponent<Property>().Card.threedays; break;
                         default: tempIncome = (long)selProp.GetComponent<Property>().Card.threemins; break;
                     }
-                    if (tempIncome >= 100000000)
+                    if (tempIncome >= 100000000 && remainingSpan > TimeSpan.Zero)
                     {
                         string temp = tempIncome.ToString("#,##0");
                         incomeText.GetComponent<Text>().text = "$" + temp.Substring(0, temp.Length - 8) + "M";
                     }
-                    else
+                    else if (tempIncome > 0 && remainingSpan > TimeSpan.Zero)
                     {
                         incomeText.GetComponent<Text>().text = "$" + tempIncome.ToString("#,##0");
+                    } else
+                    {
+                        print("income greater than null");
+                        incomeText.GetComponent<Text>().text = "No income to earn";
                     }
                 }
                 else
@@ -83,6 +87,7 @@ public class infoScript : MonoBehaviour
             {
                 timeText.GetComponent<Text>().text = "No Contract Signed";
                 fill.SetActive(false);
+                incomeText.GetComponent<Text>().text = "No income to earn";
             }
         }
         else
