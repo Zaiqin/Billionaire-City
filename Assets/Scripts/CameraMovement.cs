@@ -141,6 +141,13 @@ public class CameraMovement : MonoBehaviour
         cam.transform.position = ClampCamera(cam.transform.position);
     }
 
+    public void setZoom(float newSize)
+    {
+        cam.orthographicSize = Mathf.Clamp(newSize, minCamSize, maxCamSize);
+
+        cam.transform.position = ClampCamera(cam.transform.position);
+    }
+
     private Vector3 ClampCamera(Vector3 targetPosition)
     {
         float camHeight = cam.orthographicSize;
