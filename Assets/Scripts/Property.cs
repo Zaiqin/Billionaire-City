@@ -110,6 +110,7 @@ public class Property : MonoBehaviour, IPointerClickHandler
             {
                 infoPanel.SetActive(true);
                 infoPanel.GetComponent<infoScript>().selProp = this.gameObject;
+                infoPanel.transform.position = new Vector3(0.2f + this.gameObject.transform.position.x + (infoPanel.GetComponent<BoxCollider2D>().bounds.size.x/2) + float.Parse(this.GetComponent<Property>().Card.space.Substring(0, 1)), this.gameObject.transform.position.y + (infoPanel.GetComponent<BoxCollider2D>().bounds.size.y / 4), 0f);
 
                 GameObject hqmenu = GameObject.Find("HQStats");
                 if (hqmenu != null)
@@ -134,7 +135,7 @@ public class contractScript : MonoBehaviour, IPointerClickHandler
         {
             print("clicked on contract");
             GameObject canvas = GameObject.Find("Canvas");
-            GameObject contractMenu = canvas.transform.GetChild(canvas.transform.childCount - 2).gameObject;
+            GameObject contractMenu = canvas.transform.GetChild(canvas.transform.childCount - 4).gameObject;
             contractMenu.SetActive(true);
             GameObject contractController = GameObject.Find("Contract Scroll Controller");
             contractController.GetComponent<RecyclableScrollerContract>().pCard = propCard;
