@@ -60419,6 +60419,11 @@ MonoBehaviour:
   inputLevel: 0
   inputXP: 0
   saveloadobj: {fileID: 25462474}
+  csvObj: {fileID: 1673960463}
+  levelUpScreen: {fileID: 208941323}
+  externalAudioPlayer: {fileID: 1820829991}
+  particle: {fileID: 1477764395}
+  levelUp: {fileID: 8300000, guid: 024b969c6e50193489cba7594e11e681, type: 3}
 --- !u!4 &973017966
 Transform:
   m_ObjectHideFlags: 0

@@ -167,7 +167,7 @@ public class plotManager : MonoBehaviour
         //print("initial center tile is " + initialCenterTile.name + ", final center tile is " + map.GetTile<Tile>(gridPosition).name);
         if (initialCenterTile.name.Contains("plot") && map.GetTile<Tile>(gridPosition).name.Contains("Grass") && forced == false)
         {
-            stats.GetComponent<Statistics>().updateStats(1000, 0, 0, 0);
+            stats.GetComponent<Statistics>().updateStats(diffmoney: 1000);
             hq.GetComponent<HQstats>().noOfPlots -= 1;
             //print("adding 1k");
             GameObject value = Instantiate(floatingValue, new Vector3(gridPosition.x + (float)0.5, (float)gridPosition.y + 2, (float)gridPosition.z), Quaternion.identity) as GameObject;
@@ -176,7 +176,7 @@ public class plotManager : MonoBehaviour
         }
         if (initialCenterTile.name.Contains("Grass") && map.GetTile<Tile>(gridPosition).name.Contains("plot"))
         {
-            stats.GetComponent<Statistics>().updateStats(-1000, 0, 0, 0);
+            stats.GetComponent<Statistics>().updateStats(diffmoney: -1000);
             //print("deducting 1k");
             GameObject value = Instantiate(floatingValue, new Vector3(gridPosition.x+(float)0.5, (float)gridPosition.y+2, (float)gridPosition.z), Quaternion.identity) as GameObject;
             value.transform.GetChild(0).GetComponent<TextMesh>().text = "-$1000";

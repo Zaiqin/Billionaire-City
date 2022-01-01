@@ -22,7 +22,7 @@ public class ronaldButton : MonoBehaviour
         if (levelUpScreen.activeSelf == false)
         {
             levelUpScreen.SetActive(true);
-            stats.updateStats(diffmoney: 1000000, diffgold: 100, difflevel: 1);
+            stats.updateStats(diffmoney: 1000000, diffgold: 100);
             levelText.text = "Level " + stats.level.ToString();
             particle.Play();
         }

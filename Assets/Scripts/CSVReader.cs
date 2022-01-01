@@ -9,6 +9,8 @@ public class CSVReader : MonoBehaviour
     [SerializeField]
     private TextAsset textAssetData;
 
+    public Dictionary<int, long> levelValues = new Dictionary<int, long>();
+
     // Database of all Cards in the game --------------------------------------------------------
     public Dictionary<String, PropertyCard> CardDatabase = new Dictionary<string, PropertyCard>();
 
@@ -213,6 +215,13 @@ public class CSVReader : MonoBehaviour
                 i = -1;
             }
             masterNo++;
+        }
+
+        // Getting xp for levels
+        for (int i = 1; data[(cols * (i)) + 32] != ""; i++)
+        {
+            levelValues.Add(i, long.Parse(data[(cols * (i)) + 32]));
+            print("level for " + i + " is " + data[(cols * (i)) + 32]);
         }
         print("Completed reading CSV data");
     }

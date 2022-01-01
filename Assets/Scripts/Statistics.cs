@@ -26,15 +26,21 @@ public class Statistics : MonoBehaviour
 
     public GameObject saveloadobj;
 
+    private Dictionary<int, long> levelValues;
+    [SerializeField] private GameObject csvObj, levelUpScreen, externalAudioPlayer;
+    [SerializeField] private ParticleSystem particle;
+    [SerializeField] private AudioClip levelUp;
+
     [ContextMenu("Input Values into Game")]
     public void inputValues()
     {
-        updateStats(inputMoney, inputGold, inputLevel, inputXP);
+        updateStats(inputMoney, inputGold, inputXP);
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        levelValues = csvObj.GetComponent<CSVReader>().levelValues;
         updateStats();
     }
 
@@ -51,11 +57,10 @@ public class Statistics : MonoBehaviour
         return stats;
     }
 
-    public void updateStats(long diffmoney = 0, long diffgold = 0, long difflevel = 0, long diffxp = 0)
+    public void updateStats(long diffmoney = 0, long diffgold = 0, long diffxp = 0)
     {
         money += diffmoney;
         gold += diffgold;
-        level += difflevel;
         xp += diffxp;
         if (money >= 100000000) {
             string temp = money.ToString("#,##0");
@@ -69,6 +74,25 @@ public class Statistics : MonoBehaviour
         } else {
             goldText.text = gold.ToString("#,##0");
         }
+        print("xp is " + xp);
+        for (int i = 1; i <= levelValues.Count; i++)
+        {
+            print("checking " + levelValues[i] + " where i is " + i);
+            if (xp < levelValues[i])
+            {
+                if (level != (i - 1)){
+                    level = i - 1;
+                    levelUpScreen.SetActive(true);
+                    levelUpScreen.transform.GetChild(0).GetComponent<Text>().text = "Level " + level.ToString();
+                    particle.Play();
+                    externalAudioPlayer.GetComponent<AudioSource>().PlayOneShot(levelUp);
+                } else
+                {
+                    level = i - 1;
+                }
+                break;
+            }
+        }
         levelText.text = level.ToString();
         if (xp >= 100000000) {
             string temp = xp.ToString("#,##0");
@@ -76,7 +100,16 @@ public class Statistics : MonoBehaviour
         } else {
             xpText.text = xp.ToString("#,##0");
         }
-        xpFill.fillAmount = 0.5f;
+        long nextVal = levelValues[(int)level + 1];
+        if (xp == 0)
+        {
+            xpFill.fillAmount = (float)1/nextVal;
+        }
+        else
+        {
+            xpFill.fillAmount = (float)xp / nextVal;
+        }
+        print("xpFill is " + xpFill.fillAmount + "nextVal is " + nextVal + "xp is " + xp);
         print("updated stats");
         saveloadobj.GetComponent<saveloadsystem>().saveStats();
     }
