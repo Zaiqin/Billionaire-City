@@ -48,17 +48,21 @@ public class MapManager : MonoBehaviour
                 }
                 else
                 {
-                    //print("hit building that is draggable");
+                    //print("hit building that is not draggable");
+                    return true;
                 }
             }
             if (hit.collider.gameObject.layer == 6)
             {
-                //print("return layer 6");
+                //print("return true for layer 6");
                 return true;
             }
-        } else
+            //print("hit someting that has collider");
+            return true;
+        }
+        else
         {
-            //no collider detected
+            //print("no collider detected");
         }
         //print("returning false");
         return false;

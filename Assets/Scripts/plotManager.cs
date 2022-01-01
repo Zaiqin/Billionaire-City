@@ -49,7 +49,8 @@ public class plotManager : MonoBehaviour
                 }
                 else
                 {
-                    //print("hit building that is draggable");
+                    //print("hit building that is not draggable");
+                    return true;
                 }
             }
             if (hit.collider.gameObject.layer == 6)
@@ -57,10 +58,12 @@ public class plotManager : MonoBehaviour
                 //print("return true for layer 6");
                 return true;
             }
+            //print("hit someting that has collider");
+            return true;
         }
         else
         {
-            //no collider detected
+            //print("no collider detected");
         }
         //print("returning false");
         return false;

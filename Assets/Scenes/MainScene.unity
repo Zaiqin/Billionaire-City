@@ -830,6 +830,7 @@ MonoBehaviour:
   pendingParent: {fileID: 58940600}
   ppDrag: {fileID: 737003508}
   delPanel: {fileID: 529775927}
+  contractPanel: {fileID: 776026746}
   toggles: []
   map: {fileID: 280726322}
   greenGrass: {fileID: 11400000, guid: ed9bdc427593d5f4fa5d4bce0fd199b8, type: 2}
@@ -56514,6 +56515,7 @@ MonoBehaviour:
   pendingParent: {fileID: 58940600}
   ppDrag: {fileID: 737003508}
   delPanel: {fileID: 529775927}
+  contractPanel: {fileID: 776026746}
   toggles: []
   map: {fileID: 280726322}
   greenGrass: {fileID: 11400000, guid: ed9bdc427593d5f4fa5d4bce0fd199b8, type: 2}
@@ -58252,6 +58254,7 @@ MonoBehaviour:
   pendingParent: {fileID: 58940600}
   ppDrag: {fileID: 737003508}
   delPanel: {fileID: 529775927}
+  contractPanel: {fileID: 776026746}
   toggles: []
   map: {fileID: 280726322}
   greenGrass: {fileID: 11400000, guid: ed9bdc427593d5f4fa5d4bce0fd199b8, type: 2}
@@ -60052,6 +60055,7 @@ MonoBehaviour:
   pendingParent: {fileID: 58940600}
   ppDrag: {fileID: 737003508}
   delPanel: {fileID: 529775927}
+  contractPanel: {fileID: 776026746}
   toggles: []
   map: {fileID: 280726322}
   greenGrass: {fileID: 11400000, guid: ed9bdc427593d5f4fa5d4bce0fd199b8, type: 2}
@@ -67500,6 +67504,7 @@ MonoBehaviour:
   pendingParent: {fileID: 58940600}
   ppDrag: {fileID: 737003508}
   delPanel: {fileID: 529775927}
+  contractPanel: {fileID: 776026746}
   toggles: []
   map: {fileID: 280726322}
   greenGrass: {fileID: 11400000, guid: ed9bdc427593d5f4fa5d4bce0fd199b8, type: 2}
