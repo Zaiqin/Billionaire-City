@@ -207,7 +207,7 @@ public class plotManager : MonoBehaviour
             Vector3Int gridPosition = map.WorldToCell(mousePosition);
 
             Tile clickedTile = map.GetTile<Tile>(gridPosition);
-            if (clickedTile.name.Contains("greenGrass"))
+            if (clickedTile.name.Contains("greenGrass") && stats.GetComponent<Statistics>().money >= 1000)
             {
                 plotFunction(gridPosition, false);
             }

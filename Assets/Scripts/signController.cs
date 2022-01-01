@@ -5,13 +5,11 @@ using UnityEngine;
 
 public class signController : MonoBehaviour
 {
-    public GameObject selProperty, saveObj, stats;
+    public GameObject selProperty, saveObj, stats, contractsParent, extAudio;
+    public AudioClip contractSound;
 
     public void signer(int i)
     {
-        print("signing property " + selProperty.name);
-        selProperty.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
-        print("setting index to " + i);
         DateTime theTime; long cost;
         switch (i)
         {
@@ -26,11 +24,21 @@ public class signController : MonoBehaviour
             case 8: theTime = DateTime.Now.AddDays(3); cost = 10000; selProperty.transform.GetChild(0).gameObject.GetComponent<contractScript>().signIndex = i; break;
             default: theTime = DateTime.Now.AddMinutes(3); cost = 100; selProperty.transform.GetChild(0).gameObject.GetComponent<contractScript>().signIndex = i; break;
         }
-        string datetime = theTime.ToString("yyyy/MM/dd HH:mm:ss");
-        selProperty.transform.GetChild(0).gameObject.GetComponent<contractScript>().signTime = datetime;
-        selProperty.transform.GetChild(0).gameObject.GetComponent<contractScript>().signCreationTime = System.DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
-        print("sign time is " + datetime);
-        stats.GetComponent<Statistics>().updateStats(diffmoney: -cost);
-        saveObj.GetComponent<saveloadsystem>().saveGame();
+        if (stats.GetComponent<Statistics>().money >= cost)
+        {
+            print("signing property " + selProperty.name);
+            selProperty.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
+            contractsParent.SetActive(false);
+            string datetime = theTime.ToString("yyyy/MM/dd HH:mm:ss");
+            selProperty.transform.GetChild(0).gameObject.GetComponent<contractScript>().signTime = datetime;
+            selProperty.transform.GetChild(0).gameObject.GetComponent<contractScript>().signCreationTime = System.DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+            print("sign time is " + datetime);
+            stats.GetComponent<Statistics>().updateStats(diffmoney: -cost);
+            saveObj.GetComponent<saveloadsystem>().saveGame();
+            extAudio.GetComponent<AudioSource>().PlayOneShot(contractSound);
+        } else
+        {
+            print("no money to sign contract");
+        }
     }
 }

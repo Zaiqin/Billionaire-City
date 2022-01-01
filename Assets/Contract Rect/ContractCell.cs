@@ -29,9 +29,7 @@ public class ContractCell : MonoBehaviour, ICell
 
     private void signListener()
     {
-        print("signed contract");
-        GameObject.Find("contractsParent").gameObject.SetActive(false);
-        GameObject.Find("ExternalAudioPlayer").GetComponent<AudioSource>().PlayOneShot(touchSound);
+        print("trying to sign contract");
         GameObject.Find("SignController").GetComponent<signController>().signer(_cellIndex);
     }
 

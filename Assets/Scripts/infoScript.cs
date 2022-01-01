@@ -6,7 +6,7 @@ using System;
 
 public class infoScript : MonoBehaviour
 {
-    public GameObject selProp, nameText, timeText, fill, incomeText;
+    public GameObject selProp, nameText, timeText, fill, incomeText, fillBg;
 
     // Update is called once per frame
     private void Start()
@@ -14,6 +14,7 @@ public class infoScript : MonoBehaviour
         nameText.GetComponent<Text>().text = "";
         timeText.GetComponent<Text>().text = "";
         fill.SetActive(false);
+        fillBg.SetActive(false);
     }
 
     void Update()
@@ -30,6 +31,7 @@ public class infoScript : MonoBehaviour
                     TimeSpan fullSpan = DateTime.Parse(selProp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signTime) - DateTime.Parse(selProp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signCreationTime);
                     TimeSpan remainingSpan = DateTime.Parse(selProp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signTime) - System.DateTime.Now;
                     fill.SetActive(true);
+                    fillBg.SetActive(true);
                     fill.GetComponent<Image>().fillAmount = (float)(remainingSpan.TotalSeconds / fullSpan.TotalSeconds);
                     
                     if (diff.Days != 0)
@@ -65,35 +67,41 @@ public class infoScript : MonoBehaviour
                     }
                     if (tempIncome >= 100000000 && remainingSpan > TimeSpan.Zero)
                     {
+                        // Contract ongoing and income is more than 100M
                         string temp = tempIncome.ToString("#,##0");
                         incomeText.GetComponent<Text>().text = "$" + temp.Substring(0, temp.Length - 8) + "M";
                     }
                     else if (tempIncome > 0 && remainingSpan > TimeSpan.Zero)
                     {
+                        // Contract ongoing and income is less than 100M
                         incomeText.GetComponent<Text>().text = "$" + tempIncome.ToString("#,##0");
-                    } else
-                    {
-                        print("income greater than null");
-                        incomeText.GetComponent<Text>().text = "No income to earn";
                     }
                 }
                 else
                 {
-                    timeText.GetComponent<Text>().text = "No Contract Signed";
+                    // Income waiting to be collected, contract fulfilled
+                    timeText.GetComponent<Text>().text = "Contract Fulfilled";
+                    incomeText.GetComponent<Text>().text = "";
                     fill.SetActive(false);
+                    fillBg.SetActive(false);
                 }
             }
             else
             {
+                // No Contract Signed
                 timeText.GetComponent<Text>().text = "No Contract Signed";
                 fill.SetActive(false);
+                fillBg.SetActive(false);
                 incomeText.GetComponent<Text>().text = "No income to earn";
             }
         }
         else
         {
+            //info script showing non houses
             timeText.GetComponent<Text>().text = "";
+            incomeText.GetComponent<Text>().text = "";
             fill.SetActive(false);
+            fillBg.SetActive(false);
         }
     }
 }
