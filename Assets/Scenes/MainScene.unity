@@ -56761,6 +56761,7 @@ MonoBehaviour:
   timeText: {fileID: 1066882148}
   fill: {fileID: 1441993904}
   incomeText: {fileID: 1107437175}
+  fillBg: {fileID: 103365786}
 --- !u!1 &386740024
 GameObject:
   m_ObjectHideFlags: 0
@@ -67231,6 +67232,9 @@ MonoBehaviour:
   selProperty: {fileID: 0}
   saveObj: {fileID: 25462474}
   stats: {fileID: 973017964}
+  contractsParent: {fileID: 776026746}
+  extAudio: {fileID: 1820829991}
+  contractSound: {fileID: 8300000, guid: a47222ca973f71a4883d2936e54edb77, type: 3}
 --- !u!4 &1479850377
 Transform:
   m_ObjectHideFlags: 0
