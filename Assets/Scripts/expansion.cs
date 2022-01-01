@@ -60,6 +60,7 @@ public class expansion : MonoBehaviour
             GameObject sel = GameObject.Find("expansion" + i);
             Destroy(sel);
             deletedExp.Add("expansion" + i);
+            expInts.Remove(i);
             stats.GetComponent<Statistics>().updateStats(diffmoney: -10000);
             saveObj.GetComponent<saveloadsystem>().saveExp();
         } else
