@@ -221,7 +221,6 @@ public class CSVReader : MonoBehaviour
         for (int i = 1; data[(cols * (i)) + 32] != ""; i++)
         {
             levelValues.Add(i, long.Parse(data[(cols * (i)) + 32]));
-            print("level for " + i + " is " + data[(cols * (i)) + 32]);
         }
         print("Completed reading CSV data");
     }

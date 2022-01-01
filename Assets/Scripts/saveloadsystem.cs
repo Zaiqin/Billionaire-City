@@ -58,7 +58,7 @@ public class saveloadsystem : MonoBehaviour
 {
     public CSVReader csv;
     public Tilemap map;
-    public GameObject PropertiesParent, Stats;
+    public GameObject PropertiesParent, Stats, expPopup;
 
     public void Start()
     {
@@ -108,6 +108,10 @@ public class saveloadsystem : MonoBehaviour
             }
         }
         FileHandler.SaveToJSON<tileSaveForm>(tileSaveList, "tileSave.json");
+
+        // ------------- Save Expansions ---------------------
+        List<string> delExpList = expPopup.GetComponent<expansion>().deletedExp;
+        FileHandler.SaveToJSON<string>(delExpList, "deletedExp.json");
         print("Game saved");
     }
 
@@ -141,6 +145,14 @@ public class saveloadsystem : MonoBehaviour
         }
         FileHandler.SaveToJSON<tileSaveForm>(tileSaveList, "tileSave.json");
         print("Tilemap saved");
+    }
+    
+    [ContextMenu("Save Expansions")]
+    public void saveExp()
+    {
+        print("Saving expansions");
+        List<string> delExpList = expPopup.GetComponent<expansion>().deletedExp;
+        FileHandler.SaveToJSON<string>(delExpList, "deletedExp.json");
     }
 
     [ContextMenu("Load From Save")]
@@ -183,6 +195,12 @@ public class saveloadsystem : MonoBehaviour
                     map.SetTile(pos, Resources.Load<TileBase>("plotTiles/" + item.texName));
                     print("loaded plot" + item.texName + "at pos " + pos);
                 }
+            }
+            // ------------ Loading Expansions -------------
+            expPopup.GetComponent<expansion>().deletedExp = FileHandler.ReadListFromJSON<string>("deletedExp.json");
+            foreach (string s in FileHandler.ReadListFromJSON<string>("deletedExp.json"))
+            {
+                Destroy(GameObject.Find(s));
             }
         }
     }
