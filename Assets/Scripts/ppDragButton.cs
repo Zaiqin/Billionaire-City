@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine.Tilemaps;
 using UnityEngine;
+using System;
 
 public class ppDragButton : MonoBehaviour
 {
@@ -96,8 +97,18 @@ public class ppDragButton : MonoBehaviour
                 pp.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2; //shows contract
             } else if (pCard.type == "Commerce")
             {
+                pp.transform.GetChild(0).gameObject.AddComponent<BoxCollider2D>();
                 pp.transform.GetChild(1).gameObject.AddComponent<BoxCollider2D>();
-                pp.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0; //shows commerce collect
+                pp.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0; //hide commerce collect
+                DateTime theTime;
+                theTime = DateTime.Now.AddMinutes(3);
+                print("signing property commerce after building");
+                string datetime = theTime.ToString("yyyy/MM/dd HH:mm:ss");
+                pp.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signTime = datetime;
+                pp.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signCreationTime = System.DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                print("sign time is " + datetime);
+                pp.transform.GetChild(0).gameObject.SetActive(false);
+                pp.transform.GetChild(0).GetComponent<influence>().removeHighlights();
             }
 
             // --------------------- Swapping to green border grass -------------

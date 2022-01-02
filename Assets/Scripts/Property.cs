@@ -60,13 +60,10 @@ public class Property : MonoBehaviour, IPointerClickHandler
             Sprite infSprite = Resources.Load<Sprite>("influence");
             infRenderer.sprite = Sprite.Create(infSprite.texture, new Rect(0, 0, float.Parse(pcard.influence.Substring(0, 2)) - 0.1f, float.Parse(pcard.influence.Substring(pcard.influence.Length-2)) - 0.1f), new Vector2(0.5f, 0.5f), 1);
             infRenderer.color = new Color(35f / 255f, 206f / 255f, 241f / 255f, 125f/ 255f);
-            print("width in load is " + infSprite.texture.width);
             infRenderer.sortingOrder = 2;
             inf.transform.parent = this.transform;
-            inf.transform.localPosition = new Vector3(float.Parse(pcard.space.Substring(0, 1)) / 2, float.Parse(pcard.space.Substring(pcard.space.Length - 1)) / 2, 0f);
-            inf.gameObject.AddComponent<BoxCollider2D>();
+            inf.transform.localPosition = new Vector3(float.Parse(pcard.space.Substring(0, 1)) / 2, (float.Parse(pcard.space.Substring(pcard.space.Length - 1)) / 2) -0.05f, 0f);
             inf.AddComponent<influence>();
-            inf.SetActive(false);
             // -------- Commerce Pickup -----------------
             GameObject commerce = new GameObject();
             commerce.name = "Money";
@@ -74,11 +71,11 @@ public class Property : MonoBehaviour, IPointerClickHandler
             Sprite commerceSprite;
             foreach (Sprite s in GameObject.Find("commercePickups").GetComponent<comPickups>().l)
             {
-                print("s is " + s.name);
                 if (s.name == pcard.propName + "Icon")
                 {
                     commerceSprite = s;
                     commerceRenderer.sprite = Sprite.Create(commerceSprite.texture, new Rect(0, 0, commerceSprite.texture.width, commerceSprite.texture.height), new Vector2(0.5f, 0.5f), 45);
+                    break;
                 }
             }
             commerce.AddComponent<scaleLerper>();
@@ -255,13 +252,15 @@ public class moneyPickupScript : MonoBehaviour, IPointerClickHandler
 
 public class commercePickupScript : MonoBehaviour, IPointerClickHandler
 {
+    public string signTime = "notsigned";
+    public string signCreationTime = "notsigned";
     public PropertyCard propCard;
     void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
     {
         if (GameObject.Find("Main Camera").GetComponent<CameraMovement>().dragging == false && GameObject.Find("Main Camera").GetComponent<SpriteDetector>().isMouseOverUI() == false && propCard != null)
         {
             print("clicked on commerce");
-            this.gameObject.transform.parent.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder = 0;
+            this.gameObject.transform.parent.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder = 0; //hide commerce collect
 
             this.gameObject.transform.parent.GetChild(0).gameObject.SetActive(true);
             this.gameObject.transform.parent.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0f, 0f, 0f, 0f);
@@ -285,8 +284,29 @@ public class commercePickupScript : MonoBehaviour, IPointerClickHandler
             GameObject xpValue = Instantiate(Resources.Load<GameObject>("floatingParent"), new Vector3(this.gameObject.transform.parent.transform.position.x + (float.Parse(this.gameObject.transform.parent.GetComponent<Property>().Card.space.Substring(0, 1))) / 2, this.gameObject.transform.parent.transform.position.y + 2.8f, -5f), Quaternion.identity) as GameObject;
             xpValue.transform.GetChild(0).GetComponent<TextMesh>().text = "+ " + propCard.XP + "XP";
             xpValue.transform.GetChild(0).GetComponent<TextMesh>().color = Color.yellow;
-            GameObject.Find("SaveLoadSystem").GetComponent<saveloadsystem>().saveGame();
 
+            DateTime theTime;
+            theTime = DateTime.Now.AddMinutes(3);
+            print("signing property commerce again");
+            string datetime = theTime.ToString("yyyy/MM/dd HH:mm:ss");
+            this.gameObject.transform.parent.GetChild(1).GetComponent<commercePickupScript>().signTime = datetime;
+            this.gameObject.transform.parent.GetChild(1).GetComponent<commercePickupScript>().signCreationTime = System.DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+            print("sign time is " + datetime);
+
+            GameObject.Find("SaveLoadSystem").GetComponent<saveloadsystem>().saveGame();
+        }
+    }
+
+    private void Update()
+    {
+        var dateAndTimeVar = System.DateTime.Now;
+        if (signTime != "notsigned")
+        {
+            print("sign end time is " + signTime + ", sign created on " + signCreationTime);
+            if (dateAndTimeVar >= DateTime.Parse(signTime))
+            {
+                this.gameObject.transform.parent.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder = 2;
+            }
         }
     }
 }

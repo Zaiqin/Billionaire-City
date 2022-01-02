@@ -14,7 +14,7 @@ public class SpriteDetector : MonoBehaviour
     void Start()
     {
         addPhysics2DRaycaster();
-        print("added raycaster");
+        //print("added raycaster");
     }
 
     void addPhysics2DRaycaster()
@@ -22,7 +22,7 @@ public class SpriteDetector : MonoBehaviour
         Physics2DRaycaster physicsRaycaster = GameObject.FindObjectOfType<Physics2DRaycaster>();
         if (physicsRaycaster == null)
         {
-            print("adding raycaster");
+            //print("adding raycaster");
             Camera.main.gameObject.AddComponent<Physics2DRaycaster>();
         }
     }

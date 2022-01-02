@@ -43,7 +43,7 @@ public class CameraMovement : MonoBehaviour
     void Start()
     {
         cam.orthographicSize = Mathf.Clamp(6.0f, minCamSize, maxCamSize);
-        print("Zoomed out");
+        //print("Zoomed out");
     }
 
     // Update is called once per frame

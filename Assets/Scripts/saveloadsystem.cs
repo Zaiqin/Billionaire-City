@@ -13,9 +13,11 @@ public class propertySaveForm {
     public string signTime;
     public int signIndex;
     public string signCreationTime;
-    public propertySaveForm(string n, float[] v, string t = "notsigned", int i = -1, string ct = "notsigned")
+    public string comSignTime;
+    public string comSignCreationTime;
+    public propertySaveForm(string n, float[] v, string t = "notsigned", int i = -1, string ct = "notsigned", string comt = "notsigned", string comct = "notsigned")
     {
-        propName = n; locX = (int)v[0]; locY = (int)v[1]; signTime = t; signIndex = i; signCreationTime = ct;
+        propName = n; locX = (int)v[0]; locY = (int)v[1]; signTime = t; signIndex = i; signCreationTime = ct; comSignTime = comt; comSignCreationTime = comct;
     }
 }
 
@@ -79,6 +81,9 @@ public class saveloadsystem : MonoBehaviour
                 if (child.GetComponent<Property>().Card.type == "House")
                 {
                     propSaveList.Add(new propertySaveForm(child.GetComponent<Property>().Card.displayName, child.GetComponent<Draggable>().XY, child.transform.GetChild(0).GetComponent<contractScript>().signTime, child.transform.GetChild(0).GetComponent<contractScript>().signIndex, child.transform.GetChild(0).GetComponent<contractScript>().signCreationTime));
+                } else if (child.GetComponent<Property>().Card.type == "Commerce")
+                {
+                    propSaveList.Add(new propertySaveForm(child.GetComponent<Property>().Card.displayName, child.GetComponent<Draggable>().XY, comt: child.transform.GetChild(1).GetComponent<commercePickupScript>().signTime, comct: child.transform.GetChild(1).GetComponent<commercePickupScript>().signCreationTime));
                 } else
                 {
                     propSaveList.Add(new propertySaveForm(child.GetComponent<Property>().Card.displayName, child.GetComponent<Draggable>().XY));
@@ -177,7 +182,7 @@ public class saveloadsystem : MonoBehaviour
             // ----------- Loading Properties ---------------
             foreach (var p in list)
             {
-                loadProperty(p.propName, new Vector2Int(p.locX, p.locY), p.signTime, p.signIndex, p.signCreationTime);
+                loadProperty(p.propName, new Vector2Int(p.locX, p.locY), p.signTime, p.signIndex, p.signCreationTime, p.comSignTime, p.comSignCreationTime);
                 print("loaded: " + p.propName);
             }
             // ----------- Loading Statistics ---------------
@@ -221,7 +226,7 @@ public class saveloadsystem : MonoBehaviour
         print("Successfully Loaded Game");
     }
 
-    public void loadProperty(string propName, Vector2Int pos, string signTime = "notsigned", int signIndex = -1, string signCreationTime = "notsigned") //propName must be the display form, not camelCase; eg Bungalow Luxury, not bungalowlux
+    public void loadProperty(string propName, Vector2Int pos, string signTime = "notsigned", int signIndex = -1, string signCreationTime = "notsigned", string comSignTime = "notsigned", string comSignCreationTime = "notsigned") //propName must be the display form, not camelCase; eg Bungalow Luxury, not bungalowlux
     {
         //print("loading and spawning property into game from load save");
         PropertyCard prop = csv.CardDatabase[propName];
@@ -285,6 +290,49 @@ public class saveloadsystem : MonoBehaviour
                 print("sign still ongoiing");
             }
             
+        } else if (pp.Card.type == "Commerce")
+        {
+            print("loadproperty commerce");
+            if (pp.transform.GetChild(0).GetComponent<BoxCollider2D>() == null) {
+                pp.transform.GetChild(0).gameObject.AddComponent<BoxCollider2D>();
+            }
+            pp.transform.GetChild(0).gameObject.SetActive(false);
+            pp.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signTime = comSignTime;
+            // add collider to commerce money ----------
+            pp.transform.GetChild(1).gameObject.AddComponent<BoxCollider2D>();
+            var dateAndTimeVar = System.DateTime.Now;
+            print("going check contract for " + pp.name + "which is signtime " + pp.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signTime);
+            if (pp.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signTime == "notsigned")
+            {
+                print("notsigned, thus signing now");
+                pp.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
+
+                DateTime theTime;
+                theTime = DateTime.Now.AddMinutes(3);
+                print("signing property commerce again");
+                string datetime = theTime.ToString("yyyy/MM/dd HH:mm:ss");
+                pp.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signTime = datetime;
+                pp.transform.GetChild(1).GetComponent<commercePickupScript>().signCreationTime = System.DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                print("sign time is " + datetime);
+                
+            }
+            else if (dateAndTimeVar >= DateTime.Parse(pp.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signTime))
+            {
+                pp.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2;
+                pp.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signCreationTime = comSignCreationTime;
+                print("sign over time already");
+            }
+            else if (dateAndTimeVar < DateTime.Parse(pp.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signTime))
+            {
+                pp.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
+                pp.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signCreationTime = comSignCreationTime;
+            }
+            else
+            {
+                pp.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
+                pp.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signCreationTime = comSignCreationTime;
+                print("sign still ongoiing");
+            }
         }
         //print("Successfully loaded in " + propName + " at: x:" + pos.x + "y:" + pos.y);
     }

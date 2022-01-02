@@ -74,7 +74,7 @@ public class Statistics : MonoBehaviour
         } else {
             goldText.text = gold.ToString("#,##0");
         }
-        print("xp is " + xp);
+        //print("xp is " + xp);
         for (int i = 1; i <= levelValues.Count; i++)
         {
             //print("checking " + levelValues[i] + " where i is " + i);
@@ -109,7 +109,7 @@ public class Statistics : MonoBehaviour
         {
             xpFill.fillAmount = (float)xp / nextVal;
         }
-        print("xpFill is " + xpFill.fillAmount + "nextVal is " + nextVal + "xp is " + xp);
+        //print("xpFill is " + xpFill.fillAmount + "nextVal is " + nextVal + "xp is " + xp);
         print("updated stats");
         saveloadobj.GetComponent<saveloadsystem>().saveStats();
     }

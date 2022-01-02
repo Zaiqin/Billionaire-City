@@ -97,18 +97,30 @@ public class infoScript : MonoBehaviour
         }
         else if (selProp.GetComponent<Property>().Card.type == "Commerce")
         {
-            timeText.GetComponent<Text>().text = "Commerce time text";
             List<Collider2D> infList = selProp.gameObject.transform.GetChild(0).GetComponent<influence>().housesInfluenced;
             long finalIncome = 0;
             foreach (Collider2D item in infList)
             {
                 finalIncome += (long)GameObject.Find(item.name).GetComponent<Property>().Card.tenants * selProp.GetComponent<Property>().Card.rentPerTenant;
-                print("added " + GameObject.Find(item.name).GetComponent<Property>().Card.tenants + "tenants from " + GameObject.Find(item.name));
+                //print("added " + GameObject.Find(item.name).GetComponent<Property>().Card.tenants + "tenants from " + GameObject.Find(item.name));
             }
-            print("final income is " + finalIncome);
-            incomeText.GetComponent<Text>().text = "$"+finalIncome.ToString("#,##0");
-            fill.SetActive(false);
-            fillBg.SetActive(false);
+            var diff = DateTime.Parse(selProp.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signTime) - System.DateTime.Now;
+            if (diff > TimeSpan.Zero)
+            {
+                TimeSpan fullSpan = DateTime.Parse(selProp.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signTime) - DateTime.Parse(selProp.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signCreationTime);
+                TimeSpan remainingSpan = DateTime.Parse(selProp.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signTime) - System.DateTime.Now;
+                fill.SetActive(true);
+                fillBg.SetActive(true);
+                fill.GetComponent<Image>().fillAmount = (float)(remainingSpan.TotalSeconds / fullSpan.TotalSeconds);
+                incomeText.GetComponent<Text>().text = "$" + finalIncome.ToString("#,##0");
+                timeText.GetComponent<Text>().text = string.Format("{0:D2} mins {1:D2} secs", diff.Minutes, diff.Seconds);
+            } else
+            {
+                timeText.GetComponent<Text>().text = "Commerce Fulfilled";
+                incomeText.GetComponent<Text>().text = "";
+                fill.SetActive(false);
+                fillBg.SetActive(false);
+            }
         } else {
             //info script showing non houses
             timeText.GetComponent<Text>().text = "";
