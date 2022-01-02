@@ -218,9 +218,14 @@ public class CSVReader : MonoBehaviour
         }
 
         // Getting xp for levels
-        for (int i = 1; data[(cols * (i)) + 32] != ""; i++)
+        for (int i = 1; i < data.Length; i++)
         {
+            print("reading " + data[(cols * (i)) + 32]);
             levelValues.Add(i, long.Parse(data[(cols * (i)) + 32]));
+            if (data[(cols * (i)) + 33] == "Last Level"){
+                print("reached last level");
+                break;
+            }
         }
         print("Completed reading CSV data");
     }
