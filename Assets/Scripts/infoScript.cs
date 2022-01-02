@@ -95,8 +95,21 @@ public class infoScript : MonoBehaviour
                 incomeText.GetComponent<Text>().text = "No income to earn";
             }
         }
-        else
+        else if (selProp.GetComponent<Property>().Card.type == "Commerce")
         {
+            timeText.GetComponent<Text>().text = "Commerce time text";
+            List<Collider2D> infList = selProp.gameObject.transform.GetChild(0).GetComponent<influence>().housesInfluenced;
+            long finalIncome = 0;
+            foreach (Collider2D item in infList)
+            {
+                finalIncome += (long)GameObject.Find(item.name).GetComponent<Property>().Card.tenants * selProp.GetComponent<Property>().Card.rentPerTenant;
+                print("added " + GameObject.Find(item.name).GetComponent<Property>().Card.tenants + "tenants from " + GameObject.Find(item.name));
+            }
+            print("final income is " + finalIncome);
+            incomeText.GetComponent<Text>().text = "$"+finalIncome.ToString("#,##0");
+            fill.SetActive(false);
+            fillBg.SetActive(false);
+        } else {
             //info script showing non houses
             timeText.GetComponent<Text>().text = "";
             incomeText.GetComponent<Text>().text = "";

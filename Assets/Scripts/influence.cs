@@ -7,7 +7,7 @@ public class influence : MonoBehaviour, IPointerClickHandler
 {
 
     public float newVal;
-    private List<Collider2D> housesInfluenced = new List<Collider2D>();
+    public List<Collider2D> housesInfluenced = new List<Collider2D>();
 
     // Start is called before the first frame update
     void Start()
