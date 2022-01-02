@@ -5,20 +5,17 @@ using UnityEngine;
 public class expansion : MonoBehaviour
 {
     public int i;
-    public GameObject staticCanvas, stats, saveObj, expPopup, failPopup;
+    public GameObject expCanvas, stats, saveObj, expPopup, failPopup;
     public List<int> expInts = new List<int>();
     public List<string> deletedExp = new List<string>();
 
     // Start is called before the first frame update
     void Start()
     {
-        foreach (Transform child in staticCanvas.transform)
+        foreach (Transform child in expCanvas.transform)
         {
-            if (child.name.Contains("expansion"))
-            {
-                expInts.Add(int.Parse(child.name.Substring(child.name.Length - 2)));
-                //print("added " + child.name);
-            }
+            expInts.Add(int.Parse(child.name.Substring(child.name.Length - 2)));
+            //print("added " + child.name);
         }
     }
 
