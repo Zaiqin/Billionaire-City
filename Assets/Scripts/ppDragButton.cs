@@ -94,6 +94,10 @@ public class ppDragButton : MonoBehaviour
             {
                 pp.transform.GetChild(0).gameObject.AddComponent<BoxCollider2D>();
                 pp.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2; //shows contract
+            } else if (pCard.type == "Commerce")
+            {
+                pp.transform.GetChild(1).gameObject.AddComponent<BoxCollider2D>();
+                pp.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2; //shows commerce collect
             }
 
             // --------------------- Swapping to green border grass -------------

@@ -73,4 +73,11 @@ public class influence : MonoBehaviour, IPointerClickHandler
             GameObject.Find(item.name).GetComponent<SpriteRenderer>().color = Color.white;
         }
     }
+
+    public List<Collider2D> returnHighlights()
+    {
+        detectInfluence();
+        removeHighlights();
+        return housesInfluenced;
+    }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -52,6 +53,7 @@ public class Property : MonoBehaviour, IPointerClickHandler
             money.AddComponent<moneyPickupScript>().propCard = pcard;
         } else if (pcard.type == "Commerce")
         {
+            // --- Influence Overlay -----------
             GameObject inf = new GameObject();
             inf.name = "Influence";
             SpriteRenderer infRenderer = inf.AddComponent<SpriteRenderer>();
@@ -65,6 +67,26 @@ public class Property : MonoBehaviour, IPointerClickHandler
             inf.gameObject.AddComponent<BoxCollider2D>();
             inf.AddComponent<influence>();
             inf.SetActive(false);
+            // -------- Commerce Pickup -----------------
+            GameObject commerce = new GameObject();
+            commerce.name = "Money";
+            SpriteRenderer commerceRenderer = commerce.AddComponent<SpriteRenderer>();
+            Sprite commerceSprite;
+            foreach (Sprite s in GameObject.Find("commercePickups").GetComponent<comPickups>().l)
+            {
+                print("s is " + s.name);
+                if (s.name == pcard.propName + "Icon")
+                {
+                    commerceSprite = s;
+                    commerceRenderer.sprite = Sprite.Create(commerceSprite.texture, new Rect(0, 0, commerceSprite.texture.width, commerceSprite.texture.height), new Vector2(0.5f, 0.5f), 45);
+                }
+            }
+            commerce.AddComponent<scaleLerper>();
+            commerceRenderer.sortingOrder = 0;
+            commerce.transform.parent = this.transform;
+            commerce.transform.localPosition = new Vector3(float.Parse(pcard.space.Substring(0, 1)) / 2, float.Parse(pcard.space.Substring(pcard.space.Length - 1)) / 2, 0f);
+            commerce.AddComponent<commercePickupScript>();
+            commerce.AddComponent<commercePickupScript>().propCard = pcard;
         }
         else
         {
@@ -227,6 +249,44 @@ public class moneyPickupScript : MonoBehaviour, IPointerClickHandler
             }
 
             
+        }
+    }
+}
+
+public class commercePickupScript : MonoBehaviour, IPointerClickHandler
+{
+    public PropertyCard propCard;
+    void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
+    {
+        if (GameObject.Find("Main Camera").GetComponent<CameraMovement>().dragging == false && GameObject.Find("Main Camera").GetComponent<SpriteDetector>().isMouseOverUI() == false && propCard != null)
+        {
+            print("clicked on commerce");
+            this.gameObject.transform.parent.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder = 0;
+
+            this.gameObject.transform.parent.GetChild(0).gameObject.SetActive(true);
+            this.gameObject.transform.parent.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0f, 0f, 0f, 0f);
+            List<Collider2D> infList = this.gameObject.transform.parent.GetChild(0).GetComponent<influence>().returnHighlights();
+            this.gameObject.transform.parent.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(35f / 255f, 206f / 255f, 241f / 255f, 125f / 255f);
+            this.gameObject.transform.parent.GetChild(0).gameObject.SetActive(false);
+            long finalIncome = 0;
+            foreach (Collider2D item in infList)
+            {
+                finalIncome += (long)GameObject.Find(item.name).GetComponent<Property>().Card.tenants * propCard.rentPerTenant;
+                print("added " + GameObject.Find(item.name).GetComponent<Property>().Card.tenants + "tenants from " + GameObject.Find(item.name));
+            }
+            print("final income is " + finalIncome);
+            GameObject.Find("Stats").GetComponent<Statistics>().updateStats(diffmoney: finalIncome, diffxp: 100);
+            GameObject.Find("ExternalAudioPlayer").GetComponent<AudioSource>().PlayOneShot(Resources.Load<AudioClip>("Audio/money"));
+
+            GameObject value = Instantiate(Resources.Load<GameObject>("floatingParent"), new Vector3(this.gameObject.transform.parent.transform.position.x + (float.Parse(this.gameObject.transform.parent.GetComponent<Property>().Card.space.Substring(0, 1))) / 2, this.gameObject.transform.parent.transform.position.y + 3.4f, -5f), Quaternion.identity) as GameObject;
+            value.transform.GetChild(0).GetComponent<TextMesh>().text = "+ $" + finalIncome;
+            value.transform.GetChild(0).GetComponent<TextMesh>().color = new Color(168f / 255f, 255f / 255f, 4f / 255f);
+
+            GameObject xpValue = Instantiate(Resources.Load<GameObject>("floatingParent"), new Vector3(this.gameObject.transform.parent.transform.position.x + (float.Parse(this.gameObject.transform.parent.GetComponent<Property>().Card.space.Substring(0, 1))) / 2, this.gameObject.transform.parent.transform.position.y + 2.8f, -5f), Quaternion.identity) as GameObject;
+            xpValue.transform.GetChild(0).GetComponent<TextMesh>().text = "+ " + propCard.XP + "XP";
+            xpValue.transform.GetChild(0).GetComponent<TextMesh>().color = Color.yellow;
+            GameObject.Find("SaveLoadSystem").GetComponent<saveloadsystem>().saveGame();
+
         }
     }
 }
