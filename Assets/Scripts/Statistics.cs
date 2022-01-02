@@ -77,7 +77,7 @@ public class Statistics : MonoBehaviour
         print("xp is " + xp);
         for (int i = 1; i <= levelValues.Count; i++)
         {
-            print("checking " + levelValues[i] + " where i is " + i);
+            //print("checking " + levelValues[i] + " where i is " + i);
             if (xp < levelValues[i])
             {
                 if (level != (i - 1)){

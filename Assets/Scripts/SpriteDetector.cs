@@ -9,6 +9,8 @@ public class SpriteDetector : MonoBehaviour
     [SerializeField]
     private GameObject infoPanel, hqMenu;
 
+    public GameObject selectedCommerce;
+
     void Start()
     {
         addPhysics2DRaycaster();
@@ -33,10 +35,20 @@ public class SpriteDetector : MonoBehaviour
         if (hit.collider != null)
         {
             print("Spritedetector hit object: " + hit.collider.gameObject.name);
+            if (hit.collider.gameObject.name != "Influence" && selectedCommerce != null)
+            {
+                selectedCommerce.transform.GetChild(0).gameObject.SetActive(false);
+                selectedCommerce.transform.GetChild(0).GetComponent<influence>().removeHighlights();
+            }
         } else
         {
             infoPanel.SetActive(false);
             hqMenu.SetActive(false);
+            if (selectedCommerce != null)
+            {
+                selectedCommerce.transform.GetChild(0).gameObject.SetActive(false);
+                selectedCommerce.transform.GetChild(0).GetComponent<influence>().removeHighlights();
+            }
         }
     }
 

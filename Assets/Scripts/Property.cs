@@ -19,9 +19,9 @@ public class Property : MonoBehaviour, IPointerClickHandler
         this.gameObject.AddComponent<BoxCollider2D>();
 
         float x = float.Parse(pcard.space.Substring(0, 1));
-        float y = float.Parse(pcard.space.Substring(pcard.space.Length -1));
+        float y = float.Parse(pcard.space.Substring(pcard.space.Length - 1));
         this.gameObject.GetComponent<BoxCollider2D>().size = new Vector2(x, y);
-        this.gameObject.GetComponent<BoxCollider2D>().offset = new Vector2(x/2, y/2);
+        this.gameObject.GetComponent<BoxCollider2D>().offset = new Vector2(x / 2, y / 2);
 
         if (pcard.type == "House")
         {
@@ -50,6 +50,21 @@ public class Property : MonoBehaviour, IPointerClickHandler
             money.transform.localPosition = new Vector3(float.Parse(pcard.space.Substring(0, 1)) / 2, float.Parse(pcard.space.Substring(pcard.space.Length - 1)) / 2, 0f);
             money.AddComponent<moneyPickupScript>();
             money.AddComponent<moneyPickupScript>().propCard = pcard;
+        } else if (pcard.type == "Commerce")
+        {
+            GameObject inf = new GameObject();
+            inf.name = "Influence";
+            SpriteRenderer infRenderer = inf.AddComponent<SpriteRenderer>();
+            Sprite infSprite = Resources.Load<Sprite>("influence");
+            infRenderer.sprite = Sprite.Create(infSprite.texture, new Rect(0, 0, float.Parse(pcard.influence.Substring(0, 2)) - 0.1f, float.Parse(pcard.influence.Substring(pcard.influence.Length-2)) - 0.1f), new Vector2(0.5f, 0.5f), 1);
+            infRenderer.color = new Color(35f / 255f, 206f / 255f, 241f / 255f, 125f/ 255f);
+            print("width in load is " + infSprite.texture.width);
+            infRenderer.sortingOrder = 2;
+            inf.transform.parent = this.transform;
+            inf.transform.localPosition = new Vector3(float.Parse(pcard.space.Substring(0, 1)) / 2, float.Parse(pcard.space.Substring(pcard.space.Length - 1)) / 2, 0f);
+            inf.gameObject.AddComponent<BoxCollider2D>();
+            inf.AddComponent<influence>();
+            inf.SetActive(false);
         }
         else
         {
@@ -117,6 +132,13 @@ public class Property : MonoBehaviour, IPointerClickHandler
                 {
                     hqmenu.SetActive(false);
                 }
+            }
+            if (this.Card.type == "Commerce" && this.transform.parent.name == "Properties")
+            {
+                GameObject influence = this.transform.GetChild(0).gameObject;
+                influence.SetActive(true);
+                influence.GetComponent<influence>().detectInfluence();
+                GameObject.Find("Main Camera").GetComponent<SpriteDetector>().selectedCommerce = this.gameObject;
             }
 
         }

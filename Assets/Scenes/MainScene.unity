@@ -59361,6 +59361,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   infoPanel: {fileID: 374950764}
   hqMenu: {fileID: 1053581159}
+  selectedCommerce: {fileID: 0}
 --- !u!1 &520826243
 GameObject:
   m_ObjectHideFlags: 0
