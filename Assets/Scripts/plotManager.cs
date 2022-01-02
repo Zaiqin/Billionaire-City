@@ -183,7 +183,7 @@ public class plotManager : MonoBehaviour
             //print("deducting 1k");
             GameObject value = Instantiate(floatingValue, new Vector3(gridPosition.x+(float)0.5, (float)gridPosition.y+2, (float)gridPosition.z), Quaternion.identity) as GameObject;
             value.transform.GetChild(0).GetComponent<TextMesh>().text = "-$1000";
-            value.transform.GetChild(0).GetComponent<TextMesh>().color = new Color(197f / 255f, 17f / 255f, 0f / 255f);
+            value.transform.GetChild(0).GetComponent<TextMesh>().color = new Color(255f / 255f, 76f / 255f, 76f / 255f);
             hq.GetComponent<HQstats>().noOfPlots += 1;
             GameObject splash = Instantiate(splashObject, new Vector3(gridPosition.x + (float)0.5, gridPosition.y+(float)1.4, (float)gridPosition.z), Quaternion.identity) as GameObject;
         }

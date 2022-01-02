@@ -51,9 +51,9 @@ public class RecyclableScrollerContract : CSVReader, IRecyclableScrollRectDataSo
     public void SetCell(ICell cell, int index)
     {
         //Casting to the implemented Cell
-        print("in recycablescrollcontract setting cell");
+        //print("in recycablescrollcontract setting cell");
 
-        print("Clicked on a " + pCard.displayName + "'s contract");
+        //print("Clicked on a " + pCard.displayName + "'s contract");
         var item = cell as ContractCell;
         Sprite setSprite;
 

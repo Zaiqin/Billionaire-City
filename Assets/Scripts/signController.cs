@@ -26,7 +26,7 @@ public class signController : MonoBehaviour
         }
         if (stats.GetComponent<Statistics>().money >= cost)
         {
-            print("signing property " + selProperty.name);
+            print("signing property " + selProperty.name + "with sign index: " + i);
             selProperty.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
             contractsParent.SetActive(false);
             string datetime = theTime.ToString("yyyy/MM/dd HH:mm:ss");
@@ -36,6 +36,10 @@ public class signController : MonoBehaviour
             stats.GetComponent<Statistics>().updateStats(diffmoney: -cost);
             saveObj.GetComponent<saveloadsystem>().saveGame();
             extAudio.GetComponent<AudioSource>().PlayOneShot(contractSound);
+
+            GameObject value = Instantiate(Resources.Load<GameObject>("floatingParent"), new Vector3(selProperty.transform.position.x + (float.Parse(selProperty.GetComponent<Property>().Card.space.Substring(0, 1))) / 2, selProperty.transform.position.y + 2.8f, -5f), Quaternion.identity) as GameObject;
+            value.transform.GetChild(0).GetComponent<TextMesh>().text = "- $" + cost;
+            value.transform.GetChild(0).GetComponent<TextMesh>().color = new Color(255f / 255f, 76f / 255f, 76f / 255f);
         } else
         {
             print("no money to sign contract");

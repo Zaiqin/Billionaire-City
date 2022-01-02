@@ -184,20 +184,27 @@ public class moneyPickupScript : MonoBehaviour, IPointerClickHandler
                 case 8: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.threedays; break;
                 default: profit = 0; break;
             }
-            if (profit != 0)
+            if (profit != 0 && propCard != null)
             {
+                print("propCard xp is " + propCard);
                 GameObject.Find("Stats").GetComponent<Statistics>().updateStats(diffmoney: profit, diffxp: propCard.XP);
                 GameObject.Find("ExternalAudioPlayer").GetComponent<AudioSource>().PlayOneShot(Resources.Load<AudioClip>("Audio/money"));
 
-                GameObject value = Instantiate(Resources.Load<GameObject>("floatingParent"), new Vector3(this.gameObject.transform.parent.transform.position.x + (float.Parse(this.gameObject.transform.parent.GetComponent<Property>().Card.space.Substring(0, 1))) / 2, this.gameObject.transform.parent.transform.position.y + 2.8f, -5f), Quaternion.identity) as GameObject;
+                GameObject value = Instantiate(Resources.Load<GameObject>("floatingParent"), new Vector3(this.gameObject.transform.parent.transform.position.x + (float.Parse(this.gameObject.transform.parent.GetComponent<Property>().Card.space.Substring(0, 1))) / 2, this.gameObject.transform.parent.transform.position.y + 3.4f, -5f), Quaternion.identity) as GameObject;
                 value.transform.GetChild(0).GetComponent<TextMesh>().text = "+ $" + profit;
                 value.transform.GetChild(0).GetComponent<TextMesh>().color = new Color(168f / 255f, 255f / 255f, 4f / 255f);
+
+                GameObject xpValue = Instantiate(Resources.Load<GameObject>("floatingParent"), new Vector3(this.gameObject.transform.parent.transform.position.x + (float.Parse(this.gameObject.transform.parent.GetComponent<Property>().Card.space.Substring(0, 1))) / 2, this.gameObject.transform.parent.transform.position.y + 2.8f, -5f), Quaternion.identity) as GameObject;
+                xpValue.transform.GetChild(0).GetComponent<TextMesh>().text = "+ " + propCard.XP + "XP";
+                xpValue.transform.GetChild(0).GetComponent<TextMesh>().color = Color.yellow;
+
+                this.gameObject.transform.parent.GetChild(0).GetComponent<contractScript>().signTime = "notsigned";
+                this.gameObject.transform.parent.GetChild(0).GetComponent<contractScript>().signCreationTime = "notsigned";
+                this.gameObject.transform.parent.GetChild(0).GetComponent<contractScript>().signIndex = -1;
+                GameObject.Find("SaveLoadSystem").GetComponent<saveloadsystem>().saveGame();
             }
 
-            this.gameObject.transform.parent.GetChild(0).GetComponent<contractScript>().signTime = "notsigned";
-            this.gameObject.transform.parent.GetChild(0).GetComponent<contractScript>().signCreationTime= "notsigned";
-            this.gameObject.transform.parent.GetChild(0).GetComponent<contractScript>().signIndex = -1;
-            GameObject.Find("SaveLoadSystem").GetComponent<saveloadsystem>().saveGame();
+            
         }
     }
 }
