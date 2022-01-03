@@ -302,7 +302,7 @@ public class commercePickupScript : MonoBehaviour, IPointerClickHandler
         var dateAndTimeVar = System.DateTime.Now;
         if (signTime != "notsigned")
         {
-            print("sign end time is " + signTime + ", sign created on " + signCreationTime);
+            //print("sign end time is " + signTime + ", sign created on " + signCreationTime);
             if (dateAndTimeVar >= DateTime.Parse(signTime))
             {
                 this.gameObject.transform.parent.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder = 2;
