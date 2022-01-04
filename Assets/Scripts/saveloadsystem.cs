@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using System;
+using UnityEngine.UI;
 
 [Serializable]
 public class propertySaveForm {
@@ -28,10 +29,10 @@ public class statsSaveForm
     public long gold;
     public long level;
     public long xp;
-
-    public statsSaveForm(long m, long g, long l, long x)
+    public string cityName;
+    public statsSaveForm(long m, long g, long l, long x, string n)
     {
-        money = m; gold = g; level = l; xp = x;
+        money = m; gold = g; level = l; xp = x; cityName = n;
     }
 }
 
@@ -60,7 +61,7 @@ public class saveloadsystem : MonoBehaviour
 {
     public CSVReader csv;
     public Tilemap map;
-    public GameObject PropertiesParent, Stats, expPopup;
+    public GameObject PropertiesParent, Stats, expPopup, cityText;
 
     public void Start()
     {
@@ -93,7 +94,7 @@ public class saveloadsystem : MonoBehaviour
         FileHandler.SaveToJSON<propertySaveForm>(propSaveList, "propsSave.json");
 
         // ------------ Saving stats -------------------------------
-        statsSaveForm statsSaveObj = new statsSaveForm(Stats.GetComponent<Statistics>().money, Stats.GetComponent<Statistics>().gold, Stats.GetComponent<Statistics>().level, Stats.GetComponent<Statistics>().xp);
+        statsSaveForm statsSaveObj = new statsSaveForm(Stats.GetComponent<Statistics>().money, Stats.GetComponent<Statistics>().gold, Stats.GetComponent<Statistics>().level, Stats.GetComponent<Statistics>().xp, Stats.GetComponent<Statistics>().cityName);
         FileHandler.SaveToJSON<statsSaveForm>(statsSaveObj, "statsSave.json");
 
         // ------------ Saving tilemap -------------------------------
@@ -124,7 +125,7 @@ public class saveloadsystem : MonoBehaviour
     public void saveStats()
     {
         print("Saving Stats");
-        statsSaveForm statsSaveObj = new statsSaveForm(Stats.GetComponent<Statistics>().money, Stats.GetComponent<Statistics>().gold, Stats.GetComponent<Statistics>().level, Stats.GetComponent<Statistics>().xp);
+        statsSaveForm statsSaveObj = new statsSaveForm(Stats.GetComponent<Statistics>().money, Stats.GetComponent<Statistics>().gold, Stats.GetComponent<Statistics>().level, Stats.GetComponent<Statistics>().xp, Stats.GetComponent<Statistics>().cityName);
         FileHandler.SaveToJSON<statsSaveForm>(statsSaveObj, "statsSave.json");
         print("Stats saved");
     }
@@ -187,6 +188,8 @@ public class saveloadsystem : MonoBehaviour
             }
             // ----------- Loading Statistics ---------------
             Stats.GetComponent<Statistics>().setStats(statsObj.money, statsObj.gold, statsObj.level, statsObj.xp);
+            print("loaded name is " + statsObj.cityName);
+            cityText.GetComponent<Text>().text = statsObj.cityName;
             // ----------- Loading Tilemap ------------------
             foreach (var item in tilelist)
             {

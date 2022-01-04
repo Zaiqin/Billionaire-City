@@ -20,7 +20,10 @@ public class Draggable : MonoBehaviour
         ppDrag = GameObject.Find("ppDrag");
         map = GameObject.Find("Tilemap").GetComponent<Tilemap>();
         pendingParent = GameObject.Find("PendingProperty");
-        pCard = this.GetComponent<Property>().Card;
+        if (this.GetComponent<Property>() != null)
+        {
+            pCard = this.GetComponent<Property>().Card;
+        }
     }
 
 

@@ -9,6 +9,7 @@ public class Statistics : MonoBehaviour
     public long gold;
     public long level;
     public long xp;
+    public string cityName;
 
     public Text moneyText;
     public Text goldText;
@@ -27,7 +28,7 @@ public class Statistics : MonoBehaviour
     public GameObject saveloadobj;
 
     private Dictionary<int, long> levelValues;
-    [SerializeField] private GameObject csvObj, levelUpScreen, externalAudioPlayer;
+    [SerializeField] private GameObject csvObj, levelUpScreen, externalAudioPlayer, inputText;
     [SerializeField] private ParticleSystem particle;
     [SerializeField] private AudioClip levelUp;
 
@@ -112,6 +113,11 @@ public class Statistics : MonoBehaviour
         //print("xpFill is " + xpFill.fillAmount + "nextVal is " + nextVal + "xp is " + xp);
         print("updated stats");
         saveloadobj.GetComponent<saveloadsystem>().saveStats();
+    }
+
+    public void updateName()
+    {
+        cityName = inputText.GetComponent<Text>().text;
     }
 
     public void setStats(long m, long g, long l, long x)
