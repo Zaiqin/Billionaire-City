@@ -61,7 +61,7 @@ public class saveloadsystem : MonoBehaviour
 {
     public CSVReader csv;
     public Tilemap map;
-    public GameObject PropertiesParent, Stats, expPopup, cityText;
+    public GameObject PropertiesParent, Stats, expPopup, cityText, phCityText;
 
     public void Start()
     {
@@ -94,7 +94,7 @@ public class saveloadsystem : MonoBehaviour
         FileHandler.SaveToJSON<propertySaveForm>(propSaveList, "propsSave.json");
 
         // ------------ Saving stats -------------------------------
-        statsSaveForm statsSaveObj = new statsSaveForm(Stats.GetComponent<Statistics>().money, Stats.GetComponent<Statistics>().gold, Stats.GetComponent<Statistics>().level, Stats.GetComponent<Statistics>().xp, Stats.GetComponent<Statistics>().cityName);
+        statsSaveForm statsSaveObj = new statsSaveForm(Stats.GetComponent<Statistics>().money, Stats.GetComponent<Statistics>().gold, Stats.GetComponent<Statistics>().level, Stats.GetComponent<Statistics>().xp, cityText.GetComponent<Text>().text);
         FileHandler.SaveToJSON<statsSaveForm>(statsSaveObj, "statsSave.json");
 
         // ------------ Saving tilemap -------------------------------
@@ -125,7 +125,7 @@ public class saveloadsystem : MonoBehaviour
     public void saveStats()
     {
         print("Saving Stats");
-        statsSaveForm statsSaveObj = new statsSaveForm(Stats.GetComponent<Statistics>().money, Stats.GetComponent<Statistics>().gold, Stats.GetComponent<Statistics>().level, Stats.GetComponent<Statistics>().xp, Stats.GetComponent<Statistics>().cityName);
+        statsSaveForm statsSaveObj = new statsSaveForm(Stats.GetComponent<Statistics>().money, Stats.GetComponent<Statistics>().gold, Stats.GetComponent<Statistics>().level, Stats.GetComponent<Statistics>().xp, cityText.GetComponent<Text>().text);
         FileHandler.SaveToJSON<statsSaveForm>(statsSaveObj, "statsSave.json");
         print("Stats saved");
     }
@@ -190,6 +190,7 @@ public class saveloadsystem : MonoBehaviour
             Stats.GetComponent<Statistics>().setStats(statsObj.money, statsObj.gold, statsObj.level, statsObj.xp);
             print("loaded name is " + statsObj.cityName);
             cityText.GetComponent<Text>().text = statsObj.cityName;
+            phCityText.GetComponent<Text>().text = statsObj.cityName;
             // ----------- Loading Tilemap ------------------
             foreach (var item in tilelist)
             {

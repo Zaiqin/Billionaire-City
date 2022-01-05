@@ -402,6 +402,7 @@ MonoBehaviour:
   Stats: {fileID: 973017964}
   expPopup: {fileID: 62597483}
   cityText: {fileID: 351022004}
+  phCityText: {fileID: 1777350119}
 --- !u!4 &25462476
 Transform:
   m_ObjectHideFlags: 0
@@ -2108,7 +2109,7 @@ TextMesh:
   m_CharacterSize: 0.1
   m_LineSpacing: 1
   m_Anchor: 4
-  m_Alignment: 1
+  m_Alignment: 0
   m_TabSize: 4
   m_FontSize: 35
   m_FontStyle: 0
@@ -58894,7 +58895,7 @@ TextMesh:
   m_CharacterSize: 0.1
   m_LineSpacing: 1
   m_Anchor: 4
-  m_Alignment: 1
+  m_Alignment: 0
   m_TabSize: 4
   m_FontSize: 35
   m_FontStyle: 0
@@ -59200,7 +59201,7 @@ TextMesh:
   m_CharacterSize: 0.1
   m_LineSpacing: 1
   m_Anchor: 4
-  m_Alignment: 1
+  m_Alignment: 0
   m_TabSize: 4
   m_FontSize: 35
   m_FontStyle: 0
@@ -63530,7 +63531,7 @@ MonoBehaviour:
   csvObj: {fileID: 1673960463}
   levelUpScreen: {fileID: 208941323}
   externalAudioPlayer: {fileID: 1820829991}
-  inputText: {fileID: 0}
+  inputText: {fileID: 351022004}
   particle: {fileID: 1477764395}
   levelUp: {fileID: 8300000, guid: 024b969c6e50193489cba7594e11e681, type: 3}
 --- !u!4 &973017966
@@ -72511,7 +72512,7 @@ TextMesh:
   m_CharacterSize: 0.1
   m_LineSpacing: 1
   m_Anchor: 4
-  m_Alignment: 1
+  m_Alignment: 0
   m_TabSize: 4
   m_FontSize: 35
   m_FontStyle: 0
@@ -73253,7 +73254,7 @@ TextMesh:
   m_CharacterSize: 0.1
   m_LineSpacing: 1
   m_Anchor: 4
-  m_Alignment: 1
+  m_Alignment: 0
   m_TabSize: 4
   m_FontSize: 35
   m_FontStyle: 0
@@ -76045,7 +76046,7 @@ TextMesh:
   m_CharacterSize: 0.1
   m_LineSpacing: 1
   m_Anchor: 4
-  m_Alignment: 1
+  m_Alignment: 0
   m_TabSize: 4
   m_FontSize: 35
   m_FontStyle: 0

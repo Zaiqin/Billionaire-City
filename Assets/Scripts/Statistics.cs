@@ -48,7 +48,7 @@ public class Statistics : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        print("city name in stats is " + cityName);
     }
 
     public long[] returnStats()
