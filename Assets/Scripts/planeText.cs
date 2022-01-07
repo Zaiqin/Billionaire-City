@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class planeText : MonoBehaviour
 {
-    public GameObject textField;
+    public GameObject textField, stats;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,9 +15,9 @@ public class planeText : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (textField.GetComponent<Text>().text != "")
+        if (this.GetComponent<TextMesh>().text != stats.GetComponent<Statistics>().cityName)
         {
-            this.GetComponent<TextMesh>().text = textField.GetComponent<Text>().text;
+            this.GetComponent<TextMesh>().text = stats.GetComponent<Statistics>().cityName;
         }
     }
 }

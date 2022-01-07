@@ -251,11 +251,11 @@ public class moneyPickupScript : MonoBehaviour, IPointerClickHandler
 
     private void Update()
     {
-        if (this.gameObject.transform.parent.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder == 2) //if contract is showing
+        if (this.gameObject.transform.parent.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder == 2 && this.gameObject.transform.parent.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder == 0) //if contract is showing
         {
             this.gameObject.transform.parent.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder = 0; // hide money
         }
-        else if (this.gameObject.transform.parent.GetChild(0).GetComponent<contractScript>().signCreationTime == "notsigned") //contract creation time is not set
+        else if (this.gameObject.transform.parent.GetChild(0).GetComponent<contractScript>().signCreationTime == "notsigned" && this.gameObject.transform.parent.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder == 0) //contract creation time is not set
         {
             this.gameObject.transform.parent.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder = 0; // hide money
         }

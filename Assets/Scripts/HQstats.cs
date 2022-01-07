@@ -15,7 +15,9 @@ public class HQstats : MonoBehaviour
     private Statistics stats;
 
     [SerializeField]
-    private Text money, gold, property, land, total;
+    private Text money, gold, property, land, total, cityName;
+
+    public InputField field;
 
     public int noOfPlots;
 
@@ -57,6 +59,7 @@ public class HQstats : MonoBehaviour
         property.text = "$" + propValue.ToString("#,##0");
         land.text = "$" + (noOfPlots*1000).ToString("#,##0");
         total.text = "$" + (stats.money + goldvalue + (noOfPlots*1000)).ToString("#,##0");
+        field.text = stats.cityName;
     }
 
     public void clickedHQ()

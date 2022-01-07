@@ -61,7 +61,8 @@ public class saveloadsystem : MonoBehaviour
 {
     public CSVReader csv;
     public Tilemap map;
-    public GameObject PropertiesParent, Stats, expPopup, cityText, phCityText;
+    public GameObject PropertiesParent, Stats, expPopup, cityText;
+    public InputField nameField;
 
     public void Start()
     {
@@ -188,9 +189,9 @@ public class saveloadsystem : MonoBehaviour
             }
             // ----------- Loading Statistics ---------------
             Stats.GetComponent<Statistics>().setStats(statsObj.money, statsObj.gold, statsObj.level, statsObj.xp);
+            Stats.GetComponent<Statistics>().cityName = statsObj.cityName;
             print("loaded name is " + statsObj.cityName);
-            cityText.GetComponent<Text>().text = statsObj.cityName;
-            phCityText.GetComponent<Text>().text = statsObj.cityName;
+            nameField.text = statsObj.cityName;
             // ----------- Loading Tilemap ------------------
             foreach (var item in tilelist)
             {
@@ -217,6 +218,8 @@ public class saveloadsystem : MonoBehaviour
     [ContextMenu("Load New Game")]
     public void LoadNewGame()
     {
+        Stats.GetComponent<Statistics>().cityName = "Chocolate Fields";
+        nameField.text = "Chocolate Fields";
         print("Loading Default Properties");
         loadProperty("Japanese Tree", new Vector2Int(-1, -2));
         loadProperty("Fountain", new Vector2Int(-1, -4));

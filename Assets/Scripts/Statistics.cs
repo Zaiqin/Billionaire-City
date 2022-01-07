@@ -48,7 +48,7 @@ public class Statistics : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        print("city name in stats is " + cityName);
+        
     }
 
     public long[] returnStats()
@@ -102,14 +102,17 @@ public class Statistics : MonoBehaviour
             xpText.text = xp.ToString("#,##0");
         }
         long nextVal = levelValues[(int)level + 1];
-        if (xp == 0)
+        
+        if (level < 2)
         {
             xpFill.fillAmount = (float)1/nextVal;
         }
         else
         {
-            xpFill.fillAmount = (float)xp / nextVal;
+            long prevVal = levelValues[(int)level];
+            xpFill.fillAmount = ((float)xp-prevVal) / (nextVal-prevVal);
         }
+        print("nextVal is " + nextVal + ", current is " + xp + ", start is " + levelValues[(int)level] + ", fillamt is " + xpFill.fillAmount);
         //print("xpFill is " + xpFill.fillAmount + "nextVal is " + nextVal + "xp is " + xp);
         print("updated stats");
         saveloadobj.GetComponent<saveloadsystem>().saveStats();
