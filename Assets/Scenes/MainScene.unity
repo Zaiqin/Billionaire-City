@@ -2042,8 +2042,10 @@ MonoBehaviour:
   map: {fileID: 280726322}
   tileDatas: []
   stats: {fileID: 973017964}
+  shopToggle: {fileID: 0}
   plotToggle: {fileID: 287795618}
   deleteToggle: {fileID: 1580363176}
+  roadToggle: {fileID: 0}
   myFx: {fileID: 1580363178}
   deleteSound: {fileID: 8300000, guid: 17bc089c9bea4441daa1ce381c5aa89a, type: 3}
   floatingValue: {fileID: 0}
@@ -73918,8 +73920,10 @@ MonoBehaviour:
   map: {fileID: 280726322}
   tileDatas: []
   stats: {fileID: 973017964}
+  shopToggle: {fileID: 0}
   plotToggle: {fileID: 287795618}
   deleteToggle: {fileID: 1580363176}
+  roadToggle: {fileID: 0}
   myFx: {fileID: 1580363178}
   deleteSound: {fileID: 8300000, guid: 17bc089c9bea4441daa1ce381c5aa89a, type: 3}
   floatingValue: {fileID: 0}
@@ -77112,8 +77116,10 @@ MonoBehaviour:
   map: {fileID: 280726322}
   tileDatas: []
   stats: {fileID: 973017964}
+  shopToggle: {fileID: 52499396}
   plotToggle: {fileID: 287795618}
   deleteToggle: {fileID: 1580363176}
+  roadToggle: {fileID: 864276387}
   myFx: {fileID: 1580363178}
   deleteSound: {fileID: 8300000, guid: 17bc089c9bea4441daa1ce381c5aa89a, type: 3}
   floatingValue: {fileID: 1370402922574767072, guid: 7c1bfcb18bbf7444a9df0d55a1bb2201,

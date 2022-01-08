@@ -17,10 +17,10 @@ public class plotManager : MonoBehaviour
     private Dictionary<TileBase, TileData> dataFromTiles;
 
     [SerializeField]
-    private GameObject stats;
+    private GameObject stats, shopToggle;
 
     [SerializeField]
-    private Toggle plotToggle, deleteToggle;
+    private Toggle plotToggle, deleteToggle, roadToggle;
 
     public AudioSource myFx;
     public AudioClip deleteSound;
@@ -236,6 +236,13 @@ public class plotManager : MonoBehaviour
             Tile aclickedTile = map.GetTile<Tile>(agridPosition);
             print("clicked on tile: " + aclickedTile.name + " at position: " + agridPosition);
             startInUI = false;
+
+            if (aclickedTile.name.Contains("plot") && plotToggle.isOn == false && roadToggle.isOn == false && deleteToggle.isOn == false && shopToggle.GetComponent<Toggle>().isOn == false)
+            {
+                shopToggle.GetComponent<shopButton>().OnButtonClick();
+                shopToggle.GetComponent<UIToggle>().toggleToggles(shopToggle);
+                shopToggle.GetComponent<Toggle>().isOn = true;
+            }
         }
     }
 }
