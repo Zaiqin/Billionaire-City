@@ -4,11 +4,12 @@ using System.Text.RegularExpressions;
 using UnityEngine.Tilemaps;
 using UnityEngine;
 using System;
+using UnityEngine.UI;
 
 public class ppDragButton : MonoBehaviour
 {
     [SerializeField]
-    private GameObject pendingParent, propParent, ppDrag, externalAudioPlayer, saveloadsystem;
+    private GameObject pendingParent, propParent, ppDrag, externalAudioPlayer, saveloadsystem, shopToggle;
 
     [SerializeField]
     private Statistics stats;
@@ -59,15 +60,10 @@ public class ppDragButton : MonoBehaviour
     {
         Property pp;
         pp = pendingParent.transform.GetChild(0).gameObject.GetComponent<Property>();
-        if (pp.Card.type == "Deco")
-        {
-            GameObject a = Instantiate(pp.gameObject);
-            a.transform.parent = pp.transform.parent;
-            a.GetComponent<Property>().Card = pp.Card;
-        }
 
         if (pp.GetComponent<Draggable>().buildable == true)
         {
+            shopToggle.GetComponent<Toggle>().isOn = false;
             removePlots(pp.Card, pp.GetComponent<Draggable>().XY);
             // Setting position and parent to main properties -----------
             pp.transform.position = new Vector3(pp.transform.position.x, pp.transform.position.y, getZ(pp.GetComponent<Draggable>().XY));
@@ -75,9 +71,10 @@ public class ppDragButton : MonoBehaviour
             pp.GetComponent<SpriteRenderer>().sortingOrder = 1;
 
             // ------------- removing blinking and draggable -----------------------------
-            pp.GetComponent<BlinkingProperty>().StopBlink();
+            Destroy(pp.GetComponent<BlinkingProperty>());
             pp.GetComponent<Renderer>().material.color = Color.white;
             pp.GetComponent<Draggable>().dragEnabled = false;
+            pp.GetComponent<Draggable>().buildable = false;
 
             // Deducting money ---------------
             PropertyCard pCard = pp.GetComponent<Property>().Card;
@@ -116,6 +113,15 @@ public class ppDragButton : MonoBehaviour
                 pp.transform.GetChild(0).GetComponent<influence>().removeHighlights();
             }
 
+            if (pp.Card.type == "Deco")
+            {
+                GameObject a = Instantiate(pp.gameObject);
+                a.transform.parent = pendingParent.transform;
+                pendingParent.transform.GetChild(0).gameObject.transform.position = new Vector3(a.transform.position.x, a.transform.position.y, -8);
+                pendingParent.transform.GetChild(0).GetComponent<Draggable>().dragEnabled = true;
+                a.GetComponent<Property>().Card = pp.Card;
+
+            }
             // --------------------- Swapping to green border grass -------------
             if (pp.Card.type != "Deco")
             {
@@ -132,6 +138,7 @@ public class ppDragButton : MonoBehaviour
 
     public void dragCancel()
     {
+        shopToggle.GetComponent<Toggle>().isOn = false;
         Destroy(pendingParent.transform.GetChild(0).gameObject);
         externalAudioPlayer.GetComponent<AudioSource>().PlayOneShot(touchSound);
         ppDrag.SetActive(false);

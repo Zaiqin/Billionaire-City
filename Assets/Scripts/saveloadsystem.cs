@@ -263,8 +263,6 @@ public class saveloadsystem : MonoBehaviour
         pp.gameObject.AddComponent<Draggable>();
         pp.gameObject.GetComponent<Draggable>().XY = new[] { (float)pos.x, (float)pos.y};
         pp.GetComponent<Draggable>().dragEnabled = false;
-        pp.gameObject.AddComponent<BlinkingProperty>();
-        pp.gameObject.GetComponent<BlinkingProperty>().StopBlink();
         if (pp.Card.type == "House") // check to only do these thats only for houses
         {
             pp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signTime = signTime;

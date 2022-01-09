@@ -51,7 +51,7 @@ public class CameraMovement : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            print("set drag to false");
+            //print("set drag to false");
             dragging = false;
         }
         if (Input.GetMouseButton(0))

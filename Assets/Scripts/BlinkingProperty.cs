@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class BlinkingProperty : MonoBehaviour
 {
-    bool stop;
+    public bool stop;
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("StartBlink", 0f, 1.0f);
+        InvokeRepeating("StartBlink", 0f, 0.5f);
     }
 
     // Update is called once per frame
@@ -16,11 +16,20 @@ public class BlinkingProperty : MonoBehaviour
     {
     }
 
+    [ContextMenu("startRepeating")]
+    public void invokeStart()
+    {
+        InvokeRepeating("StartBlink", 0f, 0.5f);
+    }
+
+
     public void StartBlink()
     {
         StartCoroutine(BlinkCoroutine());
+        stop = false;
     }
 
+    [ContextMenu("stopBlink")]
     public void StopBlink()
     {
         CancelInvoke();
@@ -33,7 +42,7 @@ public class BlinkingProperty : MonoBehaviour
         {
             this.GetComponent<Renderer>().material.color = Color.green;
         }
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.25f);
         if (stop == false)
         {
             this.GetComponent<Renderer>().material.color = Color.red;

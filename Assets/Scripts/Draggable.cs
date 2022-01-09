@@ -17,6 +17,7 @@ public class Draggable : MonoBehaviour
 
     private void OnMouseDown()
     {
+        print("touching " + this.name);
         ppDrag = GameObject.Find("ppDrag");
         map = GameObject.Find("Tilemap").GetComponent<Tilemap>();
         pendingParent = GameObject.Find("PendingProperty");
@@ -24,6 +25,12 @@ public class Draggable : MonoBehaviour
         {
             pCard = this.GetComponent<Property>().Card;
         }
+    }
+
+    [ContextMenu("print name")]
+    public void printName()
+    {
+        print("name is " + this.name);
     }
 
 
@@ -37,9 +44,11 @@ public class Draggable : MonoBehaviour
 
         if (this.transform.parent == pendingParent.transform)
         {
+            print("parent is pending parent");
             Vector3 newTransform = new Vector3((float)agridPosition.x, (float)agridPosition.y, transform.position.z);
             if (transform.position != newTransform)
             {
+                print("cur trans != newTrans");
                 transform.position = newTransform;
                 transform.position += new Vector3(-1f, -0.32f, 0f); //offset vector
                 ppDrag.transform.position = new Vector3(transform.position.x + (float.Parse(pCard.space.Substring(0, 1))) / 2, transform.position.y - 1f, ppDrag.transform.position.z);
@@ -47,6 +56,14 @@ public class Draggable : MonoBehaviour
                 this.name = loc;
                 XY[0] = (float)agridPosition.x - 1; XY[1] = (float)agridPosition.y - 1;
                 buildCheck(this.pCard, this.GetComponent<Draggable>().XY);
+                if (buildable == true)
+                {
+                    this.GetComponent<BlinkingProperty>().StopBlink();
+                    this.GetComponent<Renderer>().material.color = Color.green;
+                } else if (buildable == false && this.GetComponent<BlinkingProperty>().stop == true)
+                {
+                    this.GetComponent<BlinkingProperty>().invokeStart();
+                }
             }
         }
 

@@ -134,7 +134,6 @@ public class DemoCell : MonoBehaviour, ICell
     {
         print("Buying " + _propertyCard.propName + " which costs " + _propertyCard.cost);
         GameObject shopMenu = GameObject.FindGameObjectWithTag("ShopMenu");
-        shopToggleScript script = GameObject.FindGameObjectWithTag("ShopToggle").GetComponent<shopToggleScript>();
         
         stats = GameObject.FindGameObjectWithTag("Stats").GetComponent<Statistics>();
         print("money now is " + stats.returnStats()[0]);
@@ -152,7 +151,6 @@ public class DemoCell : MonoBehaviour, ICell
             else
             {
                 print("enough gold");
-                script.offShopButton();
                 shopMenu.SetActive(false);
                 shopMenu.GetComponent<PurchaseController>().purchaseProperty(_propertyCard);
                 // --------------------- Swapping to green border grass -------------
@@ -173,7 +171,6 @@ public class DemoCell : MonoBehaviour, ICell
             else
             {
                 print("enough money");
-                script.offShopButton();
                 shopMenu.SetActive(false);
                 shopMenu.GetComponent<PurchaseController>().purchaseProperty(_propertyCard);
                 // --------------------- Swapping to green border grass -------------

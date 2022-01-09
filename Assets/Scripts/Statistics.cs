@@ -105,10 +105,12 @@ public class Statistics : MonoBehaviour
         
         if (level < 2)
         {
-            xpFill.fillAmount = (float)1/nextVal;
+            print("calc less than level 2");
+            xpFill.fillAmount = ((float)xp)/(nextVal);
         }
         else
         {
+            print("calc more than level 2");
             long prevVal = levelValues[(int)level];
             xpFill.fillAmount = ((float)xp-prevVal) / (nextVal-prevVal);
         }

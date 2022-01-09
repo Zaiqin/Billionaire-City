@@ -1045,7 +1045,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 76223688}
-  - component: {fileID: 76223689}
   - component: {fileID: 76223690}
   m_Layer: 6
   m_Name: ShopParent
@@ -1074,19 +1073,6 @@ RectTransform:
   m_AnchoredPosition: {x: -594.99994, y: 165.99998}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &76223689
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 76223687}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70c090f6967374beba61c9f99f66c77f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shopToggle: {fileID: 52499401}
 --- !u!58 &76223690
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1831,6 +1817,7 @@ MonoBehaviour:
   ppDrag: {fileID: 737003508}
   externalAudioPlayer: {fileID: 1820829991}
   saveloadsystem: {fileID: 25462474}
+  shopToggle: {fileID: 52499396}
   stats: {fileID: 973017965}
   buildSound: {fileID: 8300000, guid: af8e188edf22047efbe5414eb16f16df, type: 3}
   touchSound: {fileID: 8300000, guid: bd5423d63b2c64bff84c70238339e6d6, type: 3}
@@ -63447,7 +63434,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!224 &962398201
 RectTransform:
@@ -73697,6 +73684,7 @@ MonoBehaviour:
   ppDrag: {fileID: 737003508}
   externalAudioPlayer: {fileID: 1820829991}
   saveloadsystem: {fileID: 0}
+  shopToggle: {fileID: 52499396}
   stats: {fileID: 973017965}
   buildSound: {fileID: 8300000, guid: af8e188edf22047efbe5414eb16f16df, type: 3}
   touchSound: {fileID: 8300000, guid: bd5423d63b2c64bff84c70238339e6d6, type: 3}
