@@ -58,7 +58,7 @@ public class HQstats : MonoBehaviour
         }
         property.text = "$" + propValue.ToString("#,##0");
         land.text = "$" + (noOfPlots*1000).ToString("#,##0");
-        total.text = "$" + (stats.money + goldvalue + (noOfPlots*1000)).ToString("#,##0");
+        total.text = "$" + (stats.money + goldvalue + (noOfPlots*1000) + propValue).ToString("#,##0");
         field.text = stats.cityName;
     }
 

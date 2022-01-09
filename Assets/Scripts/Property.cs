@@ -284,23 +284,19 @@ public class commercePickupScript : MonoBehaviour, IPointerClickHandler
             long finalIncome = 0;
             foreach (Collider2D item in infList)
             {
-                if (GameObject.Find(item.name).transform.GetChild(0).GetComponent<contractScript>().signTime != "notsigned" && System.DateTime.Now >= DateTime.Parse(GameObject.Find(item.name).transform.GetChild(0).GetComponent<contractScript>().signTime))
+                GameObject obj = GameObject.Find(item.name);
+                if (obj.transform.GetChild(0).GetComponent<contractScript>().signTime != "notsigned")
                 {
-                    finalIncome += (long)GameObject.Find(item.name).GetComponent<Property>().Card.tenants * propCard.rentPerTenant;
-                    print("added " + GameObject.Find(item.name).GetComponent<Property>().Card.tenants + "tenants from " + GameObject.Find(item.name));
+                    finalIncome += (long)obj.GetComponent<Property>().Card.tenants * propCard.rentPerTenant;
+                    print("added " + obj.GetComponent<Property>().Card.tenants + "tenants from " + obj);
+                    GameObject alue = Instantiate(Resources.Load<GameObject>("floatingParent"), new Vector3(obj.transform.GetChild(0).position.x, obj.transform.GetChild(0).position.y + 1.2f, obj.transform.GetChild(0).position.z), Quaternion.identity) as GameObject;
+                    alue.transform.GetChild(0).GetComponent<TextMesh>().text = "+ $" + (long)obj.GetComponent<Property>().Card.tenants * propCard.rentPerTenant;
+                    alue.transform.GetChild(0).GetComponent<TextMesh>().color = new Color(168f / 255f, 255f / 255f, 4f / 255f);
                 }
             }
             print("final income is " + finalIncome);
-            GameObject.Find("Stats").GetComponent<Statistics>().updateStats(diffmoney: finalIncome, diffxp: 100);
+            GameObject.Find("Stats").GetComponent<Statistics>().updateStats(diffmoney: finalIncome);
             GameObject.Find("ExternalAudioPlayer").GetComponent<AudioSource>().PlayOneShot(Resources.Load<AudioClip>("Audio/money"));
-
-            GameObject value = Instantiate(Resources.Load<GameObject>("floatingParent"), new Vector3(this.gameObject.transform.parent.transform.position.x + (float.Parse(this.gameObject.transform.parent.GetComponent<Property>().Card.space.Substring(0, 1))) / 2, this.gameObject.transform.parent.transform.position.y + 3.4f, -5f), Quaternion.identity) as GameObject;
-            value.transform.GetChild(0).GetComponent<TextMesh>().text = "+ $" + finalIncome;
-            value.transform.GetChild(0).GetComponent<TextMesh>().color = new Color(168f / 255f, 255f / 255f, 4f / 255f);
-
-            GameObject xpValue = Instantiate(Resources.Load<GameObject>("floatingParent"), new Vector3(this.gameObject.transform.parent.transform.position.x + (float.Parse(this.gameObject.transform.parent.GetComponent<Property>().Card.space.Substring(0, 1))) / 2, this.gameObject.transform.parent.transform.position.y + 2.8f, -5f), Quaternion.identity) as GameObject;
-            xpValue.transform.GetChild(0).GetComponent<TextMesh>().text = "+ " + propCard.XP + "XP";
-            xpValue.transform.GetChild(0).GetComponent<TextMesh>().color = Color.yellow;
 
             DateTime theTime;
             theTime = DateTime.Now.AddMinutes(3);

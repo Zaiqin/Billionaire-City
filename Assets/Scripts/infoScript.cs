@@ -101,10 +101,11 @@ public class infoScript : MonoBehaviour
             long finalIncome = 0;
             foreach (Collider2D item in infList)
             {
-                print("adding "+item.name +" with signTime " + GameObject.Find(item.name).transform.GetChild(0).GetComponent<contractScript>().signTime);
-                if (GameObject.Find(item.name).transform.GetChild(0).GetComponent<contractScript>().signTime != "notsigned")
+                GameObject obj = GameObject.Find(item.name);
+                //print("adding "+item.name +" with signTime " + GameObject.Find(item.name).transform.GetChild(0).GetComponent<contractScript>().signTime);
+                if (obj.transform.GetChild(0).GetComponent<contractScript>().signTime != "notsigned")
                 {
-                    finalIncome += (long)GameObject.Find(item.name).GetComponent<Property>().Card.tenants * selProp.GetComponent<Property>().Card.rentPerTenant;
+                    finalIncome += (long)obj.GetComponent<Property>().Card.tenants * selProp.GetComponent<Property>().Card.rentPerTenant;
                 }
             }
             var diff = DateTime.Parse(selProp.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signTime) - System.DateTime.Now;
