@@ -115,6 +115,7 @@ public class ppDragButton : MonoBehaviour
 
             if (pp.Card.type == "Deco")
             {
+                shopToggle.GetComponent<Toggle>().isOn = true;
                 GameObject a = Instantiate(pp.gameObject);
                 a.transform.parent = pendingParent.transform;
                 pendingParent.transform.GetChild(0).gameObject.transform.position = new Vector3(a.transform.position.x, a.transform.position.y, -8);
