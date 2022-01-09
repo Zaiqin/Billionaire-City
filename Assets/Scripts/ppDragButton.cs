@@ -59,6 +59,12 @@ public class ppDragButton : MonoBehaviour
     {
         Property pp;
         pp = pendingParent.transform.GetChild(0).gameObject.GetComponent<Property>();
+        if (pp.Card.type == "Deco")
+        {
+            GameObject a = Instantiate(pp.gameObject);
+            a.transform.parent = pp.transform.parent;
+            a.GetComponent<Property>().Card = pp.Card;
+        }
 
         if (pp.GetComponent<Draggable>().buildable == true)
         {
@@ -88,7 +94,6 @@ public class ppDragButton : MonoBehaviour
             // -------------------------------
 
             externalAudioPlayer.GetComponent<AudioSource>().PlayOneShot(buildSound);
-            ppDrag.SetActive(false);
 
             // adding the contract collider and sorting its order -----------
             if (pCard.type == "House")
@@ -112,7 +117,11 @@ public class ppDragButton : MonoBehaviour
             }
 
             // --------------------- Swapping to green border grass -------------
-            map.SwapTile(greenGrass, tileGrass);
+            if (pp.Card.type != "Deco")
+            {
+                map.SwapTile(greenGrass, tileGrass);
+                ppDrag.SetActive(false);
+            }
             // ------------------------------------------------------------------
 
             // --------------------- Save Game ----------------------------------

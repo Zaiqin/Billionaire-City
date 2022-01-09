@@ -2052,6 +2052,7 @@ MonoBehaviour:
   hq: {fileID: 0}
   splashObject: {fileID: 0}
   saveObj: {fileID: 0}
+  pendingParent: {fileID: 0}
   mainCam: {fileID: 519420031}
 --- !u!1 &199292497
 GameObject:
@@ -73930,6 +73931,7 @@ MonoBehaviour:
   hq: {fileID: 0}
   splashObject: {fileID: 0}
   saveObj: {fileID: 0}
+  pendingParent: {fileID: 0}
   mainCam: {fileID: 519420031}
 --- !u!1 &1622855771
 GameObject:
@@ -77128,6 +77130,7 @@ MonoBehaviour:
   splashObject: {fileID: 1976408486320943345, guid: 916150befd6ee214ab9864791ccbabea,
     type: 3}
   saveObj: {fileID: 25462474}
+  pendingParent: {fileID: 58940600}
   mainCam: {fileID: 519420031}
 --- !u!1 &2062023779
 GameObject:

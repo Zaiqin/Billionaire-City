@@ -29,7 +29,7 @@ public class Draggable : MonoBehaviour
 
     public void OnMouseDrag()
     {
-        
+        print("dragging here");
         //transform.position = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition) - diff;
 
         Vector3 amousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
