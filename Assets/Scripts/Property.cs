@@ -178,6 +178,8 @@ public class contractScript : MonoBehaviour, IPointerClickHandler
             GameObject canvas = GameObject.Find("Canvas");
             GameObject contractMenu = canvas.transform.GetChild(canvas.transform.childCount - 4).gameObject;
             contractMenu.SetActive(true);
+            GameObject infoPanel = canvas.transform.GetChild(0).gameObject;
+            infoPanel.SetActive(false);
             GameObject contractController = GameObject.Find("Contract Scroll Controller");
             contractController.GetComponent<RecyclableScrollerContract>().pCard = propCard;
             contractController.GetComponent<RecyclableScrollerContract>().userReloadData();
@@ -282,8 +284,11 @@ public class commercePickupScript : MonoBehaviour, IPointerClickHandler
             long finalIncome = 0;
             foreach (Collider2D item in infList)
             {
-                finalIncome += (long)GameObject.Find(item.name).GetComponent<Property>().Card.tenants * propCard.rentPerTenant;
-                print("added " + GameObject.Find(item.name).GetComponent<Property>().Card.tenants + "tenants from " + GameObject.Find(item.name));
+                if (GameObject.Find(item.name).transform.GetChild(0).GetComponent<contractScript>().signTime != "notsigned" && System.DateTime.Now >= DateTime.Parse(GameObject.Find(item.name).transform.GetChild(0).GetComponent<contractScript>().signTime))
+                {
+                    finalIncome += (long)GameObject.Find(item.name).GetComponent<Property>().Card.tenants * propCard.rentPerTenant;
+                    print("added " + GameObject.Find(item.name).GetComponent<Property>().Card.tenants + "tenants from " + GameObject.Find(item.name));
+                }
             }
             print("final income is " + finalIncome);
             GameObject.Find("Stats").GetComponent<Statistics>().updateStats(diffmoney: finalIncome, diffxp: 100);

@@ -36,15 +36,15 @@ public class infoScript : MonoBehaviour
                     
                     if (diff.Days != 0)
                     {
-                        timeText.GetComponent<Text>().text = string.Format("{0:D2} Days {1:D2} hrs", diff.Days, diff.Hours);
+                        timeText.GetComponent<Text>().text = string.Format("{0:D2} Day {1:D2} hr", diff.Days, diff.Hours);
                     }
                     else if (diff.Hours != 0)
                     {
-                        timeText.GetComponent<Text>().text = string.Format("{0:D2} Hours {1:D2} mins", diff.Hours, diff.Minutes);
+                        timeText.GetComponent<Text>().text = string.Format("{0:D2} Hour {1:D2} min", diff.Hours, diff.Minutes);
                     }
                     else if (diff.Minutes != 0)
                     {
-                        timeText.GetComponent<Text>().text = string.Format("{0:D2} mins {1:D2} secs", diff.Minutes, diff.Seconds);
+                        timeText.GetComponent<Text>().text = string.Format("{0:D2} min {1:D2} sec", diff.Minutes, diff.Seconds);
                     }
                     else if (diff.Seconds != 0)
                     {
@@ -101,8 +101,11 @@ public class infoScript : MonoBehaviour
             long finalIncome = 0;
             foreach (Collider2D item in infList)
             {
-                finalIncome += (long)GameObject.Find(item.name).GetComponent<Property>().Card.tenants * selProp.GetComponent<Property>().Card.rentPerTenant;
-                //print("added " + GameObject.Find(item.name).GetComponent<Property>().Card.tenants + "tenants from " + GameObject.Find(item.name));
+                print("adding "+item.name +" with signTime " + GameObject.Find(item.name).transform.GetChild(0).GetComponent<contractScript>().signTime);
+                if (GameObject.Find(item.name).transform.GetChild(0).GetComponent<contractScript>().signTime != "notsigned")
+                {
+                    finalIncome += (long)GameObject.Find(item.name).GetComponent<Property>().Card.tenants * selProp.GetComponent<Property>().Card.rentPerTenant;
+                }
             }
             var diff = DateTime.Parse(selProp.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signTime) - System.DateTime.Now;
             if (diff > TimeSpan.Zero)
@@ -113,7 +116,14 @@ public class infoScript : MonoBehaviour
                 fillBg.SetActive(true);
                 fill.GetComponent<Image>().fillAmount = (float)(remainingSpan.TotalSeconds / fullSpan.TotalSeconds);
                 incomeText.GetComponent<Text>().text = "$" + finalIncome.ToString("#,##0");
-                timeText.GetComponent<Text>().text = string.Format("{0:D2} mins {1:D2} secs", diff.Minutes, diff.Seconds);
+                if (diff.Minutes != 0)
+                {
+                    timeText.GetComponent<Text>().text = string.Format("{0:D1} min {1:D2} sec", diff.Minutes, diff.Seconds);
+                }
+                else if (diff.Seconds != 0)
+                {
+                    timeText.GetComponent<Text>().text = string.Format("{0:D2} seconds", diff.Seconds);
+                }
             } else
             {
                 timeText.GetComponent<Text>().text = "Commerce Fulfilled";
