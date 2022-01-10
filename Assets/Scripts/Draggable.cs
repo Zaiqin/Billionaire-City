@@ -69,9 +69,9 @@ public class Draggable : MonoBehaviour
 
     }
 
-    public void buildCheck(PropertyCard card, float[] XY)
+    public bool buildCheck(PropertyCard card, float[] XY)
     {
-        //print("called build check");
+        print("called build check");
         bool result = true;
         if (card.type != "Deco")
         {
@@ -94,9 +94,32 @@ public class Draggable : MonoBehaviour
                     x = (int)XY[0]; y += 1;
                 }
             }
+        } else
+        {
+            int spaceX = int.Parse(card.space.Substring(0, 1));
+            int spaceY = int.Parse(card.space.Substring(card.space.Length - 1));
+            int x = (int)XY[0]; int y = (int)XY[1];
+            for (int i = 0; i < spaceX * spaceY; i++)
+            {
+                TileBase Tile = map.GetTile(new Vector3Int(x, y, 0));
+                print("tilename is " + Tile.name);
+                //print("checking " + x + "," + y);
+                if (Tile.name.Contains("road") || Tile.name.Contains("noBelow"))
+                {
+                    print("setting false deco");
+                    result = false;
+                    break;
+                }
+                x += 1;
+                if (x == ((int)XY[0] + spaceX))
+                {
+                    x = (int)XY[0]; y += 1;
+                }
+            }
         }
         //print("result is " + result);
         buildable = result;
+        return result;
     }
 
 }

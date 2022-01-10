@@ -137,17 +137,18 @@ public class plotManager : MonoBehaviour
                         createdTile.sprite = Resources.Load<Tile>(createPath).sprite;
                         createdTile.name = calcTile;
 
-
-                        if ((i == 1) && (delete == true))
-                        {
-                            createdTile = map.GetTile<Tile>(new Vector3Int(-1, 0, 0));
-                            //print("set to grass tile" + createdTile.name);
-                        }
-                        if ((isMouseOverUI() == false) || (forced == true))
+                        if (isMouseOverUI() == false && startInUI == false)
                         {
                             if (mainCam.GetComponent<CameraMovement>().dragging == false)
                             {
-                                map.SetTile(gridPosition, createdTile);
+                                if ((i == 1) && (delete == true))
+                                {
+                                    map.SetTile(gridPosition, Resources.Load<TileBase>("roadTiles/greenGrass"));
+                                }
+                                else
+                                {
+                                    map.SetTile(gridPosition, createdTile);
+                                }
                             }
                         }
                     }
@@ -244,17 +245,18 @@ public class plotManager : MonoBehaviour
                         createdTile.sprite = Resources.Load<Tile>(createPath).sprite;
                         createdTile.name = calcTile;
 
-
-                        if ((i == 1) && (delete == true))
-                        {
-                            createdTile = map.GetTile<Tile>(new Vector3Int(-1, 0, 0)); //grass below hq
-                            //print("set to grass tile" + createdTile.name);
-                        }
-                        if ((isMouseOverUI() == false) || (forced == true))
+                        if (isMouseOverUI() == false && startInUI == false)
                         {
                             if (mainCam.GetComponent<CameraMovement>().dragging == false)
                             {
-                                map.SetTile(gridPosition, createdTile);
+                                if ((i == 1) && (delete == true))
+                                {
+                                    map.SetTile(gridPosition, Resources.Load<TileBase>("roadTiles/noBelow"));
+                                }
+                                else
+                                {
+                                    map.SetTile(gridPosition, createdTile);
+                                }
                             }
                         }
                     }

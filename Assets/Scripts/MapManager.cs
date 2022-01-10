@@ -133,16 +133,19 @@ public class MapManager : MonoBehaviour
                         string createPath = "roadTiles/" + calcTile;
                         createdTile.sprite = Resources.Load<Tile>(createPath).sprite;
                         createdTile.name = calcTile;
-
-                        if ((i == 1) && (delete == true))
-                        {
-                            createdTile = map.GetTile<Tile>(new Vector3Int(-1, 0, 0)); //grass below hq
-                        }
+                        
                         if (isMouseOverUI() == false && startInUI == false)
                         {
                             if (mainCam.GetComponent<CameraMovement>().dragging == false)
                             {
-                                map.SetTile(gridPosition, createdTile);
+                                if ((i == 1) && (delete == true))
+                                {
+                                    map.SetTile(gridPosition, Resources.Load<TileBase>("roadTiles/greenGrass"));
+                                }
+                                else
+                                {
+                                    map.SetTile(gridPosition, createdTile);
+                                }
                             }
                         }
                     }
