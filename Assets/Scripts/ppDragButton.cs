@@ -46,7 +46,7 @@ public class ppDragButton : MonoBehaviour
         {
             TileBase Tile = map.GetTile(new Vector3Int(x, y, 0));
             //call plot function here
-            this.GetComponent<plotManager>().plotFunction(new Vector3Int(x, y,0), true, true);
+            this.GetComponent<plotManager>().belowFunction(new Vector3Int(x, y,0), true, true);
             x += 1;
             if (x == ((int)XY[0] + spaceX))
             {

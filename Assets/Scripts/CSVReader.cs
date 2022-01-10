@@ -24,7 +24,7 @@ public class CSVReader : MonoBehaviour
 
     public void ReadCSV()
     {
-        print("Reading CSV File");
+        //print("Reading CSV File");
 
         // Creation of Dictionaries to hold Sprites that are loaded from file -----------------------------
         Dictionary<String, Sprite> bgSprites = new Dictionary<string, Sprite>();
@@ -35,14 +35,14 @@ public class CSVReader : MonoBehaviour
         {
             bgSprites.Add(unsortedPropCardSprites[i].name, unsortedPropCardSprites[i]);
         }
-        print("No of propertyCard sprites in resource folder: " + bgSprites.Count);
+        //print("No of propertyCard sprites in resource folder: " + bgSprites.Count);
         //Loading all Property Sprites from Resources without order ---------------------------------------
         Sprite[] unsortedPropSprites = Resources.LoadAll<Sprite>("properties");
         for (int i = 0; i < unsortedPropSprites.Length; i++)
         {
             propSprites.Add(unsortedPropSprites[i].name, unsortedPropSprites[i]);
         }
-        print("No of property sprites in resource folder: " + propSprites.Count);
+        //print("No of property sprites in resource folder: " + propSprites.Count);
 
         //Setup for reading CSV files ----------------------------------------------------------------------
         string TitleLine = textAssetData.text.Split(new string[] { "\r\n" }, StringSplitOptions.None)[0];
@@ -57,7 +57,7 @@ public class CSVReader : MonoBehaviour
                 cols++;
             }
         }
-        print("There are " + cols + " columns in the stats file");
+        //print("There are " + cols + " columns in the stats file");
         // -------------------------------------------------------------------------------------------------
 
         //COUNTING NO OF PROPERTIES AND HOW MANY OF EACH ---------------------------------------------------
@@ -79,23 +79,23 @@ public class CSVReader : MonoBehaviour
                     case 1:
                         startName = "FIRST COMMERCE";
                         endName = "LAST COMMERCE";
-                        print("There are " + (endIndex - startIndex + 1) + " Houses");
+                        //print("There are " + (endIndex - startIndex + 1) + " Houses");
                         noOfHouses = (endIndex - startIndex + 1);
                         break;
                     case 2:
                         startName = "FIRST DECO";
                         endName = "LAST DECO";
-                        print("There are " + (endIndex - startIndex + 1) + " Commerces");
+                        //print("There are " + (endIndex - startIndex + 1) + " Commerces");
                         noOfCommerces = (endIndex - startIndex + 1);
                         break;
                     case 3:
                         startName = "FIRST WONDER";
                         endName = "LAST WONDER";
-                        print("There are " + (endIndex - startIndex + 1) + " Decos");
+                        //print("There are " + (endIndex - startIndex + 1) + " Decos");
                         noOfDecos = (endIndex - startIndex + 1);
                         break;
                     case 4:
-                        print("There are " + (endIndex - startIndex + 1) + " Wonders");
+                        //print("There are " + (endIndex - startIndex + 1) + " Wonders");
                         noOfWonders = (endIndex - startIndex + 1);
                         break;
                     default: break;
@@ -189,28 +189,28 @@ public class CSVReader : MonoBehaviour
             // IF REACH LAST OF EACH TYPE, RESET i SO THAT WHEN IT LOOPS AGAIN IT IS i=0, SO NEXT ARRAY WILL START FROM i=0.
             if (data[cols * (masterNo + 2) + 17] == "LAST HOUSE")
             {
-                print("Reached last house: " + tempArray[i].displayName);
+                //print("Reached last house: " + tempArray[i].displayName);
                 propertyCardArrays[0] = tempArray; // Set houseArray to tempArray
                 i = -1;
                 tempArray = new PropertyCard[noOfCommerces];
             }
             if (data[cols * (masterNo + 2) + 17] == "LAST COMMERCE")
             {
-                print("Reached last commerce: " + tempArray[i].displayName);
+                //print("Reached last commerce: " + tempArray[i].displayName);
                 propertyCardArrays[1] = tempArray; // Set commerceArray to tempArray
                 i = -1;
                 tempArray = new PropertyCard[noOfDecos];
             }
             if (data[cols * (masterNo + 2) + 17] == "LAST DECO")
             {
-                print("Reached last deco: " + tempArray[i].displayName);
+                //print("Reached last deco: " + tempArray[i].displayName);
                 propertyCardArrays[2] = tempArray; // Set decoArray to tempArray
                 i = -1;
                 tempArray = new PropertyCard[noOfWonders];
             }
             if (data[cols * (masterNo + 2) + 17] == "LAST WONDER")
             {
-                print("Reached last wonder: " + tempArray[i].displayName);
+                //print("Reached last wonder: " + tempArray[i].displayName);
                 propertyCardArrays[3] = tempArray; // Set wonderArray to tempArray
                 i = -1;
             }
@@ -223,7 +223,7 @@ public class CSVReader : MonoBehaviour
             //print("reading " + data[(cols * (i)) + 32]);
             levelValues.Add(i, long.Parse(data[(cols * (i)) + 32]));
             if (data[(cols * (i)) + 33] == "Last Level"){
-                print("reached last level");
+                //print("reached last level");
                 break;
             }
         }

@@ -105,18 +105,18 @@ public class Statistics : MonoBehaviour
         
         if (level < 2)
         {
-            print("calc less than level 2");
+            //print("calc less than level 2");
             xpFill.fillAmount = ((float)xp)/(nextVal);
         }
         else
         {
-            print("calc more than level 2");
+            //print("calc more than level 2");
             long prevVal = levelValues[(int)level];
             xpFill.fillAmount = ((float)xp-prevVal) / (nextVal-prevVal);
         }
-        print("nextVal is " + nextVal + ", current is " + xp + ", start is " + levelValues[(int)level] + ", fillamt is " + xpFill.fillAmount);
+        //print("nextVal is " + nextVal + ", current is " + xp + ", start is " + levelValues[(int)level] + ", fillamt is " + xpFill.fillAmount);
         //print("xpFill is " + xpFill.fillAmount + "nextVal is " + nextVal + "xp is " + xp);
-        print("updated stats");
+        print("Updated stats");
         saveloadobj.GetComponent<saveloadsystem>().saveStats();
     }
 

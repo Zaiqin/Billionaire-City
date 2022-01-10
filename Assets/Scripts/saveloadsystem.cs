@@ -66,7 +66,7 @@ public class saveloadsystem : MonoBehaviour
 
     public void Start()
     {
-        print("Attempting to Load Save Game");
+        //print("Attempting to Load Save Game");
         loadSaveGame();
     }
 
@@ -79,7 +79,7 @@ public class saveloadsystem : MonoBehaviour
         foreach (Transform child in PropertiesParent.transform)
         {
             if (child.GetComponent<Property>() != null) {
-                print("saving: " + child.GetComponent<Property>().Card.displayName);
+                //print("saving: " + child.GetComponent<Property>().Card.displayName);
                 if (child.GetComponent<Property>().Card.type == "House")
                 {
                     propSaveList.Add(new propertySaveForm(child.GetComponent<Property>().Card.displayName, child.GetComponent<Draggable>().XY, child.transform.GetChild(0).GetComponent<contractScript>().signTime, child.transform.GetChild(0).GetComponent<contractScript>().signIndex, child.transform.GetChild(0).GetComponent<contractScript>().signCreationTime));
@@ -185,7 +185,7 @@ public class saveloadsystem : MonoBehaviour
             foreach (var p in list)
             {
                 loadProperty(p.propName, new Vector2Int(p.locX, p.locY), p.signTime, p.signIndex, p.signCreationTime, p.comSignTime, p.comSignCreationTime);
-                print("loaded: " + p.propName);
+                //print("loaded: " + p.propName);
             }
             // ----------- Loading Statistics ---------------
             Stats.GetComponent<Statistics>().setStats(statsObj.money, statsObj.gold, statsObj.level, statsObj.xp);
@@ -199,11 +199,11 @@ public class saveloadsystem : MonoBehaviour
                 if (item.texName.Contains("road") || item.texName.Contains("Grass"))
                 {
                     map.SetTile(pos, Resources.Load<TileBase>("roadTiles/" + item.texName));
-                    print("loaded road" + item.texName + "at pos " + pos);
+                    //print("loaded road" + item.texName + "at pos " + pos);
                 } else if (item.texName.Contains("plot"))
                 {
                     map.SetTile(pos, Resources.Load<TileBase>("plotTiles/" + item.texName));
-                    print("loaded plot" + item.texName + "at pos " + pos);
+                    //print("loaded plot" + item.texName + "at pos " + pos);
                 }
             }
             // ------------ Loading Expansions -------------
@@ -220,7 +220,7 @@ public class saveloadsystem : MonoBehaviour
     {
         Stats.GetComponent<Statistics>().cityName = "Chocolate Fields";
         nameField.text = "Chocolate Fields";
-        print("Loading Default Properties");
+        //print("Loading Default Properties");
         loadProperty("Japanese Tree", new Vector2Int(-1, -2));
         loadProperty("Fountain", new Vector2Int(-1, -4));
         loadProperty("Pizzeria", new Vector2Int(-7, 0));
@@ -230,7 +230,7 @@ public class saveloadsystem : MonoBehaviour
         loadProperty("Townhouse Luxury", new Vector2Int(6, 0), "notsigned");
         loadProperty("Bungalow Luxury", new Vector2Int(-11, -3), "notsigned");
         loadProperty("Cypress Tree", new Vector2Int(2, -7));
-        print("Successfully Loaded Game");
+        print("Successfully Loaded New Game");
     }
 
     public void loadProperty(string propName, Vector2Int pos, string signTime = "notsigned", int signIndex = -1, string signCreationTime = "notsigned", string comSignTime = "notsigned", string comSignCreationTime = "notsigned") //propName must be the display form, not camelCase; eg Bungalow Luxury, not bungalowlux
@@ -272,17 +272,17 @@ public class saveloadsystem : MonoBehaviour
             // add collider to money
             pp.transform.GetChild(1).gameObject.AddComponent<BoxCollider2D>();
             var dateAndTimeVar = System.DateTime.Now;
-            print("going check contract for " + pp.name + "which is signtime " + pp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signTime);
+            //print("going check contract for " + pp.name + "which is signtime " + pp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signTime);
             if (pp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signTime == "notsigned") {
                 pp.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2;
                 pp.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
                 pp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signCreationTime = "notsigned";
-                print("notsigned");
+                //print("notsigned");
             } else if (dateAndTimeVar >= DateTime.Parse(pp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signTime)) {
                 pp.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
                 pp.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2;
                 pp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signCreationTime = signCreationTime;
-                print("sign over timea alre");
+                //print("sign over timea alre");
             } else if (dateAndTimeVar < DateTime.Parse(pp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signTime)) {
                 pp.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
                 pp.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
@@ -292,12 +292,12 @@ public class saveloadsystem : MonoBehaviour
                 pp.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2;
                 pp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signIndex = signIndex;
                 pp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signCreationTime = signCreationTime;
-                print("sign still ongoiing");
+                //print("sign still ongoiing");
             }
             
         } else if (pp.Card.type == "Commerce")
         {
-            print("loadproperty commerce");
+            //print("loadproperty commerce");
             if (pp.transform.GetChild(0).GetComponent<BoxCollider2D>() == null) {
                 pp.transform.GetChild(0).gameObject.AddComponent<BoxCollider2D>();
             }
@@ -306,26 +306,26 @@ public class saveloadsystem : MonoBehaviour
             // add collider to commerce money ----------
             pp.transform.GetChild(1).gameObject.AddComponent<BoxCollider2D>();
             var dateAndTimeVar = System.DateTime.Now;
-            print("going check contract for " + pp.name + "which is signtime " + pp.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signTime);
+            //print("going check contract for " + pp.name + "which is signtime " + pp.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signTime);
             if (pp.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signTime == "notsigned")
             {
-                print("notsigned, thus signing now");
+                //print("notsigned, thus signing now");
                 pp.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
 
                 DateTime theTime;
                 theTime = DateTime.Now.AddMinutes(3);
-                print("signing property commerce again");
+                //print("signing property commerce again");
                 string datetime = theTime.ToString("yyyy/MM/dd HH:mm:ss");
                 pp.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signTime = datetime;
                 pp.transform.GetChild(1).GetComponent<commercePickupScript>().signCreationTime = System.DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
-                print("sign time is " + datetime);
+                //print("sign time is " + datetime);
                 
             }
             else if (dateAndTimeVar >= DateTime.Parse(pp.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signTime))
             {
                 pp.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2;
                 pp.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signCreationTime = comSignCreationTime;
-                print("sign over time already");
+                //print("sign over time already");
             }
             else if (dateAndTimeVar < DateTime.Parse(pp.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signTime))
             {
@@ -336,7 +336,7 @@ public class saveloadsystem : MonoBehaviour
             {
                 pp.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
                 pp.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signCreationTime = comSignCreationTime;
-                print("sign still ongoiing");
+                //print("sign still ongoiing");
             }
         }
         //print("Successfully loaded in " + propName + " at: x:" + pos.x + "y:" + pos.y);
