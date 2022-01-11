@@ -122,4 +122,26 @@ public class Draggable : MonoBehaviour
         return result;
     }
 
+    public void rebuildPlots(PropertyCard card, float[] XY)
+    {
+        print("rebuilding plots");
+        int spaceX = int.Parse(card.space.Substring(0, 1));
+        int spaceY = int.Parse(card.space.Substring(card.space.Length - 1));
+        GameObject plotMgr = GameObject.Find("MapManager");
+
+        int x = (int)XY[0]; int y = (int)XY[1];
+        for (int i = 0; i < spaceX * spaceY; i++)
+        {
+            TileBase Tile = map.GetTile(new Vector3Int(x, y, 0));
+            //call plot function here
+            plotMgr.GetComponent<plotManager>().plotFunction(new Vector3Int(x, y, 0), false, true);
+            x += 1;
+            if (x == ((int)XY[0] + spaceX))
+            {
+                x = (int)XY[0]; y += 1;
+            }
+        }
+        print("rebuilt");
+    }
+
 }

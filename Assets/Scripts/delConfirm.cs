@@ -9,6 +9,7 @@ public class delConfirm : MonoBehaviour
     public void deleteProp()
     {
         print("called destroy");
+        selProp.GetComponent<Draggable>().rebuildPlots(selProp.GetComponent<Property>().Card, selProp.GetComponent<Draggable>().XY);
         selProp.transform.parent = null;
         Destroy(selProp);
         statsObj.GetComponent<Statistics>().updateStats(diffmoney: refundValue);

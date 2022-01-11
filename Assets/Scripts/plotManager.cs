@@ -123,13 +123,13 @@ public class plotManager : MonoBehaviour
 
             if (clickedTile != null)
             {
-                //print("clickedTile.name is " + clickedTile.name + ", tilebase is " + clickedTile);
+                print("clickedTile.name is " + clickedTile.name + ", tilebase is " + clickedTile);
 
-                if (((i == 1) && clickedTile.name.Contains("greenGrass")) || ((i == 1) && (delete == true)) || (clickedTile.name.Contains("plot") && (i > 1)))
+                if (((i == 1) && clickedTile.name.Contains("greenGrass")) || ((i == 1) && (delete == true)) || ((i == 1) && forced == true) || (clickedTile.name.Contains("plot") && (i > 1)))
                 {
                     string calcTile = plotTileChecker.calcTile(map, clickedTile, gridPosition.x, gridPosition.y);
 
-                    if (((clickedTile.name != calcTile) && (delete == false)) || (delete == true))
+                    if (((clickedTile.name != calcTile) && (delete == false)) || (delete == true) || (forced == true))
                     {
 
                         Tile createdTile = ScriptableObject.CreateInstance<Tile>();
@@ -150,6 +150,10 @@ public class plotManager : MonoBehaviour
                                     map.SetTile(gridPosition, createdTile);
                                 }
                             }
+                        } else if (forced == true)
+                        {
+                            print("forced set tile");
+                            map.SetTile(gridPosition, createdTile);
                         }
                     }
                 }
@@ -192,10 +196,8 @@ public class plotManager : MonoBehaviour
         //float walkingSpeed = dataFromTiles[clickedTile].walkingSpeed;
 
         //print("Walking speed on " + clickedTile + " at position " + gridPosition + " is " + walkingSpeed);
-        if (forced == false)
-        {
             saveObj.GetComponent<saveloadsystem>().saveTilemap();
-        }
+        
     }
 
     public void belowFunction(Vector3Int input, bool delete, bool forced = false)

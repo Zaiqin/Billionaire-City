@@ -196,7 +196,7 @@ public class saveloadsystem : MonoBehaviour
             foreach (var item in tilelist)
             {
                 Vector3Int pos = new Vector3Int((int)item.x, (int)item.y, 0);
-                if (item.texName.Contains("road") || item.texName.Contains("Grass"))
+                if (item.texName.Contains("road") || item.texName.Contains("Grass") || item.texName.Contains("Below"))
                 {
                     map.SetTile(pos, Resources.Load<TileBase>("roadTiles/" + item.texName));
                     //print("loaded road" + item.texName + "at pos " + pos);
