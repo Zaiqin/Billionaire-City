@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class expansion : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class expansion : MonoBehaviour
     public GameObject expCanvas, stats, saveObj, expPopup, failPopup, nocash;
     public List<int> expInts = new List<int>();
     public List<string> deletedExp = new List<string>();
+    public Tilemap map;
+    public TileBase grassTile;
 
     // Start is called before the first frame update
     void Start()
@@ -66,12 +69,30 @@ public class expansion : MonoBehaviour
         if (result == true && stats.GetComponent<Statistics>().returnStats()[0] >= cost)
         {
             print("del");
+            expPopup.SetActive(false);
             GameObject sel = GameObject.Find("expansion" + i);
+            int spaceX = 1, spaceY = 1, x = 1, y = 1, xOrig = 1;
+            switch (i)
+            {
+                case 11: spaceX = 30; spaceY = 10; x = -15; xOrig = -15; y = 10; break;
+                default:
+                    break;
+            }
+            for (int i = 0; i < spaceX * spaceY; i++)
+            {
+                map.SetTile(new Vector3Int(x, y, 0), grassTile);
+                x += 1;
+                if (x == (xOrig + spaceX))
+                {
+                    x = xOrig; y += 1;
+                }
+            }
             Destroy(sel);
             deletedExp.Add("expansion" + i);
             expInts.Remove(i);
             stats.GetComponent<Statistics>().updateStats(diffmoney: -cost);
             saveObj.GetComponent<saveloadsystem>().saveExp();
+            saveObj.GetComponent<saveloadsystem>().saveTilemap();
         }
         else if (result == true && stats.GetComponent<Statistics>().returnStats()[0] < cost)
         {
