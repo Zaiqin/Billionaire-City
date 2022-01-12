@@ -22,7 +22,7 @@ public class expScript : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (cam.GetComponent<CameraMovement>().dragging == false)
+        if (cam.GetComponent<CameraMovement>().dragging == false && GameObject.Find("Canvas").GetComponent<toggleMaster>().checkAllOff() == true)
         {
             print("name is " + this.name);
             expPopup.GetComponent<expansion>().i = int.Parse(this.name.Substring(this.name.Length - 2));

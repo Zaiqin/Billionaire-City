@@ -314,6 +314,7 @@ public class plotManager : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && isMouseOverUI() == true)
         {
             startInUI = true;
+            print("start in ui settteidaddi to true");
         }
 
         if ((plotToggle.isOn == true) && (Input.GetMouseButtonUp(0)))

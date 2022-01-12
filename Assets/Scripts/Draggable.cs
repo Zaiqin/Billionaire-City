@@ -128,6 +128,7 @@ public class Draggable : MonoBehaviour
         int spaceX = int.Parse(card.space.Substring(0, 1));
         int spaceY = int.Parse(card.space.Substring(card.space.Length - 1));
         GameObject plotMgr = GameObject.Find("MapManager");
+        map = GameObject.Find("Tilemap").GetComponent<Tilemap>();
 
         int x = (int)XY[0]; int y = (int)XY[1];
         for (int i = 0; i < spaceX * spaceY; i++)

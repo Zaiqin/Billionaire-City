@@ -74,10 +74,34 @@ public class expansion : MonoBehaviour
             int spaceX = 1, spaceY = 1, x = 1, y = 1, xOrig = 1;
             switch (i)
             {
-                case 11: spaceX = 30; spaceY = 10; x = -15; xOrig = -15; y = 10; break;
+                case 11: spaceX = 30; spaceY = 10; x = -15; y = 10; break;
+                case 12: spaceX = 15; spaceY = 20; x = 15; y = -10; break;
+                case 13: spaceX = 30; spaceY = 10; x = -15; y = -20; break;
+                case 14: spaceX = 15; spaceY = 20; x = -30; y = -10; break;
+                case 21: spaceX = 15; spaceY = 10; x = -30; y = 10; break;
+                case 22: spaceX = 15; spaceY = 10; x = 15; y = 10; break;
+                case 23: spaceX = 15; spaceY = 10; x = 15; y = -20; break;
+                case 24: spaceX = 15; spaceY = 10; x = -30; y = -20; break;
+                case 31: spaceX = 30; spaceY = 10; x = -15; y = 20; break;
+                case 32: spaceX = 15; spaceY = 20; x = 30; y = -10; break;
+                case 33: spaceX = 30; spaceY = 10; x = -15; y = -30; break;
+                case 34: spaceX = 15; spaceY = 20; x = -45; y = -10; break;
+                case 41: spaceX = 15; spaceY = 10; x = -30; y = 20; break;
+                case 42: spaceX = 15; spaceY = 10; x = 15; y = 20; break;
+                case 43: spaceX = 15; spaceY = 10; x = 30; y = 10; break;
+                case 44: spaceX = 15; spaceY = 10; x = 30; y = -20; break;
+                case 45: spaceX = 15; spaceY = 10; x = 15; y = -30; break;
+                case 46: spaceX = 15; spaceY = 10; x = -30; y = -30; break;
+                case 47: spaceX = 15; spaceY = 10; x = -45; y = -20; break;
+                case 48: spaceX = 15; spaceY = 10; x = -45; y = 10; break;
+                case 51: spaceX = 15; spaceY = 10; x = 30; y = 20; break;
+                case 52: spaceX = 15; spaceY = 10; x = 30; y = -30; break;
+                case 53: spaceX = 15; spaceY = 10; x = -45; y = -30; break;
+                case 54: spaceX = 15; spaceY = 10; x = -45; y = 20; break;
                 default:
                     break;
             }
+            xOrig = x;
             for (int i = 0; i < spaceX * spaceY; i++)
             {
                 map.SetTile(new Vector3Int(x, y, 0), grassTile);
@@ -97,6 +121,7 @@ public class expansion : MonoBehaviour
         else if (result == true && stats.GetComponent<Statistics>().returnStats()[0] < cost)
         {
             nocash.gameObject.SetActive(true);
+            expPopup.SetActive(false);
         } else {
             expPopup.SetActive(false);
             failPopup.SetActive(true);

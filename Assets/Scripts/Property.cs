@@ -140,7 +140,7 @@ public class Property : MonoBehaviour, IPointerClickHandler
                 this.gameObject.GetComponent<SpriteRenderer>().color = Color.red;
 
             }
-            else if (this.transform.parent == propParent.transform)
+            else if (this.transform.parent == propParent.transform && GameObject.Find("Canvas").GetComponent<toggleMaster>().checkAllOff() == true)
             {
                 infoPanel.SetActive(true);
                 infoPanel.GetComponent<infoScript>().selProp = this.gameObject;
@@ -152,7 +152,7 @@ public class Property : MonoBehaviour, IPointerClickHandler
                     hqmenu.SetActive(false);
                 }
             }
-            if (this.Card.type == "Commerce" && this.transform.parent.name == "Properties")
+            if (this.Card.type == "Commerce" && this.transform.parent.name == "Properties" && GameObject.Find("Canvas").GetComponent<toggleMaster>().checkAllOff() == true)
             {
                 GameObject influence = this.transform.GetChild(0).gameObject;
                 influence.SetActive(true);
@@ -172,11 +172,11 @@ public class contractScript : MonoBehaviour, IPointerClickHandler
     public PropertyCard propCard;
     void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
     {
-        if (GameObject.Find("Main Camera").GetComponent<CameraMovement>().dragging == false && GameObject.Find("Main Camera").GetComponent<SpriteDetector>().isMouseOverUI() == false)
+        if (GameObject.Find("Main Camera").GetComponent<CameraMovement>().dragging == false && GameObject.Find("Main Camera").GetComponent<SpriteDetector>().isMouseOverUI() == false && GameObject.Find("Canvas").GetComponent<toggleMaster>().checkAllOff() == true)
         {
             print("clicked on contract");
             GameObject canvas = GameObject.Find("Canvas");
-            GameObject contractMenu = canvas.transform.GetChild(canvas.transform.childCount - 4).gameObject;
+            GameObject contractMenu = canvas.transform.GetChild(canvas.transform.childCount - 5).gameObject;
             contractMenu.SetActive(true);
             GameObject infoPanel = canvas.transform.GetChild(0).gameObject;
             infoPanel.SetActive(false);
@@ -206,7 +206,7 @@ public class moneyPickupScript : MonoBehaviour, IPointerClickHandler
     public PropertyCard propCard;
     void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
     {
-        if (GameObject.Find("Main Camera").GetComponent<CameraMovement>().dragging == false && GameObject.Find("Main Camera").GetComponent<SpriteDetector>().isMouseOverUI() == false)
+        if (GameObject.Find("Main Camera").GetComponent<CameraMovement>().dragging == false && GameObject.Find("Main Camera").GetComponent<SpriteDetector>().isMouseOverUI() == false && GameObject.Find("Canvas").GetComponent<toggleMaster>().checkAllOff() == true)
         {
             print("clicked on money");
             this.gameObject.transform.parent.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = 2;

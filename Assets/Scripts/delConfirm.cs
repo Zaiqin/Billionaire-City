@@ -9,6 +9,7 @@ public class delConfirm : MonoBehaviour
     public void deleteProp()
     {
         print("called destroy");
+        print("xy is " + selProp.GetComponent<Draggable>().XY[0] + "card is " + selProp.GetComponent<Property>().Card);
         selProp.GetComponent<Draggable>().rebuildPlots(selProp.GetComponent<Property>().Card, selProp.GetComponent<Draggable>().XY);
         selProp.transform.parent = null;
         Destroy(selProp);
@@ -18,6 +19,9 @@ public class delConfirm : MonoBehaviour
 
     public void cancelDel()
     {
-        selProp.GetComponent<SpriteRenderer>().color = Color.white;
+        if (selProp.name != "Main Camera")
+        {
+            selProp.GetComponent<SpriteRenderer>().color = Color.white;
+        }
     }
 }
