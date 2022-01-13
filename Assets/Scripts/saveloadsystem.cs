@@ -62,7 +62,7 @@ public class saveloadsystem : MonoBehaviour
 {
     public CSVReader csv;
     public Tilemap map;
-    public GameObject PropertiesParent, Stats, expPopup, cityText;
+    public GameObject PropertiesParent, Stats, expPopup, cityText, hq;
     public InputField nameField;
 
     public void Start()
@@ -79,14 +79,12 @@ public class saveloadsystem : MonoBehaviour
             {
                 DirectoryInfo data_dir = new DirectoryInfo(directory);
                 data_dir.Delete(true);
-                print("deleting dire1");
             }
 
             foreach (var file in Directory.GetFiles(Application.persistentDataPath))
             {
                 FileInfo file_info = new FileInfo(file);
                 file_info.Delete();
-                print("deleting dire2");
             }
             LoadNewGame();
             saveGame();
@@ -245,6 +243,7 @@ public class saveloadsystem : MonoBehaviour
     [ContextMenu("Load New Game")]
     public void LoadNewGame()
     {
+        hq.GetComponent<HQstats>().noOfPlots = 35;
         Stats.GetComponent<Statistics>().cityName = "Chocolate Fields";
         nameField.text = "Chocolate Fields";
         //print("Loading Default Properties");

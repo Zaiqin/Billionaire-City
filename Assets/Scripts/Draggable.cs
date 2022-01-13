@@ -36,7 +36,7 @@ public class Draggable : MonoBehaviour
 
     public void OnMouseDrag()
     {
-        print("dragging here");
+        //print("dragging here");
         //transform.position = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition) - diff;
 
         Vector3 amousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -44,11 +44,11 @@ public class Draggable : MonoBehaviour
 
         if (this.transform.parent == pendingParent.transform)
         {
-            print("parent is pending parent");
+            //print("parent is pending parent");
             Vector3 newTransform = new Vector3((float)agridPosition.x, (float)agridPosition.y, transform.position.z);
             if (transform.position != newTransform)
             {
-                print("cur trans != newTrans");
+                //print("cur trans != newTrans");
                 transform.position = newTransform;
                 transform.position += new Vector3(-1f, -0.32f, 0f); //offset vector
                 ppDrag.transform.position = new Vector3(transform.position.x + (float.Parse(pCard.space.Substring(0, 1))) / 2, transform.position.y - 1f, ppDrag.transform.position.z);

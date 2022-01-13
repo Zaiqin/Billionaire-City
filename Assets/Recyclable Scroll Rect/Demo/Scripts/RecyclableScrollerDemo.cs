@@ -37,7 +37,7 @@ public class RecyclableScrollerDemo : MonoBehaviour, IRecyclableScrollRectDataSo
     /// </summary>
     public int GetItemCount()
     {
-        print("retrieving no of entries");
+        //print("retrieving no of entries");
         switch (tabGroup.selectedTab.buttonName)
         {
             case "houseTab":

@@ -241,24 +241,19 @@ public class plotManager : MonoBehaviour
 
                     if (((clickedTile.name != calcTile) && (delete == false)) || (delete == true))
                     {
-
                         Tile createdTile = ScriptableObject.CreateInstance<Tile>();
                         string createPath = "plotTiles/" + calcTile;
                         createdTile.sprite = Resources.Load<Tile>(createPath).sprite;
                         createdTile.name = calcTile;
-
-                        if (isMouseOverUI() == false && startInUI == false)
+                        if (mainCam.GetComponent<CameraMovement>().dragging == false)
                         {
-                            if (mainCam.GetComponent<CameraMovement>().dragging == false)
+                            if ((i == 1) && (delete == true))
                             {
-                                if ((i == 1) && (delete == true))
-                                {
-                                    map.SetTile(gridPosition, Resources.Load<TileBase>("roadTiles/noBelow"));
-                                }
-                                else
-                                {
-                                    map.SetTile(gridPosition, createdTile);
-                                }
+                                map.SetTile(gridPosition, Resources.Load<TileBase>("roadTiles/noBelow"));
+                            }
+                            else
+                            {
+                                map.SetTile(gridPosition, createdTile);
                             }
                         }
                     }
@@ -348,14 +343,14 @@ public class plotManager : MonoBehaviour
 
             Tile aclickedTile = map.GetTile<Tile>(agridPosition);
             print("clicked on tile: " + aclickedTile.name + " at position: " + agridPosition);
-            startInUI = false;
 
-            if (aclickedTile.name.Contains("plot") && plotToggle.isOn == false && roadToggle.isOn == false && deleteToggle.isOn == false && shopToggle.GetComponent<Toggle>().isOn == false && pendingParent.transform.childCount == 0 && startInUI == false)
+            if (aclickedTile.name.Contains("plot") && plotToggle.isOn == false && roadToggle.isOn == false && deleteToggle.isOn == false && shopToggle.GetComponent<Toggle>().isOn == false && pendingParent.transform.childCount == 0 && startInUI == false && mainCam.GetComponent<CameraMovement>().dragging == false)
             {
                 shopToggle.GetComponent<shopButton>().OnButtonClick();
                 shopToggle.GetComponent<UIToggle>().toggleToggles(shopToggle);
                 shopToggle.GetComponent<Toggle>().isOn = true;
             }
+            startInUI = false;
         }
     }
 }
