@@ -239,23 +239,19 @@ public class plotManager : MonoBehaviour
                 {
                     string calcTile = plotTileChecker.calcTile(map, clickedTile, gridPosition.x, gridPosition.y);
 
-                    if (((clickedTile.name != calcTile) && (delete == false)) || (delete == true))
+                    Tile createdTile = ScriptableObject.CreateInstance<Tile>();
+                    string createPath = "plotTiles/" + calcTile;
+                    createdTile.sprite = Resources.Load<Tile>(createPath).sprite;
+                    createdTile.name = calcTile;
+                    if ((i == 1) && (delete == true))
                     {
-                        Tile createdTile = ScriptableObject.CreateInstance<Tile>();
-                        string createPath = "plotTiles/" + calcTile;
-                        createdTile.sprite = Resources.Load<Tile>(createPath).sprite;
-                        createdTile.name = calcTile;
-                        if (mainCam.GetComponent<CameraMovement>().dragging == false)
-                        {
-                            if ((i == 1) && (delete == true))
-                            {
-                                map.SetTile(gridPosition, Resources.Load<TileBase>("roadTiles/noBelow"));
-                            }
-                            else
-                            {
-                                map.SetTile(gridPosition, createdTile);
-                            }
-                        }
+                        print("setting to noBelow");
+                        map.SetTile(gridPosition, Resources.Load<TileBase>("roadTiles/noBelow"));
+                    }
+                    else
+                    {
+                        print("setting to createdTile");
+                        map.SetTile(gridPosition, createdTile);
                     }
                 }
             }
