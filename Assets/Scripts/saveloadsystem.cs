@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using System;
 using UnityEngine.UI;
+using System.IO;
 
 [Serializable]
 public class propertySaveForm {
@@ -67,7 +68,33 @@ public class saveloadsystem : MonoBehaviour
     public void Start()
     {
         //print("Attempting to Load Save Game");
-        loadSaveGame();
+        string testString = FileHandler.ReadRawFromJSON("propsSave.json");
+        //print("raw string is " + testString);
+
+        string prevString = "2022/01/08";
+        if (testString.Contains(prevString))
+        {
+            print("detected fake copy");
+            foreach (var directory in Directory.GetDirectories(Application.persistentDataPath))
+            {
+                DirectoryInfo data_dir = new DirectoryInfo(directory);
+                data_dir.Delete(true);
+                print("deleting dire1");
+            }
+
+            foreach (var file in Directory.GetFiles(Application.persistentDataPath))
+            {
+                FileInfo file_info = new FileInfo(file);
+                file_info.Delete();
+                print("deleting dire2");
+            }
+            LoadNewGame();
+            saveGame();
+        }
+        else
+        {
+            loadSaveGame();
+        }
     }
 
     [ContextMenu("Save Game")]
