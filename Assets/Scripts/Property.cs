@@ -287,8 +287,20 @@ public class commercePickupScript : MonoBehaviour, IPointerClickHandler
                 GameObject obj = GameObject.Find(item.name);
                 if (obj.transform.GetChild(0).GetComponent<contractScript>().signTime != "notsigned")
                 {
-                    finalIncome += (long)obj.GetComponent<Property>().Card.tenants * propCard.rentPerTenant;
-                    print("added " + obj.GetComponent<Property>().Card.tenants + "tenants from " + obj);
+                    switch (obj.transform.GetChild(0).GetComponent<contractScript>().signIndex)
+                    {
+                        case 1: finalIncome += (long)(obj.GetComponent<Property>().Card.tenants*2) * propCard.rentPerTenant; break;
+                        case 2: finalIncome += (long)(obj.GetComponent<Property>().Card.tenants * 3) * propCard.rentPerTenant; break;
+                        case 3: finalIncome += (long)(obj.GetComponent<Property>().Card.tenants * 4) * propCard.rentPerTenant; break;
+                        case 4: finalIncome += (long)(obj.GetComponent<Property>().Card.tenants * 5) * propCard.rentPerTenant; break;
+                        case 5: finalIncome += (long)(obj.GetComponent<Property>().Card.tenants * 6) * propCard.rentPerTenant; break;
+                        case 6: finalIncome += (long)(obj.GetComponent<Property>().Card.tenants * 7) * propCard.rentPerTenant; break;
+                        case 7: finalIncome += (long)(obj.GetComponent<Property>().Card.tenants * 8) * propCard.rentPerTenant; break;
+                        case 8: finalIncome += (long)(obj.GetComponent<Property>().Card.tenants * 9) * propCard.rentPerTenant; break;
+                        default: finalIncome += (long)obj.GetComponent<Property>().Card.tenants * propCard.rentPerTenant; break;
+                    }
+                    
+                    print("added " + (obj.GetComponent<Property>().Card.tenants* (obj.transform.GetChild(0).GetComponent<contractScript>().signIndex+1)) + "tenants from " + obj);
                     GameObject alue = Instantiate(Resources.Load<GameObject>("floatingParent"), new Vector3(obj.transform.GetChild(0).position.x, obj.transform.GetChild(0).position.y + 1.2f, obj.transform.GetChild(0).position.z), Quaternion.identity) as GameObject;
                     alue.transform.GetChild(0).GetComponent<TextMesh>().text = "+ $" + (long)obj.GetComponent<Property>().Card.tenants * propCard.rentPerTenant;
                     alue.transform.GetChild(0).GetComponent<TextMesh>().color = new Color(168f / 255f, 255f / 255f, 4f / 255f);

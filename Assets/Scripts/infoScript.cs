@@ -105,7 +105,23 @@ public class infoScript : MonoBehaviour
                 //print("adding "+item.name +" with signTime " + GameObject.Find(item.name).transform.GetChild(0).GetComponent<contractScript>().signTime);
                 if (obj.transform.GetChild(0).GetComponent<contractScript>().signTime != "notsigned")
                 {
-                    finalIncome += (long)obj.GetComponent<Property>().Card.tenants * selProp.GetComponent<Property>().Card.rentPerTenant;
+                    
+                    switch (obj.transform.GetChild(0).GetComponent<contractScript>().signIndex)
+                    {
+                        
+                        case 1: finalIncome += (long)(obj.GetComponent<Property>().Card.tenants * 2) * selProp.GetComponent<Property>().Card.rentPerTenant; break;
+                        case 2: finalIncome += (long)(obj.GetComponent<Property>().Card.tenants * 3) * selProp.GetComponent<Property>().Card.rentPerTenant; break;
+                        case 3: finalIncome += (long)(obj.GetComponent<Property>().Card.tenants * 4) * selProp.GetComponent<Property>().Card.rentPerTenant; break;
+                        case 4: finalIncome += (long)(obj.GetComponent<Property>().Card.tenants * 5) * selProp.GetComponent<Property>().Card.rentPerTenant; break;
+                        case 5: finalIncome += (long)(obj.GetComponent<Property>().Card.tenants * 6) * selProp.GetComponent<Property>().Card.rentPerTenant; break;
+                        case 6: finalIncome += (long)(obj.GetComponent<Property>().Card.tenants * 7) * selProp.GetComponent<Property>().Card.rentPerTenant; break;
+                        case 7: finalIncome += (long)(obj.GetComponent<Property>().Card.tenants * 8) * selProp.GetComponent<Property>().Card.rentPerTenant; break;
+                        case 8: finalIncome += (long)(obj.GetComponent<Property>().Card.tenants * 9) * selProp.GetComponent<Property>().Card.rentPerTenant; break;
+                        default: finalIncome += (long)obj.GetComponent<Property>().Card.tenants * selProp.GetComponent<Property>().Card.rentPerTenant; break;
+                    }
+
+                    print("added " + (obj.GetComponent<Property>().Card.tenants * (obj.transform.GetChild(0).GetComponent<contractScript>().signIndex + 1)) + "tenants from " + obj);
+
                 }
             }
             var diff = DateTime.Parse(selProp.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signTime) - System.DateTime.Now;

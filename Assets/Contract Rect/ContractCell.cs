@@ -39,39 +39,48 @@ public class ContractCell : MonoBehaviour, ICell
         _cellIndex = cellIndex;
         bgImage.sprite = bgSprite;
         xpText.text = pCard.XP + " XP";
-        tenantsText.text = pCard.tenants.ToString();
 
         switch (cellIndex)
         {
             case 0:
                 incomeText.text = "$" + pCard.threemins.ToString("#,##0");
+                tenantsText.text = pCard.tenants.ToString();
                 break;
             case 1:
                 incomeText.text = "$" + pCard.thirtymins.ToString("#,##0");
+                tenantsText.text = (pCard.tenants*2).ToString();
                 break;
             case 2:
                 incomeText.text = "$" + pCard.onehour.ToString("#,##0");
+                tenantsText.text = (pCard.tenants * 3).ToString();
                 break;
             case 3:
                 incomeText.text = "$" + pCard.fourhours.ToString("#,##0");
+                tenantsText.text = (pCard.tenants * 4).ToString();
                 break;
             case 4:
                 incomeText.text = "$" + pCard.eighthours.ToString("#,##0");
+                tenantsText.text = (pCard.tenants * 5).ToString();
                 break;
             case 5:
                 incomeText.text = "$" + pCard.twelvehours.ToString("#,##0");
+                tenantsText.text = (pCard.tenants * 6).ToString();
                 break;
             case 6:
                 incomeText.text = "$" + pCard.oneday.ToString("#,##0");
+                tenantsText.text = (pCard.tenants * 7).ToString();
                 break;
             case 7:
                 incomeText.text = "$" + pCard.twodays.ToString("#,##0");
+                tenantsText.text = (pCard.tenants * 8).ToString();
                 break;
             case 8:
                 incomeText.text = "$" + pCard.threedays.ToString("#,##0");
+                tenantsText.text = (pCard.tenants * 9).ToString();
                 break;
             default:
                 incomeText.text = "$" + pCard.threemins.ToString("#,##0");
+                tenantsText.text = pCard.tenants.ToString();
                 break;
         }
         
