@@ -135,7 +135,13 @@ public class Draggable : MonoBehaviour
         {
             TileBase Tile = map.GetTile(new Vector3Int(x, y, 0));
             //call plot function here
-            plotMgr.GetComponent<plotManager>().plotFunction(new Vector3Int(x, y, 0), false, true);
+            if (card.type != "Deco")
+            {
+                plotMgr.GetComponent<plotManager>().plotFunction(new Vector3Int(x, y, 0), false, true);
+            } else
+            {
+                map.SetTile(new Vector3Int(x, y, 0), Resources.Load<TileBase>("roadTiles/greenGrass"));
+            }
             x += 1;
             if (x == ((int)XY[0] + spaceX))
             {

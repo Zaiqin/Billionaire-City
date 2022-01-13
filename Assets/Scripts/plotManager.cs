@@ -350,7 +350,7 @@ public class plotManager : MonoBehaviour
             print("clicked on tile: " + aclickedTile.name + " at position: " + agridPosition);
             startInUI = false;
 
-            if (aclickedTile.name.Contains("plot") && plotToggle.isOn == false && roadToggle.isOn == false && deleteToggle.isOn == false && shopToggle.GetComponent<Toggle>().isOn == false && pendingParent.transform.childCount == 0)
+            if (aclickedTile.name.Contains("plot") && plotToggle.isOn == false && roadToggle.isOn == false && deleteToggle.isOn == false && shopToggle.GetComponent<Toggle>().isOn == false && pendingParent.transform.childCount == 0 && startInUI == false)
             {
                 shopToggle.GetComponent<shopButton>().OnButtonClick();
                 shopToggle.GetComponent<UIToggle>().toggleToggles(shopToggle);
