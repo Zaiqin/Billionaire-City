@@ -38,7 +38,7 @@ public class SpriteDetector : MonoBehaviour
         if (hit.collider != null)
         {
             print("Spritedetector hit object: " + hit.collider.gameObject.name);
-            if (hit.collider.gameObject.name != "Influence" && selectedCommerce != null)
+            if (hit.collider.gameObject.name != "Influence" && selectedCommerce != null && hit.collider.gameObject.name != "infoPanel")
             {
                 selectedCommerce.transform.GetChild(0).gameObject.SetActive(false);
                 selectedCommerce.transform.GetChild(0).GetComponent<influence>().removeHighlights();

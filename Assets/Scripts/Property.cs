@@ -142,17 +142,19 @@ public class Property : MonoBehaviour, IPointerClickHandler
             }
             else if (this.transform.parent == propParent.transform && GameObject.Find("Canvas").GetComponent<toggleMaster>().checkAllOff() == true)
             {
-                infoPanel.SetActive(true);
-                infoPanel.GetComponent<infoScript>().selProp = this.gameObject;
-                infoPanel.transform.position = new Vector3(0.2f + this.gameObject.transform.position.x + (infoPanel.GetComponent<BoxCollider2D>().bounds.size.x/2) + float.Parse(this.GetComponent<Property>().Card.space.Substring(0, 1)), this.gameObject.transform.position.y + (infoPanel.GetComponent<BoxCollider2D>().bounds.size.y / 4), 0f);
-
+                if ((this.Card.type == "House" && this.gameObject.transform.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder != 2 && this.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder != 2) || (this.Card.type == "Commerce" && this.gameObject.transform.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder != 2) || (this.Card.type == "Deco" || this.Card.type == "Wonder"))
+                {
+                    infoPanel.SetActive(true);
+                    infoPanel.GetComponent<infoScript>().selProp = this.gameObject;
+                    infoPanel.transform.position = new Vector3(0.2f + this.gameObject.transform.position.x + (infoPanel.GetComponent<BoxCollider2D>().bounds.size.x / 2) + float.Parse(this.GetComponent<Property>().Card.space.Substring(0, 1)), this.gameObject.transform.position.y + (infoPanel.GetComponent<BoxCollider2D>().bounds.size.y / 4), 0f);
+                }
                 GameObject hqmenu = GameObject.Find("HQStats");
                 if (hqmenu != null)
                 {
                     hqmenu.SetActive(false);
                 }
             }
-            if (this.Card.type == "Commerce" && this.transform.parent.name == "Properties" && GameObject.Find("Canvas").GetComponent<toggleMaster>().checkAllOff() == true)
+            if (this.Card.type == "Commerce" && this.transform.parent.name == "Properties" && GameObject.Find("Canvas").GetComponent<toggleMaster>().checkAllOff() == true && this.gameObject.transform.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder != 2)
             {
                 GameObject influence = this.transform.GetChild(0).gameObject;
                 influence.SetActive(true);

@@ -51,11 +51,11 @@ public class Draggable : MonoBehaviour
                 //print("cur trans != newTrans");
                 transform.position = newTransform;
                 transform.position += new Vector3(-1f, -0.32f, 0f); //offset vector
-                ppDrag.transform.position = new Vector3(transform.position.x + (float.Parse(pCard.space.Substring(0, 1))) / 2, transform.position.y - 1f, ppDrag.transform.position.z);
+                ppDrag.transform.position = new Vector3(transform.position.x + (float.Parse(pCard.space.Substring(0, 1))) / 2, transform.position.y - 1f, 0f);
                 string loc = pCard.displayName + "(" + (agridPosition.x - 1) + "," + (agridPosition.y - 1) + ")";
                 this.name = loc;
                 XY[0] = (float)agridPosition.x - 1; XY[1] = (float)agridPosition.y - 1;
-                buildCheck(this.pCard, this.GetComponent<Draggable>().XY);
+                buildCheck(this.pCard, this.GetComponent<Draggable>().XY, map);
                 if (buildable == true)
                 {
                     this.GetComponent<BlinkingProperty>().StopBlink();
@@ -69,9 +69,10 @@ public class Draggable : MonoBehaviour
 
     }
 
-    public bool buildCheck(PropertyCard card, float[] XY)
+    public bool buildCheck(PropertyCard card, float[] XY, Tilemap map)
     {
         print("called build check");
+        map = GameObject.Find("Tilemap").GetComponent<Tilemap>();
         bool result = true;
         if (card.type != "Deco")
         {

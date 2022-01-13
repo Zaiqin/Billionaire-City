@@ -41,13 +41,19 @@ public class PurchaseController : MonoBehaviour
         pp.gameObject.AddComponent<Draggable>();
         pp.GetComponent<Draggable>().dragEnabled = true;
         pp.gameObject.AddComponent<BlinkingProperty>();
-        pp.GetComponent<BlinkingProperty>().StartBlink();
-        /*bool check = pp.GetComponent<Draggable>().buildCheck(prop, new [] { (float)(cellPos.x - 1), (float)(cellPos.y + 1 )});
+        bool check = pp.GetComponent<Draggable>().buildCheck(prop, new [] { (float)(cellPos.x - 1), (float)(cellPos.y + 1 )}, map);
+        print("check is " + check);
         if (check == true)
         {
-            pp.gameObject.GetComponent<BlinkingProperty>().StopBlink();
-            pp.gameObject.GetComponent<Renderer>().material.color = Color.green;
-        }*/
+            print("true checl stuff");
+            pp.GetComponent<BlinkingProperty>().StopBlink();
+            pp.GetComponent<Renderer>().material.color = Color.green;
+        }
+        else if (check == false)
+        {
+            print("false check stuff");
+            pp.GetComponent<BlinkingProperty>().invokeStart();
+        }
 
         float[] xy = new[] { (float)cellPos.x - 1, (float)cellPos.y + 1 };
         //pp.gameObject.GetComponent<Draggable>().buildCheck(pp.Card,xy); check if can build at where it first spawned

@@ -8,7 +8,7 @@ public class BlinkingProperty : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("StartBlink", 0f, 0.5f);
+        //InvokeRepeating("StartBlink", 0f, 0.5f);
     }
 
     // Update is called once per frame
@@ -32,6 +32,7 @@ public class BlinkingProperty : MonoBehaviour
     [ContextMenu("stopBlink")]
     public void StopBlink()
     {
+        print("stopping blink");
         CancelInvoke();
         stop = true;
 
