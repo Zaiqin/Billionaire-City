@@ -216,23 +216,24 @@ public class moneyPickupScript : MonoBehaviour, IPointerClickHandler
 
             print("collecting index " + this.gameObject.transform.parent.GetChild(0).GetComponent<contractScript>().signIndex);
             int profit;
+            long xp = 0;
             switch (this.gameObject.transform.parent.GetChild(0).GetComponent<contractScript>().signIndex)
             {
-                case 0: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.threemins; break;
-                case 1: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.thirtymins; break;
-                case 2: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.onehour; break;
-                case 3: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.fourhours; break;
-                case 4: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.eighthours; break;
-                case 5: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.twelvehours; break;
-                case 6: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.oneday; break;
-                case 7: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.twodays; break;
-                case 8: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.threedays; break;
+                case 0: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.threemins; xp = propCard.XP; break;
+                case 1: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.thirtymins; xp = propCard.XP *2; break;
+                case 2: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.onehour; xp = propCard.XP*3; break;
+                case 3: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.fourhours; xp = propCard.XP*4; break;
+                case 4: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.eighthours; xp = propCard.XP*5; break;
+                case 5: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.twelvehours; xp = propCard.XP*6; break;
+                case 6: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.oneday; xp = propCard.XP*7; break;
+                case 7: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.twodays; xp = propCard.XP*8; break;
+                case 8: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.threedays; xp = propCard.XP*9; break;
                 default: profit = 0; break;
             }
             if (profit != 0 && propCard != null)
             {
                 print("propCard xp is " + propCard);
-                GameObject.Find("Stats").GetComponent<Statistics>().updateStats(diffmoney: profit, diffxp: propCard.XP);
+                GameObject.Find("Stats").GetComponent<Statistics>().updateStats(diffmoney: profit, diffxp: xp);
                 GameObject.Find("ExternalAudioPlayer").GetComponent<AudioSource>().PlayOneShot(Resources.Load<AudioClip>("Audio/money"));
 
                 GameObject value = Instantiate(Resources.Load<GameObject>("floatingParent"), new Vector3(this.gameObject.transform.parent.transform.position.x + (float.Parse(this.gameObject.transform.parent.GetComponent<Property>().Card.space.Substring(0, 1))) / 2, this.gameObject.transform.parent.transform.position.y + 3.4f, -5f), Quaternion.identity) as GameObject;

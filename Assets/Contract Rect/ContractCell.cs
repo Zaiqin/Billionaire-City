@@ -38,49 +38,58 @@ public class ContractCell : MonoBehaviour, ICell
     {
         _cellIndex = cellIndex;
         bgImage.sprite = bgSprite;
-        xpText.text = pCard.XP + " XP";
 
         switch (cellIndex)
         {
             case 0:
                 incomeText.text = "$" + pCard.threemins.ToString("#,##0");
                 tenantsText.text = pCard.tenants.ToString();
+                xpText.text = pCard.XP + " XP";
                 break;
             case 1:
                 incomeText.text = "$" + pCard.thirtymins.ToString("#,##0");
                 tenantsText.text = (pCard.tenants*2).ToString();
+                xpText.text = (pCard.XP*2) + " XP";
                 break;
             case 2:
                 incomeText.text = "$" + pCard.onehour.ToString("#,##0");
                 tenantsText.text = (pCard.tenants * 3).ToString();
+                xpText.text = (pCard.XP * 3) + " XP";
                 break;
             case 3:
                 incomeText.text = "$" + pCard.fourhours.ToString("#,##0");
                 tenantsText.text = (pCard.tenants * 4).ToString();
+                xpText.text = (pCard.XP * 4) + " XP";
                 break;
             case 4:
                 incomeText.text = "$" + pCard.eighthours.ToString("#,##0");
                 tenantsText.text = (pCard.tenants * 5).ToString();
+                xpText.text = (pCard.XP * 5) + " XP";
                 break;
             case 5:
                 incomeText.text = "$" + pCard.twelvehours.ToString("#,##0");
                 tenantsText.text = (pCard.tenants * 6).ToString();
+                xpText.text = (pCard.XP * 6) + " XP";
                 break;
             case 6:
                 incomeText.text = "$" + pCard.oneday.ToString("#,##0");
                 tenantsText.text = (pCard.tenants * 7).ToString();
+                xpText.text = (pCard.XP * 7) + " XP";
                 break;
             case 7:
                 incomeText.text = "$" + pCard.twodays.ToString("#,##0");
                 tenantsText.text = (pCard.tenants * 8).ToString();
+                xpText.text = (pCard.XP * 8) + " XP";
                 break;
             case 8:
                 incomeText.text = "$" + pCard.threedays.ToString("#,##0");
                 tenantsText.text = (pCard.tenants * 9).ToString();
+                xpText.text = (pCard.XP * 9) + " XP";
                 break;
             default:
                 incomeText.text = "$" + pCard.threemins.ToString("#,##0");
                 tenantsText.text = pCard.tenants.ToString();
+                xpText.text = pCard.XP + " XP";
                 break;
         }
         
