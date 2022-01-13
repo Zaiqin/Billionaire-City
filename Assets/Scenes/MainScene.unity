@@ -2042,8 +2042,9 @@ MonoBehaviour:
   roadToggle: {fileID: 864276387}
   myFx: {fileID: 1580363178}
   deleteSound: {fileID: 8300000, guid: 17bc089c9bea4441daa1ce381c5aa89a, type: 3}
-  floatingValue: {fileID: 0}
-  hq: {fileID: 0}
+  floatingValue: {fileID: 1370402922574767072, guid: 7c1bfcb18bbf7444a9df0d55a1bb2201,
+    type: 3}
+  hq: {fileID: 502592024}
   splashObject: {fileID: 0}
   saveObj: {fileID: 0}
   pendingParent: {fileID: 58940600}
@@ -74224,8 +74225,9 @@ MonoBehaviour:
   roadToggle: {fileID: 864276387}
   myFx: {fileID: 1580363178}
   deleteSound: {fileID: 8300000, guid: 17bc089c9bea4441daa1ce381c5aa89a, type: 3}
-  floatingValue: {fileID: 0}
-  hq: {fileID: 0}
+  floatingValue: {fileID: 1370402922574767072, guid: 7c1bfcb18bbf7444a9df0d55a1bb2201,
+    type: 3}
+  hq: {fileID: 502592024}
   splashObject: {fileID: 0}
   saveObj: {fileID: 0}
   pendingParent: {fileID: 58940600}
