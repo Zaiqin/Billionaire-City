@@ -5,31 +5,13 @@ using UnityEngine.UI;
 
 public class ronaldButton : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject levelUpScreen;
 
     [SerializeField]
     private Statistics stats;
 
-    [SerializeField]
-    Text levelText;
-
-    [SerializeField]
-    ParticleSystem particle;
-
     public void OnButtonClick()
     {
-        if (levelUpScreen.activeSelf == false)
-        {
-            levelUpScreen.SetActive(true);
-            stats.updateStats(diffmoney: 1000000, diffgold: 100);
-            levelText.text = "Level " + stats.level.ToString();
-            particle.Play();
-        }
-        else if (levelUpScreen.activeSelf == true)
-        {
-            levelUpScreen.SetActive(false);
-        }
+        stats.updateStats(diffmoney: 1000000, diffgold: 100, diffxp: 1000);
     }
 
     // Start is called before the first frame update
