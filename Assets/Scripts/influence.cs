@@ -23,7 +23,7 @@ public class influence : MonoBehaviour, IPointerClickHandler
     [ContextMenu("Show Influence")]
     public void detectInfluence(bool invisible = false)
     {
-        print("doing test");
+        //print("doing test");
         Collider2D myCollider = gameObject.GetComponent<Collider2D>();
         List<Collider2D> colliders = new List<Collider2D>();
         ContactFilter2D contactFilter = new ContactFilter2D();
@@ -43,7 +43,7 @@ public class influence : MonoBehaviour, IPointerClickHandler
             }
         }
         //print("influencing " + housesInfluenced.Count);
-        if (invisible != false)
+        if (invisible == false)
         {
             foreach (var item in housesInfluenced)
             {
@@ -78,9 +78,9 @@ public class influence : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    public List<Collider2D> returnHighlights()
+    public List<Collider2D> returnHighlights(bool inv = false)
     {
-        detectInfluence();
+        detectInfluence(inv);
         removeHighlights();
         return housesInfluenced;
     }

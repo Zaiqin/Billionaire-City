@@ -107,6 +107,7 @@ public class ppDragButton : MonoBehaviour
             if (pCard.type == "House")
             {
                 pp.transform.GetChild(0).gameObject.AddComponent<BoxCollider2D>();
+                pp.transform.GetChild(2).gameObject.AddComponent<BoxCollider2D>();
                 pp.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2; //shows contract
             } else if (pCard.type == "Commerce")
             {
@@ -126,6 +127,7 @@ public class ppDragButton : MonoBehaviour
 
             if (pp.Card.type == "Deco")
             {
+                pp.transform.GetChild(0).gameObject.AddComponent<BoxCollider2D>();
                 shopToggle.GetComponent<Toggle>().isOn = true;
                 GameObject a = Instantiate(pp.gameObject);
                 a.transform.parent = pendingParent.transform;

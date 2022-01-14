@@ -277,7 +277,7 @@ public class saveloadsystem : MonoBehaviour
         float zPos = xFactor + yFactor;
 
         // spawning property, add name of object
-        pp.transform.position = new Vector3((float)(pos.x+1), (float)(pos.y-1), zPos); //bottom left tile of hq is tile 0,0
+        pp.transform.position = new Vector3((float)(pos.x + 1), (float)(pos.y - 1), zPos); //bottom left tile of hq is tile 0,0
         pp.transform.parent = PropertiesParent.transform;
         pp.transform.position += new Vector3(-1f, 1.64f, 0f); //Offset vector so that bottom left tile is the tilename that the property is on
         pp.transform.localScale = new Vector2(1f, 1f);
@@ -287,7 +287,7 @@ public class saveloadsystem : MonoBehaviour
 
         // adding components
         pp.gameObject.AddComponent<Draggable>();
-        pp.gameObject.GetComponent<Draggable>().XY = new[] { (float)pos.x, (float)pos.y};
+        pp.gameObject.GetComponent<Draggable>().XY = new[] { (float)pos.x, (float)pos.y };
         pp.GetComponent<Draggable>().dragEnabled = false;
         if (pp.Card.type == "House") // check to only do these thats only for houses
         {
@@ -297,34 +297,46 @@ public class saveloadsystem : MonoBehaviour
             pp.transform.GetChild(0).gameObject.AddComponent<BoxCollider2D>();
             // add collider to money
             pp.transform.GetChild(1).gameObject.AddComponent<BoxCollider2D>();
+            // add collider to deco detect influence --------------
+            pp.transform.GetChild(2).gameObject.AddComponent<BoxCollider2D>();
+
             var dateAndTimeVar = System.DateTime.Now;
             //print("going check contract for " + pp.name + "which is signtime " + pp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signTime);
-            if (pp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signTime == "notsigned") {
+            if (pp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signTime == "notsigned")
+            {
                 pp.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2;
                 pp.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
                 pp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signCreationTime = "notsigned";
                 //print("notsigned");
-            } else if (dateAndTimeVar >= DateTime.Parse(pp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signTime)) {
+            }
+            else if (dateAndTimeVar >= DateTime.Parse(pp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signTime))
+            {
                 pp.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
                 pp.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2;
                 pp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signCreationTime = signCreationTime;
                 //print("sign over timea alre");
-            } else if (dateAndTimeVar < DateTime.Parse(pp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signTime)) {
+            }
+            else if (dateAndTimeVar < DateTime.Parse(pp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signTime))
+            {
                 pp.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
                 pp.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
                 pp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signCreationTime = signCreationTime;
-            } else {
+            }
+            else
+            {
                 pp.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
                 pp.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2;
                 pp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signIndex = signIndex;
                 pp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signCreationTime = signCreationTime;
                 //print("sign still ongoiing");
             }
-            
-        } else if (pp.Card.type == "Commerce")
+
+        }
+        else if (pp.Card.type == "Commerce")
         {
             //print("loadproperty commerce");
-            if (pp.transform.GetChild(0).GetComponent<BoxCollider2D>() == null) {
+            if (pp.transform.GetChild(0).GetComponent<BoxCollider2D>() == null)
+            {
                 pp.transform.GetChild(0).gameObject.AddComponent<BoxCollider2D>();
             }
             pp.transform.GetChild(0).gameObject.SetActive(false);
@@ -345,7 +357,7 @@ public class saveloadsystem : MonoBehaviour
                 pp.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signTime = datetime;
                 pp.transform.GetChild(1).GetComponent<commercePickupScript>().signCreationTime = System.DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 //print("sign time is " + datetime);
-                
+
             }
             else if (dateAndTimeVar >= DateTime.Parse(pp.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signTime))
             {
@@ -365,6 +377,9 @@ public class saveloadsystem : MonoBehaviour
                 //print("sign still ongoiing");
             }
         }
-        //print("Successfully loaded in " + propName + " at: x:" + pos.x + "y:" + pos.y);
+        else if (pp.Card.type == "Deco") // check to only do these thats only for houses
+        {
+            pp.transform.GetChild(0).gameObject.AddComponent<BoxCollider2D>();
+        }
     }
 }

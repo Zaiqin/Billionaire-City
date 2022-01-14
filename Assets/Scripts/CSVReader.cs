@@ -152,11 +152,11 @@ public class CSVReader : MonoBehaviour
             {
                 tempArray[i].type = "Deco";
                 // Check if current deco reach is higher than current record !!REMEMBER TO CHANGE ALL INFLUENCE TO 01x01 ie 5 digits long!!!!
-                if ((float.Parse(tempArray[i].influence.Substring(0, 1)) > maxDecoReach))
+                if ((float.Parse(tempArray[i].influence.Substring(0, 2)) > maxDecoReach))
                 {
                     maxDecoReach = float.Parse(tempArray[i].influence.Substring(0, 1));
                 }
-                if (float.Parse(tempArray[i].influence.Substring(tempArray[i].influence.Length - 1)) > maxDecoReach){
+                if (float.Parse(tempArray[i].influence.Substring(tempArray[i].influence.Length - 2)) > maxDecoReach){
                     maxDecoReach = float.Parse(tempArray[i].influence.Substring(tempArray[i].influence.Length - 1));
                 }
             }
@@ -232,6 +232,12 @@ public class CSVReader : MonoBehaviour
         {
             //print("reading " + data[(cols * (i)) + 32]);
             levelValues.Add(i, long.Parse(data[(cols * (i)) + 32]));
+            /* FormatException: Input string was not in a correct format.
+             * 
+             * To fix issue, make sure levels in csv file do not have the E+11 to it, but in full numbers
+             * select the level values with E+xx, format cells > numbers > decimal places = 0
+             * 
+             */
             if (data[(cols * (i)) + 33] == "Last Level"){
                 //print("reached last level");
                 break;

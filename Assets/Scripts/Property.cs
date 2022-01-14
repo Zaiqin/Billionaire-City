@@ -64,6 +64,8 @@ public class Property : MonoBehaviour, IPointerClickHandler
             inf.transform.parent = this.transform;
             inf.transform.localPosition = new Vector3(float.Parse(pcard.space.Substring(0, 1)) / 2, (float.Parse(pcard.space.Substring(pcard.space.Length - 1)) / 2) - 0.05f, 0f);
             inf.AddComponent<detectDecoInf>();
+            inf.SetActive(false);
+            //inf.SetActive(false);
         } else if (pcard.type == "Commerce")
         {
             // --- Influence Overlay -----------
@@ -104,12 +106,13 @@ public class Property : MonoBehaviour, IPointerClickHandler
             inf.name = "Influence";
             SpriteRenderer infRenderer = inf.AddComponent<SpriteRenderer>();
             Sprite infSprite = Resources.Load<Sprite>("influence");
-            infRenderer.sprite = Sprite.Create(infSprite.texture, new Rect(0, 0, float.Parse(pcard.influence.Substring(0, 1)) - 0.1f, float.Parse(pcard.influence.Substring(pcard.influence.Length - 1)) - 0.1f), new Vector2(0.5f, 0.5f), 1);
+            infRenderer.sprite = Sprite.Create(infSprite.texture, new Rect(0, 0, float.Parse(pcard.influence.Substring(0, 2)) - 0.1f, float.Parse(pcard.influence.Substring(pcard.influence.Length - 2)) - 0.1f), new Vector2(0.5f, 0.5f), 1);
             infRenderer.color = new Color(35f / 255f, 206f / 255f, 241f / 255f, 125f / 255f);
             infRenderer.sortingOrder = 2;
             inf.transform.parent = this.transform;
             inf.transform.localPosition = new Vector3(float.Parse(pcard.space.Substring(0, 1)) / 2, (float.Parse(pcard.space.Substring(pcard.space.Length - 1)) / 2) - 0.05f, 0f);
             inf.AddComponent<influence>();
+            inf.SetActive(false);
         }
         else
         {
@@ -240,12 +243,23 @@ public class moneyPickupScript : MonoBehaviour, IPointerClickHandler
             this.gameObject.transform.parent.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = 2;
             this.gameObject.transform.parent.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder = 0;
 
+            // ---- Checking what houses it affects ---------
+            this.gameObject.transform.parent.GetChild(2).gameObject.SetActive(true);
+            this.gameObject.transform.parent.GetChild(2).GetComponent<SpriteRenderer>().color = new Color(0f, 0f, 0f, 0f);
+            List<Collider2D> infList = this.gameObject.transform.parent.GetChild(2).GetComponent<detectDecoInf>().returnHighlights();
+            this.gameObject.transform.parent.GetChild(2).GetComponent<SpriteRenderer>().color = new Color(35f / 255f, 206f / 255f, 241f / 255f, 125f / 255f);
+            this.gameObject.transform.parent.GetChild(2).gameObject.SetActive(false);
+            //------------------------------------------------
+
             print("collecting index " + this.gameObject.transform.parent.GetChild(0).GetComponent<contractScript>().signIndex);
             int profit;
             long xp = 0;
             switch (this.gameObject.transform.parent.GetChild(0).GetComponent<contractScript>().signIndex)
             {
-                case 0: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.threemins; xp = propCard.XP; break;
+                case 0: 
+                    profit = this.gameObject.transform.parent.GetComponent<Property>().Card.threemins; 
+                    xp = propCard.XP; 
+                    break;
                 case 1: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.thirtymins; xp = propCard.XP *2; break;
                 case 2: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.onehour; xp = propCard.XP*3; break;
                 case 3: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.fourhours; xp = propCard.XP*4; break;
@@ -307,11 +321,14 @@ public class commercePickupScript : MonoBehaviour, IPointerClickHandler
             print("clicked on commerce");
             this.gameObject.transform.parent.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder = 0; //hide commerce collect
 
+            // ---- Checking what houses it affects ---------
             this.gameObject.transform.parent.GetChild(0).gameObject.SetActive(true);
             this.gameObject.transform.parent.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0f, 0f, 0f, 0f);
             List<Collider2D> infList = this.gameObject.transform.parent.GetChild(0).GetComponent<influence>().returnHighlights();
             this.gameObject.transform.parent.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(35f / 255f, 206f / 255f, 241f / 255f, 125f / 255f);
             this.gameObject.transform.parent.GetChild(0).gameObject.SetActive(false);
+            //------------------------------------------------
+
             long finalIncome = 0;
             foreach (Collider2D item in infList)
             {
