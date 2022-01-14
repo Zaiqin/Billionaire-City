@@ -305,7 +305,7 @@ public class commercePickupScript : MonoBehaviour, IPointerClickHandler
                     
                     print("added " + (obj.GetComponent<Property>().Card.tenants* (obj.transform.GetChild(0).GetComponent<contractScript>().signIndex+1)) + "tenants from " + obj);
                     GameObject alue = Instantiate(Resources.Load<GameObject>("floatingParent"), new Vector3(obj.transform.GetChild(0).position.x, obj.transform.GetChild(0).position.y + 1.2f, obj.transform.GetChild(0).position.z), Quaternion.identity) as GameObject;
-                    alue.transform.GetChild(0).GetComponent<TextMesh>().text = "+ $" + (long)obj.GetComponent<Property>().Card.tenants * propCard.rentPerTenant;
+                    alue.transform.GetChild(0).GetComponent<TextMesh>().text = "+ $" + (long)obj.GetComponent<Property>().Card.tenants * (obj.transform.GetChild(0).GetComponent<contractScript>().signIndex-1) * propCard.rentPerTenant;
                     alue.transform.GetChild(0).GetComponent<TextMesh>().color = new Color(168f / 255f, 255f / 255f, 4f / 255f);
                 }
             }
