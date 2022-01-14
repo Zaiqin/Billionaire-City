@@ -21,6 +21,7 @@ public class CSVReader : MonoBehaviour
     --------------------------------------------------------------------------------------------*/
     public PropertyCard[][] propertyCardArrays = new PropertyCard[4][];
     // ------------------------------------------------------------------------------------------
+    public float maxDecoReach = 0f;
 
     public void ReadCSV()
     {
@@ -150,6 +151,14 @@ public class CSVReader : MonoBehaviour
             else if (tempArray[i].decoBonus != 0)
             {
                 tempArray[i].type = "Deco";
+                // Check if current deco reach is higher than current record !!REMEMBER TO CHANGE ALL INFLUENCE TO 01x01 ie 5 digits long!!!!
+                if ((float.Parse(tempArray[i].influence.Substring(0, 1)) > maxDecoReach))
+                {
+                    maxDecoReach = float.Parse(tempArray[i].influence.Substring(0, 1));
+                }
+                if (float.Parse(tempArray[i].influence.Substring(tempArray[i].influence.Length - 1)) > maxDecoReach){
+                    maxDecoReach = float.Parse(tempArray[i].influence.Substring(tempArray[i].influence.Length - 1));
+                }
             }
             else if (tempArray[i].buildTime.Contains("days"))
             {
@@ -214,6 +223,7 @@ public class CSVReader : MonoBehaviour
                 propertyCardArrays[3] = tempArray; // Set wonderArray to tempArray
                 i = -1;
             }
+
             masterNo++;
         }
 
@@ -227,6 +237,7 @@ public class CSVReader : MonoBehaviour
                 break;
             }
         }
+        print("end of csv, max reach is " + maxDecoReach);
         print("Completed reading CSV data");
     }
 

@@ -21,7 +21,7 @@ public class influence : MonoBehaviour, IPointerClickHandler
     }
 
     [ContextMenu("Show Influence")]
-    public void detectInfluence()
+    public void detectInfluence(bool invisible = false)
     {
         print("doing test");
         Collider2D myCollider = gameObject.GetComponent<Collider2D>();
@@ -43,12 +43,16 @@ public class influence : MonoBehaviour, IPointerClickHandler
             }
         }
         //print("influencing " + housesInfluenced.Count);
-        foreach (var item in housesInfluenced)
+        if (invisible != false)
         {
-            //print("finalised item is " + item.name);
-            GameObject.Find(item.name).GetComponent<SpriteRenderer>().color = new Color(35f / 255f, 206f / 255f, 241f / 255f);
+            foreach (var item in housesInfluenced)
+            {
+                //print("finalised item is " + item.name);
+                GameObject.Find(item.name).GetComponent<SpriteRenderer>().color = new Color(35f / 255f, 206f / 255f, 241f / 255f);
+            }
         }
     }
+
 
     void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
     {

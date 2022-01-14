@@ -51,6 +51,19 @@ public class Property : MonoBehaviour, IPointerClickHandler
             money.transform.localPosition = new Vector3(float.Parse(pcard.space.Substring(0, 1)) / 2, float.Parse(pcard.space.Substring(pcard.space.Length - 1)) / 2, 0f);
             money.AddComponent<moneyPickupScript>();
             money.AddComponent<moneyPickupScript>().propCard = pcard;
+            // --- Deco detection Influence Overlay -----------
+            float maxReach = GameObject.Find("CSV").gameObject.GetComponent<CSVReader>().maxDecoReach;
+            print("in property, max reach is" + maxReach);
+            GameObject inf = new GameObject();
+            inf.name = "Deco Influence";
+            SpriteRenderer infRenderer = inf.AddComponent<SpriteRenderer>();
+            Sprite infSprite = Resources.Load<Sprite>("influence");
+            infRenderer.sprite = Sprite.Create(infSprite.texture, new Rect(0, 0, maxReach - 0.1f, maxReach - 0.1f), new Vector2(0.5f, 0.5f), 1);
+            infRenderer.color = new Color(35f / 255f, 206f / 255f, 241f / 255f, 125f / 255f);
+            infRenderer.sortingOrder = 0;
+            inf.transform.parent = this.transform;
+            inf.transform.localPosition = new Vector3(float.Parse(pcard.space.Substring(0, 1)) / 2, (float.Parse(pcard.space.Substring(pcard.space.Length - 1)) / 2) - 0.05f, 0f);
+            inf.AddComponent<detectDecoInf>();
         } else if (pcard.type == "Commerce")
         {
             // --- Influence Overlay -----------
@@ -84,6 +97,19 @@ public class Property : MonoBehaviour, IPointerClickHandler
             commerce.transform.localPosition = new Vector3(float.Parse(pcard.space.Substring(0, 1)) / 2, float.Parse(pcard.space.Substring(pcard.space.Length - 1)) / 2, 0f);
             commerce.AddComponent<commercePickupScript>();
             commerce.AddComponent<commercePickupScript>().propCard = pcard;
+        } else if (pcard.type == "Deco")
+        {
+            // --- Influence Overlay -----------
+            GameObject inf = new GameObject();
+            inf.name = "Influence";
+            SpriteRenderer infRenderer = inf.AddComponent<SpriteRenderer>();
+            Sprite infSprite = Resources.Load<Sprite>("influence");
+            infRenderer.sprite = Sprite.Create(infSprite.texture, new Rect(0, 0, float.Parse(pcard.influence.Substring(0, 1)) - 0.1f, float.Parse(pcard.influence.Substring(pcard.influence.Length - 1)) - 0.1f), new Vector2(0.5f, 0.5f), 1);
+            infRenderer.color = new Color(35f / 255f, 206f / 255f, 241f / 255f, 125f / 255f);
+            infRenderer.sortingOrder = 2;
+            inf.transform.parent = this.transform;
+            inf.transform.localPosition = new Vector3(float.Parse(pcard.space.Substring(0, 1)) / 2, (float.Parse(pcard.space.Substring(pcard.space.Length - 1)) / 2) - 0.05f, 0f);
+            inf.AddComponent<influence>();
         }
         else
         {
@@ -230,6 +256,8 @@ public class moneyPickupScript : MonoBehaviour, IPointerClickHandler
                 case 8: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.threedays; xp = propCard.XP*9; break;
                 default: profit = 0; break;
             }
+            
+
             if (profit != 0 && propCard != null)
             {
                 print("propCard xp is " + propCard);
