@@ -6,7 +6,9 @@ using System;
 
 public class infoScript : MonoBehaviour
 {
-    public GameObject selProp, nameText, timeText, fill, incomeText, fillBg, prevProp;
+    public GameObject selProp;
+    public GameObject nameText, fillBg, fill, timeText, incomeText, incomeHeader, time, money, custHeader, tenantsIcon, tenantsText, xpIcon, xpText;
+    public Sprite largeBg, smallBg, tenantsSprite, bonusSprite;
 
     // Update is called once per frame
     private void Start()
@@ -19,9 +21,15 @@ public class infoScript : MonoBehaviour
 
     void Update()
     {
-        nameText.GetComponent<Text>().text = selProp.GetComponent<Property>().Card.displayName;
         if (selProp.GetComponent<Property>().Card.type == "House")
         {
+            this.GetComponent<Image>().sprite = largeBg;
+            nameText.GetComponent<Text>().text = selProp.GetComponent<Property>().Card.displayName;
+            custHeader.GetComponent<Text>().text = "Tenants";
+            incomeHeader.GetComponent<Text>().text = "Income";
+            xpText.GetComponent<Text>().text = (selProp.GetComponent<Property>().Card.XP * (selProp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signIndex + 1)) + " XP";
+            nameText.SetActive(true); fillBg.SetActive(true); fill.SetActive(true); timeText.SetActive(true); incomeText.SetActive(true); incomeHeader.SetActive(false);  time.SetActive(true); money.SetActive(true); xpIcon.SetActive(true); xpText.SetActive(true);
+            tenantsIcon.GetComponent<Image>().sprite = tenantsSprite;
             if (selProp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signTime != "notsigned")
             {
                 var diff = DateTime.Parse(selProp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signTime) - System.DateTime.Now;
@@ -94,29 +102,28 @@ public class infoScript : MonoBehaviour
                         // Contract ongoing and income is less than 100M
                         incomeText.GetComponent<Text>().text = "$" + finalProfit.ToString("#,##0");
                     }
+                    int Tenants = (selProp.GetComponent<Property>().Card.tenants) * (selProp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signIndex + 1);
+                    tenantsText.GetComponent<Text>().text = Tenants.ToString();
                 }
                 else
                 {
                     // Income waiting to be collected, contract fulfilled
-                    timeText.GetComponent<Text>().text = "Contract Fulfilled";
-                    incomeText.GetComponent<Text>().text = "";
-                    fill.SetActive(false);
-                    fillBg.SetActive(false);
+                    this.gameObject.SetActive(false);
                 }
-            }
-            else
-            {
-                // No Contract Signed
-                timeText.GetComponent<Text>().text = "No Contract Signed";
-                fill.SetActive(false);
-                fillBg.SetActive(false);
-                incomeText.GetComponent<Text>().text = "No income to earn";
             }
         }
         else if (selProp.GetComponent<Property>().Card.type == "Commerce")
         {
+            this.GetComponent<Image>().sprite = largeBg;
+            nameText.GetComponent<Text>().text = selProp.GetComponent<Property>().Card.displayName;
+            custHeader.GetComponent<Text>().text = "Customers";
+            incomeHeader.GetComponent<Text>().text = "Income";
+            nameText.SetActive(true); fillBg.SetActive(true); fill.SetActive(true); timeText.SetActive(true); incomeText.SetActive(true); incomeHeader.SetActive(true); time.SetActive(true); money.SetActive(true); xpIcon.SetActive(false); xpText.SetActive(false);
+            tenantsIcon.GetComponent<Image>().sprite = tenantsSprite;
+
             List<Collider2D> infList = selProp.gameObject.transform.GetChild(0).GetComponent<influence>().housesInfluenced;
             long finalIncome = 0;
+            int finalTenants = 0;
             foreach (Collider2D item in infList)
             {
                 GameObject obj = GameObject.Find(item.name);
@@ -126,7 +133,6 @@ public class infoScript : MonoBehaviour
                     
                     switch (obj.transform.GetChild(0).GetComponent<contractScript>().signIndex)
                     {
-                        
                         case 1: finalIncome += (long)(obj.GetComponent<Property>().Card.tenants * 2) * selProp.GetComponent<Property>().Card.rentPerTenant; break;
                         case 2: finalIncome += (long)(obj.GetComponent<Property>().Card.tenants * 3) * selProp.GetComponent<Property>().Card.rentPerTenant; break;
                         case 3: finalIncome += (long)(obj.GetComponent<Property>().Card.tenants * 4) * selProp.GetComponent<Property>().Card.rentPerTenant; break;
@@ -137,7 +143,7 @@ public class infoScript : MonoBehaviour
                         case 8: finalIncome += (long)(obj.GetComponent<Property>().Card.tenants * 9) * selProp.GetComponent<Property>().Card.rentPerTenant; break;
                         default: finalIncome += (long)obj.GetComponent<Property>().Card.tenants * selProp.GetComponent<Property>().Card.rentPerTenant; break;
                     }
-
+                    finalTenants += (obj.GetComponent<Property>().Card.tenants * (obj.transform.GetChild(0).GetComponent<contractScript>().signIndex + 1));
                     //print("added " + (obj.GetComponent<Property>().Card.tenants * (obj.transform.GetChild(0).GetComponent<contractScript>().signIndex + 1)) + "tenants from " + obj);
 
                 }
@@ -166,19 +172,26 @@ public class infoScript : MonoBehaviour
                 fill.SetActive(false);
                 fillBg.SetActive(false);
             }
+            tenantsText.GetComponent<Text>().text = finalTenants.ToString();
         }
         else if (selProp.GetComponent<Property>().Card.type == "Deco")
         {
-            timeText.GetComponent<Text>().text = selProp.GetComponent<Property>().Card.decoBonus + "% Bonus";
-            incomeText.GetComponent<Text>().text = "";
-            fill.SetActive(false);
-            fillBg.SetActive(false);
+            this.GetComponent<Image>().sprite = smallBg;
+            tenantsText.GetComponent<Text>().text = "+" + selProp.GetComponent<Property>().Card.decoBonus + " %";
+            custHeader.GetComponent<Text>().text = "Houses Bonus";
+            incomeHeader.GetComponent<Text>().text = selProp.GetComponent<Property>().Card.displayName;
+            incomeHeader.SetActive(true);
+            nameText.SetActive(false); fillBg.SetActive(false); fill.SetActive(false); timeText.SetActive(false); incomeText.SetActive(false); time.SetActive(false); money.SetActive(false); xpIcon.SetActive(false); xpText.SetActive(false);
+            tenantsIcon.GetComponent<Image>().sprite = bonusSprite;
         } else {
             //info script showing non houses
-            timeText.GetComponent<Text>().text = "";
-            incomeText.GetComponent<Text>().text = "";
-            fill.SetActive(false);
-            fillBg.SetActive(false);
+            this.GetComponent<Image>().sprite = smallBg;
+            tenantsText.GetComponent<Text>().text = "+ ? %";
+            custHeader.GetComponent<Text>().text = "Wonder Bonus";
+            incomeHeader.GetComponent<Text>().text = selProp.GetComponent<Property>().Card.displayName;
+            incomeHeader.SetActive(true);
+            nameText.SetActive(false); fillBg.SetActive(false); fill.SetActive(false); timeText.SetActive(false); incomeText.SetActive(false); time.SetActive(false); money.SetActive(false); xpIcon.SetActive(false); xpText.SetActive(false);
+            tenantsIcon.GetComponent<Image>().sprite = bonusSprite;
         }
     }
 }

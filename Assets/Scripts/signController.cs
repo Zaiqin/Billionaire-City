@@ -40,6 +40,9 @@ public class signController : MonoBehaviour
             GameObject value = Instantiate(Resources.Load<GameObject>("floatingParent"), new Vector3(selProperty.transform.position.x + (float.Parse(selProperty.GetComponent<Property>().Card.space.Substring(0, 1))) / 2, selProperty.transform.position.y + 2.8f, -5f), Quaternion.identity) as GameObject;
             value.transform.GetChild(0).GetComponent<TextMesh>().text = "- $" + cost;
             value.transform.GetChild(0).GetComponent<TextMesh>().color = new Color(255f / 255f, 76f / 255f, 76f / 255f);
+
+            GameObject contractPopup = Instantiate(Resources.Load<GameObject>("contractValue"), new Vector3(selProperty.transform.position.x + (float.Parse(selProperty.GetComponent<Property>().Card.space.Substring(0, 1))) / 2, selProperty.transform.position.y + ((float.Parse(selProperty.GetComponent<Property>().Card.space.Substring(selProperty.GetComponent<Property>().Card.space.Length-1)))/2), -5f), Quaternion.identity) as GameObject;
+
         } else
         {
             print("no money to sign contract");
