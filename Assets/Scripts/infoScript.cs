@@ -166,6 +166,13 @@ public class infoScript : MonoBehaviour
                 fill.SetActive(false);
                 fillBg.SetActive(false);
             }
+        }
+        else if (selProp.GetComponent<Property>().Card.type == "Deco")
+        {
+            timeText.GetComponent<Text>().text = selProp.GetComponent<Property>().Card.decoBonus + "% Bonus";
+            incomeText.GetComponent<Text>().text = "";
+            fill.SetActive(false);
+            fillBg.SetActive(false);
         } else {
             //info script showing non houses
             timeText.GetComponent<Text>().text = "";
