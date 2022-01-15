@@ -47,10 +47,10 @@ public class ppDragButton : MonoBehaviour
         {
             TileBase Tile = map.GetTile(new Vector3Int(x, y, 0));
 
-            if (card.type == "Deco")
+            if (card.type == "Deco" && Tile.name.Contains("plot"))
             {
                 stats.GetComponent<Statistics>().updateStats(diffmoney: 1000);
-                hq.GetComponent<HQstats>().noOfPlots -= 1;
+                stats.GetComponent<Statistics>().noOfPlots -= 1;
                 print("adding 1k in return");
                 GameObject value = Instantiate(floatingValue, new Vector3(x + (float)0.5, (float)y + 2, 0f), Quaternion.identity) as GameObject;
                 value.transform.GetChild(0).GetComponent<TextMesh>().text = "+$1000";

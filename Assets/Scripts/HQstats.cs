@@ -19,8 +19,6 @@ public class HQstats : MonoBehaviour
 
     public InputField field;
 
-    public int noOfPlots;
-
     public Camera mainCam;
 
     // Start is called before the first frame update
@@ -57,8 +55,8 @@ public class HQstats : MonoBehaviour
             }
         }
         property.text = "$" + propValue.ToString("#,##0");
-        land.text = "$" + (noOfPlots*1000).ToString("#,##0");
-        total.text = "$" + (stats.money + goldvalue + (noOfPlots*1000) + propValue).ToString("#,##0");
+        land.text = "$" + (stats.GetComponent<Statistics>().noOfPlots*1000).ToString("#,##0");
+        total.text = "$" + (stats.money + goldvalue + (stats.GetComponent<Statistics>().noOfPlots *1000) + propValue).ToString("#,##0");
         field.text = stats.cityName;
     }
 

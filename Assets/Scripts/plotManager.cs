@@ -177,7 +177,7 @@ public class plotManager : MonoBehaviour
         if (initialCenterTile.name.Contains("plot") && map.GetTile<Tile>(gridPosition).name.Contains("Grass") && forced == false)
         {
             stats.GetComponent<Statistics>().updateStats(diffmoney: 1000);
-            hq.GetComponent<HQstats>().noOfPlots -= 1;
+            stats.GetComponent<Statistics>().noOfPlots -= 1;
             //print("adding 1k");
             GameObject value = Instantiate(floatingValue, new Vector3(gridPosition.x + (float)0.5, (float)gridPosition.y + 2, (float)gridPosition.z), Quaternion.identity) as GameObject;
             value.transform.GetChild(0).GetComponent<TextMesh>().text = "+$1000";
@@ -190,13 +190,14 @@ public class plotManager : MonoBehaviour
             GameObject value = Instantiate(floatingValue, new Vector3(gridPosition.x+(float)0.5, (float)gridPosition.y+2, (float)gridPosition.z), Quaternion.identity) as GameObject;
             value.transform.GetChild(0).GetComponent<TextMesh>().text = "-$1000";
             value.transform.GetChild(0).GetComponent<TextMesh>().color = new Color(255f / 255f, 76f / 255f, 76f / 255f);
-            hq.GetComponent<HQstats>().noOfPlots += 1;
+            stats.GetComponent<Statistics>().noOfPlots += 1;
             GameObject splash = Instantiate(splashObject, new Vector3(gridPosition.x + (float)0.5, gridPosition.y+(float)1.4, (float)gridPosition.z), Quaternion.identity) as GameObject;
         }
         //float walkingSpeed = dataFromTiles[clickedTile].walkingSpeed;
 
         //print("Walking speed on " + clickedTile + " at position " + gridPosition + " is " + walkingSpeed);
-            saveObj.GetComponent<saveloadsystem>().saveTilemap();
+        saveObj.GetComponent<saveloadsystem>().saveTilemap();
+        saveObj.GetComponent<saveloadsystem>().saveStats();
         
     }
 
@@ -274,7 +275,7 @@ public class plotManager : MonoBehaviour
         if (initialCenterTile.name.Contains("plot") && map.GetTile<Tile>(gridPosition).name.Contains("Grass") && forced == false)
         {
             stats.GetComponent<Statistics>().updateStats(diffmoney: 1000);
-            hq.GetComponent<HQstats>().noOfPlots -= 1;
+            stats.GetComponent<Statistics>().noOfPlots -= 1;
             //print("adding 1k");
             GameObject value = Instantiate(floatingValue, new Vector3(gridPosition.x + (float)0.5, (float)gridPosition.y + 2, (float)gridPosition.z), Quaternion.identity) as GameObject;
             value.transform.GetChild(0).GetComponent<TextMesh>().text = "+$1000";
@@ -287,7 +288,7 @@ public class plotManager : MonoBehaviour
             GameObject value = Instantiate(floatingValue, new Vector3(gridPosition.x + (float)0.5, (float)gridPosition.y + 2, (float)gridPosition.z), Quaternion.identity) as GameObject;
             value.transform.GetChild(0).GetComponent<TextMesh>().text = "-$1000";
             value.transform.GetChild(0).GetComponent<TextMesh>().color = new Color(255f / 255f, 76f / 255f, 76f / 255f);
-            hq.GetComponent<HQstats>().noOfPlots += 1;
+            stats.GetComponent<Statistics>().noOfPlots += 1;
             GameObject splash = Instantiate(splashObject, new Vector3(gridPosition.x + (float)0.5, gridPosition.y + (float)1.4, (float)gridPosition.z), Quaternion.identity) as GameObject;
         }
         //float walkingSpeed = dataFromTiles[clickedTile].walkingSpeed;

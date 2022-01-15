@@ -10,6 +10,7 @@ public class Statistics : MonoBehaviour
     public long level;
     public long xp;
     public string cityName;
+    public int noOfPlots;
 
     public Text moneyText;
     public Text goldText;

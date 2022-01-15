@@ -31,9 +31,10 @@ public class statsSaveForm
     public long level;
     public long xp;
     public string cityName;
-    public statsSaveForm(long m, long g, long l, long x, string n)
+    public int noOfPlots;
+    public statsSaveForm(long m, long g, long l, long x, string n, int p)
     {
-        money = m; gold = g; level = l; xp = x; cityName = n;
+        money = m; gold = g; level = l; xp = x; cityName = n; noOfPlots = p;
     }
 }
 
@@ -120,7 +121,7 @@ public class saveloadsystem : MonoBehaviour
         FileHandler.SaveToJSON<propertySaveForm>(propSaveList, "propsSave.json");
 
         // ------------ Saving stats -------------------------------
-        statsSaveForm statsSaveObj = new statsSaveForm(Stats.GetComponent<Statistics>().money, Stats.GetComponent<Statistics>().gold, Stats.GetComponent<Statistics>().level, Stats.GetComponent<Statistics>().xp, cityText.GetComponent<Text>().text);
+        statsSaveForm statsSaveObj = new statsSaveForm(Stats.GetComponent<Statistics>().money, Stats.GetComponent<Statistics>().gold, Stats.GetComponent<Statistics>().level, Stats.GetComponent<Statistics>().xp, cityText.GetComponent<Text>().text, Stats.GetComponent<Statistics>().noOfPlots);
         FileHandler.SaveToJSON<statsSaveForm>(statsSaveObj, "statsSave.json");
 
         // ------------ Saving tilemap -------------------------------
@@ -151,7 +152,7 @@ public class saveloadsystem : MonoBehaviour
     public void saveStats()
     {
         print("Saving Stats");
-        statsSaveForm statsSaveObj = new statsSaveForm(Stats.GetComponent<Statistics>().money, Stats.GetComponent<Statistics>().gold, Stats.GetComponent<Statistics>().level, Stats.GetComponent<Statistics>().xp, cityText.GetComponent<Text>().text);
+        statsSaveForm statsSaveObj = new statsSaveForm(Stats.GetComponent<Statistics>().money, Stats.GetComponent<Statistics>().gold, Stats.GetComponent<Statistics>().level, Stats.GetComponent<Statistics>().xp, cityText.GetComponent<Text>().text, Stats.GetComponent<Statistics>().noOfPlots);
         FileHandler.SaveToJSON<statsSaveForm>(statsSaveObj, "statsSave.json");
         print("Stats saved");
     }
@@ -215,6 +216,7 @@ public class saveloadsystem : MonoBehaviour
             // ----------- Loading Statistics ---------------
             Stats.GetComponent<Statistics>().setStats(statsObj.money, statsObj.gold, statsObj.level, statsObj.xp);
             Stats.GetComponent<Statistics>().cityName = statsObj.cityName;
+            Stats.GetComponent<Statistics>().noOfPlots = statsObj.noOfPlots;
             print("loaded name is " + statsObj.cityName);
             nameField.text = statsObj.cityName;
             // ----------- Loading Tilemap ------------------
@@ -243,7 +245,7 @@ public class saveloadsystem : MonoBehaviour
     [ContextMenu("Load New Game")]
     public void LoadNewGame()
     {
-        hq.GetComponent<HQstats>().noOfPlots = 35;
+        Stats.GetComponent<Statistics>().noOfPlots = 35;
         Stats.GetComponent<Statistics>().cityName = "Chocolate Fields";
         nameField.text = "Chocolate Fields";
         //print("Loading Default Properties");
