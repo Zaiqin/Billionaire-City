@@ -72,7 +72,39 @@ public class saveloadsystem : MonoBehaviour
         string testString = FileHandler.ReadRawFromJSON("propsSave.json");
         //print("raw string is " + testString);
 
-        string prevString = "2022/01/15 11:32:01";
+        if (PlayerPrefs.GetInt("FIRSTTIMEOPENING", 1) == 1)
+        {
+            Debug.Log("First Time Opening");
+            print("Deleting any fake copy");
+            foreach (var directory in Directory.GetDirectories(Application.persistentDataPath))
+            {
+                DirectoryInfo data_dir = new DirectoryInfo(directory);
+                data_dir.Delete(true);
+            }
+
+            foreach (var file in Directory.GetFiles(Application.persistentDataPath))
+            {
+                FileInfo file_info = new FileInfo(file);
+                file_info.Delete();
+            }
+            LoadNewGame();
+            saveGame();
+
+            //Set first time opening to false
+            PlayerPrefs.SetInt("FIRSTTIMEOPENING", 0);
+
+            //Do your stuff here
+
+        }
+        else
+        {
+            Debug.Log("NOT First Time Opening");
+
+            //Do your stuff here
+            loadSaveGame();
+        }
+
+        /*string prevString = "2022/01/15 11:32:01";
         if (testString.Contains(prevString))
         {
             print("detected fake copy");
@@ -93,7 +125,7 @@ public class saveloadsystem : MonoBehaviour
         else
         {
             loadSaveGame();
-        }
+        }*/
     }
 
     [ContextMenu("Save Game")]
