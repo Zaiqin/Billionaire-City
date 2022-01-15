@@ -72,7 +72,7 @@ public class saveloadsystem : MonoBehaviour
         string testString = FileHandler.ReadRawFromJSON("propsSave.json");
         //print("raw string is " + testString);
 
-        string prevString = "2022/01/08";
+        string prevString = "2022/01/15 11:32:01";
         if (testString.Contains(prevString))
         {
             print("detected fake copy");

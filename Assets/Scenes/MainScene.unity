@@ -2379,7 +2379,7 @@ SortingGroup:
   m_Enabled: 1
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 13
+  m_SortingOrder: 8
 --- !u!102 &199292500
 TextMesh:
   serializedVersion: 3
@@ -59463,7 +59463,7 @@ SortingGroup:
   m_Enabled: 1
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 13
+  m_SortingOrder: 8
 --- !u!102 &502277937
 TextMesh:
   serializedVersion: 3
@@ -59771,7 +59771,7 @@ SortingGroup:
   m_Enabled: 1
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 13
+  m_SortingOrder: 8
 --- !u!102 &511014201
 TextMesh:
   serializedVersion: 3
@@ -64243,7 +64243,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 11
+  m_SortingOrder: 6
   m_Sprite: {fileID: 21300000, guid: 1fb4d1762a3781a4cbaa4d369894dd7f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -73295,7 +73295,7 @@ SortingGroup:
   m_Enabled: 1
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 14
+  m_SortingOrder: 9
 --- !u!102 &1479035511
 TextMesh:
   serializedVersion: 3
@@ -74292,7 +74292,7 @@ SortingGroup:
   m_Enabled: 1
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 13
+  m_SortingOrder: 8
 --- !u!102 &1595562297
 TextMesh:
   serializedVersion: 3
@@ -77307,7 +77307,7 @@ SortingGroup:
   m_Enabled: 1
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 12
+  m_SortingOrder: 7
 --- !u!102 &1928600258
 TextMesh:
   serializedVersion: 3
