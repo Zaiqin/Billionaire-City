@@ -117,6 +117,7 @@ public class expansion : MonoBehaviour
             stats.GetComponent<Statistics>().updateStats(diffmoney: -cost);
             saveObj.GetComponent<saveloadsystem>().saveExp();
             saveObj.GetComponent<saveloadsystem>().saveTilemap();
+            stats.GetComponent<Statistics>().expCost += cost;
         }
         else if (result == true && stats.GetComponent<Statistics>().returnStats()[0] < cost)
         {

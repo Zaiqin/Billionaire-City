@@ -267,10 +267,34 @@ public class saveloadsystem : MonoBehaviour
             }
             // ------------ Loading Expansions -------------
             expPopup.GetComponent<expansion>().deletedExp = FileHandler.ReadListFromJSON<string>("deletedExp.json");
+            long cost = 0;
             foreach (string s in FileHandler.ReadListFromJSON<string>("deletedExp.json"))
             {
                 Destroy(GameObject.Find(s));
+                int i = int.Parse(s.Substring(s.Length - 2));
+                
+                if (i > 10 && i < 20)
+                {
+                    cost += 1000000;
+                } 
+                else if (i > 20 && i < 30)
+                {
+                    cost += 5000000;
+                }
+                else if (i > 30 && i < 40)
+                {
+                    cost += 10000000;
+                }
+                else if (i > 40 && i < 50)
+                {
+                    cost += 50000000;
+                }
+                else if (i > 50 && i < 60)
+                {
+                    cost += 100000000;
+                }
             }
+            Stats.GetComponent<Statistics>().expCost = cost;
         }
     }
 

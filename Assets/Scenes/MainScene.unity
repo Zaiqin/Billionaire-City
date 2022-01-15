@@ -64108,6 +64108,7 @@ MonoBehaviour:
   xp: 0
   cityName: 
   noOfPlots: 0
+  expCost: 0
   moneyText: {fileID: 1718816115}
   goldText: {fileID: 1364769763}
   levelText: {fileID: 1466641800}
