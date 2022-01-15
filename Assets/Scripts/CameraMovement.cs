@@ -122,6 +122,11 @@ public class CameraMovement : MonoBehaviour
             //cam.transform.position += difference;
             hqMenu.SetActive(false);
             infoPanel.SetActive(false);
+            if (infoPanel.GetComponent<infoScript>().selProp != null && infoPanel.GetComponent<infoScript>().selProp.transform.GetChild(0).name == "Influence")
+            {
+                infoPanel.GetComponent<infoScript>().selProp.transform.GetChild(0).gameObject.SetActive(false);
+                infoPanel.GetComponent<infoScript>().selProp.transform.GetChild(0).GetComponent<influence>().removeHighlights();
+            }
             dragging = true;
         }
     	

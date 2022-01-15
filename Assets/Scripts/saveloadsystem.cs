@@ -380,6 +380,7 @@ public class saveloadsystem : MonoBehaviour
         else if (pp.Card.type == "Deco") // check to only do these thats only for houses
         {
             pp.transform.GetChild(0).gameObject.AddComponent<BoxCollider2D>();
+            pp.transform.GetChild(0).gameObject.SetActive(false);
         }
     }
 }

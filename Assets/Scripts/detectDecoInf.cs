@@ -37,7 +37,7 @@ public class detectDecoInf : MonoBehaviour
             {
                 if (item.GetComponent<Property>().Card.type == "Deco")
                 {
-                    print("found deco " + item.name);
+                    //print("found deco " + item.name);
                     item.transform.GetChild(0).gameObject.SetActive(true);
                     item.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0f, 0f, 0f, 0f);
                     List<Collider2D> infList = item.transform.GetChild(0).GetComponent<influence>().returnHighlights(true);

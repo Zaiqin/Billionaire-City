@@ -305,7 +305,7 @@ public class plotManager : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && isMouseOverUI() == true)
         {
             startInUI = true;
-            print("start in ui settteidaddi to true");
+            //print("start in ui settteidaddi to true");
         }
 
         if ((plotToggle.isOn == true) && (Input.GetMouseButtonUp(0)))
@@ -338,7 +338,7 @@ public class plotManager : MonoBehaviour
             Vector3Int agridPosition = map.WorldToCell(amousePosition);
 
             Tile aclickedTile = map.GetTile<Tile>(agridPosition);
-            print("clicked on tile: " + aclickedTile.name + " at position: " + agridPosition);
+            //print("clicked on tile: " + aclickedTile.name + " at position: " + agridPosition);
 
             if (aclickedTile.name.Contains("plot") && plotToggle.isOn == false && roadToggle.isOn == false && deleteToggle.isOn == false && shopToggle.GetComponent<Toggle>().isOn == false && pendingParent.transform.childCount == 0 && startInUI == false && mainCam.GetComponent<CameraMovement>().dragging == false)
             {

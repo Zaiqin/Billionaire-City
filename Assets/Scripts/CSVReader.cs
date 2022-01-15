@@ -154,10 +154,10 @@ public class CSVReader : MonoBehaviour
                 // Check if current deco reach is higher than current record !!REMEMBER TO CHANGE ALL INFLUENCE TO 01x01 ie 5 digits long!!!!
                 if ((float.Parse(tempArray[i].influence.Substring(0, 2)) > maxDecoReach))
                 {
-                    maxDecoReach = float.Parse(tempArray[i].influence.Substring(0, 1));
+                    maxDecoReach = float.Parse(tempArray[i].influence.Substring(0, 2));
                 }
                 if (float.Parse(tempArray[i].influence.Substring(tempArray[i].influence.Length - 2)) > maxDecoReach){
-                    maxDecoReach = float.Parse(tempArray[i].influence.Substring(tempArray[i].influence.Length - 1));
+                    maxDecoReach = float.Parse(tempArray[i].influence.Substring(tempArray[i].influence.Length - 2));
                 }
             }
             else if (tempArray[i].buildTime.Contains("days"))
@@ -243,7 +243,16 @@ public class CSVReader : MonoBehaviour
                 break;
             }
         }
-        print("end of csv, max reach is " + maxDecoReach);
+        //print("end of csv, max reach is " + maxDecoReach);
+        print("max deco reach is " + maxDecoReach);
+        if (maxDecoReach % 2 == 0)
+        {
+            maxDecoReach = maxDecoReach / 2;
+        } else
+        {
+            maxDecoReach = (maxDecoReach - 1) / 2;
+        }
+        print("max deco reach after calc is " + maxDecoReach);
         print("Completed reading CSV data");
     }
 

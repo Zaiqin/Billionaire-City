@@ -135,6 +135,8 @@ public class ppDragButton : MonoBehaviour
                 pendingParent.transform.GetChild(0).GetComponent<Draggable>().dragEnabled = true;
                 a.GetComponent<Property>().Card = pp.Card;
                 a.GetComponent<BlinkingProperty>().invokeStart();
+                Destroy(a.transform.GetChild(0).GetComponent<BoxCollider2D>());
+                pp.transform.GetChild(0).gameObject.SetActive(false);
 
             }
             // --------------------- Swapping to green border grass -------------

@@ -6,7 +6,7 @@ using System;
 
 public class infoScript : MonoBehaviour
 {
-    public GameObject selProp, nameText, timeText, fill, incomeText, fillBg;
+    public GameObject selProp, nameText, timeText, fill, incomeText, fillBg, prevProp;
 
     // Update is called once per frame
     private void Start()
@@ -51,6 +51,14 @@ public class infoScript : MonoBehaviour
                         timeText.GetComponent<Text>().text = string.Format("{0:D2} seconds", diff.Seconds);
                     }
 
+                    // ---- Checking what houses it affects ---------
+                    selProp.transform.GetChild(2).gameObject.SetActive(true);
+                    selProp.transform.GetChild(2).GetComponent<SpriteRenderer>().color = new Color(0f, 0f, 0f, 0f);
+                    List<Collider2D> infList = selProp.transform.GetChild(2).GetComponent<detectDecoInf>().returnHighlights();
+                    selProp.transform.GetChild(2).GetComponent<SpriteRenderer>().color = new Color(35f / 255f, 206f / 255f, 241f / 255f, 125f / 255f);
+                    selProp.transform.GetChild(2).gameObject.SetActive(false);
+                    //------------------------------------------------
+
                     long tempIncome;
                     switch (selProp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signIndex)
                     {
@@ -65,16 +73,26 @@ public class infoScript : MonoBehaviour
                         case 8: tempIncome = (long)selProp.GetComponent<Property>().Card.threedays; break;
                         default: tempIncome = (long)selProp.GetComponent<Property>().Card.threemins; break;
                     }
-                    if (tempIncome >= 100000000 && remainingSpan > TimeSpan.Zero)
+
+                    int totalDecoBonus = 0;
+                    foreach (Collider2D item in infList)
+                    {
+                        totalDecoBonus += GameObject.Find(item.name).GetComponent<Property>().Card.decoBonus;
+                    }
+                    float percent = 1 + (((float)totalDecoBonus) / 100);
+                    long finalProfit = (long)((float)tempIncome * percent);
+                    //print("profit is " + tempIncome + ", final profit is " + finalProfit);
+
+                    if (finalProfit >= 100000000 && remainingSpan > TimeSpan.Zero)
                     {
                         // Contract ongoing and income is more than 100M
-                        string temp = tempIncome.ToString("#,##0");
+                        string temp = finalProfit.ToString("#,##0");
                         incomeText.GetComponent<Text>().text = "$" + temp.Substring(0, temp.Length - 8) + "M";
                     }
-                    else if (tempIncome > 0 && remainingSpan > TimeSpan.Zero)
+                    else if (finalProfit > 0 && remainingSpan > TimeSpan.Zero)
                     {
                         // Contract ongoing and income is less than 100M
-                        incomeText.GetComponent<Text>().text = "$" + tempIncome.ToString("#,##0");
+                        incomeText.GetComponent<Text>().text = "$" + finalProfit.ToString("#,##0");
                     }
                 }
                 else

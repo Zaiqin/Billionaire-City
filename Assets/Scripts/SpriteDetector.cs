@@ -32,7 +32,7 @@ public class SpriteDetector : MonoBehaviour
 
     void CastRay()
     {
-        print("called cast ray");
+        //print("called cast ray");
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity);
         if (hit.collider != null)
@@ -137,7 +137,7 @@ public class SpriteDetector : MonoBehaviour
         //print("updateing");
         if (Input.GetMouseButtonDown(0))
         {
-            print("mouse down");
+            //print("mouse down");
             CastRay();
         }
     }
