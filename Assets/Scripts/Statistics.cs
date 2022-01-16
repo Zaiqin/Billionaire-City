@@ -84,6 +84,7 @@ public class Statistics : MonoBehaviour
             if (xp < levelValues[i])
             {
                 if (level != (i - 1)){
+                    this.GetComponent<levelUp>().calcLevelUp((int)level, i-1);
                     level = i - 1;
                     levelUpScreen.SetActive(true);
                     levelUpScreen.transform.GetChild(0).GetComponent<Text>().text = "Level " + level.ToString();

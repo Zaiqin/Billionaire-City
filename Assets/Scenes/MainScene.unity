@@ -64083,6 +64083,7 @@ GameObject:
   m_Component:
   - component: {fileID: 973017966}
   - component: {fileID: 973017965}
+  - component: {fileID: 973017967}
   m_Layer: 0
   m_Name: Stats
   m_TagString: Stats
@@ -64123,6 +64124,7 @@ MonoBehaviour:
   levelUpScreen: {fileID: 208941323}
   externalAudioPlayer: {fileID: 1820829991}
   inputText: {fileID: 351022004}
+  levelUpScript: {fileID: 0}
   particle: {fileID: 1477764395}
   levelUp: {fileID: 8300000, guid: 024b969c6e50193489cba7594e11e681, type: 3}
 --- !u!4 &973017966
@@ -64139,6 +64141,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &973017967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 973017964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38247ee7f779da24ebb5f292d44b355b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  csvObj: {fileID: 1673960463}
 --- !u!1 &987868325
 GameObject:
   m_ObjectHideFlags: 0

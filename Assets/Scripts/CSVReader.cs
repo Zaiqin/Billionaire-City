@@ -253,6 +253,7 @@ public class CSVReader : MonoBehaviour
             maxDecoReach = (maxDecoReach - 1) / 2;
         }
         print("max deco reach after calc is " + maxDecoReach);
+
         print("Completed reading CSV data");
     }
 
