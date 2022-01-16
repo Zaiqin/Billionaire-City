@@ -26,6 +26,8 @@ public class CameraMovement : MonoBehaviour
 
     public Tilemap map;
 
+    public Slider zoomSlider;
+
     private void Awake()
     {
         // Disable multi touch
@@ -137,6 +139,8 @@ public class CameraMovement : MonoBehaviour
     	cam.orthographicSize = Mathf.Clamp(newSize, minCamSize, maxCamSize);
 
         cam.transform.position = ClampCamera(cam.transform.position);
+
+        zoomSlider.value = newSize;
     }
 
     public void ZoomOut() {
@@ -144,6 +148,8 @@ public class CameraMovement : MonoBehaviour
     	cam.orthographicSize = Mathf.Clamp(newSize, minCamSize, maxCamSize);
 
         cam.transform.position = ClampCamera(cam.transform.position);
+
+        zoomSlider.value = newSize;
     }
 
     public void setZoom(float newSize)
