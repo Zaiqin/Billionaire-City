@@ -58527,6 +58527,8 @@ MonoBehaviour:
   smallBg: {fileID: 21300000, guid: e954741fd0540be46a0d0473a927bcfa, type: 3}
   tenantsSprite: {fileID: 21300000, guid: f0296d4cb3f7d4c4d8526db603a314c7, type: 3}
   bonusSprite: {fileID: 21300000, guid: f5cbb97caf4554c6b9a55900c0de7b6a, type: 3}
+  highlightedProp: {fileID: 0}
+  totalDecoBonus: 0
 --- !u!1 &386740024
 GameObject:
   m_ObjectHideFlags: 0
@@ -59907,6 +59909,7 @@ MonoBehaviour:
   infoPanel: {fileID: 374950764}
   dragging: 0
   map: {fileID: 280726322}
+  zoomSlider: {fileID: 557953005}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0

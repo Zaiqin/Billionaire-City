@@ -28,7 +28,6 @@ public class shopButton : MonoBehaviour
         {
             ShopMenu.SetActive(false);
         }
-
         
     }
 

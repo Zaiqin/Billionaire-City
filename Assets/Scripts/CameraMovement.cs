@@ -124,6 +124,14 @@ public class CameraMovement : MonoBehaviour
             //cam.transform.position += difference;
             hqMenu.SetActive(false);
             infoPanel.SetActive(false);
+            if (infoPanel.GetComponent<infoScript>().highlightedProp != null)
+            {
+                infoPanel.GetComponent<infoScript>().highlightedProp.GetComponent<SpriteRenderer>().material.color = Color.white;
+                if (infoPanel.GetComponent<infoScript>().highlightedProp.transform.childCount == 4)
+                {
+                    Destroy(infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(3).gameObject);
+                }
+            }
             if (infoPanel.GetComponent<infoScript>().selProp != null && infoPanel.GetComponent<infoScript>().selProp.transform.GetChild(0).name == "Influence")
             {
                 infoPanel.GetComponent<infoScript>().selProp.transform.GetChild(0).gameObject.SetActive(false);

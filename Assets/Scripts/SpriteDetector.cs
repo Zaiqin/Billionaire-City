@@ -87,6 +87,14 @@ public class SpriteDetector : MonoBehaviour
             }
         } else
         {
+            if (infoPanel.GetComponent<infoScript>().highlightedProp != null)
+            {
+                infoPanel.GetComponent<infoScript>().highlightedProp.GetComponent<SpriteRenderer>().material.color = Color.white;
+                if (infoPanel.GetComponent<infoScript>().highlightedProp.transform.childCount == 4)
+                {
+                    Destroy(infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(3).gameObject);
+                }
+            }
             infoPanel.SetActive(false);
             hqMenu.SetActive(false);
             if (selectedCommerce != null)

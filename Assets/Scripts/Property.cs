@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class Property : MonoBehaviour, IPointerClickHandler
 {
     public PropertyCard Card;
+    public int bonus;
     public void initialise(PropertyCard pcard)
     {
         // Adding propertySprite
@@ -173,6 +174,9 @@ public class Property : MonoBehaviour, IPointerClickHandler
                 {
                     infoPanel.SetActive(true);
                     infoPanel.GetComponent<infoScript>().selProp = this.gameObject;
+                    infoPanel.GetComponent<infoScript>().initInfo();
+                    
+                    print("show info Panel");
                     infoPanel.transform.position = new Vector3(0.2f + this.gameObject.transform.position.x + (infoPanel.GetComponent<BoxCollider2D>().bounds.size.x / 2) + float.Parse(this.GetComponent<Property>().Card.space.Substring(0, 1)), this.gameObject.transform.position.y + (infoPanel.GetComponent<BoxCollider2D>().bounds.size.y / 4) + 1f, 0f);
                 }
                 GameObject hqmenu = GameObject.Find("HQStats");
@@ -181,9 +185,15 @@ public class Property : MonoBehaviour, IPointerClickHandler
                     hqmenu.SetActive(false);
                 }
             }
-            if (this.Card.type == "House" && this.transform.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder == 2)
+            if (this.Card.type == "House")
             {
-                this.transform.GetChild(1).GetComponent<moneyPickupScript>().collectMoney();
+                GameObject decoObj = Instantiate(Resources.Load<GameObject>("decoObj"), new Vector3(this.transform.position.x + (float.Parse(this.Card.space.Substring(0, 1))) / 2, this.transform.position.y, -5f), Quaternion.identity) as GameObject;
+                decoObj.transform.parent = this.gameObject.transform;
+                decoObj.transform.GetChild(1).GetComponent<TextMesh>().text = "+" + bonus.ToString() + "%";
+                if (this.transform.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder == 2)
+                {
+                    this.transform.GetChild(1).GetComponent<moneyPickupScript>().collectMoney();
+                }
             }
             if (this.Card.type == "Commerce" && this.transform.parent.name == "Properties" && GameObject.Find("Canvas").GetComponent<toggleMaster>().checkAllOff() == true && this.gameObject.transform.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder != 2)
             {
@@ -199,6 +209,15 @@ public class Property : MonoBehaviour, IPointerClickHandler
                 influence.GetComponent<influence>().detectInfluence();
                 GameObject.Find("Main Camera").GetComponent<SpriteDetector>().selectedCommerce = this.gameObject;
             }
+
+        }
+    }
+
+    void Update()
+    {
+        if (this.GetComponent<SpriteRenderer>().material.color == new Color(35f / 255f, 206f / 255f, 241f / 255f, 255f / 255f))
+        {
+            print("showing deco bonus of " + bonus);
 
         }
     }

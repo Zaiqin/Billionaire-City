@@ -49,7 +49,7 @@ public class detectDecoInf : MonoBehaviour
                         if (house.name == this.transform.parent.name)
                         {
                             decoInfluenced.Add(item);
-                            print(item.name + " affects " + house.name + "giving it " + item.GetComponent<Property>().Card.decoBonus + "% bonus");
+                            //print(item.name + " affects " + house.name + "giving it " + item.GetComponent<Property>().Card.decoBonus + "% bonus");
                             break;
                         }
                     }

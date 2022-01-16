@@ -343,9 +343,10 @@ public class plotManager : MonoBehaviour
 
             if (aclickedTile.name.Contains("plot") && plotToggle.isOn == false && roadToggle.isOn == false && deleteToggle.isOn == false && shopToggle.GetComponent<Toggle>().isOn == false && pendingParent.transform.childCount == 0 && startInUI == false && mainCam.GetComponent<CameraMovement>().dragging == false)
             {
-                shopToggle.GetComponent<shopButton>().OnButtonClick();
                 shopToggle.GetComponent<UIToggle>().toggleToggles(shopToggle);
-                shopToggle.GetComponent<Toggle>().isOn = true;
+                shopToggle.GetComponent<shopButton>().shopToggle.isOn = true;
+                shopToggle.GetComponent<shopButton>().ShopMenu.SetActive(true);
+
             }
             startInUI = false;
         }
