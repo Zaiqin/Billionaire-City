@@ -7,20 +7,29 @@ using PolyAndCode.UI;
 
 public class shopButton : MonoBehaviour
 {
-    public GameObject ShopMenu;
+    public GameObject ShopMenu, ppDrag;
     public RecyclableScrollRect rect;
+    public Toggle shopToggle;
 
     public void OnButtonClick()
     {
-        if (ShopMenu.activeSelf == false)
+        if (shopToggle.isOn == true && ppDrag.activeSelf == true)
+        {
+            shopToggle.isOn = false;
+            ShopMenu.SetActive(false);
+        }
+
+        if (ShopMenu.activeSelf == false && shopToggle.isOn == true)
         {
             ShopMenu.SetActive(true);
             rect.ReloadData();
             
-        } else if (ShopMenu.activeSelf == true)
+        } else if (ShopMenu.activeSelf == true && shopToggle.isOn == false)
         {
             ShopMenu.SetActive(false);
         }
+
+        
     }
 
     // Start is called before the first frame update

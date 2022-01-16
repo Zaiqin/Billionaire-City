@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class ppDragButton : MonoBehaviour
 {
     [SerializeField]
-    private GameObject pendingParent, propParent, ppDrag, externalAudioPlayer, saveloadsystem, shopToggle;
+    private GameObject pendingParent, propParent, ppDrag, externalAudioPlayer, saveloadsystem, shopToggle, shopMenu;
 
     [SerializeField]
     private Statistics stats;
@@ -155,10 +155,10 @@ public class ppDragButton : MonoBehaviour
 
     public void dragCancel()
     {
-        shopToggle.GetComponent<Toggle>().isOn = false;
         Destroy(pendingParent.transform.GetChild(0).gameObject);
         externalAudioPlayer.GetComponent<AudioSource>().PlayOneShot(touchSound);
         ppDrag.SetActive(false);
+        shopMenu.SetActive(true);
         // --------------------- Swapping to green border grass -------------
         map.SwapTile(greenGrass, tileGrass);
         // ------------------------------------------------------------------

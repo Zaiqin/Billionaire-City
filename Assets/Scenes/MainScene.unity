@@ -947,7 +947,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShopMenu: {fileID: 252825800}
+  ppDrag: {fileID: 737003508}
   rect: {fileID: 1857201643}
+  shopToggle: {fileID: 52499401}
 --- !u!114 &52499401
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2082,6 +2084,7 @@ MonoBehaviour:
   externalAudioPlayer: {fileID: 1820829991}
   saveloadsystem: {fileID: 25462474}
   shopToggle: {fileID: 52499396}
+  shopMenu: {fileID: 252825800}
   stats: {fileID: 973017965}
   buildSound: {fileID: 8300000, guid: af8e188edf22047efbe5414eb16f16df, type: 3}
   touchSound: {fileID: 8300000, guid: bd5423d63b2c64bff84c70238339e6d6, type: 3}
@@ -74804,6 +74807,7 @@ MonoBehaviour:
   externalAudioPlayer: {fileID: 1820829991}
   saveloadsystem: {fileID: 0}
   shopToggle: {fileID: 52499396}
+  shopMenu: {fileID: 252825800}
   stats: {fileID: 973017965}
   buildSound: {fileID: 8300000, guid: af8e188edf22047efbe5414eb16f16df, type: 3}
   touchSound: {fileID: 8300000, guid: bd5423d63b2c64bff84c70238339e6d6, type: 3}
