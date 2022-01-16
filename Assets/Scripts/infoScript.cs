@@ -29,6 +29,7 @@ public class infoScript : MonoBehaviour
             incomeHeader.GetComponent<Text>().text = "Income";
             xpText.GetComponent<Text>().text = (selProp.GetComponent<Property>().Card.XP * (selProp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signIndex + 1)) + " XP";
             nameText.SetActive(true); fillBg.SetActive(true); fill.SetActive(true); timeText.SetActive(true); incomeText.SetActive(true); incomeHeader.SetActive(false);  time.SetActive(true); money.SetActive(true); xpIcon.SetActive(true); xpText.SetActive(true);
+            incomeHeader.GetComponent<Text>().fontSize = 22;
             tenantsIcon.GetComponent<Image>().sprite = tenantsSprite;
             if (selProp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signTime != "notsigned")
             {
@@ -120,7 +121,7 @@ public class infoScript : MonoBehaviour
             incomeHeader.GetComponent<Text>().text = "Income";
             nameText.SetActive(true); fillBg.SetActive(true); fill.SetActive(true); timeText.SetActive(true); incomeText.SetActive(true); incomeHeader.SetActive(true); time.SetActive(true); money.SetActive(true); xpIcon.SetActive(false); xpText.SetActive(false);
             tenantsIcon.GetComponent<Image>().sprite = tenantsSprite;
-
+            incomeHeader.GetComponent<Text>().fontSize = 22;
             List<Collider2D> infList = selProp.gameObject.transform.GetChild(0).GetComponent<influence>().housesInfluenced;
             long finalIncome = 0;
             int finalTenants = 0;
@@ -181,6 +182,7 @@ public class infoScript : MonoBehaviour
             custHeader.GetComponent<Text>().text = "Houses Bonus";
             incomeHeader.GetComponent<Text>().text = selProp.GetComponent<Property>().Card.displayName;
             incomeHeader.SetActive(true);
+            incomeHeader.GetComponent<Text>().fontSize = 28;
             nameText.SetActive(false); fillBg.SetActive(false); fill.SetActive(false); timeText.SetActive(false); incomeText.SetActive(false); time.SetActive(false); money.SetActive(false); xpIcon.SetActive(false); xpText.SetActive(false);
             tenantsIcon.GetComponent<Image>().sprite = bonusSprite;
         } else {
@@ -190,6 +192,7 @@ public class infoScript : MonoBehaviour
             custHeader.GetComponent<Text>().text = "Wonder Bonus";
             incomeHeader.GetComponent<Text>().text = selProp.GetComponent<Property>().Card.displayName;
             incomeHeader.SetActive(true);
+            incomeHeader.GetComponent<Text>().fontSize = 28;
             nameText.SetActive(false); fillBg.SetActive(false); fill.SetActive(false); timeText.SetActive(false); incomeText.SetActive(false); time.SetActive(false); money.SetActive(false); xpIcon.SetActive(false); xpText.SetActive(false);
             tenantsIcon.GetComponent<Image>().sprite = bonusSprite;
         }
