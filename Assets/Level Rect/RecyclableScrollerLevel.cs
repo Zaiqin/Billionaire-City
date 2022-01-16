@@ -14,10 +14,7 @@ public class RecyclableScrollerLevel : CSVReader, IRecyclableScrollRectDataSourc
     [SerializeField]
     RecyclableScrollRect _recyclableScrollRect;
 
-    [SerializeField]
-    Sprite threeMinSprite, thirtyMinSprite, oneHrSprite, fourHrSprite, eightHrSprite, twelveHrSprite, oneDaySprite, twoDaySprite, threeDaySprite;
-
-    public PropertyCard pCard;
+    public GameObject stats;
 
     [SerializeField]
     private RecyclableScrollRect levelRect;
@@ -41,7 +38,8 @@ public class RecyclableScrollerLevel : CSVReader, IRecyclableScrollRectDataSourc
     /// </summary>
     public int GetItemCount()
     {
-        return 9;
+        print("setting " + stats.GetComponent<levelUp>().noOfCards);
+        return stats.GetComponent<levelUp>().noOfCards;
     }
 
     /// <summary>
@@ -55,22 +53,10 @@ public class RecyclableScrollerLevel : CSVReader, IRecyclableScrollRectDataSourc
 
         //print("Clicked on a " + pCard.displayName + "'s contract");
         var item = cell as LevelCell;
-        Sprite setSprite;
 
-        switch (index)
-        {
-            case 0: setSprite = threeMinSprite; break;
-            case 1: setSprite = thirtyMinSprite; break;
-            case 2: setSprite = oneHrSprite; break;
-            case 3: setSprite = fourHrSprite; break;
-            case 4: setSprite = eightHrSprite; break;
-            case 5: setSprite = twelveHrSprite; break;
-            case 6: setSprite = oneDaySprite; break;
-            case 7: setSprite = twoDaySprite; break;
-            case 8: setSprite = threeDaySprite; break;
-            default: setSprite = threeMinSprite;  break;
-        }
-        item.ConfigureCell(setSprite, index);
+        List<Sprite> list = stats.GetComponent<levelUp>().spriteList;
+
+        item.ConfigureCell(list[index], index);
     }
 
     #endregion

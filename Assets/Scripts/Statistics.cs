@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using PolyAndCode.UI;
 public class Statistics : MonoBehaviour
 {
     public long money;
@@ -87,7 +87,15 @@ public class Statistics : MonoBehaviour
                     this.GetComponent<levelUp>().calcLevelUp((int)level, i-1);
                     level = i - 1;
                     levelUpScreen.SetActive(true);
+                    levelUpScreen.transform.GetChild(3).GetComponent<RecyclableScrollRect>().ReloadData();
                     levelUpScreen.transform.GetChild(0).GetComponent<Text>().text = "Level " + level.ToString();
+                    levelUpScreen.transform.GetChild(1).GetComponent<Text>().text = this.GetComponent<levelUp>().noOfCards + " items unlocked";
+                    levelUpScreen.transform.GetChild(1).position = new Vector3(0f, -0.4075f, 0f);
+                    if (this.GetComponent<levelUp>().noOfCards == 0)
+                    {
+                        levelUpScreen.transform.GetChild(1).GetComponent<Text>().text = "Level up to unlock more Properties";
+                        levelUpScreen.transform.GetChild(1).position = new Vector3(0f, -1.5075f, 0f);
+                    }
                     particle.Play();
                     externalAudioPlayer.GetComponent<AudioSource>().PlayOneShot(levelUp);
                 } else
