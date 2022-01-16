@@ -181,6 +181,10 @@ public class Property : MonoBehaviour, IPointerClickHandler
                     hqmenu.SetActive(false);
                 }
             }
+            if (this.Card.type == "House" && this.transform.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder == 2)
+            {
+                this.transform.GetChild(1).GetComponent<moneyPickupScript>().collectMoney();
+            }
             if (this.Card.type == "Commerce" && this.transform.parent.name == "Properties" && GameObject.Find("Canvas").GetComponent<toggleMaster>().checkAllOff() == true && this.gameObject.transform.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder != 2)
             {
                 GameObject influence = this.transform.GetChild(0).gameObject;
@@ -240,7 +244,8 @@ public class contractScript : MonoBehaviour, IPointerClickHandler
 public class moneyPickupScript : MonoBehaviour, IPointerClickHandler
 {
     public PropertyCard propCard;
-    void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
+
+    public void collectMoney()
     {
         propCard = this.gameObject.transform.parent.GetComponent<Property>().Card;
         if (GameObject.Find("Main Camera").GetComponent<CameraMovement>().dragging == false && GameObject.Find("Main Camera").GetComponent<SpriteDetector>().isMouseOverUI() == false && GameObject.Find("Canvas").GetComponent<toggleMaster>().checkAllOff() == true && this.gameObject.transform.parent.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder == 2)
@@ -263,14 +268,14 @@ public class moneyPickupScript : MonoBehaviour, IPointerClickHandler
             switch (this.gameObject.transform.parent.GetChild(0).GetComponent<contractScript>().signIndex)
             {
                 case 0: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.threemins; xp = propCard.XP; break;
-                case 1: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.thirtymins; xp = propCard.XP *2; break;
-                case 2: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.onehour; xp = propCard.XP*3; break;
-                case 3: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.fourhours; xp = propCard.XP*4; break;
-                case 4: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.eighthours; xp = propCard.XP*5; break;
-                case 5: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.twelvehours; xp = propCard.XP*6; break;
-                case 6: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.oneday; xp = propCard.XP*7; break;
-                case 7: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.twodays; xp = propCard.XP*8; break;
-                case 8: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.threedays; xp = propCard.XP*9; break;
+                case 1: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.thirtymins; xp = propCard.XP * 2; break;
+                case 2: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.onehour; xp = propCard.XP * 3; break;
+                case 3: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.fourhours; xp = propCard.XP * 4; break;
+                case 4: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.eighthours; xp = propCard.XP * 5; break;
+                case 5: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.twelvehours; xp = propCard.XP * 6; break;
+                case 6: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.oneday; xp = propCard.XP * 7; break;
+                case 7: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.twodays; xp = propCard.XP * 8; break;
+                case 8: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.threedays; xp = propCard.XP * 9; break;
                 default: profit = 0; break;
             }
 
@@ -302,6 +307,10 @@ public class moneyPickupScript : MonoBehaviour, IPointerClickHandler
                 GameObject.Find("SaveLoadSystem").GetComponent<saveloadsystem>().saveGame();
             }
         }
+    }
+    void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
+    {
+        collectMoney();
     }
 
     private void Update()
