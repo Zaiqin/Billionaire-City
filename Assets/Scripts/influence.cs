@@ -65,6 +65,7 @@ public class influence : MonoBehaviour, IPointerClickHandler
                 GameObject.Find(item.name).GetComponent<SpriteRenderer>().color = Color.white;
             }
             this.gameObject.SetActive(false);
+            this.transform.parent.GetComponent<SpriteRenderer>().material.color = Color.white;
             GameObject.Find("infoPanel").SetActive(false);
         }
     }

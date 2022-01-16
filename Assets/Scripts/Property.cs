@@ -174,6 +174,14 @@ public class Property : MonoBehaviour, IPointerClickHandler
                 {
                     infoPanel.SetActive(true);
                     infoPanel.GetComponent<infoScript>().selProp = this.gameObject;
+                    if (infoPanel.GetComponent<infoScript>().highlightedProp != null)
+                    {
+                        if (infoPanel.GetComponent<infoScript>().highlightedProp.transform.childCount > 3 && infoPanel.GetComponent<infoScript>().highlightedProp.name != this.gameObject.name)
+                        {
+                            print("Destroy this");
+                            Destroy(infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(3).gameObject);
+                        }
+                    }
                     infoPanel.GetComponent<infoScript>().initInfo();
                     
                     print("show info Panel");
@@ -187,9 +195,11 @@ public class Property : MonoBehaviour, IPointerClickHandler
             }
             if (this.Card.type == "House")
             {
-                GameObject decoObj = Instantiate(Resources.Load<GameObject>("decoObj"), new Vector3(this.transform.position.x + (float.Parse(this.Card.space.Substring(0, 1))) / 2, this.transform.position.y, -5f), Quaternion.identity) as GameObject;
-                decoObj.transform.parent = this.gameObject.transform;
-                decoObj.transform.GetChild(1).GetComponent<TextMesh>().text = "+" + bonus.ToString() + "%";
+                if (this.transform.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder == 0 && this.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder == 0 && this.transform.childCount <= 3) {
+                    GameObject decoObj = Instantiate(Resources.Load<GameObject>("decoObj"), new Vector3(this.transform.position.x + (float.Parse(this.Card.space.Substring(0, 1))) / 2, this.transform.position.y, -5f), Quaternion.identity) as GameObject;
+                    decoObj.transform.parent = this.gameObject.transform;
+                    decoObj.transform.GetChild(1).GetComponent<TextMesh>().text = "+" + bonus.ToString() + "%";
+                }
                 if (this.transform.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder == 2)
                 {
                     this.transform.GetChild(1).GetComponent<moneyPickupScript>().collectMoney();
@@ -204,21 +214,12 @@ public class Property : MonoBehaviour, IPointerClickHandler
             }
             if (this.Card.type == "Deco" && this.transform.parent.name == "Properties" && GameObject.Find("Canvas").GetComponent<toggleMaster>().checkAllOff() == true)
             {
+                print("clicked ind deco");
                 GameObject influence = this.transform.GetChild(0).gameObject;
                 influence.SetActive(true);
                 influence.GetComponent<influence>().detectInfluence();
                 GameObject.Find("Main Camera").GetComponent<SpriteDetector>().selectedCommerce = this.gameObject;
             }
-
-        }
-    }
-
-    void Update()
-    {
-        if (this.GetComponent<SpriteRenderer>().material.color == new Color(35f / 255f, 206f / 255f, 241f / 255f, 255f / 255f))
-        {
-            print("showing deco bonus of " + bonus);
-
         }
     }
 }
