@@ -132,10 +132,13 @@ public class CameraMovement : MonoBehaviour
                     Destroy(infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(3).gameObject);
                 }
             }
-            if (infoPanel.GetComponent<infoScript>().selProp != null && infoPanel.GetComponent<infoScript>().selProp.transform.GetChild(0).name == "Influence")
+            if (infoPanel.GetComponent<infoScript>().selProp != null && infoPanel.GetComponent<infoScript>().selProp.transform.childCount > 1)
             {
-                infoPanel.GetComponent<infoScript>().selProp.transform.GetChild(0).gameObject.SetActive(false);
-                infoPanel.GetComponent<infoScript>().selProp.transform.GetChild(0).GetComponent<influence>().removeHighlights();
+                if (infoPanel.GetComponent<infoScript>().selProp.transform.GetChild(0).name == "Influence")
+                {
+                    infoPanel.GetComponent<infoScript>().selProp.transform.GetChild(0).gameObject.SetActive(false);
+                    infoPanel.GetComponent<infoScript>().selProp.transform.GetChild(0).GetComponent<influence>().removeHighlights();
+                }
             }
             dragging = true;
         }

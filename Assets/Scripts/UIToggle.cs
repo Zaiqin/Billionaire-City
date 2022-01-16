@@ -34,6 +34,15 @@ public class UIToggle : MonoBehaviour
     public void toggleToggles(GameObject sel)
     {
         print("Selected " + sel);
+        if (GameObject.Find("infoPanel") != null)
+        {
+            GameObject highlightedProp = GameObject.Find("infoPanel").GetComponent<infoScript>().highlightedProp;
+            highlightedProp.GetComponent<SpriteRenderer>().material.color = Color.white;
+            if (highlightedProp.GetComponent<Property>().Card.type == "House" && highlightedProp.transform.childCount == 4)
+            {
+                Destroy(highlightedProp.transform.GetChild(3).gameObject);
+            }
+        }
 
         if (sel == shopToggle)
         {

@@ -306,6 +306,7 @@ public class moneyPickupScript : MonoBehaviour, IPointerClickHandler
             }
             float percent = 1 + (((float)totalDecoBonus) / 100);
             long finalProfit = (long)((float)profit * percent);
+            finalProfit = (long)((float)profit * GameObject.Find("Stats").GetComponent<Statistics>().wonderBonus);
             print("profit is " + profit + ", final profit is " + finalProfit);
 
             if (profit != 0)

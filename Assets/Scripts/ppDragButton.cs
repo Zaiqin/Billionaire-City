@@ -109,7 +109,8 @@ public class ppDragButton : MonoBehaviour
                 pp.transform.GetChild(0).gameObject.AddComponent<BoxCollider2D>();
                 pp.transform.GetChild(2).gameObject.AddComponent<BoxCollider2D>();
                 pp.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2; //shows contract
-            } else if (pCard.type == "Commerce")
+            }
+            if (pCard.type == "Commerce")
             {
                 pp.transform.GetChild(0).gameObject.AddComponent<BoxCollider2D>();
                 pp.transform.GetChild(1).gameObject.AddComponent<BoxCollider2D>();
@@ -124,7 +125,6 @@ public class ppDragButton : MonoBehaviour
                 pp.transform.GetChild(0).gameObject.SetActive(false);
                 pp.transform.GetChild(0).GetComponent<influence>().removeHighlights();
             }
-
             if (pp.Card.type == "Deco")
             {
                 pp.transform.GetChild(0).gameObject.AddComponent<BoxCollider2D>();
@@ -138,6 +138,10 @@ public class ppDragButton : MonoBehaviour
                 Destroy(a.transform.GetChild(0).GetComponent<BoxCollider2D>());
                 pp.transform.GetChild(0).gameObject.SetActive(false);
 
+            }
+            if (pp.Card.type == "Wonder")
+            {
+                stats.GetComponent<Statistics>().wonderBonus += pp.Card.wonderBonus;
             }
             // --------------------- Swapping to green border grass -------------
             if (pp.Card.type != "Deco")

@@ -25,6 +25,7 @@ public class PropertyCard
     public string buildTime;
     public int XP;
     public int level;
+    public int wonderBonus;
     public Sprite bgImage;
     public Sprite propImage;
 

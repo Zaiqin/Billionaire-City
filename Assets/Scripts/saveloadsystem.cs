@@ -440,5 +440,9 @@ public class saveloadsystem : MonoBehaviour
             pp.transform.GetChild(0).gameObject.AddComponent<BoxCollider2D>();
             pp.transform.GetChild(0).gameObject.SetActive(false);
         }
+        else if (pp.Card.type == "Wonder") // check to only do these thats only for houses
+        {
+            Stats.GetComponent<Statistics>().wonderBonus += pp.Card.wonderBonus;
+        }
     }
 }

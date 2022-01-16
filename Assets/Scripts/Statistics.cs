@@ -12,6 +12,7 @@ public class Statistics : MonoBehaviour
     public string cityName;
     public int noOfPlots;
     public long expCost;
+    public int wonderBonus;
 
     public Text moneyText;
     public Text goldText;
@@ -33,6 +34,12 @@ public class Statistics : MonoBehaviour
     [SerializeField] private GameObject csvObj, levelUpScreen, externalAudioPlayer, inputText;
     [SerializeField] private ParticleSystem particle;
     [SerializeField] private AudioClip levelUp;
+
+    [ContextMenu("Whats the Wonder Bonus")]
+    public void func()
+    {
+        print("Wonder bonus at " + wonderBonus + "%");
+    }
 
     [ContextMenu("Input Values into Game")]
     public void inputValues()

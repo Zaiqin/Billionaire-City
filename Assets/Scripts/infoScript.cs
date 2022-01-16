@@ -99,7 +99,9 @@ public class infoScript : MonoBehaviour
                     }
                     float percent = 1 + (((float)totalDecoBonus) / 100);
                     long finalProfit = (long)((float)tempIncome * percent);
-                    //print("profit is " + tempIncome + ", final profit is " + finalProfit);
+                    float wonderPercent = 1 + (((float)(GameObject.Find("Stats").GetComponent<Statistics>().wonderBonus)) / 100);
+                    finalProfit = (long)((float)finalProfit * wonderPercent);
+                    print("profit is " + tempIncome + ", final profit is " + finalProfit);
 
                     if (finalProfit >= 100000000 && remainingSpan > TimeSpan.Zero)
                     {
@@ -204,7 +206,7 @@ public class infoScript : MonoBehaviour
             //info script showing non houses
             nameText.SetActive(false); fillBg.SetActive(false); fill.SetActive(false); timeText.SetActive(false); incomeText.SetActive(false); time.SetActive(false); money.SetActive(false); xpIcon.SetActive(false); xpText.SetActive(false);
             this.GetComponent<Image>().sprite = smallBg;
-            tenantsText.GetComponent<Text>().text = "+ ? %";
+            tenantsText.GetComponent<Text>().text = "+ " + selProp.GetComponent<Property>().Card.wonderBonus.ToString() + " %";
             custHeader.GetComponent<Text>().text = "Wonder Bonus";
             incomeHeader.GetComponent<Text>().text = selProp.GetComponent<Property>().Card.displayName;
             incomeHeader.SetActive(true);
@@ -349,7 +351,7 @@ public class infoScript : MonoBehaviour
         {
             //info script showing non houses
             this.GetComponent<Image>().sprite = smallBg;
-            tenantsText.GetComponent<Text>().text = "+ ? %";
+            tenantsText.GetComponent<Text>().text = "+ " + selProp.GetComponent<Property>().Card.wonderBonus.ToString() + " % ";
             custHeader.GetComponent<Text>().text = "Wonder Bonus";
             incomeHeader.GetComponent<Text>().text = selProp.GetComponent<Property>().Card.displayName;
             incomeHeader.SetActive(true);
