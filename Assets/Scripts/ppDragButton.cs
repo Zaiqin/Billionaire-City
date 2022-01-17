@@ -169,6 +169,7 @@ public class ppDragButton : MonoBehaviour
             if (pp.Card.type == "Wonder")
             {
                 stats.GetComponent<Statistics>().wonderBonus += pp.Card.wonderBonus;
+                stats.GetComponent<Statistics>().builtWonders.Add(pp.Card.displayName);
             }
             // --------------------- Swapping to green border grass -------------
             if (pp.Card.type != "Deco")

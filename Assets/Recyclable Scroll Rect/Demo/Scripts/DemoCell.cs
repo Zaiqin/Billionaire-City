@@ -12,6 +12,8 @@ public class DemoCell : MonoBehaviour, ICell
 {
     //UI
     public Image bgImage;
+    public Sprite buyButtonFadedSprite;
+    public Sprite buyButtonSprite;
     public Button buyButton;
     public Button infoButton;
     public GameObject infoParent;
@@ -65,6 +67,8 @@ public class DemoCell : MonoBehaviour, ICell
     //This is called from the SetCell method in DataSource
     public void ConfigureCell(PropertyCard propertyCard, int cellIndex, string propertyType)
     {
+        stats = GameObject.FindGameObjectWithTag("Stats").GetComponent<Statistics>();
+
         _cellIndex = cellIndex;
         _propertyCard = propertyCard;
 
@@ -104,6 +108,14 @@ public class DemoCell : MonoBehaviour, ICell
                 infoBG.sprite = infoBg3;
                 break;
             case "Wonder":
+                foreach (var item in stats.GetComponent<Statistics>().builtWonders)
+                {
+                    if (item == propertyCard.displayName)
+                    {
+                        buyButton.interactable = false;
+                        buyButton.image.sprite = buyButtonFadedSprite;
+                    }
+                }
                 firstImg.sprite = buildTime;
                 firstText.text = propertyCard.buildTime;
                 secondImg.sprite = size;
@@ -118,7 +130,6 @@ public class DemoCell : MonoBehaviour, ICell
         }
         bgImage.sprite = propertyCard.bgImage;
 
-        stats = GameObject.FindGameObjectWithTag("Stats").GetComponent<Statistics>();
         //print("in democell, level is " + stats.returnStats()[2]);
         if (propertyCard.level > stats.returnStats()[2])
         {

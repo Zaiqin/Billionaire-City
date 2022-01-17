@@ -13,6 +13,7 @@ public class Statistics : MonoBehaviour
     public int noOfPlots;
     public long expCost;
     public int wonderBonus;
+    public List<string> builtWonders;
 
     public Text moneyText;
     public Text goldText;

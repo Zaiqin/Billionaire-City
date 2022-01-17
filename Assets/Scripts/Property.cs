@@ -195,7 +195,7 @@ public class Property : MonoBehaviour, IPointerClickHandler
             }
             if (this.Card.type == "House")
             {
-                if (this.transform.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder == 0 && this.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder == 0 && this.transform.childCount <= 3) {
+                if (this.transform.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder == 0 && this.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder == 0 && this.transform.childCount <= 3 && this.transform.parent.name == "Properties") {
                     GameObject decoObj = Instantiate(Resources.Load<GameObject>("decoObj"), new Vector3(this.transform.position.x + (float.Parse(this.Card.space.Substring(0, 1))) / 2, this.transform.position.y, -5f), Quaternion.identity) as GameObject;
                     decoObj.transform.parent = this.gameObject.transform;
                     decoObj.transform.GetChild(1).GetComponent<TextMesh>().text = "+" + bonus.ToString() + "%";
@@ -304,9 +304,12 @@ public class moneyPickupScript : MonoBehaviour, IPointerClickHandler
             {
                 totalDecoBonus += GameObject.Find(item.name).GetComponent<Property>().Card.decoBonus;
             }
+            print("decoBonus is " + totalDecoBonus);
             float percent = 1 + (((float)totalDecoBonus) / 100);
             long finalProfit = (long)((float)profit * percent);
-            finalProfit = (long)((float)profit * GameObject.Find("Stats").GetComponent<Statistics>().wonderBonus);
+            print("profit is " + profit + ", final profit is " + finalProfit);
+            float wonderPercent = 1 + (((float)(GameObject.Find("Stats").GetComponent<Statistics>().wonderBonus)) / 100);
+            finalProfit = (long)((float)finalProfit * wonderPercent);
             print("profit is " + profit + ", final profit is " + finalProfit);
 
             if (profit != 0)

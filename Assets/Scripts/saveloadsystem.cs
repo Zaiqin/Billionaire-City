@@ -443,6 +443,7 @@ public class saveloadsystem : MonoBehaviour
         else if (pp.Card.type == "Wonder") // check to only do these thats only for houses
         {
             Stats.GetComponent<Statistics>().wonderBonus += pp.Card.wonderBonus;
+            Stats.GetComponent<Statistics>().builtWonders.Add(pp.Card.displayName);
         }
     }
 }

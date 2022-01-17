@@ -139,6 +139,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bgImage: {fileID: 6607455146852868338}
+  buyButtonFadedSprite: {fileID: 21300000, guid: c576bce4775dba448933270cfc87f89e,
+    type: 3}
+  buyButtonSprite: {fileID: 21300000, guid: 0ca220828bb9f4857ae5fec8cacae1cc, type: 3}
   buyButton: {fileID: 2433357107273617212}
   infoButton: {fileID: 6701478797425871693}
   infoParent: {fileID: 3047720057771912394}
@@ -352,7 +355,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -0.40000153, y: -3.5}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &3736029196476691241
@@ -1136,7 +1139,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -3.699997, y: -124.6}
+  m_AnchoredPosition: {x: -3.699997, y: -119.7}
   m_SizeDelta: {x: 61.3438, y: 61.3438}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3488498019795360618
@@ -1381,7 +1384,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -4.9991913, y: -123.50013}
+  m_AnchoredPosition: {x: -4.9991913, y: -118.600006}
   m_SizeDelta: {x: 100, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2343827935118044190
@@ -1459,7 +1462,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 73.5, y: 99.9}
+  m_AnchoredPosition: {x: 72.2, y: 96.4}
   m_SizeDelta: {x: 40.1059, y: 38.0199}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6707384309914991885

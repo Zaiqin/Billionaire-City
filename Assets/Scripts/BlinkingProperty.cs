@@ -41,7 +41,7 @@ public class BlinkingProperty : MonoBehaviour
     {
         if (stop == false)
         {
-            this.GetComponent<Renderer>().material.color = Color.green;
+            this.GetComponent<Renderer>().material.color = Color.yellow;
         }
         yield return new WaitForSeconds(0.25f);
         if (stop == false)
