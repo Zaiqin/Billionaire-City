@@ -17,7 +17,6 @@ public class Statistics : MonoBehaviour
     public int doubleChance;
     public List<string> builtWonders;
     public List<string> commerceWonders;
-    public List<string> dailyWonders;
 
     public Text moneyText;
     public Text goldText;

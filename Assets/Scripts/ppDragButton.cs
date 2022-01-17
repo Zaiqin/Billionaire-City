@@ -170,7 +170,7 @@ public class ppDragButton : MonoBehaviour
             {
                 
                 stats.GetComponent<Statistics>().builtWonders.Add(pp.Card.displayName);
-                if (pp.Card.wonderBonus >= 100 && pp.Card.wonderBonus < 1000) 
+                if (pp.Card.wonderBonus >= 100) 
                 { 
                     stats.GetComponent<Statistics>().doubleChance += (int)(((float)pp.Card.wonderBonus) / 100);
                 } else if (pp.Card.wonderBonus > 10 && pp.Card.wonderBonus < 100)

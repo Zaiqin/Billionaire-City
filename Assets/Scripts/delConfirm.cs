@@ -12,7 +12,7 @@ public class delConfirm : MonoBehaviour
         print("xy is " + selProp.GetComponent<Draggable>().XY[0] + "card is " + selProp.GetComponent<Property>().Card);
         if (selProp.GetComponent<Property>().Card.type == "Wonder")
         {
-            if (selProp.GetComponent<Property>().Card.wonderBonus >= 100 && selProp.GetComponent<Property>().Card.wonderBonus < 1000)
+            if (selProp.GetComponent<Property>().Card.wonderBonus >= 100)
             {
                 statsObj.GetComponent<Statistics>().doubleChance -= (int)(((float)selProp.GetComponent<Property>().Card.wonderBonus) / 100);
             }

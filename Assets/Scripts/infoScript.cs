@@ -208,11 +208,7 @@ public class infoScript : MonoBehaviour
             //info script showing non houses
             nameText.SetActive(false); fillBg.SetActive(false); fill.SetActive(false); timeText.SetActive(false); incomeText.SetActive(false); time.SetActive(false); money.SetActive(false); xpIcon.SetActive(false); xpText.SetActive(false);
             this.GetComponent<Image>().sprite = smallBg;
-            if (selProp.GetComponent<Property>().Card.wonderBonus > 1000)
-            {
-                tenantsText.GetComponent<Text>().text = "$" + selProp.GetComponent<Property>().Card.wonderBonus.ToString("#,##0") + " Daily";
-            }
-            else if (selProp.GetComponent<Property>().Card.wonderBonus >= 100)
+            if (selProp.GetComponent<Property>().Card.wonderBonus >= 100)
             {
                 tenantsText.GetComponent<Text>().text = (((float)selProp.GetComponent<Property>().Card.wonderBonus) / 100).ToString() + "% Double Rent";
             }
@@ -370,11 +366,7 @@ public class infoScript : MonoBehaviour
         {
             //info script showing non houses
             this.GetComponent<Image>().sprite = smallBg;
-            if (selProp.GetComponent<Property>().Card.wonderBonus > 1000)
-            {
-                tenantsText.GetComponent<Text>().text = "$" + selProp.GetComponent<Property>().Card.wonderBonus.ToString("#,##0") + " Daily";
-            }
-            else if (selProp.GetComponent<Property>().Card.wonderBonus >= 100)
+            if (selProp.GetComponent<Property>().Card.wonderBonus >= 100)
             {
                 tenantsText.GetComponent<Text>().text = (((float)selProp.GetComponent<Property>().Card.wonderBonus) / 100).ToString() + "% Double Rent";
             }

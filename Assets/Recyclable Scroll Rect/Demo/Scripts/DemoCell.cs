@@ -125,11 +125,7 @@ public class DemoCell : MonoBehaviour, ICell
                 secondImg.sprite = size;
                 secondText.text = propertyCard.space;
                 thirdImg.sprite = bonus;
-                if (propertyCard.wonderBonus > 1000)
-                {
-                    thirdText.text = "$" + propertyCard.wonderBonus.ToString("#,##0") + " Daily";
-                }
-                else if (propertyCard.wonderBonus >= 100)
+                if (propertyCard.wonderBonus >= 100)
                 {
                     thirdText.text = (((float)propertyCard.wonderBonus) / 100).ToString() + "% Rent x2";
                 }
