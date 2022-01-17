@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using PolyAndCode.UI;
 using System;
+using System.Collections.Generic;
 
 //Cell class for demo. A cell in Recyclable Scroll Rect must have a cell class inheriting from ICell.
 //The class is required to configure the cell(updating UI elements etc) according to the data during recycling of cells.
@@ -34,65 +35,86 @@ public class ContractCell : MonoBehaviour, ICell
     }
 
     //This is called from the SetCell method in DataSource
-    public void ConfigureCell(Sprite bgSprite, PropertyCard pCard, int cellIndex)
+    public void ConfigureCell(Sprite bgSprite, PropertyCard pCard, int cellIndex, GameObject selProp)
     {
         _cellIndex = cellIndex;
         bgImage.sprite = bgSprite;
 
+        int tempIncome = 0;
         switch (cellIndex)
         {
             case 0:
-                incomeText.text = "$" + pCard.threemins.ToString("#,##0");
+                tempIncome = pCard.threemins;
                 tenantsText.text = pCard.tenants.ToString();
                 xpText.text = pCard.XP + " XP";
                 break;
             case 1:
-                incomeText.text = "$" + pCard.thirtymins.ToString("#,##0");
+                tempIncome = pCard.thirtymins;
                 tenantsText.text = (pCard.tenants*2).ToString();
                 xpText.text = (pCard.XP*2) + " XP";
                 break;
             case 2:
-                incomeText.text = "$" + pCard.onehour.ToString("#,##0");
+                tempIncome = pCard.onehour;
                 tenantsText.text = (pCard.tenants * 3).ToString();
                 xpText.text = (pCard.XP * 3) + " XP";
                 break;
             case 3:
-                incomeText.text = "$" + pCard.fourhours.ToString("#,##0");
+                tempIncome = pCard.fourhours;
                 tenantsText.text = (pCard.tenants * 4).ToString();
                 xpText.text = (pCard.XP * 4) + " XP";
                 break;
             case 4:
-                incomeText.text = "$" + pCard.eighthours.ToString("#,##0");
+                tempIncome = pCard.eighthours;
                 tenantsText.text = (pCard.tenants * 5).ToString();
                 xpText.text = (pCard.XP * 5) + " XP";
                 break;
             case 5:
-                incomeText.text = "$" + pCard.twelvehours.ToString("#,##0");
+                tempIncome = pCard.twelvehours;
                 tenantsText.text = (pCard.tenants * 6).ToString();
                 xpText.text = (pCard.XP * 6) + " XP";
                 break;
             case 6:
-                incomeText.text = "$" + pCard.oneday.ToString("#,##0");
+                tempIncome = pCard.oneday;
                 tenantsText.text = (pCard.tenants * 7).ToString();
                 xpText.text = (pCard.XP * 7) + " XP";
                 break;
             case 7:
-                incomeText.text = "$" + pCard.twodays.ToString("#,##0");
+                tempIncome = pCard.twodays;
                 tenantsText.text = (pCard.tenants * 8).ToString();
                 xpText.text = (pCard.XP * 8) + " XP";
                 break;
             case 8:
-                incomeText.text = "$" + pCard.threedays.ToString("#,##0");
+                tempIncome = pCard.threedays;
                 tenantsText.text = (pCard.tenants * 9).ToString();
                 xpText.text = (pCard.XP * 9) + " XP";
                 break;
             default:
-                incomeText.text = "$" + pCard.threemins.ToString("#,##0");
+                tempIncome = pCard.threemins;
                 tenantsText.text = pCard.tenants.ToString();
                 xpText.text = pCard.XP + " XP";
                 break;
         }
-        
+
+        // ---- Checking what houses it affects ---------
+        selProp.transform.GetChild(2).gameObject.SetActive(true);
+        selProp.transform.GetChild(2).GetComponent<SpriteRenderer>().color = new Color(0f, 0f, 0f, 0f);
+        List<Collider2D> infList = selProp.transform.GetChild(2).GetComponent<detectDecoInf>().returnHighlights();
+        selProp.transform.GetChild(2).GetComponent<SpriteRenderer>().color = new Color(35f / 255f, 206f / 255f, 241f / 255f, 125f / 255f);
+        selProp.transform.GetChild(2).gameObject.SetActive(false);
+        //------------------------------------------------
+
+        int totalDecoBonus = 0;
+        foreach (Collider2D item in infList)
+        {
+            totalDecoBonus += GameObject.Find(item.name).GetComponent<Property>().Card.decoBonus;
+        }
+        float percent = 1 + (((float)totalDecoBonus) / 100);
+        long finalProfit = (long)((float)tempIncome * percent);
+        float wonderPercent = 1 + (((float)(GameObject.Find("Stats").GetComponent<Statistics>().wonderBonus)) / 100);
+        finalProfit = (long)((float)finalProfit * wonderPercent);
+        print("profit is " + tempIncome + ", final profit is " + finalProfit);
+
+        incomeText.text = "$" + finalProfit.ToString("#,##0");
 
     }
 
