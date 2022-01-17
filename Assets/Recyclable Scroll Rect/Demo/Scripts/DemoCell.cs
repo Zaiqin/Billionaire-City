@@ -87,7 +87,7 @@ public class DemoCell : MonoBehaviour, ICell
                 break;
             case "Commerce":
                 firstImg.sprite = income;
-                secondImg.sprite = time;
+                secondImg.sprite = buildTime;
                 thirdImg.sprite = radius;
                 fourthImg.sprite = size;
                 firstText.text= "$" + propertyCard.rentPerTenant.ToString();
