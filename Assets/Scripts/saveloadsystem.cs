@@ -442,7 +442,19 @@ public class saveloadsystem : MonoBehaviour
         }
         else if (pp.Card.type == "Wonder") // check to only do these thats only for houses
         {
-            Stats.GetComponent<Statistics>().wonderBonus += pp.Card.wonderBonus;
+            if (pp.Card.wonderBonus >= 100 && pp.Card.wonderBonus < 1000)
+            {
+                Stats.GetComponent<Statistics>().doubleChance += (int)(((float)pp.Card.wonderBonus) / 100);
+            }
+            else if (pp.Card.wonderBonus > 10 && pp.Card.wonderBonus < 100)
+            {
+                Stats.GetComponent<Statistics>().wonderCommerceBonus += (int)(((float)pp.Card.wonderBonus) / 10);
+                Stats.GetComponent<Statistics>().commerceWonders.Add(pp.Card.displayName);
+            }
+            else if (pp.Card.wonderBonus < 10)
+            {
+                Stats.GetComponent<Statistics>().wonderBonus += pp.Card.wonderBonus;
+            }
             Stats.GetComponent<Statistics>().builtWonders.Add(pp.Card.displayName);
         }
     }

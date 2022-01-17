@@ -13,7 +13,11 @@ public class Statistics : MonoBehaviour
     public int noOfPlots;
     public long expCost;
     public int wonderBonus;
+    public int wonderCommerceBonus;
+    public int doubleChance;
     public List<string> builtWonders;
+    public List<string> commerceWonders;
+    public List<string> dailyWonders;
 
     public Text moneyText;
     public Text goldText;
@@ -39,7 +43,7 @@ public class Statistics : MonoBehaviour
     [ContextMenu("Whats the Wonder Bonus")]
     public void func()
     {
-        print("Wonder bonus at " + wonderBonus + "%");
+        print("Wonder House bonus at " + wonderBonus + "%, Commerce Bonus at " + wonderCommerceBonus + "%");
     }
 
     [ContextMenu("Input Values into Game")]

@@ -312,6 +312,14 @@ public class moneyPickupScript : MonoBehaviour, IPointerClickHandler
             finalProfit = (long)((float)finalProfit * wonderPercent);
             print("profit is " + profit + ", final profit is " + finalProfit);
 
+            print("double rent chance is " + ((float)(GameObject.Find("Stats").GetComponent<Statistics>().doubleChance)) + "%");
+            float m_dropChance = ((float)(GameObject.Find("Stats").GetComponent<Statistics>().doubleChance)) / 10f;
+            if (UnityEngine.Random.Range(0f, 1f) <= m_dropChance)
+            {
+                print("Double rent!!");
+                finalProfit = finalProfit * 2;
+            }
+
             if (profit != 0)
             {
                 GameObject.Find("Stats").GetComponent<Statistics>().updateStats(diffmoney: finalProfit, diffxp: xp);
@@ -371,6 +379,7 @@ public class commercePickupScript : MonoBehaviour, IPointerClickHandler
             //------------------------------------------------
 
             long finalIncome = 0;
+            float percent = 1 + (((float)GameObject.Find("Stats").GetComponent<Statistics>().wonderCommerceBonus) / 10);
             foreach (Collider2D item in infList)
             {
                 GameObject obj = GameObject.Find(item.name);
@@ -391,12 +400,15 @@ public class commercePickupScript : MonoBehaviour, IPointerClickHandler
                     
                     print("added " + (obj.GetComponent<Property>().Card.tenants* (obj.transform.GetChild(0).GetComponent<contractScript>().signIndex+1)) + "tenants from " + obj);
                     GameObject alue = Instantiate(Resources.Load<GameObject>("floatingParent"), new Vector3(obj.transform.GetChild(0).position.x, obj.transform.GetChild(0).position.y + 1.2f, obj.transform.GetChild(0).position.z), Quaternion.identity) as GameObject;
-                    alue.transform.GetChild(0).GetComponent<TextMesh>().text = "+ $" + (long)obj.GetComponent<Property>().Card.tenants * (obj.transform.GetChild(0).GetComponent<contractScript>().signIndex+1) * propCard.rentPerTenant;
+                    alue.transform.GetChild(0).GetComponent<TextMesh>().text = "+ $" + (long)((float)(obj.GetComponent<Property>().Card.tenants * (obj.transform.GetChild(0).GetComponent<contractScript>().signIndex + 1) * propCard.rentPerTenant) * percent);
                     alue.transform.GetChild(0).GetComponent<TextMesh>().color = new Color(168f / 255f, 255f / 255f, 4f / 255f);
                 }
             }
-            print("final income is " + finalIncome);
-            GameObject.Find("Stats").GetComponent<Statistics>().updateStats(diffmoney: finalIncome);
+
+            long finalProfit = (long)((float)finalIncome * percent);
+            print("final profit is " + finalProfit);
+
+            GameObject.Find("Stats").GetComponent<Statistics>().updateStats(diffmoney: finalProfit);
             GameObject.Find("ExternalAudioPlayer").GetComponent<AudioSource>().PlayOneShot(Resources.Load<AudioClip>("Audio/money"));
 
             DateTime theTime;

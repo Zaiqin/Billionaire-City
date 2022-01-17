@@ -64144,6 +64144,8 @@ MonoBehaviour:
   cityName: 
   noOfPlots: 0
   expCost: 0
+  wonderBonus: 0
+  builtWonders: []
   moneyText: {fileID: 1718816115}
   goldText: {fileID: 1364769763}
   levelText: {fileID: 1466641800}

@@ -170,7 +170,9 @@ public class infoScript : MonoBehaviour
                 fill.SetActive(true);
                 fillBg.SetActive(true);
                 fill.GetComponent<Image>().fillAmount = (float)(remainingSpan.TotalSeconds / fullSpan.TotalSeconds);
-                incomeText.GetComponent<Text>().text = "$" + finalIncome.ToString("#,##0");
+                float percent = 1 + (((float)GameObject.Find("Stats").GetComponent<Statistics>().wonderCommerceBonus) / 10);
+                long finalProfit = (long)((float)finalIncome * percent);
+                incomeText.GetComponent<Text>().text = "$" + finalProfit.ToString("#,##0");
                 if (diff.Minutes != 0)
                 {
                     timeText.GetComponent<Text>().text = string.Format("{0:D1} min {1:D2} sec", diff.Minutes, diff.Seconds);
@@ -206,7 +208,22 @@ public class infoScript : MonoBehaviour
             //info script showing non houses
             nameText.SetActive(false); fillBg.SetActive(false); fill.SetActive(false); timeText.SetActive(false); incomeText.SetActive(false); time.SetActive(false); money.SetActive(false); xpIcon.SetActive(false); xpText.SetActive(false);
             this.GetComponent<Image>().sprite = smallBg;
-            tenantsText.GetComponent<Text>().text = "+ " + selProp.GetComponent<Property>().Card.wonderBonus.ToString() + " %";
+            if (selProp.GetComponent<Property>().Card.wonderBonus > 1000)
+            {
+                tenantsText.GetComponent<Text>().text = "$" + selProp.GetComponent<Property>().Card.wonderBonus.ToString("#,##0") + " Daily";
+            }
+            else if (selProp.GetComponent<Property>().Card.wonderBonus >= 100)
+            {
+                tenantsText.GetComponent<Text>().text = (((float)selProp.GetComponent<Property>().Card.wonderBonus) / 100).ToString() + "% Double Rent";
+            }
+            else if (selProp.GetComponent<Property>().Card.wonderBonus > 10)
+            {
+                tenantsText.GetComponent<Text>().text = "+ " + (((float)selProp.GetComponent<Property>().Card.wonderBonus) / 10).ToString() + "% Commerce";
+            }
+            else
+            {
+                tenantsText.GetComponent<Text>().text = "+ " + selProp.GetComponent<Property>().Card.wonderBonus.ToString() + "% Houses";
+            }
             custHeader.GetComponent<Text>().text = "Wonder Bonus";
             incomeHeader.GetComponent<Text>().text = selProp.GetComponent<Property>().Card.displayName;
             incomeHeader.SetActive(true);
@@ -317,7 +334,9 @@ public class infoScript : MonoBehaviour
                 fill.SetActive(true);
                 fillBg.SetActive(true);
                 fill.GetComponent<Image>().fillAmount = (float)(remainingSpan.TotalSeconds / fullSpan.TotalSeconds);
-                incomeText.GetComponent<Text>().text = "$" + finalIncome.ToString("#,##0");
+                float percent = 1 + (((float)GameObject.Find("Stats").GetComponent<Statistics>().wonderCommerceBonus) / 10);
+                long finalProfit = (long)((float)finalIncome * percent);
+                incomeText.GetComponent<Text>().text = "$" + finalProfit.ToString("#,##0");
                 if (diff.Minutes != 0)
                 {
                     timeText.GetComponent<Text>().text = string.Format("{0:D1} min {1:D2} sec", diff.Minutes, diff.Seconds);
@@ -351,7 +370,22 @@ public class infoScript : MonoBehaviour
         {
             //info script showing non houses
             this.GetComponent<Image>().sprite = smallBg;
-            tenantsText.GetComponent<Text>().text = "+ " + selProp.GetComponent<Property>().Card.wonderBonus.ToString() + " % ";
+            if (selProp.GetComponent<Property>().Card.wonderBonus > 1000)
+            {
+                tenantsText.GetComponent<Text>().text = "$" + selProp.GetComponent<Property>().Card.wonderBonus.ToString("#,##0") + " Daily";
+            }
+            else if (selProp.GetComponent<Property>().Card.wonderBonus >= 100)
+            {
+                tenantsText.GetComponent<Text>().text = (((float)selProp.GetComponent<Property>().Card.wonderBonus) / 100).ToString() + "% Double Rent";
+            }
+            else if (selProp.GetComponent<Property>().Card.wonderBonus > 10)
+            {
+                tenantsText.GetComponent<Text>().text = "+ " + (((float)selProp.GetComponent<Property>().Card.wonderBonus) / 10).ToString() + "% Commerce";
+            }
+            else
+            {
+                tenantsText.GetComponent<Text>().text = "+ " + selProp.GetComponent<Property>().Card.wonderBonus.ToString() + "% Houses";
+            }
             custHeader.GetComponent<Text>().text = "Wonder Bonus";
             incomeHeader.GetComponent<Text>().text = selProp.GetComponent<Property>().Card.displayName;
             incomeHeader.SetActive(true);

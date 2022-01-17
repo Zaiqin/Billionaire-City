@@ -168,8 +168,21 @@ public class ppDragButton : MonoBehaviour
             }
             if (pp.Card.type == "Wonder")
             {
-                stats.GetComponent<Statistics>().wonderBonus += pp.Card.wonderBonus;
+                
                 stats.GetComponent<Statistics>().builtWonders.Add(pp.Card.displayName);
+                if (pp.Card.wonderBonus >= 100 && pp.Card.wonderBonus < 1000) 
+                { 
+                    stats.GetComponent<Statistics>().doubleChance += (int)(((float)pp.Card.wonderBonus) / 100);
+                } else if (pp.Card.wonderBonus > 10 && pp.Card.wonderBonus < 100)
+                {
+                    print("added wonder commerce");
+                    stats.GetComponent<Statistics>().wonderCommerceBonus += (int)(((float)pp.Card.wonderBonus)/10);
+                    stats.GetComponent<Statistics>().commerceWonders.Add(pp.Card.displayName);
+                }
+                else
+                {
+                    stats.GetComponent<Statistics>().wonderBonus += pp.Card.wonderBonus;
+                }
             }
             // --------------------- Swapping to green border grass -------------
             if (pp.Card.type != "Deco")

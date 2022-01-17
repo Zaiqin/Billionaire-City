@@ -124,15 +124,15 @@ discovery,12500,4x3,,,,,,,,,,,discoveryCard,,,,,Discovery,,14 days,43,7,,,,,,,,,
 pyramid,15000,4x3,,,,,,,,,,,pyramidCard,,,,,Pyramid,,14 days,50,12,,,,,,,,,,18844100000000,,1
 lasagradafamilia,5500000,6x4,,,,,,,,,,,lasagradafamiliaCard,,,,,La Sagrada Familia,,35 days,13335,15,,,,,,,,,,21520500000000,,2
 yellowsubmarine,5000000,6x2,,,,,,,,,,,yellowsubmarineCard,,,,,Yellow Submarine,,35 days,3250,16,,,,,,,,,,25851100000000,,3
-atomium,5000000,4x4,,,,,,,,,,,atomiumCard,,,,,Atomium,,35 days,3335,17,,,,,,,,,,30042400000000,,2
-eiffeltower,150000,4x4,,,,,,,,,,,eiffeltowerCard,,,,,Eiffel Tower,,22 days,500,20,,,,,,,,,,35202700000000,,2
-chichenitza,9000000,4x4,,,,,,,,,,,chichenitzaCard,,,,,Chichen Itza,,35 days,21665,22,,,,,,,,,,43886300000000,,2
+atomium,5000000,4x4,,,,,,,,,,,atomiumCard,,,,,Atomium,,35 days,3335,17,,,,,,,,,,30042400000000,,20
+eiffeltower,150000,4x4,,,,,,,,,,,eiffeltowerCard,,,,,Eiffel Tower,,22 days,500,20,,,,,,,,,,35202700000000,,20
+chichenitza,9000000,4x4,,,,,,,,,,,chichenitzaCard,,,,,Chichen Itza,,35 days,21665,22,,,,,,,,,,43886300000000,,20
 ronaldstatue,175000,2x2,,,,,,,,,,,ronaldstatueCard,,,,,Ronald Statue,,34 days,585,25,,,,,,,,,,53270200000000,,5000
-colosseo,900000,5x5,,,,,,,,,,,colosseoCard,,,,,Colosseo,,22 days,3000,26,,,,,,,,,,65833900000000,,2
+colosseo,900000,5x5,,,,,,,,,,,colosseoCard,,,,,Colosseo,,22 days,3000,26,,,,,,,,,,65833900000000,,20
 statueofliberty,175000,4x4,,,,,,,,,,,statueoflibertyCard,,,,,Statue of Liberty,,35 days,585,30,,,,,,,,,,82518600000000,,10000
 stonehenge,7000000,5x3,,,,,,,,,,,stonehengeCard,,,,,Stonehenge,,35 days,23335,30,,,,,,,,,,100134000000000,,2
 tajmahal,12000000,4x6,,,,,,,,,,,tajmahalCard,,,,,Taj Mahal,,35 days,40000,36,,,,,,,,,,124792000000000,,5
-corcovado,8000000,6x5,,,,,,,,,,,corcovadoCard,,,,,Corcovado,,35 days,26665,39,,,,,,,,,,144120000000000,,2
+corcovado,8000000,6x5,,,,,,,,,,,corcovadoCard,,,,,Corcovado,,35 days,26665,39,,,,,,,,,,144120000000000,,20
 chronostower,300000,4x4,,,,,,,,,,,chronostowerCard,,,,,Chronos Tower,,35 days,1000,40,,,,,,,,,,175392000000000,,100
 stbasilscathedral,12000000,6x5,,,,,,,,,,,stbasilscathedralCard,,,,,St Basil's Cathedral,,35 days,50000,45,,,,,,,,,,210864000000000,,7
 dollarsbin,10000000,4x4,,,,,,,,,,,dollarsbinCard,,,,,Dollars Bin,,35 days,3335,48,All wonders less than level 62,,,,,,,,,261314000000000,,200

@@ -116,7 +116,7 @@ public class CSVReader : MonoBehaviour
             //int i is not the counter, instead its used to allow correct entry into each Property Type arrays. It is reset to 0 for each prop Type.
             tempArray[i] = new PropertyCard();
             string propImagePath = data[cols * (masterNo + 2)]; // Prop URL
-            tempArray[i].propName = data[cols * (masterNo + 2)]; print("propname is " + tempArray[i].propName);
+            tempArray[i].propName = data[cols * (masterNo + 2)];
             tempArray[i].cost = data[cols * (masterNo + 2) + 1];
             tempArray[i].space = data[cols * (masterNo + 2) + 2];
             tempArray[i].tenants = string.IsNullOrEmpty(data[(cols * (masterNo + 2)) + 3]) ? 0 : int.Parse(data[(cols * (masterNo + 2)) + 3]);

@@ -108,23 +108,42 @@ public class DemoCell : MonoBehaviour, ICell
                 infoBG.sprite = infoBg3;
                 break;
             case "Wonder":
+                buyButton.interactable = true;
+                buyButton.image.sprite = buyButtonSprite;
                 foreach (var item in stats.GetComponent<Statistics>().builtWonders)
                 {
                     if (item == propertyCard.displayName)
                     {
+                        //print("setting " + propertyCard.displayName + "as faded");
                         buyButton.interactable = false;
                         buyButton.image.sprite = buyButtonFadedSprite;
+                        break;
                     }
                 }
                 firstImg.sprite = buildTime;
                 firstText.text = propertyCard.buildTime;
                 secondImg.sprite = size;
                 secondText.text = propertyCard.space;
-                thirdImg.enabled = false;
-                thirdText.text = "";
+                thirdImg.sprite = bonus;
+                if (propertyCard.wonderBonus > 1000)
+                {
+                    thirdText.text = "$" + propertyCard.wonderBonus.ToString("#,##0") + " Daily";
+                }
+                else if (propertyCard.wonderBonus >= 100)
+                {
+                    thirdText.text = (((float)propertyCard.wonderBonus) / 100).ToString() + "% Rent x2";
+                }
+                else if (propertyCard.wonderBonus > 10)
+                {
+                    thirdText.text = (((float)propertyCard.wonderBonus) / 10).ToString() + "% Commerce";
+                }
+                else
+                {
+                    thirdText.text = propertyCard.wonderBonus.ToString() + "% Houses";
+                }
                 fourthImg.enabled = false;
                 fourthText.text = "";
-                infoBG.sprite = infoBg2;
+                infoBG.sprite = infoBg3;
                 break;
             default: break;
         }
