@@ -72,7 +72,34 @@ public class ppDragButton : MonoBehaviour
         Property pp;
         pp = pendingParent.transform.GetChild(0).gameObject.GetComponent<Property>();
 
-        if (pp.GetComponent<Draggable>().buildable == true)
+        bool canBuild = true;
+
+        if (pp.Card.type == "Deco")
+        {
+            int deduction = 0;
+            if (pp.Card.cost.Contains("Gold"))
+            {
+                deduction = int.Parse(pp.Card.cost.Remove(pp.Card.cost.Length - 5));
+                print("deducting " + deduction + " gold");
+                if (stats.returnStats()[1] < deduction)
+                {
+                    print("insufficient gold");
+                    canBuild = false;
+                }
+            }
+            else
+            {
+                deduction = int.Parse(pp.Card.cost);
+                print("deducting $" + deduction);
+                if (stats.returnStats()[0] < deduction)
+                {
+                    print("insufficient money");
+                    canBuild = false;
+                }
+            }
+        }
+
+        if (pp.GetComponent<Draggable>().buildable == true && canBuild == true)
         {
             shopToggle.GetComponent<Toggle>().isOn = false;
             removePlots(pp.Card, pp.GetComponent<Draggable>().XY);
