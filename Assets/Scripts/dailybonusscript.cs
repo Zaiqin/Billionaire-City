@@ -13,7 +13,7 @@ public class dailybonusscript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        print("daily collected is " + stats.GetComponent<Statistics>().noDailyCollected + ", doing day" + int.Parse(this.transform.parent.name.Substring(this.transform.parent.name.Length - 1)));
+        //print("daily collected is " + stats.GetComponent<Statistics>().noDailyCollected + ", doing day" + int.Parse(this.transform.parent.name.Substring(this.transform.parent.name.Length - 1)));
         if (int.Parse(this.transform.parent.name.Substring(this.transform.parent.name.Length - 1)) > (stats.GetComponent<Statistics>().noDailyCollected + 1))
         {
             this.GetComponent<Button>().image.sprite = faded;
@@ -65,13 +65,13 @@ public class dailybonusscript : MonoBehaviour
             {
                 print("collect gold");
                 string amount = this.transform.parent.GetChild(1).transform.GetChild(1).GetComponent<Text>().text;
-                stats.GetComponent<Statistics>().updateStats(diffgold: long.Parse(amount.Substring(1)));
+                stats.GetComponent<Statistics>().updateStats(diffgold: long.Parse(amount));
             }
             else
             {
                 print("collect xp");
                 string amount = this.transform.parent.GetChild(1).transform.GetChild(1).GetComponent<Text>().text;
-                stats.GetComponent<Statistics>().updateStats(diffxp: long.Parse(amount.Substring(1)));
+                stats.GetComponent<Statistics>().updateStats(diffxp: long.Parse(amount));
             }
 
             stats.GetComponent<Statistics>().noDailyCollected += 1;
