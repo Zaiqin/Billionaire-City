@@ -8,6 +8,8 @@ public class Property : MonoBehaviour, IPointerClickHandler
 {
     public PropertyCard Card;
     public int bonus;
+    public string constructStart;
+    public string constructEnd;
     public void initialise(PropertyCard pcard)
     {
         // Adding propertySprite

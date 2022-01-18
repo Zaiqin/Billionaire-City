@@ -189,6 +189,7 @@ public class ppDragButton : MonoBehaviour
             {
                 map.SwapTile(greenGrass, tileGrass);
                 ppDrag.SetActive(false);
+                //pp.GetComponent<Property>().constructStart
             }
             // ------------------------------------------------------------------
 
