@@ -236,7 +236,7 @@ public class contractScript : MonoBehaviour, IPointerClickHandler
         {
             print("clicked on contract");
             GameObject canvas = GameObject.Find("Canvas");
-            GameObject contractMenu = canvas.transform.GetChild(canvas.transform.childCount - 5).gameObject;
+            GameObject contractMenu = canvas.transform.GetChild(canvas.transform.childCount - 6).gameObject;
             contractMenu.SetActive(true);
             GameObject infoPanel = canvas.transform.GetChild(0).gameObject;
             infoPanel.SetActive(false);
