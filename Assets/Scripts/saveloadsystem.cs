@@ -32,9 +32,11 @@ public class statsSaveForm
     public long xp;
     public string cityName;
     public int noOfPlots;
-    public statsSaveForm(long m, long g, long l, long x, string n, int p)
+    public int noDailyCollected;
+    public string lastDailyCollected;
+    public statsSaveForm(long m, long g, long l, long x, string n, int p, int noD, string lastD)
     {
-        money = m; gold = g; level = l; xp = x; cityName = n; noOfPlots = p;
+        money = m; gold = g; level = l; xp = x; cityName = n; noOfPlots = p; noDailyCollected = noD; lastDailyCollected = lastD;
     }
 }
 
@@ -153,7 +155,7 @@ public class saveloadsystem : MonoBehaviour
         FileHandler.SaveToJSON<propertySaveForm>(propSaveList, "propsSave.json");
 
         // ------------ Saving stats -------------------------------
-        statsSaveForm statsSaveObj = new statsSaveForm(Stats.GetComponent<Statistics>().money, Stats.GetComponent<Statistics>().gold, Stats.GetComponent<Statistics>().level, Stats.GetComponent<Statistics>().xp, cityText.GetComponent<Text>().text, Stats.GetComponent<Statistics>().noOfPlots);
+        statsSaveForm statsSaveObj = new statsSaveForm(Stats.GetComponent<Statistics>().money, Stats.GetComponent<Statistics>().gold, Stats.GetComponent<Statistics>().level, Stats.GetComponent<Statistics>().xp, cityText.GetComponent<Text>().text, Stats.GetComponent<Statistics>().noOfPlots, Stats.GetComponent<Statistics>().noDailyCollected, Stats.GetComponent<Statistics>().lastDailyCollected);
         FileHandler.SaveToJSON<statsSaveForm>(statsSaveObj, "statsSave.json");
 
         // ------------ Saving tilemap -------------------------------
@@ -184,7 +186,7 @@ public class saveloadsystem : MonoBehaviour
     public void saveStats()
     {
         print("Saving Stats");
-        statsSaveForm statsSaveObj = new statsSaveForm(Stats.GetComponent<Statistics>().money, Stats.GetComponent<Statistics>().gold, Stats.GetComponent<Statistics>().level, Stats.GetComponent<Statistics>().xp, cityText.GetComponent<Text>().text, Stats.GetComponent<Statistics>().noOfPlots);
+        statsSaveForm statsSaveObj = new statsSaveForm(Stats.GetComponent<Statistics>().money, Stats.GetComponent<Statistics>().gold, Stats.GetComponent<Statistics>().level, Stats.GetComponent<Statistics>().xp, cityText.GetComponent<Text>().text, Stats.GetComponent<Statistics>().noOfPlots, Stats.GetComponent<Statistics>().noDailyCollected, Stats.GetComponent<Statistics>().lastDailyCollected);
         FileHandler.SaveToJSON<statsSaveForm>(statsSaveObj, "statsSave.json");
         print("Stats saved");
     }
@@ -249,6 +251,17 @@ public class saveloadsystem : MonoBehaviour
             Stats.GetComponent<Statistics>().setStats(statsObj.money, statsObj.gold, statsObj.level, statsObj.xp);
             Stats.GetComponent<Statistics>().cityName = statsObj.cityName;
             Stats.GetComponent<Statistics>().noOfPlots = statsObj.noOfPlots;
+
+            if (statsObj.noDailyCollected == 5)
+            {
+                Stats.GetComponent<Statistics>().noDailyCollected = 0;
+                Stats.GetComponent<Statistics>().lastDailyCollected = "";
+            }
+            else
+            {
+                Stats.GetComponent<Statistics>().noDailyCollected = statsObj.noDailyCollected;
+                Stats.GetComponent<Statistics>().lastDailyCollected = statsObj.lastDailyCollected;
+            }
             print("loaded name is " + statsObj.cityName);
             nameField.text = statsObj.cityName;
             // ----------- Loading Tilemap ------------------

@@ -5,12 +5,17 @@ using UnityEngine.UI;
 using PolyAndCode.UI;
 public class Statistics : MonoBehaviour
 {
+    // --- Saved properties ------
     public long money;
     public long gold;
     public long level;
     public long xp;
     public string cityName;
     public int noOfPlots;
+    public int noDailyCollected;
+    public string lastDailyCollected;
+    // ---------------------------
+
     public long expCost;
     public int wonderBonus;
     public int wonderCommerceBonus;
