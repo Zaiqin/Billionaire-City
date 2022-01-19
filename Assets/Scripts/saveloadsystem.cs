@@ -69,7 +69,6 @@ public class saveloadsystem : MonoBehaviour
     public Tilemap map;
     public GameObject PropertiesParent, Stats, expPopup, cityText, hq, dailyBonus;
     public InputField nameField;
-
     public void Start()
     {
         //print("Attempting to Load Save Game");
@@ -372,25 +371,6 @@ public class saveloadsystem : MonoBehaviour
         // Add construction times
         pp.constructStart = consStart;
         pp.constructEnd = consEnd;
-
-        print("CONS END FOR " + pp.name + " is " + consEnd);
-
-        if (consEnd != "na")
-        {
-            if ((DateTime.Parse(pp.constructEnd) - System.DateTime.Now) > TimeSpan.Zero)
-            {
-                print("property " + pp.name + " is still constructing");
-            } else
-            {
-                pp.constructStart = "na";
-                pp.constructEnd = "na";
-            }
-        }
-        
-        if (pp.constructEnd == "na")
-        {
-            print("property " + pp.name + " is fully constructed");
-        }
 
         if (pp.Card.type == "House") // check to only do these thats only for houses
         {

@@ -190,7 +190,7 @@ public class ppDragButton : MonoBehaviour
                 map.SwapTile(greenGrass, tileGrass);
                 ppDrag.SetActive(false);
                 string temp;
-                if (pp.Card.buildTime.Contains("mins"))
+                if (pp.Card.buildTime.Contains("min"))
                 {
                     temp = pp.Card.buildTime.Remove(pp.Card.buildTime.Length-4);
                     pp.constructEnd = DateTime.Now.AddMinutes(int.Parse(temp)).ToString("yyyy/MM/dd HH:mm:ss");

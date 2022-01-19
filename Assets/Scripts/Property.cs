@@ -224,6 +224,34 @@ public class Property : MonoBehaviour, IPointerClickHandler
             }
         }
     }
+
+    private void Update()
+    {
+        if (constructEnd != null && constructEnd != "na")
+        {
+            if ((DateTime.Parse(constructEnd) - DateTime.Now) <= TimeSpan.Zero)
+            {
+                SpriteRenderer renderer = this.gameObject.GetComponent<SpriteRenderer>();
+                renderer.sprite = Card.propImage;
+                renderer.sprite = Sprite.Create(Card.propImage.texture, new Rect(0, 0, Card.propImage.texture.width, Card.propImage.texture.height), new Vector2(0f, 0f), 32);
+
+                this.transform.GetChild(0).gameObject.SetActive(true);
+                this.transform.GetChild(1).gameObject.SetActive(true);
+            } else
+            {
+                SpriteRenderer renderer = this.gameObject.GetComponent<SpriteRenderer>();
+                Sprite constructSprite = Resources.Load<Sprite>("construct");
+                renderer.sprite = constructSprite;
+                float x = float.Parse(Card.space.Substring(0, 1));
+                float y = float.Parse(Card.space.Substring(Card.space.Length - 1));
+                renderer.sprite = Sprite.Create(constructSprite.texture, new Rect(0, 0, 32*x, y), new Vector2(0f, 0f), 32);
+                print("flaot is " + (((float)constructSprite.texture.width) / (32 * x)));
+
+                this.transform.GetChild(0).gameObject.SetActive(false);
+                this.transform.GetChild(1).gameObject.SetActive(false);
+            }
+        }
+    }
 }
 
 public class contractScript : MonoBehaviour, IPointerClickHandler
@@ -437,5 +465,6 @@ public class commercePickupScript : MonoBehaviour, IPointerClickHandler
                 this.gameObject.transform.parent.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder = 2;
             }
         }
+        
     }
 }
