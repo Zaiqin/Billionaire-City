@@ -27,6 +27,7 @@ public class infoScript : MonoBehaviour
     {
         selProp.GetComponent<SpriteRenderer>().material.color = new Color(35f / 255f, 206f / 255f, 241f / 255f, 255f / 255f);
         print("initing info again");
+
         if (selProp.GetComponent<Property>().Card.type == "House")
         {
             print("showing house info");

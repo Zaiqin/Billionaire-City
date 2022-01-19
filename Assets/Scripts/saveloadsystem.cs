@@ -17,9 +17,11 @@ public class propertySaveForm {
     public string signCreationTime;
     public string comSignTime;
     public string comSignCreationTime;
-    public propertySaveForm(string n, float[] v, string t = "notsigned", int i = -1, string ct = "notsigned", string comt = "notsigned", string comct = "notsigned")
+    public string constructEnd;
+    public string constructStart;
+    public propertySaveForm(string n, float[] v, string t = "notsigned", int i = -1, string ct = "notsigned", string comt = "notsigned", string comct = "notsigned", string consStart = "na", string consEnd = "na")
     {
-        propName = n; locX = (int)v[0]; locY = (int)v[1]; signTime = t; signIndex = i; signCreationTime = ct; comSignTime = comt; comSignCreationTime = comct;
+        propName = n; locX = (int)v[0]; locY = (int)v[1]; signTime = t; signIndex = i; signCreationTime = ct; comSignTime = comt; comSignCreationTime = comct; constructEnd = consEnd; constructStart = consStart;
     }
 }
 
@@ -65,7 +67,7 @@ public class saveloadsystem : MonoBehaviour
 {
     public CSVReader csv;
     public Tilemap map;
-    public GameObject PropertiesParent, Stats, expPopup, cityText, hq;
+    public GameObject PropertiesParent, Stats, expPopup, cityText, hq, dailyBonus;
     public InputField nameField;
 
     public void Start()
@@ -142,11 +144,15 @@ public class saveloadsystem : MonoBehaviour
                 //print("saving: " + child.GetComponent<Property>().Card.displayName);
                 if (child.GetComponent<Property>().Card.type == "House")
                 {
-                    propSaveList.Add(new propertySaveForm(child.GetComponent<Property>().Card.displayName, child.GetComponent<Draggable>().XY, child.transform.GetChild(0).GetComponent<contractScript>().signTime, child.transform.GetChild(0).GetComponent<contractScript>().signIndex, child.transform.GetChild(0).GetComponent<contractScript>().signCreationTime));
+                    propSaveList.Add(new propertySaveForm(child.GetComponent<Property>().Card.displayName, child.GetComponent<Draggable>().XY, child.transform.GetChild(0).GetComponent<contractScript>().signTime, child.transform.GetChild(0).GetComponent<contractScript>().signIndex, child.transform.GetChild(0).GetComponent<contractScript>().signCreationTime, consStart: child.GetComponent<Property>().constructStart, consEnd: child.GetComponent<Property>().constructEnd));
                 } else if (child.GetComponent<Property>().Card.type == "Commerce")
                 {
-                    propSaveList.Add(new propertySaveForm(child.GetComponent<Property>().Card.displayName, child.GetComponent<Draggable>().XY, comt: child.transform.GetChild(1).GetComponent<commercePickupScript>().signTime, comct: child.transform.GetChild(1).GetComponent<commercePickupScript>().signCreationTime));
-                } else
+                    propSaveList.Add(new propertySaveForm(child.GetComponent<Property>().Card.displayName, child.GetComponent<Draggable>().XY, comt: child.transform.GetChild(1).GetComponent<commercePickupScript>().signTime, comct: child.transform.GetChild(1).GetComponent<commercePickupScript>().signCreationTime, consStart: child.GetComponent<Property>().constructStart, consEnd: child.GetComponent<Property>().constructEnd));
+                } else if (child.GetComponent<Property>().Card.type == "Wonder")
+                {
+                    propSaveList.Add(new propertySaveForm(child.GetComponent<Property>().Card.displayName, child.GetComponent<Draggable>().XY, consStart: child.GetComponent<Property>().constructStart, consEnd: child.GetComponent<Property>().constructEnd));
+                }
+                else
                 {
                     propSaveList.Add(new propertySaveForm(child.GetComponent<Property>().Card.displayName, child.GetComponent<Draggable>().XY));
                 }
@@ -244,7 +250,7 @@ public class saveloadsystem : MonoBehaviour
             // ----------- Loading Properties ---------------
             foreach (var p in list)
             {
-                loadProperty(p.propName, new Vector2Int(p.locX, p.locY), p.signTime, p.signIndex, p.signCreationTime, p.comSignTime, p.comSignCreationTime);
+                loadProperty(p.propName, new Vector2Int(p.locX, p.locY), p.signTime, p.signIndex, p.signCreationTime, p.comSignTime, p.comSignCreationTime, p.constructStart, p.constructEnd);
                 //print("loaded: " + p.propName);
             }
             // ----------- Loading Statistics ---------------
@@ -309,6 +315,7 @@ public class saveloadsystem : MonoBehaviour
             }
             Stats.GetComponent<Statistics>().expCost = cost;
         }
+        dailyBonus.SetActive(true);
     }
 
     [ContextMenu("Load New Game")]
@@ -327,10 +334,11 @@ public class saveloadsystem : MonoBehaviour
         loadProperty("Townhouse Luxury", new Vector2Int(6, 0), "notsigned");
         loadProperty("Bungalow Luxury", new Vector2Int(-11, -3), "notsigned");
         loadProperty("Cypress Tree", new Vector2Int(2, -7));
+        dailyBonus.SetActive(true);
         print("Successfully Loaded New Game");
     }
 
-    public void loadProperty(string propName, Vector2Int pos, string signTime = "notsigned", int signIndex = -1, string signCreationTime = "notsigned", string comSignTime = "notsigned", string comSignCreationTime = "notsigned") //propName must be the display form, not camelCase; eg Bungalow Luxury, not bungalowlux
+    public void loadProperty(string propName, Vector2Int pos, string signTime = "notsigned", int signIndex = -1, string signCreationTime = "notsigned", string comSignTime = "notsigned", string comSignCreationTime = "notsigned", string consStart = "na", string consEnd = "na") //propName must be the display form, not camelCase; eg Bungalow Luxury, not bungalowlux
     {
         //print("loading and spawning property into game from load save");
         PropertyCard prop = csv.CardDatabase[propName];
@@ -360,6 +368,30 @@ public class saveloadsystem : MonoBehaviour
         pp.gameObject.AddComponent<Draggable>();
         pp.gameObject.GetComponent<Draggable>().XY = new[] { (float)pos.x, (float)pos.y };
         pp.GetComponent<Draggable>().dragEnabled = false;
+
+        // Add construction times
+        pp.constructStart = consStart;
+        pp.constructEnd = consEnd;
+
+        print("CONS END FOR " + pp.name + " is " + consEnd);
+
+        if (consEnd != "na")
+        {
+            if ((DateTime.Parse(pp.constructEnd) - System.DateTime.Now) > TimeSpan.Zero)
+            {
+                print("property " + pp.name + " is still constructing");
+            } else
+            {
+                pp.constructStart = "na";
+                pp.constructEnd = "na";
+            }
+        }
+        
+        if (pp.constructEnd == "na")
+        {
+            print("property " + pp.name + " is fully constructed");
+        }
+
         if (pp.Card.type == "House") // check to only do these thats only for houses
         {
             pp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signTime = signTime;

@@ -31,7 +31,7 @@ public class dailybonusscript : MonoBehaviour
             if (stats.GetComponent<Statistics>().lastDailyCollected != "")
             {
                 var diff = System.DateTime.Now - DateTime.Parse(stats.GetComponent<Statistics>().lastDailyCollected);
-                print("diff is " + diff);
+                //print("diff is " + diff);
                 if (diff.Days < 1)
                 {
                     this.GetComponent<Button>().image.sprite = faded;

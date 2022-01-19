@@ -189,7 +189,28 @@ public class ppDragButton : MonoBehaviour
             {
                 map.SwapTile(greenGrass, tileGrass);
                 ppDrag.SetActive(false);
-                //pp.GetComponent<Property>().constructStart
+                string temp;
+                if (pp.Card.buildTime.Contains("mins"))
+                {
+                    temp = pp.Card.buildTime.Remove(pp.Card.buildTime.Length-4);
+                    pp.constructEnd = DateTime.Now.AddMinutes(int.Parse(temp)).ToString("yyyy/MM/dd HH:mm:ss");
+                    pp.constructStart = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                    print("temp is " + temp);
+                }
+                else if (pp.Card.buildTime.Contains("hr"))
+                {
+                    temp = pp.Card.buildTime.Remove(pp.Card.buildTime.Length - 2);
+                    pp.constructEnd = DateTime.Now.AddHours(int.Parse(temp)).ToString("yyyy/MM/dd HH:mm:ss");
+                    pp.constructStart = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                    print("temp is " + temp);
+                }
+                else if (pp.Card.buildTime.Contains("day"))
+                {
+                    temp = pp.Card.buildTime.Remove(pp.Card.buildTime.Length - 3);
+                    pp.constructEnd = DateTime.Now.AddDays(int.Parse(temp)).ToString("yyyy/MM/dd HH:mm:ss");
+                    pp.constructStart = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                    print("temp is " + temp);
+                }
             }
             // ------------------------------------------------------------------
 

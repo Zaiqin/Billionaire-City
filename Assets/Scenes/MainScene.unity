@@ -594,6 +594,7 @@ MonoBehaviour:
   expPopup: {fileID: 62597483}
   cityText: {fileID: 351022004}
   hq: {fileID: 502592024}
+  dailyBonus: {fileID: 662742294}
   nameField: {fileID: 1165604900}
 --- !u!4 &25462476
 Transform:
@@ -63320,7 +63321,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &662742295
 RectTransform:
   m_ObjectHideFlags: 0
