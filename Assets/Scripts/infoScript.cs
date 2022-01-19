@@ -228,6 +228,21 @@ public class infoScript : MonoBehaviour
             
             tenantsIcon.GetComponent<Image>().sprite = bonusSprite;
         }
+
+        // Change if its still constructin ---
+        if (selProp.GetComponent<Property>().constructEnd != "na")
+        {
+            print("showing const version");
+            nameText.SetActive(false); fillBg.SetActive(false); fill.SetActive(false); timeText.SetActive(false); incomeText.SetActive(false); time.SetActive(false); money.SetActive(false); xpIcon.SetActive(false); xpText.SetActive(false);
+            this.GetComponent<Image>().sprite = smallBg;
+            tenantsText.GetComponent<Text>().text = "Time here";
+            custHeader.GetComponent<Text>().text = "Const.";
+            incomeHeader.GetComponent<Text>().text = selProp.GetComponent<Property>().Card.displayName;
+            incomeHeader.SetActive(true);
+            incomeHeader.GetComponent<Text>().fontSize = 28;
+
+            tenantsIcon.GetComponent<Image>().sprite = bonusSprite;
+        }
     }
 
     void Update()
@@ -384,6 +399,20 @@ public class infoScript : MonoBehaviour
             incomeHeader.SetActive(true);
             incomeHeader.GetComponent<Text>().fontSize = 28;
             nameText.SetActive(false); fillBg.SetActive(false); fill.SetActive(false); timeText.SetActive(false); incomeText.SetActive(false); time.SetActive(false); money.SetActive(false); xpIcon.SetActive(false); xpText.SetActive(false);
+            tenantsIcon.GetComponent<Image>().sprite = bonusSprite;
+        }
+
+        if (selProp.GetComponent<Property>().constructEnd != "na")
+        {
+            print("showing const version");
+            nameText.SetActive(false); fillBg.SetActive(false); fill.SetActive(false); timeText.SetActive(false); incomeText.SetActive(false); time.SetActive(false); money.SetActive(false); xpIcon.SetActive(false); xpText.SetActive(false);
+            this.GetComponent<Image>().sprite = smallBg;
+            tenantsText.GetComponent<Text>().text = "Time here";
+            custHeader.GetComponent<Text>().text = "Const.";
+            incomeHeader.GetComponent<Text>().text = selProp.GetComponent<Property>().Card.displayName;
+            incomeHeader.SetActive(true);
+            incomeHeader.GetComponent<Text>().fontSize = 28;
+
             tenantsIcon.GetComponent<Image>().sprite = bonusSprite;
         }
     }

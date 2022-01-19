@@ -188,6 +188,23 @@ public class Property : MonoBehaviour, IPointerClickHandler
                     
                     print("show info Panel");
                     infoPanel.transform.position = new Vector3(0.2f + this.gameObject.transform.position.x + (infoPanel.GetComponent<BoxCollider2D>().bounds.size.x / 2) + float.Parse(this.GetComponent<Property>().Card.space.Substring(0, 1)), this.gameObject.transform.position.y + (infoPanel.GetComponent<BoxCollider2D>().bounds.size.y / 4) + 1f, 0f);
+                } else if (this.GetComponent<Property>().constructEnd != null && this.GetComponent<Property>().constructEnd != "na" )
+                {
+                    print("tapped on constructing house");
+                    infoPanel.SetActive(true);
+                    infoPanel.GetComponent<infoScript>().selProp = this.gameObject;
+                    if (infoPanel.GetComponent<infoScript>().highlightedProp != null)
+                    {
+                        if (infoPanel.GetComponent<infoScript>().highlightedProp.transform.childCount > 3 && infoPanel.GetComponent<infoScript>().highlightedProp.name != this.gameObject.name)
+                        {
+                            print("Destroy this");
+                            Destroy(infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(3).gameObject);
+                        }
+                    }
+                    infoPanel.GetComponent<infoScript>().initInfo();
+
+                    print("show info Panel");
+                    infoPanel.transform.position = new Vector3(0.2f + this.gameObject.transform.position.x + (infoPanel.GetComponent<BoxCollider2D>().bounds.size.x / 2) + float.Parse(this.GetComponent<Property>().Card.space.Substring(0, 1)), this.gameObject.transform.position.y + (infoPanel.GetComponent<BoxCollider2D>().bounds.size.y / 4) + 1f, 0f);
                 }
                 GameObject hqmenu = GameObject.Find("HQStats");
                 if (hqmenu != null)
@@ -242,10 +259,11 @@ public class Property : MonoBehaviour, IPointerClickHandler
                 SpriteRenderer renderer = this.gameObject.GetComponent<SpriteRenderer>();
                 Sprite constructSprite = Resources.Load<Sprite>("construct");
                 renderer.sprite = constructSprite;
-                float x = float.Parse(Card.space.Substring(0, 1));
+                float x = float.Parse(Card.space.Substring(0, 1)); 
                 float y = float.Parse(Card.space.Substring(Card.space.Length - 1));
-                renderer.sprite = Sprite.Create(constructSprite.texture, new Rect(0, 0, 32*x, y), new Vector2(0f, 0f), 32);
-                print("flaot is " + (((float)constructSprite.texture.width) / (32 * x)));
+                //print("x is " + x + " y is " + y);
+                float ppi = (constructSprite.texture.width) / (x); //print("ppi is " + ppi);
+                renderer.sprite = Sprite.Create(constructSprite.texture, new Rect(0, 0, constructSprite.texture.width, constructSprite.texture.height), new Vector2(0f, 0f), ppi);
 
                 this.transform.GetChild(0).gameObject.SetActive(false);
                 this.transform.GetChild(1).gameObject.SetActive(false);
