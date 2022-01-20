@@ -431,7 +431,7 @@ public class infoScript : MonoBehaviour
 
         if (selProp.GetComponent<Property>().constructEnd != "na")
         {
-            //print("showing const version");
+            //yprint("showing const version");
             nameText.SetActive(false); fillBg.SetActive(false); fill.SetActive(false); timeText.SetActive(false); incomeText.SetActive(false); time.SetActive(false); money.SetActive(false); xpIcon.SetActive(false); xpText.SetActive(false);
             this.GetComponent<Image>().sprite = smallBg;
             tenantsText.SetActive(false);
