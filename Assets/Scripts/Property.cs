@@ -27,6 +27,7 @@ public class Property : MonoBehaviour, IPointerClickHandler
         this.gameObject.GetComponent<BoxCollider2D>().size = new Vector2(x, y);
         this.gameObject.GetComponent<BoxCollider2D>().offset = new Vector2(x / 2, y / 2);
 
+        print("type is " + pcard.type);
         if (pcard.type == "House")
         {
             // ---------------------- Contract Object ---------------------
@@ -75,7 +76,7 @@ public class Property : MonoBehaviour, IPointerClickHandler
             inf.name = "Influence";
             SpriteRenderer infRenderer = inf.AddComponent<SpriteRenderer>();
             Sprite infSprite = Resources.Load<Sprite>("influence");
-            infRenderer.sprite = Sprite.Create(infSprite.texture, new Rect(0, 0, float.Parse(pcard.influence.Substring(0, 2)) - 0.1f, float.Parse(pcard.influence.Substring(pcard.influence.Length-2)) - 0.1f), new Vector2(0.5f, 0.5f), 1);
+            infRenderer.sprite = Sprite.Create(infSprite.texture, new Rect(0, 0, float.Parse(pcard.influence.Substring(0, 2)) - 0.2f, float.Parse(pcard.influence.Substring(pcard.influence.Length-2)) - 0.2f), new Vector2(0.5f, 0.5f), 1);
             infRenderer.color = new Color(35f / 255f, 206f / 255f, 241f / 255f, 125f/ 255f);
             infRenderer.sortingOrder = 2;
             inf.transform.parent = this.transform;
@@ -108,7 +109,7 @@ public class Property : MonoBehaviour, IPointerClickHandler
             inf.name = "Influence";
             SpriteRenderer infRenderer = inf.AddComponent<SpriteRenderer>();
             Sprite infSprite = Resources.Load<Sprite>("influence");
-            infRenderer.sprite = Sprite.Create(infSprite.texture, new Rect(0, 0, float.Parse(pcard.influence.Substring(0, 2)) - 0.1f, float.Parse(pcard.influence.Substring(pcard.influence.Length - 2)) - 0.1f), new Vector2(0.5f, 0.5f), 1);
+            infRenderer.sprite = Sprite.Create(infSprite.texture, new Rect(0, 0, float.Parse(pcard.influence.Substring(0, 2)) - 0.2f, float.Parse(pcard.influence.Substring(pcard.influence.Length - 2)) - 0.2f), new Vector2(0.5f, 0.5f), 1);
             infRenderer.color = new Color(35f / 255f, 206f / 255f, 241f / 255f, 125f / 255f);
             infRenderer.sortingOrder = 2;
             inf.transform.parent = this.transform;
@@ -244,16 +245,20 @@ public class Property : MonoBehaviour, IPointerClickHandler
 
     private void Update()
     {
-        if (constructEnd != null && constructEnd != "na")
+        if (constructEnd != null && constructEnd != "na" && this.gameObject.GetComponent<Property>().Card.type != "Deco")
         {
             if ((DateTime.Parse(constructEnd) - DateTime.Now) <= TimeSpan.Zero)
             {
                 SpriteRenderer renderer = this.gameObject.GetComponent<SpriteRenderer>();
                 renderer.sprite = Card.propImage;
                 renderer.sprite = Sprite.Create(Card.propImage.texture, new Rect(0, 0, Card.propImage.texture.width, Card.propImage.texture.height), new Vector2(0f, 0f), 32);
+                this.gameObject.GetComponent<Property>().constructEnd = "na";
+                this.gameObject.GetComponent<Property>().constructStart = "na";
 
-                this.transform.GetChild(0).gameObject.SetActive(true);
-                this.transform.GetChild(1).gameObject.SetActive(true);
+                this.transform.GetChild(0).gameObject.AddComponent<BoxCollider2D>();
+                this.transform.GetChild(1).gameObject.AddComponent<BoxCollider2D>();
+
+                this.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2;
             } else
             {
                 SpriteRenderer renderer = this.gameObject.GetComponent<SpriteRenderer>();
@@ -265,8 +270,6 @@ public class Property : MonoBehaviour, IPointerClickHandler
                 float ppi = (constructSprite.texture.width) / (x); //print("ppi is " + ppi);
                 renderer.sprite = Sprite.Create(constructSprite.texture, new Rect(0, 0, constructSprite.texture.width, constructSprite.texture.height), new Vector2(0f, 0f), ppi);
 
-                this.transform.GetChild(0).gameObject.SetActive(false);
-                this.transform.GetChild(1).gameObject.SetActive(false);
             }
         }
     }
@@ -280,7 +283,7 @@ public class contractScript : MonoBehaviour, IPointerClickHandler
     public PropertyCard propCard;
     void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
     {
-        if (GameObject.Find("Main Camera").GetComponent<CameraMovement>().dragging == false && GameObject.Find("Main Camera").GetComponent<SpriteDetector>().isMouseOverUI() == false && GameObject.Find("Canvas").GetComponent<toggleMaster>().checkAllOff() == true)
+        if (GameObject.Find("Main Camera").GetComponent<CameraMovement>().dragging == false && GameObject.Find("Main Camera").GetComponent<SpriteDetector>().isMouseOverUI() == false && GameObject.Find("Canvas").GetComponent<toggleMaster>().checkAllOff() == true && this.transform.parent.GetComponent<Property>().constructEnd == "na")
         {
             print("clicked on contract");
             GameObject canvas = GameObject.Find("Canvas");

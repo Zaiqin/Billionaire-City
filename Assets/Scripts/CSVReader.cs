@@ -162,7 +162,7 @@ public class CSVReader : MonoBehaviour
                     maxDecoReach = float.Parse(tempArray[i].influence.Substring(tempArray[i].influence.Length - 2));
                 }
             }
-            else if (tempArray[i].buildTime.Contains("days"))
+            else if (tempArray[i].buildTime.Contains("day"))
             {
                 tempArray[i].type = "Wonder";
             }

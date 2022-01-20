@@ -7,7 +7,7 @@ using System;
 public class infoScript : MonoBehaviour
 {
     public GameObject selProp;
-    public GameObject nameText, fillBg, fill, timeText, incomeText, incomeHeader, time, money, custHeader, tenantsIcon, tenantsText, xpIcon, xpText;
+    public GameObject nameText, fillBg, fill, timeText, incomeText, incomeHeader, time, money, custHeader, tenantsIcon, tenantsText, xpIcon, xpText, consfillBg, consfill, constimeText, cons;
     public Sprite largeBg, smallBg, tenantsSprite, bonusSprite;
 
     public GameObject highlightedProp;
@@ -33,6 +33,8 @@ public class infoScript : MonoBehaviour
             print("showing house info");
             
             nameText.SetActive(true); fillBg.SetActive(true); fill.SetActive(true); timeText.SetActive(true); incomeText.SetActive(true); incomeHeader.SetActive(false); time.SetActive(true); money.SetActive(true); xpIcon.SetActive(true); xpText.SetActive(true);
+            consfill.SetActive(false); consfillBg.SetActive(false); constimeText.SetActive(false); cons.SetActive(false);
+            custHeader.SetActive(true); tenantsText.SetActive(true);
             this.GetComponent<Image>().sprite = largeBg;
             nameText.GetComponent<Text>().text = selProp.GetComponent<Property>().Card.displayName;
             custHeader.GetComponent<Text>().text = "Tenants";
@@ -70,14 +72,6 @@ public class infoScript : MonoBehaviour
                         timeText.GetComponent<Text>().text = string.Format("{0:D2} seconds", diff.Seconds);
                     }
 
-                    // ---- Checking what houses it affects ---------
-                    selProp.transform.GetChild(2).gameObject.SetActive(true);
-                    selProp.transform.GetChild(2).GetComponent<SpriteRenderer>().color = new Color(0f, 0f, 0f, 0f);
-                    List<Collider2D> infList = selProp.transform.GetChild(2).GetComponent<detectDecoInf>().returnHighlights();
-                    selProp.transform.GetChild(2).GetComponent<SpriteRenderer>().color = new Color(35f / 255f, 206f / 255f, 241f / 255f, 125f / 255f);
-                    selProp.transform.GetChild(2).gameObject.SetActive(false);
-                    //------------------------------------------------
-
                     long tempIncome;
                     switch (selProp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signIndex)
                     {
@@ -93,6 +87,13 @@ public class infoScript : MonoBehaviour
                         default: tempIncome = (long)selProp.GetComponent<Property>().Card.threemins; break;
                     }
 
+                    // ---- Checking what houses it affects ---------
+                    selProp.transform.GetChild(2).gameObject.SetActive(true);
+                    selProp.transform.GetChild(2).GetComponent<SpriteRenderer>().color = new Color(0f, 0f, 0f, 0f);
+                    List<Collider2D> infList = selProp.transform.GetChild(2).GetComponent<detectDecoInf>().returnHighlights();
+                    selProp.transform.GetChild(2).GetComponent<SpriteRenderer>().color = new Color(35f / 255f, 206f / 255f, 241f / 255f, 125f / 255f);
+                    selProp.transform.GetChild(2).gameObject.SetActive(false);
+                    //------------------------------------------------
                     totalDecoBonus = 0;
                     foreach (Collider2D item in infList)
                     {
@@ -133,7 +134,8 @@ public class infoScript : MonoBehaviour
             nameText.GetComponent<Text>().text = selProp.GetComponent<Property>().Card.displayName;
             custHeader.GetComponent<Text>().text = "Customers";
             incomeHeader.GetComponent<Text>().text = "Income";
-            
+            custHeader.SetActive(true); tenantsText.SetActive(true);
+            consfill.SetActive(false); consfillBg.SetActive(false); constimeText.SetActive(false); cons.SetActive(false);
             tenantsIcon.GetComponent<Image>().sprite = tenantsSprite;
             incomeHeader.GetComponent<Text>().fontSize = 22;
             List<Collider2D> infList = selProp.gameObject.transform.GetChild(0).GetComponent<influence>().housesInfluenced;
@@ -198,10 +200,11 @@ public class infoScript : MonoBehaviour
             this.GetComponent<Image>().sprite = smallBg;
             tenantsText.GetComponent<Text>().text = "+" + selProp.GetComponent<Property>().Card.decoBonus + " %";
             custHeader.GetComponent<Text>().text = "Houses Bonus";
+            custHeader.SetActive(true); tenantsText.SetActive(true);
             incomeHeader.GetComponent<Text>().text = selProp.GetComponent<Property>().Card.displayName;
             incomeHeader.SetActive(true);
             incomeHeader.GetComponent<Text>().fontSize = 28;
-            
+            consfill.SetActive(false); consfillBg.SetActive(false); constimeText.SetActive(false); cons.SetActive(false);
             tenantsIcon.GetComponent<Image>().sprite = bonusSprite;
         }
         else
@@ -222,10 +225,11 @@ public class infoScript : MonoBehaviour
                 tenantsText.GetComponent<Text>().text = "+ " + selProp.GetComponent<Property>().Card.wonderBonus.ToString() + "% Houses";
             }
             custHeader.GetComponent<Text>().text = "Wonder Bonus";
+            custHeader.SetActive(true); tenantsText.SetActive(true);
             incomeHeader.GetComponent<Text>().text = selProp.GetComponent<Property>().Card.displayName;
             incomeHeader.SetActive(true);
             incomeHeader.GetComponent<Text>().fontSize = 28;
-            
+            consfill.SetActive(false); consfillBg.SetActive(false); constimeText.SetActive(false); cons.SetActive(false);
             tenantsIcon.GetComponent<Image>().sprite = bonusSprite;
         }
 
@@ -235,13 +239,30 @@ public class infoScript : MonoBehaviour
             print("showing const version");
             nameText.SetActive(false); fillBg.SetActive(false); fill.SetActive(false); timeText.SetActive(false); incomeText.SetActive(false); time.SetActive(false); money.SetActive(false); xpIcon.SetActive(false); xpText.SetActive(false);
             this.GetComponent<Image>().sprite = smallBg;
-            tenantsText.GetComponent<Text>().text = "Time here";
-            custHeader.GetComponent<Text>().text = "Const.";
+            tenantsText.SetActive(false);
+            custHeader.SetActive(false);
             incomeHeader.GetComponent<Text>().text = selProp.GetComponent<Property>().Card.displayName;
             incomeHeader.SetActive(true);
             incomeHeader.GetComponent<Text>().fontSize = 28;
-
+            consfill.SetActive(true); consfillBg.SetActive(true); constimeText.SetActive(true); cons.SetActive(true);
             tenantsIcon.GetComponent<Image>().sprite = bonusSprite;
+
+            if (selProp.GetComponent<Property>().Card.type == "House")
+            {
+                // ---- Checking what houses it affects ---------
+                selProp.transform.GetChild(2).gameObject.SetActive(true);
+                selProp.transform.GetChild(2).GetComponent<SpriteRenderer>().color = new Color(0f, 0f, 0f, 0f);
+                List<Collider2D> infList = selProp.transform.GetChild(2).GetComponent<detectDecoInf>().returnHighlights();
+                selProp.transform.GetChild(2).GetComponent<SpriteRenderer>().color = new Color(35f / 255f, 206f / 255f, 241f / 255f, 125f / 255f);
+                selProp.transform.GetChild(2).gameObject.SetActive(false);
+                //------------------------------------------------
+                totalDecoBonus = 0;
+                foreach (Collider2D item in infList)
+                {
+                    totalDecoBonus += GameObject.Find(item.name).GetComponent<Property>().Card.decoBonus;
+                }
+                selProp.GetComponent<Property>().bonus = totalDecoBonus;
+            }
         }
     }
 
@@ -266,6 +287,9 @@ public class infoScript : MonoBehaviour
             nameText.SetActive(true); fillBg.SetActive(true); fill.SetActive(true); timeText.SetActive(true); incomeText.SetActive(true); incomeHeader.SetActive(false); time.SetActive(true); money.SetActive(true); xpIcon.SetActive(true); xpText.SetActive(true);
             incomeHeader.GetComponent<Text>().fontSize = 22;
             tenantsIcon.GetComponent<Image>().sprite = tenantsSprite;
+            tenantsText.SetActive(true);
+            custHeader.SetActive(true);
+            consfill.SetActive(false); consfillBg.SetActive(false); constimeText.SetActive(false); cons.SetActive(false);
             if (selProp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signTime != "notsigned")
             {
                 var diff = DateTime.Parse(selProp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signTime) - System.DateTime.Now;
@@ -304,6 +328,7 @@ public class infoScript : MonoBehaviour
         }
         else if (selProp.GetComponent<Property>().Card.type == "Commerce")
         {
+            consfill.SetActive(false); consfillBg.SetActive(false); constimeText.SetActive(false); cons.SetActive(false);
             this.GetComponent<Image>().sprite = largeBg;
             nameText.GetComponent<Text>().text = selProp.GetComponent<Property>().Card.displayName;
             custHeader.GetComponent<Text>().text = "Customers";
@@ -377,6 +402,7 @@ public class infoScript : MonoBehaviour
             incomeHeader.GetComponent<Text>().fontSize = 28;
             nameText.SetActive(false); fillBg.SetActive(false); fill.SetActive(false); timeText.SetActive(false); incomeText.SetActive(false); time.SetActive(false); money.SetActive(false); xpIcon.SetActive(false); xpText.SetActive(false);
             tenantsIcon.GetComponent<Image>().sprite = bonusSprite;
+            consfill.SetActive(false); consfillBg.SetActive(false); constimeText.SetActive(false); cons.SetActive(false);
         }
         else
         {
@@ -400,6 +426,7 @@ public class infoScript : MonoBehaviour
             incomeHeader.GetComponent<Text>().fontSize = 28;
             nameText.SetActive(false); fillBg.SetActive(false); fill.SetActive(false); timeText.SetActive(false); incomeText.SetActive(false); time.SetActive(false); money.SetActive(false); xpIcon.SetActive(false); xpText.SetActive(false);
             tenantsIcon.GetComponent<Image>().sprite = bonusSprite;
+            consfill.SetActive(false); consfillBg.SetActive(false); constimeText.SetActive(false); cons.SetActive(false);
         }
 
         if (selProp.GetComponent<Property>().constructEnd != "na")
@@ -407,13 +434,40 @@ public class infoScript : MonoBehaviour
             print("showing const version");
             nameText.SetActive(false); fillBg.SetActive(false); fill.SetActive(false); timeText.SetActive(false); incomeText.SetActive(false); time.SetActive(false); money.SetActive(false); xpIcon.SetActive(false); xpText.SetActive(false);
             this.GetComponent<Image>().sprite = smallBg;
-            tenantsText.GetComponent<Text>().text = "Time here";
-            custHeader.GetComponent<Text>().text = "Const.";
+            tenantsText.SetActive(false);
+            custHeader.SetActive(false);
+            consfill.SetActive(true); consfillBg.SetActive(true); constimeText.SetActive(true); cons.SetActive(true);
             incomeHeader.GetComponent<Text>().text = selProp.GetComponent<Property>().Card.displayName;
             incomeHeader.SetActive(true);
             incomeHeader.GetComponent<Text>().fontSize = 28;
 
             tenantsIcon.GetComponent<Image>().sprite = bonusSprite;
+
+            var diff = DateTime.Parse(selProp.GetComponent<Property>().constructEnd) - System.DateTime.Now;
+
+            if (diff > TimeSpan.Zero)
+            {
+                TimeSpan fullSpan = DateTime.Parse(selProp.GetComponent<Property>().constructEnd) - DateTime.Parse(selProp.GetComponent<Property>().constructStart);
+                TimeSpan remainingSpan = DateTime.Parse(selProp.GetComponent<Property>().constructEnd) - System.DateTime.Now;
+                consfill.GetComponent<Image>().fillAmount = (float)(remainingSpan.TotalSeconds / fullSpan.TotalSeconds);
+
+                if (diff.Days != 0)
+                {
+                    constimeText.GetComponent<Text>().text = string.Format("{0:D2} Day {1:D2} hr", diff.Days, diff.Hours);
+                }
+                else if (diff.Hours != 0)
+                {
+                    constimeText.GetComponent<Text>().text = string.Format("{0:D2} Hour {1:D2} min", diff.Hours, diff.Minutes);
+                }
+                else if (diff.Minutes != 0)
+                {
+                    constimeText.GetComponent<Text>().text = string.Format("{0:D2} min {1:D2} sec", diff.Minutes, diff.Seconds);
+                }
+                else if (diff.Seconds != 0)
+                {
+                    constimeText.GetComponent<Text>().text = string.Format("{0:D2} seconds", diff.Seconds);
+                }
+            }
         }
     }
 }

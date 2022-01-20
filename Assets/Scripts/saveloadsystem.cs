@@ -414,6 +414,11 @@ public class saveloadsystem : MonoBehaviour
                 //print("sign still ongoiing");
             }
 
+            if (pp.constructEnd != "na")
+            {
+                pp.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
+            }
+
         }
         else if (pp.Card.type == "Commerce")
         {
