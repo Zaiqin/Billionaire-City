@@ -215,7 +215,7 @@ public class Property : MonoBehaviour, IPointerClickHandler
             }
             if (this.Card.type == "House")
             {
-                if (this.transform.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder == 0 && this.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder == 0 && this.transform.childCount <= 3 && this.transform.parent.name == "Properties") {
+                if (this.transform.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder == 0 && this.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder == 0 && this.transform.childCount <= 3 && this.transform.parent.name == "Properties" && GameObject.Find("Canvas").GetComponent<toggleMaster>().checkAllOff() == true) {
                     GameObject decoObj = Instantiate(Resources.Load<GameObject>("decoObj"), new Vector3(this.transform.position.x + (float.Parse(this.Card.space.Substring(0, 1))) / 2, this.transform.position.y, -5f), Quaternion.identity) as GameObject;
                     decoObj.transform.parent = this.gameObject.transform;
                     decoObj.transform.GetChild(1).GetComponent<TextMesh>().text = "+" + bonus.ToString() + "%";

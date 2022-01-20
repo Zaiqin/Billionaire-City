@@ -59681,7 +59681,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &374950765
 RectTransform:
   m_ObjectHideFlags: 0
@@ -59808,6 +59808,10 @@ MonoBehaviour:
   tenantsText: {fileID: 13880788}
   xpIcon: {fileID: 1683677719}
   xpText: {fileID: 1905678179}
+  consfillBg: {fileID: 469339280}
+  consfill: {fileID: 93334633}
+  constimeText: {fileID: 1107530258}
+  cons: {fileID: 872681329}
   largeBg: {fileID: 21300000, guid: 32c1c2860ab2ab74597bcbf5ab0df5fc, type: 3}
   smallBg: {fileID: 21300000, guid: e954741fd0540be46a0d0473a927bcfa, type: 3}
   tenantsSprite: {fileID: 21300000, guid: f0296d4cb3f7d4c4d8526db603a314c7, type: 3}
