@@ -13,24 +13,24 @@ public class Astar : MonoBehaviour
         print("Called A star function");
 
         openList.Clear(); closedList.Clear();
-        print("openList has " + openList.Count);
+        //print("openList has " + openList.Count);
         Node currentNode = new Node(0, 0, "", "", startPos);
 
         Node startNode = new Node(0, calcDist(startPos, endPos, "H"), createTileName(startPos, map), "", startPos);
         openList.Add(startNode);
         bool success = false;
-        print("Created startNode");
+        //print("Created startNode");
 
         while (openList.Count != 0)
         {
-            print("start of while loop");
+            //print("start of while loop");
             
-            print("openList has " + openList.Count);
+            /*print("openList has " + openList.Count);
             foreach (var item in openList)
             {
                 print("openlist has " + item.nodeName);
             }
-            print("setting current Node");
+            print("setting current Node");*/
             currentNode = returnLeastF(openList);
             
             if (currentNode != null && currentNode.pos == endPos)
@@ -46,7 +46,7 @@ public class Astar : MonoBehaviour
 
             for (int i = 0; i < 4; i++)
             {
-                print("checking adj node number " + i);
+                //print("checking adj node number " + i);
                 Vector2Int curPos = new Vector2Int(0, 0);
                 switch (i)
                 {
@@ -65,24 +65,24 @@ public class Astar : MonoBehaviour
                 adjNode.parentName = currentNode.nodeName;
                 adjNode.pos = curPos;
 
-                print("done evaluating adj node number " + i);
+                //print("done evaluating adj node number " + i);
 
                 if (adjNode.nodeName.Contains("road") == false) {
-                    print("adjnode is not road or is in closedlist string ");
+                    //print("adjnode is not road or is in closedlist string ");
                 } else if (checkContain(closedList, adjNode.nodeName) == true)
                 {
-                    print("adj node is in closed list");
+                    //print("adj node is in closed list");
                 }
                 else
                 {
-                    print("adjnode is road and not in closedlist");
+                    //print("adjnode is road and not in closedlist");
                     if (checkContain(openList, adjNode.nodeName) == false)
                     {
-                        print("Added " + adjNode.nodeName + " to openList");
+                        //print("Added " + adjNode.nodeName + " to openList");
                         openList.Add(adjNode);
                         foreach (var item in openList)
                         {
-                            print("openlist has " + item.nodeName);
+                            //print("openlist has " + item.nodeName);
                         }
                     }
                     else
@@ -90,108 +90,34 @@ public class Astar : MonoBehaviour
                         Node searchedNode = getNode(adjNode.nodeName, openList);
                         if (searchedNode.g < adjNode.g)
                         {
-                            print("Updated old node");
+                            //print("Updated old node");
                             searchedNode = adjNode;
                         }
                     }
-
                 }
             }
 
             if (openList.Count == 0)
             {
-                print("no path found");
+                print("No path found");
             }
         }
-        print("Exited while Loop");
+        //print("Exited while Loop");
         return success;
     }
-
-    /*public bool AStarFunc(Vector2Int startPos, Vector2Int endPos, Tilemap map)
-    {
-        List<Node> openList = new List<Node>();
-        List<Node> closedList = new List<Node>();
-        List<string> openListString = new List<string>();
-        List<string> closedListString = new List<string>();
-        Node currentNode = new Node(0,0, "","", startPos);
-
-        Node startNode = new Node(0, calcDist(startPos, endPos), createTileName(startPos, map), "", startPos);
-        openList.Add(startNode);
-        openListString.Add(startNode.nodeName);
-        bool success = false;
-
-        while (openList.Count != 0) { 
-        
-            if (currentNode != null && currentNode.pos == endPos)
-            {
-                success = true;
-                openList.Clear();
-                closedList.Clear();
-                openListString.Clear();
-                closedList.Clear();
-                return success;
-            }
-            currentNode = returnLeastF(openList);
-            openList.Remove(currentNode);
-            openListString.Remove(currentNode.nodeName);
-
-            closedList.Add(currentNode);
-            closedListString.Add(currentNode.nodeName);
-
-            Node adjNode = new Node(0, 0, "", "", new Vector2Int(0,0));
-            for (int i = 0; i < 4; i++)
-            {
-                Vector2Int curPos = new Vector2Int(0,0);
-                switch (i)
-                {
-                    case 0: curPos = new Vector2Int(currentNode.pos.x - 1, currentNode.pos.y); break;
-                    case 1: curPos = new Vector2Int(currentNode.pos.x, currentNode.pos.y + 1); break;
-                    case 2: curPos = new Vector2Int(currentNode.pos.x + 1, currentNode.pos.y); break;
-                    case 3: curPos = new Vector2Int(currentNode.pos.x, currentNode.pos.y - 1); break;
-                    default: break;
-                }
-                adjNode.g = calcDist(startPos, curPos);
-                adjNode.h = calcDist(endPos, curPos);
-                adjNode.f = adjNode.g + adjNode.h;
-                adjNode.nodeName = createTileName(curPos, map);
-                adjNode.parentName = currentNode.nodeName;
-                adjNode.pos = curPos;
-
-                if ((adjNode.nodeName.Contains("road") == false) || (closedListString.Contains(adjNode.nodeName))) { }
-                else
-                {
-                    if (openListString.Contains(adjNode.nodeName) == false)
-                    {
-                        openList.Add(adjNode);
-                        openListString.Add(adjNode.nodeName);
-                    }
-                    else
-                    {
-                        Node searchedNode = getNode(adjNode.nodeName, openList);
-                        if (searchedNode.g < adjNode.g)
-                        {
-                            searchedNode = adjNode;
-                        }
-                    }
-
-                }
-            }
-        }
-        return success;
-    }*/
 
     public int calcDist(Vector2Int start, Vector2Int sel, string which)
     {
         int deltaX = Mathf.Abs(sel.x - start.x);
         int deltaY = Mathf.Abs(sel.y - start.y);
-        print("calcDist " + which + " is " + 10*(deltaX + deltaY));
+        //print("calcDist " + which + " is " + 10*(deltaX + deltaY));
         return 10*(deltaX + deltaY);
     }
 
     public Node returnLeastF(List<Node> paramList)
     {
         List<Node> hereList = paramList.OrderBy(w => w.f).ToList();
-        print("leastF is " + hereList[0].nodeName);
+        //print("leastF is " + hereList[0].nodeName);
         return hereList[0];
     }
 
@@ -206,8 +132,7 @@ public class Astar : MonoBehaviour
         {
             s = textureName + pos.x.ToString() + pos.y.ToString();
         }
-        
-        print("created tilename " + s);
+        //print("created tilename " + s);
         return s;
     }
 
@@ -217,11 +142,11 @@ public class Astar : MonoBehaviour
         {
             if (item.nodeName == s)
             {
-                print("got node: " + item.nodeName);
+                //print("got node: " + item.nodeName);
                 return true;
             }
         }
-        print("did not find node in list");
+        //print("did not find node in list");
         return false;
     }
     public Node getNode(string s, List<Node> list)
@@ -230,7 +155,7 @@ public class Astar : MonoBehaviour
         {
             if (item.nodeName == s)
             {
-                print("got node: " + item.nodeName);
+                //print("got node: " + item.nodeName);
                 return item;
             }
         }
@@ -251,6 +176,7 @@ public class Node
     {
 
     }
+
     public Node(int g, int h, string nodeName, string parentName, Vector2Int pos)
     {
         this.g = g;
