@@ -68,6 +68,15 @@ public class Property : MonoBehaviour, IPointerClickHandler
             inf.transform.localPosition = new Vector3(float.Parse(pcard.space.Substring(0, 1)) / 2, (float.Parse(pcard.space.Substring(pcard.space.Length - 1)) / 2) - 0.05f, 0f);
             inf.AddComponent<detectDecoInf>();
             inf.SetActive(false);
+            // ----------------------- Road Disconnected Object -----------------------------
+            GameObject discon = new GameObject();
+            discon.name = "Disconnected";
+            SpriteRenderer disconrenderer = discon.AddComponent<SpriteRenderer>();
+            Sprite disconSprite = Resources.Load<Sprite>("disconnected");
+            disconrenderer.sprite = Sprite.Create(disconSprite.texture, new Rect(0, 0, disconSprite.texture.width, disconSprite.texture.height), new Vector2(0.5f, 0.5f), 50);
+            disconrenderer.sortingOrder = 0;
+            discon.transform.parent = this.transform;
+            discon.transform.localPosition = new Vector3(float.Parse(pcard.space.Substring(0, 1)) / 2, float.Parse(pcard.space.Substring(pcard.space.Length - 1)) / 2, 0f);
 
         } else if (pcard.type == "Commerce")
         {
@@ -102,6 +111,15 @@ public class Property : MonoBehaviour, IPointerClickHandler
             commerce.transform.localPosition = new Vector3(float.Parse(pcard.space.Substring(0, 1)) / 2, float.Parse(pcard.space.Substring(pcard.space.Length - 1)) / 2, 0f);
             commerce.AddComponent<commercePickupScript>();
             commerce.AddComponent<commercePickupScript>().propCard = pcard;
+            // ----------------------- Road Disconnected Object -----------------------------
+            GameObject discon = new GameObject();
+            discon.name = "Disconnected";
+            SpriteRenderer disconrenderer = discon.AddComponent<SpriteRenderer>();
+            Sprite disconSprite = Resources.Load<Sprite>("disconnected");
+            disconrenderer.sprite = Sprite.Create(disconSprite.texture, new Rect(0, 0, disconSprite.texture.width, disconSprite.texture.height), new Vector2(0.5f, 0.5f), 50);
+            disconrenderer.sortingOrder = 0;
+            discon.transform.parent = this.transform;
+            discon.transform.localPosition = new Vector3(float.Parse(pcard.space.Substring(0, 1)) / 2, float.Parse(pcard.space.Substring(pcard.space.Length - 1)) / 2, 0f);
         } else if (pcard.type == "Deco")
         {
             // --- Influence Overlay -----------
@@ -118,7 +136,16 @@ public class Property : MonoBehaviour, IPointerClickHandler
         }
         else
         {
-            //Debug.Log("this not a house");
+            //--------------------------- Wonder -------------------------
+            // ----------------------- Road Disconnected Object -----------------------------
+            GameObject discon = new GameObject();
+            discon.name = "Disconnected";
+            SpriteRenderer disconrenderer = discon.AddComponent<SpriteRenderer>();
+            Sprite disconSprite = Resources.Load<Sprite>("disconnected");
+            disconrenderer.sprite = Sprite.Create(disconSprite.texture, new Rect(0, 0, disconSprite.texture.width, disconSprite.texture.height), new Vector2(0.5f, 0.5f), 50);
+            disconrenderer.sortingOrder = 0;
+            discon.transform.parent = this.transform;
+            discon.transform.localPosition = new Vector3(float.Parse(pcard.space.Substring(0, 1)) / 2, float.Parse(pcard.space.Substring(pcard.space.Length - 1)) / 2, 0f);
         }
     }
 
@@ -269,7 +296,6 @@ public class Property : MonoBehaviour, IPointerClickHandler
                 //print("x is " + x + " y is " + y);
                 float ppi = (constructSprite.texture.width) / (x); //print("ppi is " + ppi);
                 renderer.sprite = Sprite.Create(constructSprite.texture, new Rect(0, 0, constructSprite.texture.width, constructSprite.texture.height), new Vector2(0f, 0f), ppi);
-
             }
         }
     }

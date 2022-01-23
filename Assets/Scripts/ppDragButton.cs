@@ -36,6 +36,16 @@ public class ppDragButton : MonoBehaviour
         //at y=-1, when x is -10 and -1, -0.1
     }
 
+    public int getSurroundRoads(PropertyCard card, float[] XY)
+    {
+        //List<Vector2Int> list = new List<Vector2Int>();
+        int maxNo = (int.Parse(card.space.Substring(0, 1)) + 2) * (int.Parse(card.space.Substring(card.space.Length - 1)) + 2);
+        int minNo = (int.Parse(card.space.Substring(0, 1))) * (int.Parse(card.space.Substring(card.space.Length - 1)));
+        int totalNo = maxNo - minNo;
+        print("totalNo is " + totalNo);
+        return 1;
+    }
+
     private void removePlots(PropertyCard card, float[] XY)
     {
         print("removing plots");
@@ -129,6 +139,8 @@ public class ppDragButton : MonoBehaviour
             // -------------------------------
 
             externalAudioPlayer.GetComponent<AudioSource>().PlayOneShot(buildSound);
+
+            getSurroundRoads(pCard, pp.GetComponent<Draggable>().XY);
 
             // adding the contract collider and sorting its order -----------
             if (pCard.type == "House")

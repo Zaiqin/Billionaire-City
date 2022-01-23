@@ -7,7 +7,7 @@ public class scaleLerper : MonoBehaviour
 
     //add public to these varables to allow editing in inspector
     Vector3 minScale = new Vector3(0.9f, 0.9f, 1f);
-    Vector3 maxScale = new Vector3(1.2f, 1.2f, 1f);
+    Vector3 maxScale = new Vector3(1.1f, 1.1f, 1f);
     bool repeatable = true;
     float speed = 2f;
     float duration = 1f;
