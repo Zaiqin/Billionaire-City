@@ -168,7 +168,7 @@ MonoBehaviour:
   shopInsuffController: {fileID: 0}
   stats: {fileID: 0}
   map: {fileID: 0}
-  greenGrass: {fileID: 11400000, guid: ed9bdc427593d5f4fa5d4bce0fd199b8, type: 2}
+  greenGrass: {fileID: 11400000, guid: 68a3091ae6a3000469a13bd060a098ad, type: 2}
   tileGrass: {fileID: 11400000, guid: b3e8f3a2e14494bcc9001c2bd1e27c1f, type: 2}
 --- !u!1 &1898575467137161063
 GameObject:

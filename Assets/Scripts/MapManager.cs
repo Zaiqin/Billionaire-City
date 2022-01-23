@@ -171,9 +171,6 @@ public class MapManager : MonoBehaviour
 
         //print("Walking speed on " + clickedTile + " at position " + gridPosition + " is " + walkingSpeed);
         saveObj.GetComponent<saveloadsystem>().saveTilemap();
-
-        bool test = GameObject.Find("astar obj").GetComponent<Astar>().AStarFunc(new Vector2Int(gridPosition.x, gridPosition.y), new Vector2Int(0, -1), map);
-        print("test astar is " + test);
     }
 
     // Update is called once per frame

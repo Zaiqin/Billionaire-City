@@ -19,7 +19,7 @@ public class ppDragButton : MonoBehaviour
 
     public Tilemap map;
     public TileBase greenGrass, tileGrass;
-    public GameObject floatingValue, hq;
+    public GameObject floatingValue, hq, astar;
 
     public float getZ(float[] coords) //range of y is 3 to -3, range of x is -44 to 45
     {
@@ -36,14 +36,40 @@ public class ppDragButton : MonoBehaviour
         //at y=-1, when x is -10 and -1, -0.1
     }
 
-    public int getSurroundRoads(PropertyCard card, float[] XY)
+    public List<Vector2Int> getSurroundRoads(PropertyCard card, float[] XY)
     {
-        //List<Vector2Int> list = new List<Vector2Int>();
-        int maxNo = (int.Parse(card.space.Substring(0, 1)) + 2) * (int.Parse(card.space.Substring(card.space.Length - 1)) + 2);
-        int minNo = (int.Parse(card.space.Substring(0, 1))) * (int.Parse(card.space.Substring(card.space.Length - 1)));
-        int totalNo = maxNo - minNo;
-        print("totalNo is " + totalNo);
-        return 1;
+        List<Vector2Int> list = new List<Vector2Int>();
+        int[] xy = new int[] { (int)(XY[0]-1), (int)(XY[1]-1) };
+        int propX = int.Parse(card.space.Substring(0, 1)); int propY = int.Parse(card.space.Substring(card.space.Length - 1));
+        int totalNo = ((propX + 2) * (propY + 2)) - (propX * propY);
+        int deltaX = 0; int deltaY = 0; bool topHori = true;
+        for (int i = 0; i < totalNo; i++)
+        {
+            if (i < (propY+1))
+            {
+                list.Add(new Vector2Int(xy[0], xy[1]+deltaY));
+                deltaY++;
+            } else if ((deltaX < (propX+1)) && (topHori == true))
+            {
+                list.Add(new Vector2Int(xy[0] + deltaX, xy[1] + deltaY));
+                deltaX++;
+            } else if (deltaY != 0)
+            {
+                list.Add(new Vector2Int(xy[0] + deltaX, xy[1] + deltaY));
+                deltaY--;
+                topHori = false;
+            } else
+            {
+                list.Add(new Vector2Int(xy[0] + deltaX, xy[1] + deltaY));
+                deltaX--;
+            }
+        }
+        foreach (var item in list)
+        {
+            print("item " + item);
+        }
+        print("totalNo is " + list.Count);
+        return list;
     }
 
     private void removePlots(PropertyCard card, float[] XY)
@@ -140,8 +166,6 @@ public class ppDragButton : MonoBehaviour
 
             externalAudioPlayer.GetComponent<AudioSource>().PlayOneShot(buildSound);
 
-            getSurroundRoads(pCard, pp.GetComponent<Draggable>().XY);
-
             // adding the contract collider and sorting its order -----------
             if (pCard.type == "House")
             {
@@ -224,12 +248,50 @@ public class ppDragButton : MonoBehaviour
                     pp.constructStart = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                     print("temp is " + temp);
                 }
+
+                // A star detection when build ------
+                List<Vector2Int> alist = getSurroundRoads(pCard, pp.GetComponent<Draggable>().XY);
+                bool test = false;
+                foreach (var item in alist)
+                {
+                    if (map.GetTile(new Vector3Int(item.x, item.y, 0)).name.Contains("road"))
+                    {
+                        test = astar.GetComponent<Astar>().AStarFunc(new Vector2Int(item.x, item.y), new Vector2Int(0, -1), map);
+                        print("test astar is " + test);
+                    } else
+                    {
+                        print("no road, no astar called");
+                        test = false;
+                    }
+                    if (test == true)
+                    {
+                        switch (pp.Card.type)
+                        {
+                            case "House": pp.transform.GetChild(3).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0; break;
+                            case "Commerce": pp.transform.GetChild(2).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0; break;
+                            case "Wonder": pp.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0; break;
+                            default: break;
+                        }
+                        break;
+                    }
+                    else
+                    {
+                        switch (pp.Card.type)
+                        {
+                            case "House": pp.transform.GetChild(3).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2; break;
+                            case "Commerce": pp.transform.GetChild(2).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2; break;
+                            case "Wonder": pp.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2; break;
+                            default: break;
+                        }
+                    }
+                }
             }
             // ------------------------------------------------------------------
 
             // --------------------- Save Game ----------------------------------
             saveloadsystem.GetComponent<saveloadsystem>().saveGame();
             // ------------------------------------------------------------------
+            
         }
     }
 
