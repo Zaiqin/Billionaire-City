@@ -382,6 +382,7 @@ public class saveloadsystem : MonoBehaviour
             pp.transform.GetChild(1).gameObject.AddComponent<BoxCollider2D>();
             // add collider to deco detect influence --------------
             pp.transform.GetChild(2).gameObject.AddComponent<BoxCollider2D>();
+            pp.transform.GetChild(2).gameObject.GetComponent<BoxCollider2D>().size = new Vector2(((GameObject.Find("CSV").gameObject.GetComponent<CSVReader>().maxDecoReach * 2) + int.Parse(pp.Card.space.Substring(0, 1))) - 0.1f, ((GameObject.Find("CSV").gameObject.GetComponent<CSVReader>().maxDecoReach * 2) + int.Parse(pp.Card.space.Substring(pp.Card.space.Length - 1))) - 0.1f);
 
             var dateAndTimeVar = System.DateTime.Now;
             //print("going check contract for " + pp.name + "which is signtime " + pp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signTime);
@@ -427,6 +428,7 @@ public class saveloadsystem : MonoBehaviour
             {
                 pp.transform.GetChild(0).gameObject.AddComponent<BoxCollider2D>();
             }
+            pp.transform.GetChild(0).gameObject.GetComponent<BoxCollider2D>().size = new Vector2(float.Parse(pp.Card.influence.Substring(0, 2)) - 0.2f, float.Parse(pp.Card.influence.Substring(pp.Card.influence.Length - 2)) - 0.2f);
             pp.transform.GetChild(0).gameObject.SetActive(false);
             pp.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signTime = comSignTime;
             // add collider to commerce money ----------
@@ -468,6 +470,7 @@ public class saveloadsystem : MonoBehaviour
         else if (pp.Card.type == "Deco") // check to only do these thats only for houses
         {
             pp.transform.GetChild(0).gameObject.AddComponent<BoxCollider2D>();
+            pp.transform.GetChild(0).gameObject.GetComponent<BoxCollider2D>().size = new Vector2(float.Parse(pp.Card.influence.Substring(0, 2)) - 0.2f, float.Parse(pp.Card.influence.Substring(pp.Card.influence.Length - 2)) - 0.2f);
             pp.transform.GetChild(0).gameObject.SetActive(false);
         }
         else if (pp.Card.type == "Wonder") // check to only do these thats only for houses

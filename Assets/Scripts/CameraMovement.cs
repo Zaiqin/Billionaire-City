@@ -127,9 +127,9 @@ public class CameraMovement : MonoBehaviour
             if (infoPanel.GetComponent<infoScript>().highlightedProp != null)
             {
                 infoPanel.GetComponent<infoScript>().highlightedProp.GetComponent<SpriteRenderer>().material.color = Color.white;
-                if (infoPanel.GetComponent<infoScript>().highlightedProp.transform.childCount == 4)
+                if (infoPanel.GetComponent<infoScript>().highlightedProp.transform.childCount == 5)
                 {
-                    Destroy(infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(3).gameObject);
+                    Destroy(infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(4).gameObject);
                 }
             }
             if (infoPanel.GetComponent<infoScript>().selProp != null && infoPanel.GetComponent<infoScript>().selProp.transform.childCount > 1)

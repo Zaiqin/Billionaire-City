@@ -60,8 +60,11 @@ public class Property : MonoBehaviour, IPointerClickHandler
             GameObject inf = new GameObject();
             inf.name = "Deco Influence";
             SpriteRenderer infRenderer = inf.AddComponent<SpriteRenderer>();
-            Sprite infSprite = Resources.Load<Sprite>("influence");
-            infRenderer.sprite = Sprite.Create(infSprite.texture, new Rect(0, 0, ((maxReach*2)+int.Parse(pcard.space.Substring(0, 1))) - 0.1f, ((maxReach * 2) + int.Parse(pcard.space.Substring(pcard.space.Length - 1))) - 0.1f), new Vector2(0.5f, 0.5f), 1);
+            Sprite infSprite = Resources.Load<Sprite>("blueInfluence");
+            infRenderer.drawMode = SpriteDrawMode.Sliced;
+            infRenderer.sprite = infSprite;
+            infRenderer.size = new Vector2(((maxReach * 2) + int.Parse(pcard.space.Substring(0, 1))) - 0.1f, ((maxReach * 2) + int.Parse(pcard.space.Substring(pcard.space.Length - 1))) - 0.1f);
+            //infRenderer.sprite = Sprite.Create(infSprite.texture, new Rect(0, 0, ((maxReach*2)+int.Parse(pcard.space.Substring(0, 1))) - 0.1f, ((maxReach * 2) + int.Parse(pcard.space.Substring(pcard.space.Length - 1))) - 0.1f), new Vector2(0.5f, 0.5f), 1);
             infRenderer.color = new Color(35f / 255f, 206f / 255f, 241f / 255f, 125f / 255f);
             infRenderer.sortingOrder = 0;
             inf.transform.parent = this.transform;
@@ -84,8 +87,10 @@ public class Property : MonoBehaviour, IPointerClickHandler
             GameObject inf = new GameObject();
             inf.name = "Influence";
             SpriteRenderer infRenderer = inf.AddComponent<SpriteRenderer>();
-            Sprite infSprite = Resources.Load<Sprite>("influence");
-            infRenderer.sprite = Sprite.Create(infSprite.texture, new Rect(0, 0, float.Parse(pcard.influence.Substring(0, 2)) - 0.2f, float.Parse(pcard.influence.Substring(pcard.influence.Length-2)) - 0.2f), new Vector2(0.5f, 0.5f), 1);
+            Sprite infSprite = Resources.Load<Sprite>("blueInfluence");
+            infRenderer.drawMode = SpriteDrawMode.Sliced;
+            infRenderer.sprite = infSprite;
+            infRenderer.size = new Vector2(float.Parse(pcard.influence.Substring(0, 2)) - 0.2f, float.Parse(pcard.influence.Substring(pcard.influence.Length - 2)) - 0.2f);
             infRenderer.color = new Color(35f / 255f, 206f / 255f, 241f / 255f, 125f/ 255f);
             infRenderer.sortingOrder = 2;
             inf.transform.parent = this.transform;
@@ -126,8 +131,10 @@ public class Property : MonoBehaviour, IPointerClickHandler
             GameObject inf = new GameObject();
             inf.name = "Influence";
             SpriteRenderer infRenderer = inf.AddComponent<SpriteRenderer>();
-            Sprite infSprite = Resources.Load<Sprite>("influence");
-            infRenderer.sprite = Sprite.Create(infSprite.texture, new Rect(0, 0, float.Parse(pcard.influence.Substring(0, 2)) - 0.2f, float.Parse(pcard.influence.Substring(pcard.influence.Length - 2)) - 0.2f), new Vector2(0.5f, 0.5f), 1);
+            Sprite infSprite = Resources.Load<Sprite>("blueInfluence");
+            infRenderer.drawMode = SpriteDrawMode.Sliced;
+            infRenderer.sprite = infSprite;
+            infRenderer.size = new Vector2(float.Parse(pcard.influence.Substring(0, 2)) - 0.2f, float.Parse(pcard.influence.Substring(pcard.influence.Length - 2)) - 0.2f);
             infRenderer.color = new Color(35f / 255f, 206f / 255f, 241f / 255f, 125f / 255f);
             infRenderer.sortingOrder = 2;
             inf.transform.parent = this.transform;
@@ -206,10 +213,10 @@ public class Property : MonoBehaviour, IPointerClickHandler
                     infoPanel.GetComponent<infoScript>().selProp = this.gameObject;
                     if (infoPanel.GetComponent<infoScript>().highlightedProp != null)
                     {
-                        if (infoPanel.GetComponent<infoScript>().highlightedProp.transform.childCount > 3 && infoPanel.GetComponent<infoScript>().highlightedProp.name != this.gameObject.name)
+                        if (infoPanel.GetComponent<infoScript>().highlightedProp.transform.childCount > 4 && infoPanel.GetComponent<infoScript>().highlightedProp.name != this.gameObject.name)
                         {
                             print("Destroy this");
-                            Destroy(infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(3).gameObject);
+                            Destroy(infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(4).gameObject);
                         }
                     }
                     infoPanel.GetComponent<infoScript>().initInfo();
@@ -242,7 +249,7 @@ public class Property : MonoBehaviour, IPointerClickHandler
             }
             if (this.Card.type == "House")
             {
-                if (this.transform.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder == 0 && this.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder == 0 && this.transform.childCount <= 3 && this.transform.parent.name == "Properties" && GameObject.Find("Canvas").GetComponent<toggleMaster>().checkAllOff() == true) {
+                if (this.transform.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder == 0 && this.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder == 0 && this.transform.childCount <= 4 && this.transform.parent.name == "Properties" && GameObject.Find("Canvas").GetComponent<toggleMaster>().checkAllOff() == true) {
                     GameObject decoObj = Instantiate(Resources.Load<GameObject>("decoObj"), new Vector3(this.transform.position.x + (float.Parse(this.Card.space.Substring(0, 1))) / 2, this.transform.position.y, -5f), Quaternion.identity) as GameObject;
                     decoObj.transform.parent = this.gameObject.transform;
                     decoObj.transform.GetChild(1).GetComponent<TextMesh>().text = "+" + bonus.ToString() + "%";

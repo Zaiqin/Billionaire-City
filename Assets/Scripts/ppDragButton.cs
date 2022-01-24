@@ -171,11 +171,13 @@ public class ppDragButton : MonoBehaviour
             {
                 pp.transform.GetChild(0).gameObject.AddComponent<BoxCollider2D>();
                 pp.transform.GetChild(2).gameObject.AddComponent<BoxCollider2D>();
+                pp.transform.GetChild(2).gameObject.GetComponent<BoxCollider2D>().size = new Vector2(((GameObject.Find("CSV").gameObject.GetComponent<CSVReader>().maxDecoReach * 2) + int.Parse(pp.Card.space.Substring(0, 1))) - 0.1f, ((GameObject.Find("CSV").gameObject.GetComponent<CSVReader>().maxDecoReach * 2) + int.Parse(pp.Card.space.Substring(pp.Card.space.Length - 1))) - 0.1f);
                 pp.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0; //hides contract
             }
             if (pCard.type == "Commerce")
             {
                 pp.transform.GetChild(0).gameObject.AddComponent<BoxCollider2D>();
+                pp.transform.GetChild(0).gameObject.GetComponent<BoxCollider2D>().size = new Vector2(float.Parse(pp.Card.influence.Substring(0, 2)) - 0.2f, float.Parse(pp.Card.influence.Substring(pp.Card.influence.Length - 2)) - 0.2f);
                 pp.transform.GetChild(1).gameObject.AddComponent<BoxCollider2D>();
                 pp.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0; //hide commerce collect
                 DateTime theTime;
@@ -191,6 +193,7 @@ public class ppDragButton : MonoBehaviour
             if (pp.Card.type == "Deco")
             {
                 pp.transform.GetChild(0).gameObject.AddComponent<BoxCollider2D>();
+                pp.transform.GetChild(0).gameObject.GetComponent<BoxCollider2D>().size = new Vector2(float.Parse(pp.Card.influence.Substring(0, 2)) - 0.2f, float.Parse(pp.Card.influence.Substring(pp.Card.influence.Length - 2)) - 0.2f);
                 shopToggle.GetComponent<Toggle>().isOn = true;
                 GameObject a = Instantiate(pp.gameObject);
                 a.transform.parent = pendingParent.transform;
