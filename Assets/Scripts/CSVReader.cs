@@ -23,6 +23,8 @@ public class CSVReader : MonoBehaviour
     // ------------------------------------------------------------------------------------------
     public float maxDecoReach = 0f;
 
+    public List<string> ratios = new List<string>();
+
     public void ReadCSV()
     {
         //print("Reading CSV File");
@@ -172,6 +174,13 @@ public class CSVReader : MonoBehaviour
             }
             // ------------------------------------
 
+            if (tempArray[i].type != "Deco")
+            {
+                float rN = float.Parse(tempArray[i].space.Substring(0, 1)) / float.Parse(tempArray[i].space.Substring(tempArray[i].space.Length - 1));
+
+                ratios.Add(rN.ToString());
+    }
+
             // Addition of PropertyCard Image and Property Image ---------------------------------------------
             // Addition of Property Card ie bgImage ---------------------------------
             if (bgSprites.ContainsKey(bgImagePath)) //check if cannot find url
@@ -257,6 +266,10 @@ public class CSVReader : MonoBehaviour
         print("max deco reach after calc is " + maxDecoReach);
 
         print("Completed reading CSV data");
+        foreach (var item in ratios)
+        {
+            print("ratio of " + item);
+        }
     }
 
 }

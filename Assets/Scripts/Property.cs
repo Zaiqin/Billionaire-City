@@ -296,10 +296,11 @@ public class Property : MonoBehaviour, IPointerClickHandler
             } else
             {
                 SpriteRenderer renderer = this.gameObject.GetComponent<SpriteRenderer>();
-                Sprite constructSprite = Resources.Load<Sprite>("construct");
-                renderer.sprite = constructSprite;
-                float x = float.Parse(Card.space.Substring(0, 1)); 
+                float x = float.Parse(Card.space.Substring(0, 1));
                 float y = float.Parse(Card.space.Substring(Card.space.Length - 1));
+                string spritename = "constructSprites/construct" + (x / y).ToString();
+                Sprite constructSprite = Resources.Load<Sprite>(spritename);
+                renderer.sprite = constructSprite;
                 //print("x is " + x + " y is " + y);
                 float ppi = (constructSprite.texture.width) / (x); //print("ppi is " + ppi);
                 renderer.sprite = Sprite.Create(constructSprite.texture, new Rect(0, 0, constructSprite.texture.width, constructSprite.texture.height), new Vector2(0f, 0f), ppi);
