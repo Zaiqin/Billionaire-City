@@ -288,6 +288,7 @@ public class ppDragButton : MonoBehaviour
                         }
                     }
                 }
+                // End of astar detection -------
             }
             // ------------------------------------------------------------------
 

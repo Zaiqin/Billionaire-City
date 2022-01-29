@@ -207,7 +207,7 @@ public class Property : MonoBehaviour, IPointerClickHandler
             }
             else if (this.transform.parent == propParent.transform && GameObject.Find("Canvas").GetComponent<toggleMaster>().checkAllOff() == true)
             {
-                if ((this.Card.type == "House" && this.gameObject.transform.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder != 2 && this.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder != 2) || (this.Card.type == "Commerce" && this.gameObject.transform.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder != 2) || (this.Card.type == "Deco" || this.Card.type == "Wonder"))
+                if ((this.Card.type == "House" && this.gameObject.transform.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder != 2 && this.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder != 2 && this.gameObject.transform.GetChild(3).GetComponent<SpriteRenderer>().sortingOrder != 2) || (this.Card.type == "Commerce" && this.gameObject.transform.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder != 2) || (this.Card.type == "Deco" || this.Card.type == "Wonder"))
                 {
                     infoPanel.SetActive(true);
                     infoPanel.GetComponent<infoScript>().selProp = this.gameObject;
@@ -249,7 +249,7 @@ public class Property : MonoBehaviour, IPointerClickHandler
             }
             if (this.Card.type == "House")
             {
-                if (this.transform.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder == 0 && this.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder == 0 && this.transform.childCount <= 4 && this.transform.parent.name == "Properties" && GameObject.Find("Canvas").GetComponent<toggleMaster>().checkAllOff() == true) {
+                if (this.transform.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder == 0 && this.gameObject.transform.GetChild(3).GetComponent<SpriteRenderer>().sortingOrder != 2 && this.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder == 0 && this.transform.childCount <= 4 && this.transform.parent.name == "Properties" && GameObject.Find("Canvas").GetComponent<toggleMaster>().checkAllOff() == true) {
                     GameObject decoObj = Instantiate(Resources.Load<GameObject>("decoObj"), new Vector3(this.transform.position.x + (float.Parse(this.Card.space.Substring(0, 1))) / 2, this.transform.position.y, -5f), Quaternion.identity) as GameObject;
                     decoObj.transform.parent = this.gameObject.transform;
                     decoObj.transform.GetChild(1).GetComponent<TextMesh>().text = "+" + bonus.ToString() + "%";

@@ -67,7 +67,7 @@ public class saveloadsystem : MonoBehaviour
 {
     public CSVReader csv;
     public Tilemap map;
-    public GameObject PropertiesParent, Stats, expPopup, cityText, hq, dailyBonus;
+    public GameObject PropertiesParent, Stats, expPopup, cityText, hq, dailyBonus, ppDragButton, Astar;
     public InputField nameField;
     public void Start()
     {
@@ -339,7 +339,7 @@ public class saveloadsystem : MonoBehaviour
 
     public void loadProperty(string propName, Vector2Int pos, string signTime = "notsigned", int signIndex = -1, string signCreationTime = "notsigned", string comSignTime = "notsigned", string comSignCreationTime = "notsigned", string consStart = "na", string consEnd = "na") //propName must be the display form, not camelCase; eg Bungalow Luxury, not bungalowlux
     {
-        //print("loading and spawning property into game from load save");
+        print("loading and spawning property into game from load save" + propName);
         PropertyCard prop = csv.CardDatabase[propName];
         GameObject obj = new GameObject(); // Creating game object for property
 
@@ -391,7 +391,7 @@ public class saveloadsystem : MonoBehaviour
                 pp.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2;
                 pp.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
                 pp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signCreationTime = "notsigned";
-                //print("notsigned");
+                print("notsigned");
             }
             else if (dateAndTimeVar >= DateTime.Parse(pp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signTime))
             {
@@ -418,6 +418,7 @@ public class saveloadsystem : MonoBehaviour
             if (pp.constructEnd != "na")
             {
                 pp.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
+                print("not equals na");
             }
 
         }
@@ -489,6 +490,55 @@ public class saveloadsystem : MonoBehaviour
                 Stats.GetComponent<Statistics>().wonderBonus += pp.Card.wonderBonus;
             }
             Stats.GetComponent<Statistics>().builtWonders.Add(pp.Card.displayName);
+        }
+
+        if (pp.Card.type != "Deco")
+        {
+            // A star detection when build ------
+            List<Vector2Int> alist = ppDragButton.GetComponent<ppDragButton>().getSurroundRoads(pp.Card, pp.GetComponent<Draggable>().XY);
+            bool test = false;
+            foreach (var item in alist)
+            {
+                if (map.GetTile(new Vector3Int(item.x, item.y, 0)).name.Contains("road"))
+                {
+                    test = Astar.GetComponent<Astar>().AStarFunc(new Vector2Int(item.x, item.y), new Vector2Int(0, -1), map);
+                    print("test astar is " + test);
+                    break;
+                }
+                else
+                {
+                    test = false;
+                }
+            }
+            if (test == true)
+            {
+                switch (pp.Card.type)
+                {
+
+                    case "House": pp.transform.GetChild(3).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0; break;
+                    case "Commerce": pp.transform.GetChild(2).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0; break;
+                    case "Wonder": pp.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0; break;
+                    default: break;
+                }
+            }
+            else
+            {
+                switch (pp.Card.type)
+                {
+                    case "House":
+                        pp.transform.GetChild(3).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2;
+                        pp.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
+                        pp.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
+                        break;
+                    case "Commerce":
+                        pp.transform.GetChild(2).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2;
+                        pp.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
+                        break;
+                    case "Wonder": pp.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2; break;
+                    default: break;
+                }
+            }
+            // End of astar detection -------
         }
     }
 }
