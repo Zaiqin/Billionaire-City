@@ -611,6 +611,8 @@ MonoBehaviour:
   cityText: {fileID: 351022004}
   hq: {fileID: 502592024}
   dailyBonus: {fileID: 662742294}
+  ppDragButton: {fileID: 184177505}
+  Astar: {fileID: 68398485}
   nameField: {fileID: 1165604900}
 --- !u!4 &25462476
 Transform:
@@ -36499,8 +36501,8 @@ Tilemap:
   - first: {x: 5, y: 5, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 11
-      m_TileSpriteIndex: 11
+      m_TileIndex: 0
+      m_TileSpriteIndex: 0
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -58498,7 +58500,7 @@ Tilemap:
       m_AllTileFlags: 1073741825
   m_AnimatedTiles: {}
   m_TileAssetArray:
-  - m_RefCount: 513
+  - m_RefCount: 514
     m_Data: {fileID: 11400000, guid: b3e8f3a2e14494bcc9001c2bd1e27c1f, type: 2}
   - m_RefCount: 6
     m_Data: {fileID: 11400000, guid: 3e8177d9b21b7492492d7f1f97c2a61c, type: 2}
@@ -58520,10 +58522,10 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 72b7b1838d40a4e4b9a26f6935a7fda0, type: 2}
   - m_RefCount: 4855
     m_Data: {fileID: 11400000, guid: f0c9f6f5092008d4fad0bb4c5fb92460, type: 2}
-  - m_RefCount: 1
-    m_Data: {fileID: 11400000, guid: 5a8dbb78ed853482fa9538d0c21c25f9, type: 2}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   m_TileSpriteArray:
-  - m_RefCount: 513
+  - m_RefCount: 514
     m_Data: {fileID: 21300000, guid: 925323f728ab6e84f9bac6151ba590d3, type: 3}
   - m_RefCount: 6
     m_Data: {fileID: 21300000, guid: 88c7dc16c9e55481f945722e4986458d, type: 3}
@@ -58545,8 +58547,8 @@ Tilemap:
     m_Data: {fileID: 21300000, guid: 36e3e71373bfc48e98c63c8fe7ee3635, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 21300000, guid: c57afff266d7b45428e99004e8bf5b7b, type: 3}
-  - m_RefCount: 1
-    m_Data: {fileID: 21300000, guid: 561ecbb0b5dfc4234ac1b4299d1fe2e0, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   m_TileMatrixArray:
   - m_RefCount: 5400
     m_Data:
@@ -63233,6 +63235,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textAssetData: {fileID: 0}
   maxDecoReach: 0
+  ratios: []
   _recyclableScrollRect: {fileID: 1124475071}
   threeMinSprite: {fileID: 21300000, guid: 9862ef777a3d2544ca08c139bfd41605, type: 3}
   thirtyMinSprite: {fileID: 21300000, guid: 62a9df5a06c744c4a9f81cbb93f045d9, type: 3}
@@ -71234,6 +71237,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textAssetData: {fileID: 0}
   maxDecoReach: 0
+  ratios: []
   _recyclableScrollRect: {fileID: 1307693307}
   stats: {fileID: 973017964}
   levelRect: {fileID: 1307693307}
@@ -79836,6 +79840,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textAssetData: {fileID: 4900000, guid: 55344fc88d7fb40edba2b548f7a9ae65, type: 3}
   maxDecoReach: 0
+  ratios: []
 --- !u!4 &1673960465
 Transform:
   m_ObjectHideFlags: 0
