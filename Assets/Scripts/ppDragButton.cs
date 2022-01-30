@@ -66,7 +66,7 @@ public class ppDragButton : MonoBehaviour
         }
         foreach (var item in list)
         {
-            print("item " + item);
+            //print("item " + item);
         }
         print("totalNo is " + list.Count);
         return list;

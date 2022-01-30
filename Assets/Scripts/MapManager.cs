@@ -24,7 +24,7 @@ public class MapManager : MonoBehaviour
     public AudioClip deleteSound;
 
     [SerializeField]
-    public GameObject splashObject, saveObj;
+    public GameObject splashObject, saveObj, ppDragButton, Astar;
 
     public Camera mainCam;
 
@@ -200,6 +200,51 @@ public class MapManager : MonoBehaviour
                     if (hit.collider != null && hit.collider.gameObject.GetComponent<Property>() != null)
                     {
                         print("Hit Property: " + hit.collider.gameObject.name + " at x = " + x);
+                        // A star detection when build ------
+                        List<Vector2Int> alist = ppDragButton.GetComponent<ppDragButton>().getSurroundRoads(hit.collider.gameObject.GetComponent<Property>().Card, hit.collider.gameObject.GetComponent<Property>().GetComponent<Draggable>().XY);
+                        bool astartest = false;
+                        foreach (var item in alist)
+                        {
+                            if (map.GetTile(new Vector3Int(item.x, item.y, 0)).name.Contains("road"))
+                            {
+                                astartest = Astar.GetComponent<Astar>().AStarFunc(new Vector2Int(item.x, item.y), new Vector2Int(0, -1), map);
+                                print("test astar is " + test);
+                                break;
+                            }
+                            else
+                            {
+                                astartest = false;
+                            }
+                        }
+                        if (astartest == true)
+                        {
+                            switch (hit.collider.gameObject.GetComponent<Property>().Card.type)
+                            {
+
+                                case "House": hit.collider.gameObject.transform.GetChild(3).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0; break;
+                                case "Commerce": hit.collider.gameObject.transform.GetChild(2).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0; break;
+                                case "Wonder": hit.collider.gameObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0; break;
+                                default: break;
+                            }
+                        }
+                        else
+                        {
+                            switch (hit.collider.gameObject.GetComponent<Property>().Card.type)
+                            {
+                                case "House":
+                                    hit.collider.gameObject.transform.GetChild(3).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2;
+                                    hit.collider.gameObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
+                                    hit.collider.gameObject.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
+                                    break;
+                                case "Commerce":
+                                    hit.collider.gameObject.transform.GetChild(2).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2;
+                                    hit.collider.gameObject.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
+                                    break;
+                                case "Wonder": hit.collider.gameObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2; break;
+                                default: break;
+                            }
+                        }
+                        // End of astar detection -------
                     }
                 }
             } else

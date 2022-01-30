@@ -266,10 +266,6 @@ public class CSVReader : MonoBehaviour
         print("max deco reach after calc is " + maxDecoReach);
 
         print("Completed reading CSV data");
-        foreach (var item in ratios)
-        {
-            print("ratio of " + item);
-        }
     }
 
 }

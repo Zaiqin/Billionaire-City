@@ -83558,6 +83558,8 @@ MonoBehaviour:
   splashObject: {fileID: 1976408486320943345, guid: 916150befd6ee214ab9864791ccbabea,
     type: 3}
   saveObj: {fileID: 25462474}
+  ppDragButton: {fileID: 184177505}
+  Astar: {fileID: 68398485}
   mainCam: {fileID: 519420031}
   startInUI: 0
 --- !u!4 &2061975115

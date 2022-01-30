@@ -246,6 +246,21 @@ public class saveloadsystem : MonoBehaviour
         else
         {
             print("Save Game Found, loading from save");
+            // ----------- Loading Tilemap ------------------
+            foreach (var item in tilelist)
+            {
+                Vector3Int pos = new Vector3Int((int)item.x, (int)item.y, 0);
+                if (item.texName.Contains("road") || item.texName.Contains("Grass") || item.texName.Contains("Below"))
+                {
+                    map.SetTile(pos, Resources.Load<TileBase>("roadTiles/" + item.texName));
+                    //print("loaded road" + item.texName + "at pos " + pos);
+                }
+                else if (item.texName.Contains("plot"))
+                {
+                    map.SetTile(pos, Resources.Load<TileBase>("plotTiles/" + item.texName));
+                    //print("loaded plot" + item.texName + "at pos " + pos);
+                }
+            }
             // ----------- Loading Properties ---------------
             foreach (var p in list)
             {
@@ -269,20 +284,7 @@ public class saveloadsystem : MonoBehaviour
             }
             print("loaded name is " + statsObj.cityName);
             nameField.text = statsObj.cityName;
-            // ----------- Loading Tilemap ------------------
-            foreach (var item in tilelist)
-            {
-                Vector3Int pos = new Vector3Int((int)item.x, (int)item.y, 0);
-                if (item.texName.Contains("road") || item.texName.Contains("Grass") || item.texName.Contains("Below"))
-                {
-                    map.SetTile(pos, Resources.Load<TileBase>("roadTiles/" + item.texName));
-                    //print("loaded road" + item.texName + "at pos " + pos);
-                } else if (item.texName.Contains("plot"))
-                {
-                    map.SetTile(pos, Resources.Load<TileBase>("plotTiles/" + item.texName));
-                    //print("loaded plot" + item.texName + "at pos " + pos);
-                }
-            }
+            
             // ------------ Loading Expansions -------------
             expPopup.GetComponent<expansion>().deletedExp = FileHandler.ReadListFromJSON<string>("deletedExp.json");
             long cost = 0;
@@ -499,14 +501,17 @@ public class saveloadsystem : MonoBehaviour
             bool test = false;
             foreach (var item in alist)
             {
+                //print("testing " + new Vector3Int(item.x, item.y, 0) + " with name " + map.GetTile(new Vector3Int(item.x, item.y, 0)).name);
                 if (map.GetTile(new Vector3Int(item.x, item.y, 0)).name.Contains("road"))
                 {
+                    //print("contain road");
                     test = Astar.GetComponent<Astar>().AStarFunc(new Vector2Int(item.x, item.y), new Vector2Int(0, -1), map);
                     print("test astar is " + test);
                     break;
                 }
                 else
                 {
+                    //print("no road");
                     test = false;
                 }
             }
