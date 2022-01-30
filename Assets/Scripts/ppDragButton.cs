@@ -39,34 +39,61 @@ public class ppDragButton : MonoBehaviour
     public List<Vector2Int> getSurroundRoads(PropertyCard card, float[] XY)
     {
         List<Vector2Int> list = new List<Vector2Int>();
-        int[] xy = new int[] { (int)(XY[0]-1), (int)(XY[1]-1) };
+        int[] xy = new int[] { (int)(XY[0]-1), (int)(XY[1]) };
         int propX = int.Parse(card.space.Substring(0, 1)); int propY = int.Parse(card.space.Substring(card.space.Length - 1));
-        int totalNo = ((propX + 2) * (propY + 2)) - (propX * propY);
+        int totalNo = (propX * 2) + (propY * 2);
         int deltaX = 0; int deltaY = 0; bool topHori = true;
         for (int i = 0; i < totalNo; i++)
         {
-            if (i < (propY+1))
+            if (i < propY)
             {
                 list.Add(new Vector2Int(xy[0], xy[1]+deltaY));
                 deltaY++;
-            } else if ((deltaX < (propX+1)) && (topHori == true))
+            } else if ((deltaX < propX) && (topHori == true))
             {
-                list.Add(new Vector2Int(xy[0] + deltaX, xy[1] + deltaY));
-                deltaX++;
+                if (i != propY-1)
+                {
+                    list.Add(new Vector2Int((int)(XY[0]) + deltaX, xy[1] + deltaY));
+                    deltaX++;
+                } else
+                {
+                    deltaY++;
+                    list.Add(new Vector2Int((int)(XY[0]) + deltaX, xy[1] + deltaY));
+                    deltaX++;
+                }
+                
             } else if (deltaY != 0)
             {
-                list.Add(new Vector2Int(xy[0] + deltaX, xy[1] + deltaY));
-                deltaY--;
-                topHori = false;
+                if (deltaX == propX)
+                {
+                    topHori = false;
+                    deltaY--;
+                    list.Add(new Vector2Int((int)(XY[0]) + propX, xy[1] + deltaY));
+                }
+                else
+                {
+                    list.Add(new Vector2Int((int)(XY[0]) + propX, xy[1] + deltaY));
+                    deltaY--;
+                }
             } else
             {
-                list.Add(new Vector2Int(xy[0] + deltaX, xy[1] + deltaY));
-                deltaX--;
+                if (deltaX == propX)
+                {
+                    print("here");
+                    list.Add(new Vector2Int(xy[0] + deltaX, xy[1] + deltaY-1));
+                    deltaX--;
+                }
+                else
+                {
+                    print("her2e");
+                    list.Add(new Vector2Int(xy[0] + deltaX, xy[1] + deltaY-1));
+                    deltaX--;
+                }
             }
         }
         foreach (var item in list)
         {
-            //print("item " + item);
+            print("item " + item);
         }
         print("totalNo is " + list.Count);
         return list;
@@ -235,25 +262,29 @@ public class ppDragButton : MonoBehaviour
                     temp = pp.Card.buildTime.Remove(pp.Card.buildTime.Length-4);
                     pp.constructEnd = DateTime.Now.AddMinutes(int.Parse(temp)).ToString("yyyy/MM/dd HH:mm:ss");
                     pp.constructStart = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
-                    print("temp is " + temp);
+                    //print("temp is " + temp);
                 }
                 else if (pp.Card.buildTime.Contains("hr"))
                 {
                     temp = pp.Card.buildTime.Remove(pp.Card.buildTime.Length - 2);
                     pp.constructEnd = DateTime.Now.AddHours(int.Parse(temp)).ToString("yyyy/MM/dd HH:mm:ss");
                     pp.constructStart = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
-                    print("temp is " + temp);
+                    //print("temp is " + temp);
                 }
                 else if (pp.Card.buildTime.Contains("day"))
                 {
                     temp = pp.Card.buildTime.Remove(pp.Card.buildTime.Length - 3);
                     pp.constructEnd = DateTime.Now.AddDays(int.Parse(temp)).ToString("yyyy/MM/dd HH:mm:ss");
                     pp.constructStart = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
-                    print("temp is " + temp);
+                    //print("temp is " + temp);
                 }
 
                 // A star detection when build ------
                 List<Vector2Int> alist = getSurroundRoads(pCard, pp.GetComponent<Draggable>().XY);
+                /*foreach (var item in alist) // for testing surround roads
+                {
+                    map.SetTile(new Vector3Int(item.x, item.y, 0), road255);
+                }*/
                 bool test = false;
                 foreach (var item in alist)
                 {
