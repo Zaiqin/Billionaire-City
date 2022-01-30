@@ -173,6 +173,43 @@ public class MapManager : MonoBehaviour
         saveObj.GetComponent<saveloadsystem>().saveTilemap();
     }
 
+    public void testSurroundHouse(Vector3Int gridPosition)
+    {
+        Vector3Int test = new Vector3Int(0, 0, 0);
+        for (int i = 0; i < 4; i++)
+        {
+            switch (i)
+            {
+                case 0: test = new Vector3Int(gridPosition.x, gridPosition.y + 1, gridPosition.z); break;
+                case 1: test = new Vector3Int(gridPosition.x + 1, gridPosition.y, gridPosition.z); break;
+                case 2: test = new Vector3Int(gridPosition.x, gridPosition.y - 1, gridPosition.z); break;
+                case 3: test = new Vector3Int(gridPosition.x - 1, gridPosition.y, gridPosition.z); break;
+                default:
+                    break;
+            }
+            Vector3 temp = map.CellToWorld(test);
+            temp = new Vector3(temp.x + 0.5f, temp.y + 0.5f);
+            Debug.DrawRay(temp, Vector3.forward, Color.red, Mathf.Infinity);
+            if (map.GetTile(test).name.Contains("noBelow"))
+            {
+                RaycastHit2D[] hits;
+                hits = Physics2D.RaycastAll(temp, Vector3.forward, Mathf.Infinity);
+                for (int x = 0; x < hits.Length; x++)
+                {
+                    RaycastHit2D hit = hits[x];
+                    if (hit.collider != null && hit.collider.gameObject.GetComponent<Property>() != null)
+                    {
+                        print("Hit Property: " + hit.collider.gameObject.name + " at x = " + x);
+                    }
+                }
+            } else
+            {
+                //print("no below here");
+            }
+
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -190,6 +227,9 @@ public class MapManager : MonoBehaviour
             if (clickedTile.name.Contains("greenGrass"))
             {
                 roadFunction(gridPosition, false);
+                print("built a new road");
+
+                testSurroundHouse(gridPosition);
             }
         }
         if ((deleteToggle.isOn == true) && (Input.GetMouseButtonUp(0)) && startInUI == false)
