@@ -79,13 +79,11 @@ public class ppDragButton : MonoBehaviour
             {
                 if (deltaX == propX)
                 {
-                    print("here");
                     list.Add(new Vector2Int(xy[0] + deltaX, xy[1] + deltaY-1));
                     deltaX--;
                 }
                 else
                 {
-                    print("her2e");
                     list.Add(new Vector2Int(xy[0] + deltaX, xy[1] + deltaY-1));
                     deltaX--;
                 }
@@ -93,9 +91,9 @@ public class ppDragButton : MonoBehaviour
         }
         foreach (var item in list)
         {
-            print("item " + item);
+            //print("item " + item);
         }
-        print("totalNo is " + list.Count);
+        //print("totalNo is " + list.Count);
         return list;
     }
 

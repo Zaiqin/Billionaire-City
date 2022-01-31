@@ -24,7 +24,7 @@ public class MapManager : MonoBehaviour
     public AudioClip deleteSound;
 
     [SerializeField]
-    public GameObject splashObject, saveObj, ppDragButton, Astar;
+    public GameObject splashObject, saveObj, ppDragButton, Astar, PropertiesParent;
 
     public Camera mainCam;
 
@@ -274,7 +274,66 @@ public class MapManager : MonoBehaviour
                 roadFunction(gridPosition, false);
                 print("built a new road");
 
-                testSurroundHouse(gridPosition);
+                //testSurroundHouse(gridPosition);
+                foreach (Transform child in PropertiesParent.transform)
+                {
+                    if (child.gameObject.name != "HQ")
+                    {
+                        if (child.gameObject.GetComponent<Property>().Card.type != "Deco")
+                        {
+                            print("checked child " + child.gameObject.name);
+                            Property pp = child.gameObject.GetComponent<Property>();
+                            // A star detection when build ------
+                            List<Vector2Int> alist = ppDragButton.GetComponent<ppDragButton>().getSurroundRoads(pp.Card, pp.GetComponent<Draggable>().XY);
+                            bool test = false;
+                            foreach (var item in alist)
+                            {
+                                //print("testing " + new Vector3Int(item.x, item.y, 0) + " with name " + map.GetTile(new Vector3Int(item.x, item.y, 0)).name);
+                                if (map.GetTile(new Vector3Int(item.x, item.y, 0)).name.Contains("road"))
+                                {
+                                    //print("contain road");
+                                    test = Astar.GetComponent<Astar>().AStarFunc(new Vector2Int(item.x, item.y), new Vector2Int(0, -1), map);
+                                    print("test astar is " + test);
+                                    break;
+                                }
+                                else
+                                {
+                                    //print("no road");
+                                    test = false;
+                                }
+                            }
+                            if (test == true)
+                            {
+                                pp.justConnected = true;
+                                switch (pp.Card.type)
+                                {
+                                    case "House": pp.transform.GetChild(3).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0; break;
+                                    case "Commerce": pp.transform.GetChild(2).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0; break;
+                                    case "Wonder": pp.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0; break;
+                                    default: break;
+                                }
+                            }
+                            else
+                            {
+                                switch (pp.Card.type)
+                                {
+                                    case "House":
+                                        pp.transform.GetChild(3).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2;
+                                        pp.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
+                                        pp.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
+                                        break;
+                                    case "Commerce":
+                                        pp.transform.GetChild(2).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2;
+                                        pp.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
+                                        break;
+                                    case "Wonder": pp.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2; break;
+                                    default: break;
+                                }
+                            }
+                            // End of astar detection -------
+                        }
+                    }
+                }
             }
         }
         if ((deleteToggle.isOn == true) && (Input.GetMouseButtonUp(0)) && startInUI == false)
@@ -285,8 +344,71 @@ public class MapManager : MonoBehaviour
             Tile clickedTile = map.GetTile<Tile>(gridPosition);
             if (clickedTile.name.Contains("road"))
             {
-                myFx.PlayOneShot(deleteSound);
                 roadFunction(gridPosition, true);
+
+                print("deleted road");
+                //testSurroundHouse(gridPosition);
+
+                foreach (Transform child in PropertiesParent.transform)
+                {
+                    if (child.gameObject.name != "HQ")
+                    {
+                        if (child.gameObject.GetComponent<Property>().Card.type != "Deco")
+                        {
+                            print("checked child " + child.gameObject.name);
+                            Property pp = child.gameObject.GetComponent<Property>();
+                            // A star detection when build ------
+                            List<Vector2Int> alist = ppDragButton.GetComponent<ppDragButton>().getSurroundRoads(pp.Card, pp.GetComponent<Draggable>().XY);
+                            bool test = false;
+                            foreach (var item in alist)
+                            {
+                                //print("testing " + new Vector3Int(item.x, item.y, 0) + " with name " + map.GetTile(new Vector3Int(item.x, item.y, 0)).name);
+                                if (map.GetTile(new Vector3Int(item.x, item.y, 0)).name.Contains("road"))
+                                {
+                                    //print("contain road");
+                                    test = Astar.GetComponent<Astar>().AStarFunc(new Vector2Int(item.x, item.y), new Vector2Int(0, -1), map);
+                                    print("test astar is " + test);
+                                    break;
+                                }
+                                else
+                                {
+                                    //print("no road");
+                                    test = false;
+                                }
+                            }
+                            if (test == true)
+                            {
+                                pp.justConnected = true;
+                                switch (pp.Card.type)
+                                {
+
+                                    case "House": pp.transform.GetChild(3).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0; break;
+                                    case "Commerce": pp.transform.GetChild(2).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0; break;
+                                    case "Wonder": pp.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0; break;
+                                    default: break;
+                                }
+                            }
+                            else
+                            {
+                                switch (pp.Card.type)
+                                {
+                                    case "House":
+                                        pp.transform.GetChild(3).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2;
+                                        pp.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
+                                        pp.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
+                                        break;
+                                    case "Commerce":
+                                        pp.transform.GetChild(2).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2;
+                                        pp.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
+                                        break;
+                                    case "Wonder": pp.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2; break;
+                                    default: break;
+                                }
+                            }
+                            // End of astar detection -------
+                        }
+                    }
+                }
             }
         }
 

@@ -10,6 +10,8 @@ public class Property : MonoBehaviour, IPointerClickHandler
     public int bonus;
     public string constructStart;
     public string constructEnd;
+    public bool justConnected = false;
+    private double nextUpdate = 0.1;
     public void initialise(PropertyCard pcard)
     {
         // Adding propertySprite
@@ -230,10 +232,10 @@ public class Property : MonoBehaviour, IPointerClickHandler
                     infoPanel.GetComponent<infoScript>().selProp = this.gameObject;
                     if (infoPanel.GetComponent<infoScript>().highlightedProp != null)
                     {
-                        if (infoPanel.GetComponent<infoScript>().highlightedProp.transform.childCount > 3 && infoPanel.GetComponent<infoScript>().highlightedProp.name != this.gameObject.name)
+                        if (infoPanel.GetComponent<infoScript>().highlightedProp.transform.childCount > 4 && infoPanel.GetComponent<infoScript>().highlightedProp.name != this.gameObject.name)
                         {
                             print("Destroy this");
-                            Destroy(infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(3).gameObject);
+                            Destroy(infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(4).gameObject);
                         }
                     }
                     infoPanel.GetComponent<infoScript>().initInfo();
@@ -279,6 +281,44 @@ public class Property : MonoBehaviour, IPointerClickHandler
 
     private void Update()
     {
+        if (Time.time >= nextUpdate)
+        {
+            //Debug.Log(Time.time + ">=" + nextUpdate);
+            // Change the next update (current second+1)
+            nextUpdate = Mathf.FloorToInt(Time.time) + 0.1;
+            // Call your fonction
+            checkConstruction();
+
+            if (this.justConnected == true)
+            {
+                if (this.Card.type == "House")
+                {
+                    if (this.gameObject.transform.GetChild(3).gameObject.GetComponent<SpriteRenderer>().sortingOrder == 0)
+                    {
+                        updateConnected();
+                    }
+                }
+                else if (this.Card.type == "Commerce")
+                {
+                    if (this.gameObject.transform.GetChild(2).gameObject.GetComponent<SpriteRenderer>().sortingOrder == 0)
+                    {
+                        updateConnected();
+                    }
+                }
+                else if (this.Card.type == "Wonder")
+                {
+                    if (this.gameObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder == 0)
+                    {
+                        updateConnected();
+                    }
+                }
+            }
+        }
+    }
+
+    public void checkConstruction()
+    {
+        // ------------- Check construction --------------
         if (constructEnd != null && constructEnd != "na" && this.gameObject.GetComponent<Property>().Card.type != "Deco")
         {
             if ((DateTime.Parse(constructEnd) - DateTime.Now) <= TimeSpan.Zero)
@@ -293,7 +333,8 @@ public class Property : MonoBehaviour, IPointerClickHandler
                 this.transform.GetChild(1).gameObject.AddComponent<BoxCollider2D>();
 
                 this.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2;
-            } else
+            }
+            else
             {
                 SpriteRenderer renderer = this.gameObject.GetComponent<SpriteRenderer>();
                 float x = float.Parse(Card.space.Substring(0, 1));
@@ -304,6 +345,82 @@ public class Property : MonoBehaviour, IPointerClickHandler
                 //print("x is " + x + " y is " + y);
                 float ppi = (constructSprite.texture.width) / (x); //print("ppi is " + ppi);
                 renderer.sprite = Sprite.Create(constructSprite.texture, new Rect(0, 0, constructSprite.texture.width, constructSprite.texture.height), new Vector2(0f, 0f), ppi);
+            }
+        }
+        // -----------------------------------------------------
+    }
+
+    public void updateConnected()
+    {
+        this.justConnected = false;
+        Property pp = this.gameObject.GetComponent<Property>();
+        if (pp.Card.type == "House") // check to only do these thats only for houses
+        {
+            var dateAndTimeVar = System.DateTime.Now;
+            //print("going check contract for " + pp.name + "which is signtime " + pp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signTime);
+            if (pp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signTime == "notsigned")
+            {
+                pp.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2;
+                pp.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
+                pp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signCreationTime = "notsigned";
+                print("notsigned");
+            }
+            else if (dateAndTimeVar >= DateTime.Parse(pp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signTime))
+            {
+                pp.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
+                pp.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2;
+                //print("sign over timea alre");
+            }
+            else if (dateAndTimeVar < DateTime.Parse(pp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signTime))
+            {
+                pp.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
+                pp.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
+            }
+            else
+            {
+                pp.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
+                pp.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2;
+                //print("sign still ongoiing");
+            }
+
+            if (pp.constructEnd != "na")
+            {
+                pp.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
+                print("not equals na");
+            }
+
+        }
+        else if (pp.Card.type == "Commerce")
+        {
+            var dateAndTimeVar = System.DateTime.Now;
+            //print("going check contract for " + pp.name + "which is signtime " + pp.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signTime);
+            if (pp.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signTime == "notsigned")
+            {
+                //print("notsigned, thus signing now");
+                pp.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
+
+                DateTime theTime;
+                theTime = DateTime.Now.AddMinutes(3);
+                //print("signing property commerce again");
+                string datetime = theTime.ToString("yyyy/MM/dd HH:mm:ss");
+                pp.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signTime = datetime;
+                pp.transform.GetChild(1).GetComponent<commercePickupScript>().signCreationTime = System.DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                //print("sign time is " + datetime);
+
+            }
+            else if (dateAndTimeVar >= DateTime.Parse(pp.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signTime))
+            {
+                pp.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2;
+                //print("sign over time already");
+            }
+            else if (dateAndTimeVar < DateTime.Parse(pp.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signTime))
+            {
+                pp.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
+            }
+            else
+            {
+                pp.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
+                //print("sign still ongoiing");
             }
         }
     }
@@ -339,7 +456,7 @@ public class contractScript : MonoBehaviour, IPointerClickHandler
         var dateAndTimeVar = System.DateTime.Now;
         if (signTime != "notsigned")
         {
-            if (dateAndTimeVar >= DateTime.Parse(signTime))
+            if (dateAndTimeVar >= DateTime.Parse(signTime) && this.gameObject.transform.parent.GetChild(3).GetComponent<SpriteRenderer>().sortingOrder == 0)
             {
                 this.gameObject.transform.parent.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder = 2;
             }
@@ -515,7 +632,7 @@ public class commercePickupScript : MonoBehaviour, IPointerClickHandler
         if (signTime != "notsigned")
         {
             //print("sign end time is " + signTime + ", sign created on " + signCreationTime);
-            if (dateAndTimeVar >= DateTime.Parse(signTime))
+            if (dateAndTimeVar >= DateTime.Parse(signTime) && this.gameObject.transform.parent.GetChild(2).GetComponent<SpriteRenderer>().sortingOrder == 0)
             {
                 this.gameObject.transform.parent.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder = 2;
             }

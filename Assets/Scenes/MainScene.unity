@@ -83560,6 +83560,7 @@ MonoBehaviour:
   saveObj: {fileID: 25462474}
   ppDragButton: {fileID: 184177505}
   Astar: {fileID: 68398485}
+  PropertiesParent: {fileID: 2080538343}
   mainCam: {fileID: 519420031}
   startInUI: 0
 --- !u!4 &2061975115

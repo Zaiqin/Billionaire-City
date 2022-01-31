@@ -38,9 +38,9 @@ public class UIToggle : MonoBehaviour
         {
             GameObject highlightedProp = GameObject.Find("infoPanel").GetComponent<infoScript>().highlightedProp;
             highlightedProp.GetComponent<SpriteRenderer>().material.color = Color.white;
-            if (highlightedProp.GetComponent<Property>().Card.type == "House" && highlightedProp.transform.childCount == 4)
+            if (highlightedProp.GetComponent<Property>().Card.type == "House" && highlightedProp.transform.childCount == 5)
             {
-                Destroy(highlightedProp.transform.GetChild(3).gameObject);
+                Destroy(highlightedProp.transform.GetChild(4).gameObject);
             }
         }
 
