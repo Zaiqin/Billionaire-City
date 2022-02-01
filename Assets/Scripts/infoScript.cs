@@ -43,22 +43,6 @@ public class infoScript : MonoBehaviour
         return calc;
     }
 
-    public string parseLong(long val)
-    {
-        string res = "";
-        if (val >= 100000000)
-        {
-            // Contract ongoing and income is more than 100M
-            res = val.ToString("#,##0");
-            incomeText.GetComponent<Text>().text = "$" + (val/1000000) + "M";
-        }
-        else
-        {
-            // Contract ongoing and income is less than 100M
-            res = val.ToString("#,##0");
-        }
-        return res;
-    }
     public void initInfo()
     {
         selProp.GetComponent<SpriteRenderer>().material.color = new Color(35f / 255f, 206f / 255f, 241f / 255f, 255f / 255f);
@@ -508,7 +492,7 @@ public class infoScript : MonoBehaviour
                 }
             }
             instantCost = calcInstant(selProp.GetComponent<Property>(), diff);
-            custHeader.GetComponent<Text>().text = "Cost: $" + parseLong(calcInstant(selProp.GetComponent<Property>(), diff));
+            custHeader.GetComponent<Text>().text = "Cost: $" + instantCost.ToString("#,##0");
         }
     }
 }
