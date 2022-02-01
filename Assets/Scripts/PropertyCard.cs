@@ -25,6 +25,15 @@ public class PropertyCard
     public string buildTime;
     public int XP;
     public int level;
+    public int xpthreemins;
+    public int xpthirtymins;
+    public int xponehour;
+    public int xpfourhours;
+    public int xpeighthours;
+    public int xptwelvehours;
+    public int xponeday;
+    public int xptwodays;
+    public int xpthreedays;
     public int wonderBonus;
     public Sprite bgImage;
     public Sprite propImage;

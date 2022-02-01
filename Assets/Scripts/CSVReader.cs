@@ -143,7 +143,15 @@ public class CSVReader : MonoBehaviour
             tempArray[i].buildTime = string.IsNullOrEmpty(data[(cols * (masterNo + 2)) + 20]) ? "" : data[(cols * (masterNo + 2)) + 20];
             tempArray[i].XP = string.IsNullOrEmpty(data[(cols * (masterNo + 2)) + 21]) ? 0 : int.Parse(data[(cols * (masterNo + 2)) + 21]);
             tempArray[i].level = string.IsNullOrEmpty(data[(cols * (masterNo + 2)) + 22]) ? 0 : int.Parse(data[(cols * (masterNo + 2)) + 22]);
-            //-- VARIOUS COLUMNS -----
+            /*tempArray[i].xpthreemins = string.IsNullOrEmpty(data[(cols * (masterNo + 2)) + 23]) ? 0 : int.Parse(data[(cols * (masterNo + 2)) + 23]);
+            tempArray[i].xpthirtymins = string.IsNullOrEmpty(data[(cols * (masterNo + 2)) + 24]) ? 0 : int.Parse(data[(cols * (masterNo + 2)) + 24]);
+            tempArray[i].xponehour = string.IsNullOrEmpty(data[(cols * (masterNo + 2)) + 25]) ? 0 : int.Parse(data[(cols * (masterNo + 2)) + 25]);
+            tempArray[i].xpfourhours = string.IsNullOrEmpty(data[(cols * (masterNo + 2)) + 26]) ? 0 : int.Parse(data[(cols * (masterNo + 2)) + 26]);
+            tempArray[i].xpeighthours = string.IsNullOrEmpty(data[(cols * (masterNo + 2)) + 27]) ? 0 : int.Parse(data[(cols * (masterNo + 2)) + 27]);
+            tempArray[i].xptwelvehours = string.IsNullOrEmpty(data[(cols * (masterNo + 2)) + 28]) ? 0 : int.Parse(data[(cols * (masterNo + 2)) + 28]);
+            tempArray[i].xponeday = string.IsNullOrEmpty(data[(cols * (masterNo + 2)) + 29]) ? 0 : int.Parse(data[(cols * (masterNo + 2)) + 29]);
+            tempArray[i].xptwodays = string.IsNullOrEmpty(data[(cols * (masterNo + 2)) + 30]) ? 0 : int.Parse(data[(cols * (masterNo + 2)) + 30]);
+            tempArray[i].xpthreedays = string.IsNullOrEmpty(data[(cols * (masterNo + 2)) + 31]) ? 0 : int.Parse(data[(cols * (masterNo + 2)) + 31]);*/
             tempArray[i].wonderBonus = string.IsNullOrEmpty(data[(cols * (masterNo + 2)) + 34]) ? 0 : int.Parse(data[(cols * (masterNo + 2)) + 34]);
             //---------------------------------
 

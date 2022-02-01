@@ -1383,6 +1383,8 @@ MonoBehaviour:
   contractPanel: {fileID: 776026746}
   expPopup: {fileID: 62597483}
   failExpPopup: {fileID: 616594838}
+  convertMoneyPanel: {fileID: 205541568}
+  dailyBonusPanel: {fileID: 662742294}
   toggles: []
   map: {fileID: 280726322}
   greenGrass: {fileID: 11400000, guid: 68a3091ae6a3000469a13bd060a098ad, type: 2}
@@ -59117,6 +59119,8 @@ MonoBehaviour:
   contractPanel: {fileID: 776026746}
   expPopup: {fileID: 62597483}
   failExpPopup: {fileID: 616594838}
+  convertMoneyPanel: {fileID: 205541568}
+  dailyBonusPanel: {fileID: 662742294}
   toggles: []
   map: {fileID: 280726322}
   greenGrass: {fileID: 11400000, guid: 68a3091ae6a3000469a13bd060a098ad, type: 2}
@@ -63171,6 +63175,8 @@ MonoBehaviour:
   contractPanel: {fileID: 776026746}
   expPopup: {fileID: 62597483}
   failExpPopup: {fileID: 616594838}
+  convertMoneyPanel: {fileID: 205541568}
+  dailyBonusPanel: {fileID: 662742294}
   toggles: []
   map: {fileID: 280726322}
   greenGrass: {fileID: 11400000, guid: 68a3091ae6a3000469a13bd060a098ad, type: 2}
@@ -66242,6 +66248,8 @@ MonoBehaviour:
   contractPanel: {fileID: 776026746}
   expPopup: {fileID: 62597483}
   failExpPopup: {fileID: 616594838}
+  convertMoneyPanel: {fileID: 205541568}
+  dailyBonusPanel: {fileID: 662742294}
   toggles: []
   map: {fileID: 280726322}
   greenGrass: {fileID: 11400000, guid: 68a3091ae6a3000469a13bd060a098ad, type: 2}
@@ -78585,6 +78593,8 @@ MonoBehaviour:
   contractPanel: {fileID: 776026746}
   expPopup: {fileID: 62597483}
   failExpPopup: {fileID: 616594838}
+  convertMoneyPanel: {fileID: 205541568}
+  dailyBonusPanel: {fileID: 662742294}
   toggles: []
   map: {fileID: 280726322}
   greenGrass: {fileID: 11400000, guid: 68a3091ae6a3000469a13bd060a098ad, type: 2}
