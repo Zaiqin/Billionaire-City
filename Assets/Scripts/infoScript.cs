@@ -7,8 +7,9 @@ using System;
 public class infoScript : MonoBehaviour
 {
     public GameObject selProp;
-    public GameObject nameText, fillBg, fill, timeText, incomeText, incomeHeader, time, money, custHeader, tenantsIcon, tenantsText, xpIcon, xpText, consfillBg, consfill, constimeText, cons;
-    public Sprite largeBg, smallBg, tenantsSprite, bonusSprite;
+    public GameObject nameText, fillBg, fill, timeText, incomeText, incomeHeader, time, money, custHeader, tenantsIcon, tenantsText, xpIcon, xpText, consfillBg, consfill, constimeText, cons, instantBuild, constHeader;
+    public Sprite largeBg, smallBg, constructBg, tenantsSprite, bonusSprite;
+    public long instantCost;
 
     public GameObject highlightedProp;
 
@@ -23,6 +24,41 @@ public class infoScript : MonoBehaviour
         fillBg.SetActive(false);
     }
 
+    public long calcInstant(Property pp, TimeSpan time)
+    {
+        long calc = 0;
+        if (pp.Card.cost.Contains("Gold"))
+        {
+            int temp = int.Parse(pp.Card.cost.Remove(pp.Card.cost.Length - 5));
+            calc = 60000 * temp;
+        }
+        else
+        {
+            calc = long.Parse(pp.Card.cost);
+        }
+        double perten = time.TotalMinutes / 10;
+        calc = (long)( (95/6) * (calc / 1000) * perten);
+        //print("calc is " + calc);
+        
+        return calc;
+    }
+
+    public string parseLong(long val)
+    {
+        string res = "";
+        if (val >= 100000000)
+        {
+            // Contract ongoing and income is more than 100M
+            res = val.ToString("#,##0");
+            incomeText.GetComponent<Text>().text = "$" + (val/1000000) + "M";
+        }
+        else
+        {
+            // Contract ongoing and income is less than 100M
+            res = val.ToString("#,##0");
+        }
+        return res;
+    }
     public void initInfo()
     {
         selProp.GetComponent<SpriteRenderer>().material.color = new Color(35f / 255f, 206f / 255f, 241f / 255f, 255f / 255f);
@@ -33,8 +69,8 @@ public class infoScript : MonoBehaviour
             print("showing house info");
             
             nameText.SetActive(true); fillBg.SetActive(true); fill.SetActive(true); timeText.SetActive(true); incomeText.SetActive(true); incomeHeader.SetActive(false); time.SetActive(true); money.SetActive(true); xpIcon.SetActive(true); xpText.SetActive(true);
-            consfill.SetActive(false); consfillBg.SetActive(false); constimeText.SetActive(false); cons.SetActive(false);
-            custHeader.SetActive(true); tenantsText.SetActive(true);
+            consfill.SetActive(false); consfillBg.SetActive(false); constimeText.SetActive(false); cons.SetActive(false); instantBuild.SetActive(false); constHeader.SetActive(false);
+            custHeader.SetActive(true); tenantsText.SetActive(true); tenantsIcon.SetActive(true);
             this.GetComponent<Image>().sprite = largeBg;
             nameText.GetComponent<Text>().text = selProp.GetComponent<Property>().Card.displayName;
             custHeader.GetComponent<Text>().text = "Tenants";
@@ -134,8 +170,8 @@ public class infoScript : MonoBehaviour
             nameText.GetComponent<Text>().text = selProp.GetComponent<Property>().Card.displayName;
             custHeader.GetComponent<Text>().text = "Customers";
             incomeHeader.GetComponent<Text>().text = "Income";
-            custHeader.SetActive(true); tenantsText.SetActive(true);
-            consfill.SetActive(false); consfillBg.SetActive(false); constimeText.SetActive(false); cons.SetActive(false);
+            custHeader.SetActive(true); tenantsText.SetActive(true); tenantsIcon.SetActive(true);
+            consfill.SetActive(false); consfillBg.SetActive(false); constimeText.SetActive(false); cons.SetActive(false); instantBuild.SetActive(false); constHeader.SetActive(false);
             tenantsIcon.GetComponent<Image>().sprite = tenantsSprite;
             incomeHeader.GetComponent<Text>().fontSize = 22;
             List<Collider2D> infList = selProp.gameObject.transform.GetChild(0).GetComponent<influence>().housesInfluenced;
@@ -200,17 +236,18 @@ public class infoScript : MonoBehaviour
             this.GetComponent<Image>().sprite = smallBg;
             tenantsText.GetComponent<Text>().text = "+" + selProp.GetComponent<Property>().Card.decoBonus + " %";
             custHeader.GetComponent<Text>().text = "Houses Bonus";
-            custHeader.SetActive(true); tenantsText.SetActive(true);
+            custHeader.SetActive(true); tenantsText.SetActive(true); tenantsIcon.SetActive(true);
             incomeHeader.GetComponent<Text>().text = selProp.GetComponent<Property>().Card.displayName;
             incomeHeader.SetActive(true);
             incomeHeader.GetComponent<Text>().fontSize = 28;
-            consfill.SetActive(false); consfillBg.SetActive(false); constimeText.SetActive(false); cons.SetActive(false);
+            consfill.SetActive(false); consfillBg.SetActive(false); constimeText.SetActive(false); cons.SetActive(false); instantBuild.SetActive(false); constHeader.SetActive(false);
             tenantsIcon.GetComponent<Image>().sprite = bonusSprite;
         }
         else
         {
             //info script showing non houses
             nameText.SetActive(false); fillBg.SetActive(false); fill.SetActive(false); timeText.SetActive(false); incomeText.SetActive(false); time.SetActive(false); money.SetActive(false); xpIcon.SetActive(false); xpText.SetActive(false);
+            instantBuild.SetActive(false);
             this.GetComponent<Image>().sprite = smallBg;
             if (selProp.GetComponent<Property>().Card.wonderBonus >= 100)
             {
@@ -225,11 +262,11 @@ public class infoScript : MonoBehaviour
                 tenantsText.GetComponent<Text>().text = "+ " + selProp.GetComponent<Property>().Card.wonderBonus.ToString() + "% Houses";
             }
             custHeader.GetComponent<Text>().text = "Wonder Bonus";
-            custHeader.SetActive(true); tenantsText.SetActive(true);
+            custHeader.SetActive(true); tenantsText.SetActive(true); tenantsIcon.SetActive(true);
             incomeHeader.GetComponent<Text>().text = selProp.GetComponent<Property>().Card.displayName;
             incomeHeader.SetActive(true);
             incomeHeader.GetComponent<Text>().fontSize = 28;
-            consfill.SetActive(false); consfillBg.SetActive(false); constimeText.SetActive(false); cons.SetActive(false);
+            consfill.SetActive(false); consfillBg.SetActive(false); constimeText.SetActive(false); cons.SetActive(false); constHeader.SetActive(false);
             tenantsIcon.GetComponent<Image>().sprite = bonusSprite;
         }
 
@@ -238,14 +275,13 @@ public class infoScript : MonoBehaviour
         {
             print("showing const version");
             nameText.SetActive(false); fillBg.SetActive(false); fill.SetActive(false); timeText.SetActive(false); incomeText.SetActive(false); time.SetActive(false); money.SetActive(false); xpIcon.SetActive(false); xpText.SetActive(false);
-            this.GetComponent<Image>().sprite = smallBg;
+            this.GetComponent<Image>().sprite = constructBg;
             tenantsText.SetActive(false);
-            custHeader.SetActive(false);
-            incomeHeader.GetComponent<Text>().text = selProp.GetComponent<Property>().Card.displayName;
-            incomeHeader.SetActive(true);
-            incomeHeader.GetComponent<Text>().fontSize = 28;
+            custHeader.SetActive(true); custHeader.GetComponent<Text>().text = "Cost: $-";
+            constHeader.GetComponent<Text>().text = selProp.GetComponent<Property>().Card.displayName;
+            incomeHeader.SetActive(false);
             consfill.SetActive(true); consfillBg.SetActive(true); constimeText.SetActive(true); cons.SetActive(true);
-            tenantsIcon.GetComponent<Image>().sprite = bonusSprite;
+            tenantsIcon.SetActive(false); instantBuild.SetActive(true); constHeader.SetActive(true);
 
             if (selProp.GetComponent<Property>().Card.type == "House")
             {
@@ -287,9 +323,9 @@ public class infoScript : MonoBehaviour
             nameText.SetActive(true); fillBg.SetActive(true); fill.SetActive(true); timeText.SetActive(true); incomeText.SetActive(true); incomeHeader.SetActive(false); time.SetActive(true); money.SetActive(true); xpIcon.SetActive(true); xpText.SetActive(true);
             incomeHeader.GetComponent<Text>().fontSize = 22;
             tenantsIcon.GetComponent<Image>().sprite = tenantsSprite;
-            tenantsText.SetActive(true);
+            tenantsText.SetActive(true); tenantsIcon.SetActive(true);
             custHeader.SetActive(true);
-            consfill.SetActive(false); consfillBg.SetActive(false); constimeText.SetActive(false); cons.SetActive(false);
+            consfill.SetActive(false); consfillBg.SetActive(false); constimeText.SetActive(false); cons.SetActive(false); instantBuild.SetActive(false); constHeader.SetActive(false);
             if (selProp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signTime != "notsigned")
             {
                 var diff = DateTime.Parse(selProp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signTime) - System.DateTime.Now;
@@ -328,7 +364,7 @@ public class infoScript : MonoBehaviour
         }
         else if (selProp.GetComponent<Property>().Card.type == "Commerce" && selProp.GetComponent<Property>().constructEnd == "na")
         {
-            consfill.SetActive(false); consfillBg.SetActive(false); constimeText.SetActive(false); cons.SetActive(false);
+            consfill.SetActive(false); consfillBg.SetActive(false); constimeText.SetActive(false); cons.SetActive(false); instantBuild.SetActive(false); constHeader.SetActive(false); tenantsIcon.SetActive(true);
             this.GetComponent<Image>().sprite = largeBg;
             nameText.GetComponent<Text>().text = selProp.GetComponent<Property>().Card.displayName;
             custHeader.GetComponent<Text>().text = "Customers";
@@ -402,11 +438,12 @@ public class infoScript : MonoBehaviour
             incomeHeader.GetComponent<Text>().fontSize = 28;
             nameText.SetActive(false); fillBg.SetActive(false); fill.SetActive(false); timeText.SetActive(false); incomeText.SetActive(false); time.SetActive(false); money.SetActive(false); xpIcon.SetActive(false); xpText.SetActive(false);
             tenantsIcon.GetComponent<Image>().sprite = bonusSprite;
-            consfill.SetActive(false); consfillBg.SetActive(false); constimeText.SetActive(false); cons.SetActive(false);
+            consfill.SetActive(false); consfillBg.SetActive(false); constimeText.SetActive(false); cons.SetActive(false); instantBuild.SetActive(false); constHeader.SetActive(false); tenantsIcon.SetActive(true);
         }
         else
         {
             //info script showing non houses
+            instantBuild.SetActive(false);
             this.GetComponent<Image>().sprite = smallBg;
             if (selProp.GetComponent<Property>().Card.wonderBonus >= 100)
             {
@@ -426,23 +463,21 @@ public class infoScript : MonoBehaviour
             incomeHeader.GetComponent<Text>().fontSize = 28;
             nameText.SetActive(false); fillBg.SetActive(false); fill.SetActive(false); timeText.SetActive(false); incomeText.SetActive(false); time.SetActive(false); money.SetActive(false); xpIcon.SetActive(false); xpText.SetActive(false);
             tenantsIcon.GetComponent<Image>().sprite = bonusSprite;
-            consfill.SetActive(false); consfillBg.SetActive(false); constimeText.SetActive(false); cons.SetActive(false);
+            consfill.SetActive(false); consfillBg.SetActive(false); constimeText.SetActive(false); cons.SetActive(false); constHeader.SetActive(false); tenantsIcon.SetActive(true);
         }
 
         if (selProp.GetComponent<Property>().constructEnd != "na")
         {
             //yprint("showing const version");
             nameText.SetActive(false); fillBg.SetActive(false); fill.SetActive(false); timeText.SetActive(false); incomeText.SetActive(false); time.SetActive(false); money.SetActive(false); xpIcon.SetActive(false); xpText.SetActive(false);
-            this.GetComponent<Image>().sprite = smallBg;
+            this.GetComponent<Image>().sprite = constructBg;
             tenantsText.SetActive(false);
-            custHeader.SetActive(false);
-            consfill.SetActive(true); consfillBg.SetActive(true); constimeText.SetActive(true); cons.SetActive(true);
-            incomeHeader.GetComponent<Text>().text = selProp.GetComponent<Property>().Card.displayName;
-            incomeHeader.SetActive(true);
-            incomeHeader.GetComponent<Text>().fontSize = 28;
-
-            tenantsIcon.GetComponent<Image>().sprite = bonusSprite;
-
+            custHeader.SetActive(true);
+            consfill.SetActive(true); consfillBg.SetActive(true); constimeText.SetActive(true); cons.SetActive(true); constHeader.SetActive(true);
+            constHeader.GetComponent<Text>().text = selProp.GetComponent<Property>().Card.displayName;
+            incomeHeader.SetActive(false);
+            tenantsIcon.SetActive(false);
+            instantBuild.SetActive(true);
             var diff = DateTime.Parse(selProp.GetComponent<Property>().constructEnd) - System.DateTime.Now;
 
             if (diff > TimeSpan.Zero)
@@ -472,6 +507,8 @@ public class infoScript : MonoBehaviour
                     }
                 }
             }
+            instantCost = calcInstant(selProp.GetComponent<Property>(), diff);
+            custHeader.GetComponent<Text>().text = "Cost: $" + parseLong(calcInstant(selProp.GetComponent<Property>(), diff));
         }
     }
 }

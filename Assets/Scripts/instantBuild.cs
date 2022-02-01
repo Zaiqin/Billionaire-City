@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class instantBuild : MonoBehaviour
 {
-
-    public GameObject save, infoPanel;
+    public GameObject save, infoPanel, stats, extAudio;
+    public AudioClip constSound;
 
     // Start is called before the first frame update
     void Start()
@@ -20,9 +20,21 @@ public class instantBuild : MonoBehaviour
         
     }
 
+    public void instantButton()
+    {
+        if (stats.GetComponent<Statistics>().returnStats()[0] < infoPanel.GetComponent<infoScript>().instantCost)
+        {
+            print("insufficient money");
+        } else
+        {
+            instant();
+            stats.GetComponent<Statistics>().updateStats(diffmoney: -infoPanel.GetComponent<infoScript>().instantCost);
+            extAudio.GetComponent<AudioSource>().PlayOneShot(constSound);
+        }
+    }
+
     public void instant()
     {
-        
         SpriteRenderer renderer = this.transform.parent.GetComponent<infoScript>().selProp.GetComponent<SpriteRenderer>();
         renderer.sprite = this.transform.parent.GetComponent<infoScript>().selProp.GetComponent<Property>().Card.propImage;
         renderer.sprite = Sprite.Create(this.transform.parent.GetComponent<infoScript>().selProp.GetComponent<Property>().Card.propImage.texture, new Rect(0, 0, this.transform.parent.GetComponent<infoScript>().selProp.GetComponent<Property>().Card.propImage.texture.width, this.transform.parent.GetComponent<infoScript>().selProp.GetComponent<Property>().Card.propImage.texture.height), new Vector2(0f, 0f), 32);
