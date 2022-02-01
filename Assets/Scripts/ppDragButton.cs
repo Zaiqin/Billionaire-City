@@ -205,15 +205,8 @@ public class ppDragButton : MonoBehaviour
                 pp.transform.GetChild(0).gameObject.GetComponent<BoxCollider2D>().size = new Vector2(float.Parse(pp.Card.influence.Substring(0, 2)) - 0.2f, float.Parse(pp.Card.influence.Substring(pp.Card.influence.Length - 2)) - 0.2f);
                 pp.transform.GetChild(1).gameObject.AddComponent<BoxCollider2D>();
                 pp.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0; //hide commerce collect
-                DateTime theTime;
-                theTime = DateTime.Now.AddMinutes(3);
-                print("signing property commerce after building");
-                string datetime = theTime.ToString("yyyy/MM/dd HH:mm:ss");
-                pp.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signTime = datetime;
-                pp.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signCreationTime = System.DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
-                print("sign time is " + datetime);
+
                 pp.transform.GetChild(0).gameObject.SetActive(false);
-                pp.transform.GetChild(0).GetComponent<influence>().removeHighlights();
             }
             if (pp.Card.type == "Deco")
             {

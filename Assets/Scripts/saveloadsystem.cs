@@ -438,7 +438,7 @@ public class saveloadsystem : MonoBehaviour
             pp.transform.GetChild(1).gameObject.AddComponent<BoxCollider2D>();
             var dateAndTimeVar = System.DateTime.Now;
             //print("going check contract for " + pp.name + "which is signtime " + pp.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signTime);
-            if (pp.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signTime == "notsigned")
+            if (pp.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signTime == "notsigned" && pp.constructEnd == "na")
             {
                 //print("notsigned, thus signing now");
                 pp.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;

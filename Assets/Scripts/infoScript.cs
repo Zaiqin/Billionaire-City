@@ -127,7 +127,7 @@ public class infoScript : MonoBehaviour
             }
             selProp.GetComponent<Property>().bonus = totalDecoBonus;
         }
-        else if (selProp.GetComponent<Property>().Card.type == "Commerce")
+        else if (selProp.GetComponent<Property>().Card.type == "Commerce" && selProp.GetComponent<Property>().constructEnd == "na")
         {
             nameText.SetActive(true); fillBg.SetActive(true); fill.SetActive(true); timeText.SetActive(true); incomeText.SetActive(true); incomeHeader.SetActive(true); time.SetActive(true); money.SetActive(true); xpIcon.SetActive(false); xpText.SetActive(false);
             this.GetComponent<Image>().sprite = largeBg;
@@ -326,7 +326,7 @@ public class infoScript : MonoBehaviour
                 }
             }
         }
-        else if (selProp.GetComponent<Property>().Card.type == "Commerce")
+        else if (selProp.GetComponent<Property>().Card.type == "Commerce" && selProp.GetComponent<Property>().constructEnd == "na")
         {
             consfill.SetActive(false); consfillBg.SetActive(false); constimeText.SetActive(false); cons.SetActive(false);
             this.GetComponent<Image>().sprite = largeBg;
