@@ -59,7 +59,6 @@ public class infoScript : MonoBehaviour
             nameText.GetComponent<Text>().text = selProp.GetComponent<Property>().Card.displayName;
             custHeader.GetComponent<Text>().text = "Tenants";
             incomeHeader.GetComponent<Text>().text = "Income";
-            xpText.GetComponent<Text>().text = (selProp.GetComponent<Property>().Card.XP * (selProp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signIndex + 1)) + " XP";
             
             incomeHeader.GetComponent<Text>().fontSize = 22;
             tenantsIcon.GetComponent<Image>().sprite = tenantsSprite;
@@ -91,20 +90,20 @@ public class infoScript : MonoBehaviour
                     {
                         timeText.GetComponent<Text>().text = string.Format("{0:D2} seconds", diff.Seconds);
                     }
-
+                    int xpVal = 0;
                     long tempIncome;
                     switch (selProp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signIndex)
                     {
-                        case 0: tempIncome = (long)selProp.GetComponent<Property>().Card.threemins; break;
-                        case 1: tempIncome = (long)selProp.GetComponent<Property>().Card.thirtymins; break;
-                        case 2: tempIncome = (long)selProp.GetComponent<Property>().Card.onehour; break;
-                        case 3: tempIncome = (long)selProp.GetComponent<Property>().Card.fourhours; break;
-                        case 4: tempIncome = (long)selProp.GetComponent<Property>().Card.eighthours; break;
-                        case 5: tempIncome = (long)selProp.GetComponent<Property>().Card.twelvehours; break;
-                        case 6: tempIncome = (long)selProp.GetComponent<Property>().Card.oneday; break;
-                        case 7: tempIncome = (long)selProp.GetComponent<Property>().Card.twodays; break;
-                        case 8: tempIncome = (long)selProp.GetComponent<Property>().Card.threedays; break;
-                        default: tempIncome = (long)selProp.GetComponent<Property>().Card.threemins; break;
+                        case 0: tempIncome = (long)selProp.GetComponent<Property>().Card.threemins; xpVal = selProp.GetComponent<Property>().Card.xpthreemins; break;
+                        case 1: tempIncome = (long)selProp.GetComponent<Property>().Card.thirtymins; xpVal = selProp.GetComponent<Property>().Card.xpthirtymins; break;
+                        case 2: tempIncome = (long)selProp.GetComponent<Property>().Card.onehour; xpVal = selProp.GetComponent<Property>().Card.xponehour; break;
+                        case 3: tempIncome = (long)selProp.GetComponent<Property>().Card.fourhours; xpVal = selProp.GetComponent<Property>().Card.xpfourhours; break;
+                        case 4: tempIncome = (long)selProp.GetComponent<Property>().Card.eighthours; xpVal = selProp.GetComponent<Property>().Card.xpeighthours; break;
+                        case 5: tempIncome = (long)selProp.GetComponent<Property>().Card.twelvehours; xpVal = selProp.GetComponent<Property>().Card.xptwelvehours; break;
+                        case 6: tempIncome = (long)selProp.GetComponent<Property>().Card.oneday; xpVal = selProp.GetComponent<Property>().Card.xponeday; break;
+                        case 7: tempIncome = (long)selProp.GetComponent<Property>().Card.twodays; xpVal = selProp.GetComponent<Property>().Card.xptwodays; break;
+                        case 8: tempIncome = (long)selProp.GetComponent<Property>().Card.threedays; xpVal = selProp.GetComponent<Property>().Card.xpthreedays; break;
+                        default: tempIncome = (long)selProp.GetComponent<Property>().Card.threemins; xpVal = selProp.GetComponent<Property>().Card.xpthreemins; break;
                     }
 
                     // ---- Checking what houses it affects ---------
@@ -138,6 +137,7 @@ public class infoScript : MonoBehaviour
                     }
                     int Tenants = (selProp.GetComponent<Property>().Card.tenants) * (selProp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signIndex + 1);
                     tenantsText.GetComponent<Text>().text = Tenants.ToString();
+                    xpText.GetComponent<Text>().text = xpVal.ToString("#,##0") + " XP";
                 }
                 else
                 {
@@ -303,7 +303,7 @@ public class infoScript : MonoBehaviour
             nameText.GetComponent<Text>().text = selProp.GetComponent<Property>().Card.displayName;
             custHeader.GetComponent<Text>().text = "Tenants";
             incomeHeader.GetComponent<Text>().text = "Income";
-            xpText.GetComponent<Text>().text = (selProp.GetComponent<Property>().Card.XP * (selProp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signIndex + 1)) + " XP";
+            
             nameText.SetActive(true); fillBg.SetActive(true); fill.SetActive(true); timeText.SetActive(true); incomeText.SetActive(true); incomeHeader.SetActive(false); time.SetActive(true); money.SetActive(true); xpIcon.SetActive(true); xpText.SetActive(true);
             incomeHeader.GetComponent<Text>().fontSize = 22;
             tenantsIcon.GetComponent<Image>().sprite = tenantsSprite;
@@ -345,6 +345,22 @@ public class infoScript : MonoBehaviour
                     this.gameObject.SetActive(false);
                 }
             }
+
+            int xpVal = 0;
+            switch (selProp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signIndex)
+            {
+                case 0: xpVal = selProp.GetComponent<Property>().Card.xpthreemins; break;
+                case 1: xpVal = selProp.GetComponent<Property>().Card.xpthirtymins; break;
+                case 2: xpVal = selProp.GetComponent<Property>().Card.xponehour; break;
+                case 3: xpVal = selProp.GetComponent<Property>().Card.xpfourhours; break;
+                case 4: xpVal = selProp.GetComponent<Property>().Card.xpeighthours; break;
+                case 5: xpVal = selProp.GetComponent<Property>().Card.xptwelvehours; break;
+                case 6: xpVal = selProp.GetComponent<Property>().Card.xponeday; break;
+                case 7: xpVal = selProp.GetComponent<Property>().Card.xptwodays; break;
+                case 8: xpVal = selProp.GetComponent<Property>().Card.xpthreedays; break;
+                default: xpVal = selProp.GetComponent<Property>().Card.xpthreemins; break;
+            }
+            xpText.GetComponent<Text>().text = xpVal.ToString("#,##0") + " XP";
         }
         else if (selProp.GetComponent<Property>().Card.type == "Commerce" && selProp.GetComponent<Property>().constructEnd == "na")
         {

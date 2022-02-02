@@ -503,15 +503,15 @@ public class moneyPickupScript : MonoBehaviour, IPointerClickHandler
             long xp = 0;
             switch (this.gameObject.transform.parent.GetChild(0).GetComponent<contractScript>().signIndex)
             {
-                case 0: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.threemins; xp = propCard.XP; break;
-                case 1: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.thirtymins; xp = propCard.XP * 2; break;
-                case 2: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.onehour; xp = propCard.XP * 3; break;
-                case 3: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.fourhours; xp = propCard.XP * 4; break;
-                case 4: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.eighthours; xp = propCard.XP * 5; break;
-                case 5: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.twelvehours; xp = propCard.XP * 6; break;
-                case 6: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.oneday; xp = propCard.XP * 7; break;
-                case 7: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.twodays; xp = propCard.XP * 8; break;
-                case 8: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.threedays; xp = propCard.XP * 9; break;
+                case 0: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.threemins; xp = this.gameObject.transform.parent.GetComponent<Property>().Card.xpthreemins; break;
+                case 1: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.thirtymins; xp = this.gameObject.transform.parent.GetComponent<Property>().Card.xpthirtymins; break;
+                case 2: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.onehour; xp = this.gameObject.transform.parent.GetComponent<Property>().Card.xponehour; break;
+                case 3: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.fourhours; xp = this.gameObject.transform.parent.GetComponent<Property>().Card.xpfourhours; break;
+                case 4: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.eighthours; xp = this.gameObject.transform.parent.GetComponent<Property>().Card.xpeighthours; break;
+                case 5: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.twelvehours; xp = this.gameObject.transform.parent.GetComponent<Property>().Card.xptwelvehours; break;
+                case 6: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.oneday; xp = this.gameObject.transform.parent.GetComponent<Property>().Card.xponeday; break;
+                case 7: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.twodays; xp = this.gameObject.transform.parent.GetComponent<Property>().Card.xptwodays; break;
+                case 8: profit = this.gameObject.transform.parent.GetComponent<Property>().Card.threedays; xp = this.gameObject.transform.parent.GetComponent<Property>().Card.xpthreedays; break;
                 default: profit = 0; break;
             }
 
@@ -546,7 +546,7 @@ public class moneyPickupScript : MonoBehaviour, IPointerClickHandler
                 value.transform.GetChild(0).GetComponent<TextMesh>().color = new Color(168f / 255f, 255f / 255f, 4f / 255f);
 
                 GameObject xpValue = Instantiate(Resources.Load<GameObject>("floatingParent"), new Vector3(this.gameObject.transform.parent.transform.position.x + (float.Parse(this.gameObject.transform.parent.GetComponent<Property>().Card.space.Substring(0, 1))) / 2, this.gameObject.transform.parent.transform.position.y + 2.8f, -5f), Quaternion.identity) as GameObject;
-                xpValue.transform.GetChild(0).GetComponent<TextMesh>().text = "+ " + propCard.XP + "XP";
+                xpValue.transform.GetChild(0).GetComponent<TextMesh>().text = "+ " + xp + "XP";
                 xpValue.transform.GetChild(0).GetComponent<TextMesh>().color = Color.yellow;
 
                 this.gameObject.transform.parent.GetChild(0).GetComponent<contractScript>().signTime = "notsigned";
