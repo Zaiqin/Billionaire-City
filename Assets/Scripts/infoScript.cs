@@ -320,7 +320,7 @@ public class infoScript : MonoBehaviour
                     TimeSpan remainingSpan = DateTime.Parse(selProp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signTime) - System.DateTime.Now;
                     fill.SetActive(true);
                     fillBg.SetActive(true);
-                    fill.GetComponent<Image>().fillAmount = (float)(remainingSpan.TotalSeconds / fullSpan.TotalSeconds);
+                    fill.GetComponent<Image>().fillAmount = 1-(float)(remainingSpan.TotalSeconds / fullSpan.TotalSeconds);
 
                     if (diff.Days != 0)
                     {
@@ -406,7 +406,7 @@ public class infoScript : MonoBehaviour
                 TimeSpan remainingSpan = DateTime.Parse(selProp.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signTime) - System.DateTime.Now;
                 fill.SetActive(true);
                 fillBg.SetActive(true);
-                fill.GetComponent<Image>().fillAmount = (float)(remainingSpan.TotalSeconds / fullSpan.TotalSeconds);
+                fill.GetComponent<Image>().fillAmount = 1-(float)(remainingSpan.TotalSeconds / fullSpan.TotalSeconds);
                 float percent = 1 + (((float)GameObject.Find("Stats").GetComponent<Statistics>().wonderCommerceBonus) / 10);
                 long finalProfit = (long)((float)finalIncome * percent);
                 incomeText.GetComponent<Text>().text = "$" + finalProfit.ToString("#,##0");
@@ -484,7 +484,7 @@ public class infoScript : MonoBehaviour
             {
                 TimeSpan fullSpan = DateTime.Parse(selProp.GetComponent<Property>().constructEnd) - DateTime.Parse(selProp.GetComponent<Property>().constructStart);
                 TimeSpan remainingSpan = DateTime.Parse(selProp.GetComponent<Property>().constructEnd) - System.DateTime.Now;
-                consfill.GetComponent<Image>().fillAmount = (float)(remainingSpan.TotalSeconds / fullSpan.TotalSeconds);
+                consfill.GetComponent<Image>().fillAmount = 1-(float)(remainingSpan.TotalSeconds / fullSpan.TotalSeconds);
 
                 if (diff.Days != 0)
                 {
