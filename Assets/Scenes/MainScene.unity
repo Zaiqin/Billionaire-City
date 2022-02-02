@@ -1385,6 +1385,7 @@ MonoBehaviour:
   failExpPopup: {fileID: 616594838}
   convertMoneyPanel: {fileID: 205541568}
   dailyBonusPanel: {fileID: 662742294}
+  missionPanel: {fileID: 273355504}
   toggles: []
   map: {fileID: 280726322}
   greenGrass: {fileID: 11400000, guid: 68a3091ae6a3000469a13bd060a098ad, type: 2}
@@ -4431,8 +4432,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 11, y: -35}
-  m_SizeDelta: {x: 882.88, y: 517.57}
+  m_AnchoredPosition: {x: 11, y: -38.88}
+  m_SizeDelta: {x: 882.88, y: 453.89}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &255956573
 MonoBehaviour:
@@ -4454,7 +4455,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 0af672306bd43874b9bdd4a41c1376b8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6231ad9ea7473495885940f989d631de, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -4501,6 +4502,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 255956572}
+  - {fileID: 1492184051}
   - {fileID: 1126997448}
   - {fileID: 384455027}
   m_Father: {fileID: 523200279}
@@ -4524,7 +4526,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 10.700012, y: -34.135033}
+  m_Offset: {x: -0.09020996, y: 0.19651794}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -4535,7 +4537,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 857.0802, y: 436.8396}
+  m_Size: {x: 1333.7976, y: 599.66907}
   m_EdgeRadius: 0
 --- !u!1 &275365437
 GameObject:
@@ -59261,6 +59263,7 @@ MonoBehaviour:
   failExpPopup: {fileID: 616594838}
   convertMoneyPanel: {fileID: 205541568}
   dailyBonusPanel: {fileID: 662742294}
+  missionPanel: {fileID: 273355504}
   toggles: []
   map: {fileID: 280726322}
   greenGrass: {fileID: 11400000, guid: 68a3091ae6a3000469a13bd060a098ad, type: 2}
@@ -63098,7 +63101,6 @@ GameObject:
   - component: {fileID: 584236250}
   - component: {fileID: 584236251}
   - component: {fileID: 584236253}
-  - component: {fileID: 584236252}
   - component: {fileID: 584236254}
   - component: {fileID: 584236255}
   - component: {fileID: 584236256}
@@ -63177,102 +63179,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 0
---- !u!82 &584236252
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 584236249}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: bd5423d63b2c64bff84c70238339e6d6, type: 3}
-  m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!114 &584236253
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63326,6 +63232,19 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 1
           m_CallState: 2
+        - m_Target: {fileID: 1820829992}
+          m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+          m_MethodName: PlayOneShot
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 8300000, guid: bd5423d63b2c64bff84c70238339e6d6,
+              type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
 --- !u!114 &584236254
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63354,6 +63273,7 @@ MonoBehaviour:
   failExpPopup: {fileID: 616594838}
   convertMoneyPanel: {fileID: 205541568}
   dailyBonusPanel: {fileID: 662742294}
+  missionPanel: {fileID: 273355504}
   toggles: []
   map: {fileID: 280726322}
   greenGrass: {fileID: 11400000, guid: 68a3091ae6a3000469a13bd060a098ad, type: 2}
@@ -63370,7 +63290,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44f8100ea0e374e40bee8865f916e7e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stats: {fileID: 973017965}
+  missionPanel: {fileID: 273355504}
+  rect: {fileID: 384455029}
 --- !u!58 &584236256
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -66427,6 +66348,7 @@ MonoBehaviour:
   failExpPopup: {fileID: 616594838}
   convertMoneyPanel: {fileID: 205541568}
   dailyBonusPanel: {fileID: 662742294}
+  missionPanel: {fileID: 273355504}
   toggles: []
   map: {fileID: 280726322}
   greenGrass: {fileID: 11400000, guid: 68a3091ae6a3000469a13bd060a098ad, type: 2}
@@ -68881,9 +68803,7 @@ MonoBehaviour:
   maxDecoReach: 0
   ratios: []
   _recyclableScrollRect: {fileID: 384455029}
-  stats: {fileID: 973017964}
   missionRect: {fileID: 384455029}
-  bg: {fileID: 21300000, guid: 2b6140eb4aa4aa14994fda2506809c85, type: 3}
 --- !u!4 &1112744952
 Transform:
   m_ObjectHideFlags: 0
@@ -69068,7 +68988,7 @@ RectTransform:
   m_LocalScale: {x: 1.0000715, y: 1.0000715, z: 1.0000715}
   m_Children: []
   m_Father: {fileID: 273355505}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -70435,7 +70355,7 @@ PrefabInstance:
     - target: {fileID: 114310977074674660, guid: 3c01abf790e1a42ca8d10525f571cab5,
         type: 3}
       propertyPath: Direction
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114310977074674660, guid: 3c01abf790e1a42ca8d10525f571cab5,
         type: 3}
@@ -70461,7 +70381,7 @@ PrefabInstance:
     - target: {fileID: 224141822819573504, guid: 3c01abf790e1a42ca8d10525f571cab5,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 224141822819573504, guid: 3c01abf790e1a42ca8d10525f571cab5,
         type: 3}
@@ -70486,7 +70406,7 @@ PrefabInstance:
     - target: {fileID: 224141822819573504, guid: 3c01abf790e1a42ca8d10525f571cab5,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 825.2
+      value: 810.56
       objectReference: {fileID: 0}
     - target: {fileID: 224141822819573504, guid: 3c01abf790e1a42ca8d10525f571cab5,
         type: 3}
@@ -70531,7 +70451,7 @@ PrefabInstance:
     - target: {fileID: 224141822819573504, guid: 3c01abf790e1a42ca8d10525f571cab5,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 11.04
+      value: 3.72
       objectReference: {fileID: 0}
     - target: {fileID: 224141822819573504, guid: 3c01abf790e1a42ca8d10525f571cab5,
         type: 3}
@@ -70571,7 +70491,7 @@ PrefabInstance:
     - target: {fileID: 224516841076241162, guid: 3c01abf790e1a42ca8d10525f571cab5,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 117.63
+      value: 117.62999
       objectReference: {fileID: 0}
     - target: {fileID: 224953711503076072, guid: 3c01abf790e1a42ca8d10525f571cab5,
         type: 3}
@@ -78840,6 +78760,117 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1487203718}
   m_CullTransparentMesh: 1
+--- !u!1 &1492184050
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1492184051}
+  - component: {fileID: 1492184055}
+  - component: {fileID: 1492184054}
+  - component: {fileID: 1492184053}
+  - component: {fileID: 1492184052}
+  m_Layer: 6
+  m_Name: header
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1492184051
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1492184050}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 273355505}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 131}
+  m_SizeDelta: {x: 222.5, y: 47.305}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1492184052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1492184050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.61960787}
+  m_EffectDistance: {x: 4, y: -3}
+  m_UseGraphicAlpha: 1
+--- !u!114 &1492184053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1492184050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0.078431375, g: 0.34901962, b: 0.5137255, a: 1}
+  m_EffectDistance: {x: 2, y: -2}
+  m_UseGraphicAlpha: 1
+--- !u!114 &1492184054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1492184050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: ac69ead4238ee4edca81114c3ac1de6a, type: 3}
+    m_FontSize: 51
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 75
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: Missions
+--- !u!222 &1492184055
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1492184050}
+  m_CullTransparentMesh: 1
 --- !u!1 &1557169953
 GameObject:
   m_ObjectHideFlags: 0
@@ -79360,6 +79391,7 @@ MonoBehaviour:
   failExpPopup: {fileID: 616594838}
   convertMoneyPanel: {fileID: 205541568}
   dailyBonusPanel: {fileID: 662742294}
+  missionPanel: {fileID: 273355504}
   toggles: []
   map: {fileID: 280726322}
   greenGrass: {fileID: 11400000, guid: 68a3091ae6a3000469a13bd060a098ad, type: 2}

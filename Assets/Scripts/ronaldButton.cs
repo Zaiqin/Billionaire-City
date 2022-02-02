@@ -1,3 +1,4 @@
+using PolyAndCode.UI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,11 +8,14 @@ public class ronaldButton : MonoBehaviour
 {
 
     [SerializeField]
-    private Statistics stats;
+    private GameObject missionPanel;
+    public RecyclableScrollRect rect;
 
     public void OnButtonClick()
     {
-        stats.updateStats(diffmoney: 1000000, diffgold: 100, diffxp: 1000);
+        missionPanel.SetActive(true);
+        rect.ReloadData();
+        //stats.updateStats(diffmoney: 1000000, diffgold: 100, diffxp: 1000);
     }
 
     // Start is called before the first frame update

@@ -10,22 +10,29 @@ using System;
 public class MissionCell : MonoBehaviour, ICell
 {
     //UI
-    public Image bgImage;
-    public Button infoButton, rewardButton;
+    public Button readMoreButton;
+    public Text missionName;
+
+    public AudioClip touchSound;
 
     //Model
     private int _cellIndex;
 
     private void Start()
     {
-        
+        readMoreButton.GetComponent<Button>().onClick.AddListener(readListener);
+    }
+
+    private void readListener()
+    {
+        GameObject.Find("ExternalAudioPlayer").GetComponent<AudioSource>().PlayOneShot(touchSound);
     }
 
     //This is called from the SetCell method in DataSource
-    public void ConfigureCell(Sprite bgSprite, int cellIndex)
+    public void ConfigureCell(int cellIndex, string text)
     {
         _cellIndex = cellIndex;
-        bgImage.sprite = bgSprite;
+        missionName.text = text;
     }
 
 }

@@ -13,13 +13,10 @@ public class RecyclableScrollerMission : CSVReader, IRecyclableScrollRectDataSou
 {
     [SerializeField]
     RecyclableScrollRect _recyclableScrollRect;
-
-    public GameObject stats;
-
     [SerializeField]
     private RecyclableScrollRect missionRect;
 
-    public Sprite bg;
+    private string[] missionArray = new string[]{"Pizzalicious", "Pizzalicious Clients I", "Pizzalicious Sales I", "Name It", "Instant Build", "Green Thumb I", "M-City's VIP Club"};
 
     //Recyclable scroll rect's data source must be assigned in Awake.
     private void Awake()
@@ -29,7 +26,6 @@ public class RecyclableScrollerMission : CSVReader, IRecyclableScrollRectDataSou
 
     public void userReloadData()
     {
-        print("resetting data for contracts selection");
         missionRect.ReloadData();
     }
 
@@ -55,7 +51,7 @@ public class RecyclableScrollerMission : CSVReader, IRecyclableScrollRectDataSou
         //print("Clicked on a " + pCard.displayName + "'s contract");
         var item = cell as MissionCell;
 
-        item.ConfigureCell(bg, index);
+        item.ConfigureCell(index, missionArray[index]);
     }
 
     #endregion
