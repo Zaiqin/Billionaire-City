@@ -208,8 +208,11 @@ public class MapManager : MonoBehaviour
                             if (map.GetTile(new Vector3Int(item.x, item.y, 0)).name.Contains("road"))
                             {
                                 astartest = Astar.GetComponent<Astar>().AStarFunc(new Vector2Int(item.x, item.y), new Vector2Int(0, -1), map);
-                                print("test astar is " + test);
-                                break;
+                                print("test astar is " + astartest);
+                                if (astartest == true)
+                                {
+                                    break;
+                                }
                             }
                             else
                             {
@@ -294,7 +297,10 @@ public class MapManager : MonoBehaviour
                                     //print("contain road");
                                     test = Astar.GetComponent<Astar>().AStarFunc(new Vector2Int(item.x, item.y), new Vector2Int(0, -1), map);
                                     print("test astar is " + test);
-                                    break;
+                                    if (test == true)
+                                    {
+                                        break;
+                                    }
                                 }
                                 else
                                 {
@@ -368,7 +374,10 @@ public class MapManager : MonoBehaviour
                                     //print("contain road");
                                     test = Astar.GetComponent<Astar>().AStarFunc(new Vector2Int(item.x, item.y), new Vector2Int(0, -1), map);
                                     print("test astar is " + test);
-                                    break;
+                                    if (test == true)
+                                    {
+                                        break;
+                                    }
                                 }
                                 else
                                 {
