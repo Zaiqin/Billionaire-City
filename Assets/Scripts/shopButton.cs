@@ -22,7 +22,7 @@ public class shopButton : MonoBehaviour
         if (ShopMenu.activeSelf == false && shopToggle.isOn == true)
         {
             ShopMenu.SetActive(true);
-            rect.ReloadData();
+            //rect.ReloadData();
             
         } else if (ShopMenu.activeSelf == true && shopToggle.isOn == false)
         {
