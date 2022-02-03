@@ -8,6 +8,8 @@ public class CSVReader : MonoBehaviour
 {
     [SerializeField]
     private TextAsset textAssetData;
+    public List<string> missionName = new List<string>();
+    public List<string> missionDesc = new List<string>();
 
     public Dictionary<int, long> levelValues = new Dictionary<int, long>();
 
@@ -258,11 +260,26 @@ public class CSVReader : MonoBehaviour
              * select the level values with E+xx, format cells > numbers > decimal places = 0
              * 
              */
-            if (data[(cols * (i)) + 33] == "Last Level"){
+            if (data[(cols * (i)) + 33] == "Last Level")
+            {
                 //print("reached last level");
                 break;
             }
         }
+
+        // Getting mission details
+        
+        for (int i = 1; i < data.Length; i++)
+        {
+            missionName.Add(data[(cols * (i)) + 35]);
+            missionDesc.Add(data[(cols * (i)) + 36]);
+            if (data[(cols * (i)) + 37] == "Last Mission"){
+                //print("reached last level");
+                print("there are " + i);
+                break;
+            }
+        }
+
         //print("end of csv, max reach is " + maxDecoReach);
         print("max deco reach is " + maxDecoReach);
         if (maxDecoReach % 2 == 0)

@@ -9,13 +9,17 @@ public class missionParent : MonoBehaviour
     public Text descText;
     public bool extended = false;
     public int chosenIndex;
+    public GameObject missionController;
 
-    private string[] descArray = new string[] { "Pizzalicious desc", "Pizzalicious Clients I desc", "Pizzalicious Sales I desc", "Name It desc", "Instant Build desc", "Green Thumb I desc", "M-City's VIP Club desc" };
+    public List<string> missionArray;
+    public List<string> descArray;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        missionArray = GameObject.Find("CSV").GetComponent<CSVReader>().missionName;
+        descArray = GameObject.Find("CSV").GetComponent<CSVReader>().missionDesc;
+        missionController.GetComponent<RecyclableScrollerMission>().missionNameList = missionArray;
     }
 
     // Update is called once per frame

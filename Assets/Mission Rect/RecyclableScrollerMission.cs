@@ -16,7 +16,7 @@ public class RecyclableScrollerMission : CSVReader, IRecyclableScrollRectDataSou
     [SerializeField]
     private RecyclableScrollRect missionRect;
 
-    private string[] missionArray = new string[]{"Pizzalicious", "Pizzalicious Clients I", "Pizzalicious Sales I", "Name It", "Instant Build", "Green Thumb I", "M-City's VIP Club"};
+    public List<string> missionNameList;
 
     //Recyclable scroll rect's data source must be assigned in Awake.
     private void Awake()
@@ -36,7 +36,7 @@ public class RecyclableScrollerMission : CSVReader, IRecyclableScrollRectDataSou
     /// </summary>
     public int GetItemCount()
     {
-        return 7;
+        return missionNameList.Count;
     }
 
     /// <summary>
@@ -51,7 +51,7 @@ public class RecyclableScrollerMission : CSVReader, IRecyclableScrollRectDataSou
         //print("Clicked on a " + pCard.displayName + "'s contract");
         var item = cell as MissionCell;
 
-        item.ConfigureCell(index, missionArray[index]);
+        item.ConfigureCell(index, missionNameList[index]);
     }
 
     #endregion

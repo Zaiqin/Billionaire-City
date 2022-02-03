@@ -4557,6 +4557,7 @@ MonoBehaviour:
   descText: {fileID: 1220483033}
   extended: 0
   chosenIndex: 0
+  missionController: {fileID: 1112744950}
 --- !u!1 &275365437
 GameObject:
   m_ObjectHideFlags: 0
@@ -68898,6 +68899,14 @@ MonoBehaviour:
   ratios: []
   _recyclableScrollRect: {fileID: 384455029}
   missionRect: {fileID: 384455029}
+  missionArray:
+  - Pizzalicious
+  - Pizzalicious Clients I
+  - Pizzalicious Sales I
+  - Name It
+  - Instant Build
+  - Green Thumb I
+  - M-City's VIP Club
 --- !u!4 &1112744952
 Transform:
   m_ObjectHideFlags: 0
