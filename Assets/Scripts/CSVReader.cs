@@ -62,7 +62,7 @@ public class CSVReader : MonoBehaviour
                 cols++;
             }
         }
-        //print("There are " + cols + " columns in the stats file");
+        print("There are " + cols + " columns in the stats file");
         // -------------------------------------------------------------------------------------------------
 
         //COUNTING NO OF PROPERTIES AND HOW MANY OF EACH ---------------------------------------------------
@@ -71,36 +71,37 @@ public class CSVReader : MonoBehaviour
         int a = 0; int propertyCycle = 1; string startName = "FIRST HOUSE"; string endName = "LAST HOUSE";
         while (propertyCycle != 5)
         {
-            //print("i is " + a);
+            // If there is an error detecting how many houses, check missions titles and descriptions and ensure no commas ----
             if (data[(cols * (a + 2)) + 17] == startName)
             {
                 startIndex = a;
             }
             if (data[(cols * (a + 2)) + 17] == endName)
             {
+                //print("hit last name");
                 endIndex = a;
                 switch (propertyCycle)
                 {
                     case 1:
                         startName = "FIRST COMMERCE";
                         endName = "LAST COMMERCE";
-                        //print("There are " + (endIndex - startIndex + 1) + " Houses");
+                        print("There are " + (endIndex - startIndex + 1) + " Houses");
                         noOfHouses = (endIndex - startIndex + 1);
                         break;
                     case 2:
                         startName = "FIRST DECO";
                         endName = "LAST DECO";
-                        //print("There are " + (endIndex - startIndex + 1) + " Commerces");
+                        print("There are " + (endIndex - startIndex + 1) + " Commerces");
                         noOfCommerces = (endIndex - startIndex + 1);
                         break;
                     case 3:
                         startName = "FIRST WONDER";
                         endName = "LAST WONDER";
-                        //print("There are " + (endIndex - startIndex + 1) + " Decos");
+                        print("There are " + (endIndex - startIndex + 1) + " Decos");
                         noOfDecos = (endIndex - startIndex + 1);
                         break;
                     case 4:
-                        //print("There are " + (endIndex - startIndex + 1) + " Wonders");
+                        print("There are " + (endIndex - startIndex + 1) + " Wonders");
                         noOfWonders = (endIndex - startIndex + 1);
                         break;
                     default: break;
@@ -109,6 +110,7 @@ public class CSVReader : MonoBehaviour
             }
             a++;
         }
+        //print("done calc");
         int totalNoOfProperties = noOfHouses + noOfCommerces + noOfDecos + noOfWonders;
         // -------------------------------------------------------------------------------------------------
 
@@ -275,7 +277,7 @@ public class CSVReader : MonoBehaviour
             missionDesc.Add(data[(cols * (i)) + 36]);
             if (data[(cols * (i)) + 37] == "Last Mission"){
                 //print("reached last level");
-                print("there are " + i);
+                print("There are " + i + " Missions");
                 break;
             }
         }

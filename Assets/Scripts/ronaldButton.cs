@@ -14,6 +14,7 @@ public class ronaldButton : MonoBehaviour
     public void OnButtonClick()
     {
         missionPanel.SetActive(true);
+        missionPanel.GetComponent<missionParent>().resetDesc();
         rect.ReloadData();
         //stats.updateStats(diffmoney: 1000000, diffgold: 100, diffxp: 1000);
     }

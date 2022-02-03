@@ -6,7 +6,9 @@ using UnityEngine.UI;
 public class missionParent : MonoBehaviour
 {
     public GameObject descPanel;
+    public GameObject missionPanel;
     public Text descText;
+    public Text descTitle;
     public bool extended = false;
     public int chosenIndex;
     public GameObject missionController;
@@ -22,10 +24,12 @@ public class missionParent : MonoBehaviour
         missionController.GetComponent<RecyclableScrollerMission>().missionNameList = missionArray;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void resetDesc()
     {
-        
+        chosenIndex = 0;
+        extended = false;
+        descPanel.transform.localPosition = new Vector3(-54, descPanel.transform.localPosition.y, descPanel.transform.localPosition.z);
+        missionPanel.transform.localPosition = new Vector3(50, missionPanel.transform.localPosition.y, missionPanel.transform.localPosition.z);
     }
 
     public void toggleDesc(int index)
@@ -35,14 +39,17 @@ public class missionParent : MonoBehaviour
             if (extended == false)
             {
                 descPanel.transform.localPosition = new Vector3(descPanel.transform.localPosition.x + 290, descPanel.transform.localPosition.y, descPanel.transform.localPosition.z);
+                missionPanel.transform.localPosition = new Vector3(missionPanel.transform.localPosition.x - 132, missionPanel.transform.localPosition.y, missionPanel.transform.localPosition.z);
                 extended = true;
             }
             else
             {
                 descPanel.transform.localPosition = new Vector3(descPanel.transform.localPosition.x - 290, descPanel.transform.localPosition.y, descPanel.transform.localPosition.z);
+                missionPanel.transform.localPosition = new Vector3(missionPanel.transform.localPosition.x + 132, missionPanel.transform.localPosition.y, missionPanel.transform.localPosition.z);
                 extended = false;
             }
         }
+        descTitle.text = missionArray[index];
         descText.text = descArray[index];
         chosenIndex = index;
     }
