@@ -461,7 +461,19 @@ public class contractScript : MonoBehaviour, IPointerClickHandler
             contractController.GetComponent<RecyclableScrollerContract>().userReloadData();
 
             GameObject.Find("SignController").GetComponent<signController>().selProperty = this.gameObject.transform.parent.gameObject;
+
+            if (GameObject.Find("Canvas").transform.GetChild(0).GetComponent<infoScript>().highlightedProp != null)
+            {
+                GameObject hProp = GameObject.Find("Canvas").transform.GetChild(0).GetComponent<infoScript>().highlightedProp;
+                hProp.GetComponent<SpriteRenderer>().material.color = Color.white;
+
+                if (hProp.GetComponent<Property>().Card.type == "House" && hProp.transform.childCount > 4)
+                {
+                    Destroy(hProp.transform.GetChild(4).gameObject);
+                }
+            }
         }
+        
     }
 
     private void Update()
@@ -554,7 +566,22 @@ public class moneyPickupScript : MonoBehaviour, IPointerClickHandler
                 this.gameObject.transform.parent.GetChild(0).GetComponent<contractScript>().signIndex = -1;
                 GameObject.Find("SaveLoadSystem").GetComponent<saveloadsystem>().saveGame();
             }
+            if (GameObject.Find("Canvas").transform.GetChild(0).GetComponent<infoScript>().highlightedProp != null)
+            {
+                GameObject hProp = GameObject.Find("Canvas").transform.GetChild(0).GetComponent<infoScript>().highlightedProp;
+                hProp.GetComponent<SpriteRenderer>().material.color = Color.white;
+
+                if (hProp.GetComponent<Property>().Card.type == "House" && hProp.transform.childCount > 4)
+                {
+                    Destroy(hProp.transform.GetChild(4).gameObject);
+                }
+                if (GameObject.Find("Canvas").transform.GetChild(0).gameObject.activeSelf == true)
+                {
+                    GameObject.Find("Canvas").transform.GetChild(0).gameObject.SetActive(false);
+                }
+            }
         }
+        
     }
     void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
     {
@@ -636,6 +663,21 @@ public class commercePickupScript : MonoBehaviour, IPointerClickHandler
             print("sign time is " + datetime);
 
             GameObject.Find("SaveLoadSystem").GetComponent<saveloadsystem>().saveGame();
+
+            if (GameObject.Find("Canvas").transform.GetChild(0).GetComponent<infoScript>().highlightedProp != null)
+            {
+                GameObject hProp = GameObject.Find("Canvas").transform.GetChild(0).GetComponent<infoScript>().highlightedProp;
+                hProp.GetComponent<SpriteRenderer>().material.color = Color.white;
+
+                if (hProp.GetComponent<Property>().Card.type == "House" && hProp.transform.childCount > 4)
+                {
+                    Destroy(hProp.transform.GetChild(4).gameObject);
+                }
+                if (GameObject.Find("Canvas").transform.GetChild(0).gameObject.activeSelf == true)
+                {
+                    GameObject.Find("Canvas").transform.GetChild(0).gameObject.SetActive(false);
+                }
+            }
         }
     }
 

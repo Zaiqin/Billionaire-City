@@ -140,6 +140,7 @@ MonoBehaviour:
   readMoreButton: {fileID: 6393267523381855761}
   missionName: {fileID: 8259946416090051178}
   touchSound: {fileID: 8300000, guid: bd5423d63b2c64bff84c70238339e6d6, type: 3}
+  descPanel: {fileID: 0}
 --- !u!1 &545181832290568109
 GameObject:
   m_ObjectHideFlags: 0

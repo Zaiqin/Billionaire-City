@@ -421,10 +421,7 @@ public class infoScript : MonoBehaviour
             }
             else
             {
-                timeText.GetComponent<Text>().text = "Commerce Fulfilled";
-                incomeText.GetComponent<Text>().text = "";
-                fill.SetActive(false);
-                fillBg.SetActive(false);
+                this.gameObject.SetActive(false);
             }
             tenantsText.GetComponent<Text>().text = finalTenants.ToString();
         }
