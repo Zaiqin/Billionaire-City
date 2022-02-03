@@ -422,6 +422,9 @@ public class infoScript : MonoBehaviour
             else
             {
                 this.gameObject.SetActive(false);
+                selProp.GetComponent<SpriteRenderer>().material.color = Color.white;
+                selProp.gameObject.transform.GetChild(0).GetComponent<influence>().removeHighlights();
+                selProp.gameObject.transform.GetChild(0).gameObject.SetActive(false);
             }
             tenantsText.GetComponent<Text>().text = finalTenants.ToString();
         }

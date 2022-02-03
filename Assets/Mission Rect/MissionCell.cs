@@ -14,10 +14,6 @@ public class MissionCell : MonoBehaviour, ICell
     public Text missionName;
 
     public AudioClip touchSound;
-    public GameObject descPanel;
-
-    private bool move = false;
-    private Vector3 descEnd;
 
     //Model
     private int _cellIndex;
@@ -25,26 +21,13 @@ public class MissionCell : MonoBehaviour, ICell
     private void Start()
     {
         readMoreButton.GetComponent<Button>().onClick.AddListener(readListener);
-        descPanel = GameObject.Find("descPanel");
-        descEnd = new Vector3(7.1f, descPanel.transform.position.y, descPanel.transform.position.z);
     }
 
-    private void Update()
-    {
-        if (move == true)
-        {
-            descPanel.transform.position = Vector3.MoveTowards(descPanel.transform.position, descEnd, 50f * Time.deltaTime);
-        }
-        if (descPanel.transform.position.x >= descEnd.x)
-        {
-            move = false;
-        }
-    }
 
     private void readListener()
     {
         GameObject.Find("ExternalAudioPlayer").GetComponent<AudioSource>().PlayOneShot(touchSound);
-        move = true;
+        GameObject.Find("missionParent").GetComponent<missionParent>().toggleDesc(_cellIndex);
     }
 
     //This is called from the SetCell method in DataSource
