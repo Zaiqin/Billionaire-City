@@ -209,7 +209,11 @@ public class Property : MonoBehaviour, IPointerClickHandler
             }
             else if (this.transform.parent == propParent.transform && GameObject.Find("Canvas").GetComponent<toggleMaster>().checkAllOff() == true)
             {
-                if ((this.Card.type == "House" && this.gameObject.transform.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder != 2 && this.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder != 2 && this.gameObject.transform.GetChild(3).GetComponent<SpriteRenderer>().sortingOrder != 2) || (this.Card.type == "Commerce" && this.gameObject.transform.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder != 2) || (this.Card.type == "Deco" || this.Card.type == "Wonder"))
+                if (   (this.Card.type == "House" && this.gameObject.transform.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder != 2 && this.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder != 2 && this.gameObject.transform.GetChild(3).GetComponent<SpriteRenderer>().sortingOrder != 2) 
+                    || (this.Card.type == "Commerce" && this.gameObject.transform.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder != 2) 
+                    || (this.Card.type == "Deco") 
+                    || (this.Card.type == "Wonder")  
+                    || (this.GetComponent<Property>().constructEnd != null && this.GetComponent<Property>().constructEnd != "na")   )
                 {
                     infoPanel.SetActive(true);
                     infoPanel.GetComponent<infoScript>().selProp = this.gameObject;
@@ -224,24 +228,13 @@ public class Property : MonoBehaviour, IPointerClickHandler
                     infoPanel.GetComponent<infoScript>().initInfo();
                     
                     print("show info Panel");
+                    infoPanel.GetComponent<infoScript>().rightSide = true;
                     infoPanel.transform.position = new Vector3(0.2f + this.gameObject.transform.position.x + (infoPanel.GetComponent<BoxCollider2D>().bounds.size.x / 2) + float.Parse(this.GetComponent<Property>().Card.space.Substring(0, 1)), this.gameObject.transform.position.y + (infoPanel.GetComponent<BoxCollider2D>().bounds.size.y / 4) + 1f, 0f);
-                } else if (this.GetComponent<Property>().constructEnd != null && this.GetComponent<Property>().constructEnd != "na" )
-                {
-                    print("tapped on constructing house");
-                    infoPanel.SetActive(true);
-                    infoPanel.GetComponent<infoScript>().selProp = this.gameObject;
-                    if (infoPanel.GetComponent<infoScript>().highlightedProp != null)
-                    {
-                        if (infoPanel.GetComponent<infoScript>().highlightedProp.transform.childCount > 4 && infoPanel.GetComponent<infoScript>().highlightedProp.name != this.gameObject.name)
-                        {
-                            print("Destroy this");
-                            Destroy(infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(4).gameObject);
-                        }
+                    if ( infoPanel.transform.position.x + (infoPanel.GetComponent<BoxCollider2D>().bounds.size.x / 2) > (Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0))).x ){
+                        print("show infoPanel on left side of house");
+                        infoPanel.GetComponent<infoScript>().rightSide = false;
+                        infoPanel.transform.position = new Vector3(-0.2f + this.gameObject.transform.position.x - (infoPanel.GetComponent<BoxCollider2D>().bounds.size.x / 2), this.gameObject.transform.position.y + (infoPanel.GetComponent<BoxCollider2D>().bounds.size.y / 4) + 1f, 0f);
                     }
-                    infoPanel.GetComponent<infoScript>().initInfo();
-
-                    print("show info Panel");
-                    infoPanel.transform.position = new Vector3(0.2f + this.gameObject.transform.position.x + (infoPanel.GetComponent<BoxCollider2D>().bounds.size.x / 2) + float.Parse(this.GetComponent<Property>().Card.space.Substring(0, 1)), this.gameObject.transform.position.y + (infoPanel.GetComponent<BoxCollider2D>().bounds.size.y / 4) + 1f, 0f);
                 }
                 GameObject hqmenu = GameObject.Find("HQStats");
                 if (hqmenu != null)
