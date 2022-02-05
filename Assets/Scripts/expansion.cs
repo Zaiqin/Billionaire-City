@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 
 public class expansion : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class expansion : MonoBehaviour
     public List<string> deletedExp = new List<string>();
     public Tilemap map;
     public TileBase grassTile;
+    public Sprite saleUnlocked;
+
+    public GameObject sale21, sale22, sale23, sale24, sale31, sale32, sale33, sale34, sale41, sale42, sale43, sale44, sale45, sale46, sale47, sale48, sale51, sale52, sale53, sale54;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +26,42 @@ public class expansion : MonoBehaviour
                 expInts.Add(int.Parse(child.name.Substring(child.name.Length - 2)));
                 //print("added " + child.name);
             }
+        }
+    }
+
+    public void updateSprite()
+    {
+        if (deletedExp.Count >= 20)
+        {
+            if (sale51 != null) { sale51.GetComponent<Image>().sprite = saleUnlocked; };
+            if (sale52 != null) { sale52.GetComponent<Image>().sprite = saleUnlocked; };
+            if (sale53 != null) { sale53.GetComponent<Image>().sprite = saleUnlocked; };
+            if (sale54 != null) { sale54.GetComponent<Image>().sprite = saleUnlocked; };
+        }
+        else if (deletedExp.Count >= 12)
+        {
+            if (sale41 != null) { sale41.GetComponent<Image>().sprite = saleUnlocked; };
+            if (sale42 != null) { sale42.GetComponent<Image>().sprite = saleUnlocked; };
+            if (sale43 != null) { sale43.GetComponent<Image>().sprite = saleUnlocked; };
+            if (sale44 != null) { sale44.GetComponent<Image>().sprite = saleUnlocked; };
+            if (sale45 != null) { sale45.GetComponent<Image>().sprite = saleUnlocked; };
+            if (sale46 != null) { sale46.GetComponent<Image>().sprite = saleUnlocked; };
+            if (sale47 != null) { sale47.GetComponent<Image>().sprite = saleUnlocked; };
+            if (sale48 != null) { sale48.GetComponent<Image>().sprite = saleUnlocked; };
+        }
+        else if (deletedExp.Count >= 8)
+        {
+            if (sale31 != null) { sale31.GetComponent<Image>().sprite = saleUnlocked; };
+            if (sale32 != null) { sale32.GetComponent<Image>().sprite = saleUnlocked; };
+            if (sale33 != null) { sale33.GetComponent<Image>().sprite = saleUnlocked; };
+            if (sale34 != null) { sale34.GetComponent<Image>().sprite = saleUnlocked; };
+        }
+        else if (deletedExp.Count >= 4)
+        {
+            if (sale21 != null) { sale21.GetComponent<Image>().sprite = saleUnlocked; };
+            if (sale22 != null) { sale22.GetComponent<Image>().sprite = saleUnlocked; };
+            if (sale23 != null) { sale23.GetComponent<Image>().sprite = saleUnlocked; };
+            if (sale24 != null) { sale24.GetComponent<Image>().sprite = saleUnlocked; };
         }
     }
 
@@ -146,14 +186,12 @@ public class expansion : MonoBehaviour
             saveObj.GetComponent<saveloadsystem>().saveExp();
             saveObj.GetComponent<saveloadsystem>().saveTilemap();
             stats.GetComponent<Statistics>().expCost += cost;
+            updateSprite();
         }
         else if (result == true && stats.GetComponent<Statistics>().returnStats()[0] < cost)
         {
             nocash.gameObject.SetActive(true);
             expPopup.SetActive(false);
-        } else {
-            expPopup.SetActive(false);
-            failPopup.SetActive(true);
         }
     }
 

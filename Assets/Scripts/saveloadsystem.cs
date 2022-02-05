@@ -315,6 +315,7 @@ public class saveloadsystem : MonoBehaviour
                 }
             }
             Stats.GetComponent<Statistics>().expCost = cost;
+            expPopup.GetComponent<expansion>().updateSprite();
         }
         dailyBonus.SetActive(true);
     }
