@@ -124,12 +124,7 @@ public class Statistics : MonoBehaviour
             }
         }
         levelText.text = level.ToString();
-        if (xp >= 100000000) {
-            string temp = xp.ToString("#,##0");
-            xpText.text = temp.Substring(0, temp.Length - 8) + "M";
-        } else {
-            xpText.text = xp.ToString("#,##0");
-        }
+        xpText.text = xp.ToString("#,##0");
         long nextVal = levelValues[(int)level + 1];
         
         if (level < 2)

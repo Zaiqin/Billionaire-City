@@ -82,6 +82,7 @@ public class Property : MonoBehaviour, IPointerClickHandler
             disconrenderer.sortingOrder = 0;
             discon.transform.parent = this.transform;
             discon.transform.localPosition = new Vector3(float.Parse(pcard.space.Substring(0, 1)) / 2, float.Parse(pcard.space.Substring(pcard.space.Length - 1)) / 2, 0f);
+            discon.AddComponent<scaleLerper>();
 
         } else if (pcard.type == "Commerce")
         {
@@ -127,6 +128,7 @@ public class Property : MonoBehaviour, IPointerClickHandler
             disconrenderer.sortingOrder = 0;
             discon.transform.parent = this.transform;
             discon.transform.localPosition = new Vector3(float.Parse(pcard.space.Substring(0, 1)) / 2, float.Parse(pcard.space.Substring(pcard.space.Length - 1)) / 2, 0f);
+            discon.AddComponent<scaleLerper>();
         } else if (pcard.type == "Deco")
         {
             // --- Influence Overlay -----------
@@ -155,6 +157,7 @@ public class Property : MonoBehaviour, IPointerClickHandler
             disconrenderer.sortingOrder = 0;
             discon.transform.parent = this.transform;
             discon.transform.localPosition = new Vector3(float.Parse(pcard.space.Substring(0, 1)) / 2, float.Parse(pcard.space.Substring(pcard.space.Length - 1)) / 2, 0f);
+            discon.AddComponent<scaleLerper>();
         }
     }
 
