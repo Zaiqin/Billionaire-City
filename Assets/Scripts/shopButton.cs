@@ -11,6 +11,8 @@ public class shopButton : MonoBehaviour
     public RecyclableScrollRect rect;
     public Toggle shopToggle;
 
+    public bool requireReload = false;
+
     public void OnButtonClick()
     {
         if (shopToggle.isOn == true && ppDrag.activeSelf == true)
@@ -22,7 +24,11 @@ public class shopButton : MonoBehaviour
         if (ShopMenu.activeSelf == false && shopToggle.isOn == true)
         {
             ShopMenu.SetActive(true);
-            //rect.ReloadData();
+            if (requireReload == true)
+            {
+                rect.ReloadData();
+                requireReload = false;
+            }
             
         } else if (ShopMenu.activeSelf == true && shopToggle.isOn == false)
         {

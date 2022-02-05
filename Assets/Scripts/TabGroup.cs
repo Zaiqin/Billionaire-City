@@ -6,7 +6,6 @@ using PolyAndCode.UI;
 
 public class TabGroup : MonoBehaviour
 {
-
     public List<TabButton> tabButtons;
     public TabButton selectedTab;
     public TabButton firstButton;
@@ -57,6 +56,7 @@ public class TabGroup : MonoBehaviour
         //button.background.sprite = tabActive;
         int index = button.transform.GetSiblingIndex();
     }
+
 
     public void ResetTabs()
     {

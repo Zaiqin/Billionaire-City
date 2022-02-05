@@ -1309,6 +1309,7 @@ MonoBehaviour:
   ppDrag: {fileID: 737003508}
   rect: {fileID: 1857201643}
   shopToggle: {fileID: 52499401}
+  requireReload: 0
 --- !u!114 &52499401
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68611,6 +68612,41 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 224127562778899208, guid: 5b9a188a62db6ce4cad91c5fd90d1007,
         type: 3}
+    - target: {fileID: 114310977074674660, guid: 3c01abf790e1a42ca8d10525f571cab5,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114310977074674660, guid: 3c01abf790e1a42ca8d10525f571cab5,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114310977074674660, guid: 3c01abf790e1a42ca8d10525f571cab5,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1636394982}
+    - target: {fileID: 114310977074674660, guid: 3c01abf790e1a42ca8d10525f571cab5,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114310977074674660, guid: 3c01abf790e1a42ca8d10525f571cab5,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: thisFunc
+      objectReference: {fileID: 0}
+    - target: {fileID: 114310977074674660, guid: 3c01abf790e1a42ca8d10525f571cab5,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TabGroup, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 114310977074674660, guid: 3c01abf790e1a42ca8d10525f571cab5,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 114664610104649842, guid: 3c01abf790e1a42ca8d10525f571cab5,
         type: 3}
       propertyPath: m_ShowMaskGraphic
@@ -73132,6 +73168,7 @@ MonoBehaviour:
   inputLevel: 0
   inputXP: 0
   saveloadobj: {fileID: 25462474}
+  shopButton: {fileID: 52499396}
   csvObj: {fileID: 1673960463}
   levelUpScreen: {fileID: 208941323}
   externalAudioPlayer: {fileID: 1820829991}

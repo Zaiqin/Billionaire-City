@@ -37,7 +37,7 @@ public class Statistics : MonoBehaviour
     public long inputLevel;
     public long inputXP;
 
-    public GameObject saveloadobj;
+    public GameObject saveloadobj, shopButton;
 
     private Dictionary<int, long> levelValues;
     [SerializeField] private GameObject csvObj, levelUpScreen, externalAudioPlayer, inputText;
@@ -108,6 +108,7 @@ public class Statistics : MonoBehaviour
                     levelUpScreen.transform.GetChild(1).GetComponent<Text>().text = this.GetComponent<levelUp>().noOfCards + " items unlocked";
                     levelUpScreen.transform.GetChild(1).gameObject.SetActive(true);
                     levelUpScreen.transform.GetChild(4).gameObject.SetActive(false);
+                    shopButton.GetComponent<shopButton>().requireReload = true;
                     if (this.GetComponent<levelUp>().noOfCards == 0)
                     {
                         levelUpScreen.transform.GetChild(1).gameObject.SetActive(false);
