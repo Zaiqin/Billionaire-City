@@ -8,7 +8,7 @@ public class UIToggle : MonoBehaviour
 {
 
     [SerializeField]
-    GameObject shopToggle, plotToggle, roadToggle, deleteToggle, ronaldToggle, ShopMenu, hqMenu, infoPanel, pendingParent, ppDrag, delPanel, contractPanel, expPopup, failExpPopup, convertMoneyPanel, dailyBonusPanel, missionPanel;
+    GameObject shopToggle, plotToggle, roadToggle, deleteToggle, ronaldToggle, storageToggle, ShopMenu, hqMenu, infoPanel, pendingParent, ppDrag, delPanel, contractPanel, expPopup, failExpPopup, convertMoneyPanel, dailyBonusPanel, missionPanel, storageMenu;
 
     GameObject selectedToggle;
     public GameObject[] toggles;
@@ -50,6 +50,8 @@ public class UIToggle : MonoBehaviour
             plotToggle.GetComponent<Toggle>().isOn = false;
             deleteToggle.GetComponent<Toggle>().isOn = false;
             ronaldToggle.GetComponent<Toggle>().isOn = false;
+            storageToggle.GetComponent<Toggle>().isOn = false;
+            storageMenu.SetActive(false);
             print("disabling grid");
             map.SwapTile(greenGrass, tileGrass); //disable grid
         }
@@ -59,7 +61,9 @@ public class UIToggle : MonoBehaviour
             plotToggle.GetComponent<Toggle>().isOn = false;
             deleteToggle.GetComponent<Toggle>().isOn = false;
             ronaldToggle.GetComponent<Toggle>().isOn = false;
+            storageToggle.GetComponent<Toggle>().isOn = false;
             ShopMenu.SetActive(false);
+            storageMenu.SetActive(false);
             if (roadToggle.GetComponent<Toggle>().isOn == true)
             {
                 print("enabling grid");
@@ -77,7 +81,9 @@ public class UIToggle : MonoBehaviour
             roadToggle.GetComponent<Toggle>().isOn = false;
             deleteToggle.GetComponent<Toggle>().isOn = false;
             ronaldToggle.GetComponent<Toggle>().isOn = false;
+            storageToggle.GetComponent<Toggle>().isOn = false;
             ShopMenu.SetActive(false);
+            storageMenu.SetActive(false);
             if (plotToggle.GetComponent<Toggle>().isOn == true)
             {
                 print("enabling grid");
@@ -95,7 +101,9 @@ public class UIToggle : MonoBehaviour
             plotToggle.GetComponent<Toggle>().isOn = false;
             shopToggle.GetComponent<Toggle>().isOn = false;
             ronaldToggle.GetComponent<Toggle>().isOn = false;
+            storageToggle.GetComponent<Toggle>().isOn = false;
             ShopMenu.SetActive(false);
+            storageMenu.SetActive(false);
             if (deleteToggle.GetComponent<Toggle>().isOn == true)
             {
                 print("enabling grid");
@@ -112,7 +120,19 @@ public class UIToggle : MonoBehaviour
             roadToggle.GetComponent<Toggle>().isOn = false;
             plotToggle.GetComponent<Toggle>().isOn = false;
             shopToggle.GetComponent<Toggle>().isOn = false;
+            deleteToggle.GetComponent<Toggle>().isOn = false;
+            storageToggle.GetComponent<Toggle>().isOn = false;
+            ShopMenu.SetActive(false);
+            storageMenu.SetActive(false);
+            print("disabling grid");
+            map.SwapTile(greenGrass, tileGrass); //disable grid
+        }
+        if (sel == storageToggle)
+        {
+            roadToggle.GetComponent<Toggle>().isOn = false;
+            plotToggle.GetComponent<Toggle>().isOn = false;
             shopToggle.GetComponent<Toggle>().isOn = false;
+            deleteToggle.GetComponent<Toggle>().isOn = false;
             ShopMenu.SetActive(false);
             print("disabling grid");
             map.SwapTile(greenGrass, tileGrass); //disable grid
@@ -127,6 +147,7 @@ public class UIToggle : MonoBehaviour
         dailyBonusPanel.SetActive(false);
         convertMoneyPanel.SetActive(false);
         missionPanel.SetActive(false);
+        
         if (delPanel.transform.GetChild(2).GetComponent<delConfirm>().selProp != null)
         {
             delPanel.transform.GetChild(2).GetComponent<delConfirm>().selProp.GetComponent<SpriteRenderer>().color = Color.white;
