@@ -8,8 +8,7 @@ public class CSVReader : MonoBehaviour
 {
     [SerializeField]
     private TextAsset textAssetData;
-    public List<string> missionName = new List<string>();
-    public List<string> missionDesc = new List<string>();
+    public List<Mission> missionList = new List<Mission>();
 
     public Dictionary<int, long> levelValues = new Dictionary<int, long>();
 
@@ -273,10 +272,8 @@ public class CSVReader : MonoBehaviour
         
         for (int i = 1; i < data.Length; i++)
         {
-            missionName.Add(data[(cols * (i)) + 35]);
-            missionDesc.Add(data[(cols * (i)) + 36]);
-            if (data[(cols * (i)) + 37] == "Last Mission"){
-                //print("reached last level");
+            missionList.Add(new Mission(data[(cols * (i)) + 35], data[(cols * (i)) + 36], int.Parse(data[(cols * (i)) + 37]), data[(cols * (i)) + 38]));
+            if (data[(cols * (i)) + 39] == "Last Mission"){
                 print("There are " + i + " Missions");
                 break;
             }

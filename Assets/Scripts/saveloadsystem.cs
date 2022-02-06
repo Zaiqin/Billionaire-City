@@ -67,7 +67,7 @@ public class saveloadsystem : MonoBehaviour
 {
     public CSVReader csv;
     public Tilemap map;
-    public GameObject PropertiesParent, Stats, expPopup, cityText, hq, dailyBonus, ppDragButton, Astar;
+    public GameObject PropertiesParent, Stats, expPopup, cityText, hq, dailyBonus, ppDragButton, Astar, missionParent;
     public InputField nameField;
     public void Start()
     {
@@ -185,6 +185,19 @@ public class saveloadsystem : MonoBehaviour
         List<string> delExpList = expPopup.GetComponent<expansion>().deletedExp;
         FileHandler.SaveToJSON<string>(delExpList, "deletedExp.json");
         print("Game saved");
+
+        // ------------- Save Missions ---------------------
+        List<string> doneMissionList = missionParent.GetComponent<missionParent>().doneMissionList;
+        FileHandler.SaveToJSON<string>(doneMissionList, "doneMission.json");
+        print("Game saved");
+    }
+
+    public void saveMissions()
+    {
+        // ------------- Save Missions ---------------------
+        List<string> doneMissionList = missionParent.GetComponent<missionParent>().doneMissionList;
+        FileHandler.SaveToJSON<string>(doneMissionList, "doneMission.json");
+        print("Missions saved");
     }
 
     [ContextMenu("Save Stats")]
@@ -316,6 +329,9 @@ public class saveloadsystem : MonoBehaviour
             }
             Stats.GetComponent<Statistics>().expCost = cost;
             expPopup.GetComponent<expansion>().updateSprite();
+
+            // Loading missions that are done
+            missionParent.GetComponent<missionParent>().doneMissionList = FileHandler.ReadListFromJSON<string>("doneMission.json");
         }
         dailyBonus.SetActive(true);
     }

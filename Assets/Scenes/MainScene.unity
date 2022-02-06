@@ -598,6 +598,7 @@ MonoBehaviour:
   dailyBonus: {fileID: 662742294}
   ppDragButton: {fileID: 184177505}
   Astar: {fileID: 68398485}
+  missionParent: {fileID: 273355504}
   nameField: {fileID: 1165604900}
 --- !u!4 &25462476
 Transform:
@@ -2260,8 +2261,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 216, y: -80.6}
-  m_SizeDelta: {x: 242.29, y: 32.74}
+  m_AnchoredPosition: {x: 216, y: -46.07}
+  m_SizeDelta: {x: 242.29, y: 26.89}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &100966899
 MonoBehaviour:
@@ -2315,7 +2316,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: ac69ead4238ee4edca81114c3ac1de6a, type: 3}
-    m_FontSize: 28
+    m_FontSize: 25
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -3515,6 +3516,151 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 99.86423, y: 80.09138}
   m_EdgeRadius: 0
+--- !u!1 &185937601
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 185937602}
+  - component: {fileID: 185937605}
+  - component: {fileID: 185937604}
+  - component: {fileID: 185937603}
+  m_Layer: 6
+  m_Name: claimButton
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &185937602
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 185937601}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 879773134}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 216, y: -172.2}
+  m_SizeDelta: {x: 125.6, y: 36.2}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &185937603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 185937601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 185937604}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1820829992}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: PlayOneShot
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: bd5423d63b2c64bff84c70238339e6d6,
+            type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 273355507}
+        m_TargetAssemblyTypeName: missionParent, Assembly-CSharp
+        m_MethodName: claimReward
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &185937604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 185937601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 272dbb452bb0d504d8bd761c08ea1f65, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 1
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &185937605
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 185937601}
+  m_CullTransparentMesh: 1
 --- !u!1 &192690291
 GameObject:
   m_ObjectHideFlags: 0
@@ -3660,8 +3806,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 141.4, y: -143}
-  m_SizeDelta: {x: 90, y: 90}
+  m_AnchoredPosition: {x: 143.04996, y: -107.44997}
+  m_SizeDelta: {x: 86, y: 86}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &192705362
 MonoBehaviour:
@@ -5326,25 +5472,16 @@ MonoBehaviour:
   missionPanel: {fileID: 273355504}
   descText: {fileID: 1220483033}
   descTitle: {fileID: 1616669260}
+  rewardText: {fileID: 425568917}
   extended: 0
   chosenIndex: 0
   missionController: {fileID: 1112744950}
-  missionArray:
-  - Pizzalicious
-  - Pizzalicious Clients I
-  - Pizzalicious Sales I
-  - Name It
-  - Instant Build
-  - Green Thumb I
-  - M-City's VIP Club
-  descArray:
-  - Pizzalicious desc
-  - Pizzalicious Clients I desc
-  - Pizzalicious Sales I desc
-  - Name It desc
-  - Instant Build desc
-  - Green Thumb I desc
-  - M-City's VIP Club desc
+  stats: {fileID: 973017964}
+  saveObj: {fileID: 25462474}
+  rewardImage: {fileID: 192705362}
+  money: {fileID: 21300000, guid: cc10f08c0bc1bdb4e9fb4bd813b56e16, type: 3}
+  gold: {fileID: 21300000, guid: 7eb9620ab3816354ea8f15c94cc2f4cc, type: 3}
+  doneMissionList: []
 --- !u!1 &275365437
 GameObject:
   m_ObjectHideFlags: 0
@@ -67217,7 +67354,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 263.85, y: -141}
+  m_AnchoredPosition: {x: 263.85, y: -103.8}
   m_SizeDelta: {x: 142.36, y: 32.74}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &425568915
@@ -67277,7 +67414,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 40
-    m_Alignment: 3
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -70353,8 +70490,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textAssetData: {fileID: 0}
-  missionName: []
-  missionDesc: []
   maxDecoReach: 0
   ratios: []
   _recyclableScrollRect: {fileID: 1124475071}
@@ -73185,8 +73320,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textAssetData: {fileID: 0}
-  missionName: []
-  missionDesc: []
   maxDecoReach: 0
   ratios: []
   _recyclableScrollRect: {fileID: 1702639542}
@@ -73962,6 +74095,7 @@ RectTransform:
   - {fileID: 100966898}
   - {fileID: 192705361}
   - {fileID: 425568914}
+  - {fileID: 185937602}
   m_Father: {fileID: 273355505}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -76258,13 +76392,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textAssetData: {fileID: 0}
-  missionName: []
-  missionDesc: []
   maxDecoReach: 0
   ratios: []
   _recyclableScrollRect: {fileID: 384455029}
   missionRect: {fileID: 384455029}
-  missionNameList: []
 --- !u!4 &1112744952
 Transform:
   m_ObjectHideFlags: 0
@@ -77821,8 +77952,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 216, y: 36.99}
-  m_SizeDelta: {x: 242.29, y: 194.21}
+  m_AnchoredPosition: {x: 216, y: 56.06}
+  m_SizeDelta: {x: 242.29, y: 178.51}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1220483031
 MonoBehaviour:
@@ -77876,7 +78007,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: ac69ead4238ee4edca81114c3ac1de6a, type: 3}
-    m_FontSize: 22
+    m_FontSize: 21
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 2
@@ -79964,8 +80095,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textAssetData: {fileID: 0}
-  missionName: []
-  missionDesc: []
   maxDecoReach: 0
   ratios: []
   _recyclableScrollRect: {fileID: 1307693307}
@@ -88511,8 +88640,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 216, y: 170}
-  m_SizeDelta: {x: 242.29, y: 56.39}
+  m_AnchoredPosition: {x: 216, y: 174.68}
+  m_SizeDelta: {x: 242.29, y: 47.03}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1616669258
 MonoBehaviour:
@@ -89099,8 +89228,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textAssetData: {fileID: 4900000, guid: 55344fc88d7fb40edba2b548f7a9ae65, type: 3}
-  missionName: []
-  missionDesc: []
   maxDecoReach: 0
   ratios: []
 --- !u!4 &1673960465
