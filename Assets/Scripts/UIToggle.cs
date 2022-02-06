@@ -8,7 +8,7 @@ public class UIToggle : MonoBehaviour
 {
 
     [SerializeField]
-    GameObject shopToggle, plotToggle, roadToggle, deleteToggle, ronaldToggle, storageToggle, ShopMenu, hqMenu, infoPanel, pendingParent, ppDrag, delPanel, contractPanel, expPopup, failExpPopup, convertMoneyPanel, dailyBonusPanel, missionPanel, storageMenu;
+    GameObject shopToggle, plotToggle, roadToggle, deleteToggle, ronaldToggle, storageToggle, ShopMenu, hqMenu, infoPanel, pendingParent, ppDrag, delPanel, contractPanel, expPopup, failExpPopup, convertMoneyPanel, dailyBonusPanel, missionPanel, storageMenu, instantRentPanel;
 
     GameObject selectedToggle;
     public GameObject[] toggles;
@@ -147,7 +147,7 @@ public class UIToggle : MonoBehaviour
         dailyBonusPanel.SetActive(false);
         convertMoneyPanel.SetActive(false);
         missionPanel.SetActive(false);
-        
+        instantRentPanel.SetActive(false);
         if (delPanel.transform.GetChild(2).GetComponent<delConfirm>().selProp != null)
         {
             delPanel.transform.GetChild(2).GetComponent<delConfirm>().selProp.GetComponent<SpriteRenderer>().color = Color.white;

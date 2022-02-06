@@ -233,7 +233,7 @@ public class Property : MonoBehaviour, IPointerClickHandler
                     print("show info Panel");
                     infoPanel.GetComponent<infoScript>().rightSide = true;
                     infoPanel.transform.position = new Vector3(0.2f + this.gameObject.transform.position.x + (infoPanel.GetComponent<BoxCollider2D>().bounds.size.x / 2) + float.Parse(this.GetComponent<Property>().Card.space.Substring(0, 1)), this.gameObject.transform.position.y + (infoPanel.GetComponent<BoxCollider2D>().bounds.size.y / 4) + 1f, 0f);
-                    if ( infoPanel.transform.position.x + (infoPanel.GetComponent<BoxCollider2D>().bounds.size.x / 2) > (Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0))).x ){
+                    if ( infoPanel.transform.position.x + (infoPanel.GetComponent<BoxCollider2D>().bounds.size.x / 2) + 0.6f > (Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0))).x ){
                         print("show infoPanel on left side of house");
                         infoPanel.GetComponent<infoScript>().rightSide = false;
                         infoPanel.transform.position = new Vector3(-0.2f + this.gameObject.transform.position.x - (infoPanel.GetComponent<BoxCollider2D>().bounds.size.x / 2), this.gameObject.transform.position.y + (infoPanel.GetComponent<BoxCollider2D>().bounds.size.y / 4) + 1f, 0f);
