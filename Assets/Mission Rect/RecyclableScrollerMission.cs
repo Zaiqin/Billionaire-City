@@ -35,6 +35,7 @@ public class RecyclableScrollerMission : CSVReader, IRecyclableScrollRectDataSou
     /// </summary>
     public int GetItemCount()
     {
+        print("there are " + missionlist.Count);
         return missionlist.Count;
     }
 

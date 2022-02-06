@@ -46,6 +46,7 @@ public class missionParent : MonoBehaviour
 
     public void initMissions()
     {
+        print("init missions start");
         List<Mission> temp = new List<Mission>();
         foreach (var item in GameObject.Find("CSV").GetComponent<CSVReader>().missionList)
         {
@@ -64,6 +65,7 @@ public class missionParent : MonoBehaviour
         }
         missionList = temp;
         missionController.GetComponent<RecyclableScrollerMission>().missionlist = missionList;
+        print("init missions end");
     }
 
     public void completeMission(Mission m)
@@ -75,10 +77,12 @@ public class missionParent : MonoBehaviour
 
     public void resetDesc()
     {
+        print("resetting desc");
         chosenIndex = 0;
         extended = false;
         descPanel.transform.localPosition = new Vector3(-54, descPanel.transform.localPosition.y, descPanel.transform.localPosition.z);
         missionPanel.transform.localPosition = new Vector3(50, missionPanel.transform.localPosition.y, missionPanel.transform.localPosition.z);
+        print("done resetting desc");
     }
 
     public void toggleDesc(int index)

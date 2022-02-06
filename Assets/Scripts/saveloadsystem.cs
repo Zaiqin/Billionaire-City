@@ -106,6 +106,8 @@ public class saveloadsystem : MonoBehaviour
             //Do your stuff here
             loadSaveGame();
         }
+        dailyBonus.SetActive(true);
+        missionParent.GetComponent<missionParent>().initMissions();
     }
 
     [ContextMenu("Save Game")]
@@ -313,8 +315,7 @@ public class saveloadsystem : MonoBehaviour
             missionParent.GetComponent<missionParent>().doneMissionList = FileHandler.ReadListFromJSON<string>("doneMission.json");
             missionParent.GetComponent<missionParent>().pendingMissionList = FileHandler.ReadListFromJSON<string>("pendingMission.json");
         }
-        dailyBonus.SetActive(true);
-        missionParent.GetComponent<missionParent>().initMissions();
+        
     }
 
     [ContextMenu("Load New Game")]
@@ -333,7 +334,7 @@ public class saveloadsystem : MonoBehaviour
         loadProperty("Townhouse Luxury", new Vector2Int(6, 0), "notsigned");
         loadProperty("Bungalow Luxury", new Vector2Int(-11, -3), "notsigned");
         loadProperty("Cypress Tree", new Vector2Int(2, -7));
-        dailyBonus.SetActive(true);
+        
         print("Successfully Loaded New Game");
     }
 
