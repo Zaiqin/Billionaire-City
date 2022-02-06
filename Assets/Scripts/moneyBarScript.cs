@@ -18,7 +18,7 @@ public class moneyBarScript : MonoBehaviour, IPointerClickHandler
     {
         print("tapped");
         convertMoney.gameObject.SetActive(true);
-        moneyBar.transform.GetChild(0).GetComponent<Text>().text = this.transform.GetChild(0).GetComponent<Text>().text;
+        moneyBar.transform.GetChild(0).GetComponent<Text>().text = this.transform.parent.transform.GetChild(0).GetComponent<Text>().text;
         goldBar.transform.GetChild(0).GetComponent<Text>().text = GameObject.Find("GoldBar").transform.GetChild(0).GetComponent<Text>().text;
     }
 

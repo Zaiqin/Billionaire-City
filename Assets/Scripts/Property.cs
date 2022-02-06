@@ -26,7 +26,7 @@ public class Property : MonoBehaviour, IPointerClickHandler
 
         float x = float.Parse(pcard.space.Substring(0, 1));
         float y = float.Parse(pcard.space.Substring(pcard.space.Length - 1));
-        this.gameObject.GetComponent<BoxCollider2D>().size = new Vector2(x, y);
+        this.gameObject.GetComponent<BoxCollider2D>().size = new Vector2(x-(float)0.1, y-(float)0.1);
         this.gameObject.GetComponent<BoxCollider2D>().offset = new Vector2(x / 2, y / 2);
 
         print("type is " + pcard.type);
