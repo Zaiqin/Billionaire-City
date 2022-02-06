@@ -37,10 +37,10 @@ public class Statistics : MonoBehaviour
     public long inputLevel;
     public long inputXP;
 
-    public GameObject saveloadobj, shopButton;
+    public GameObject saveloadobj, shopButton, HQ;
 
     private Dictionary<int, long> levelValues;
-    [SerializeField] private GameObject csvObj, levelUpScreen, externalAudioPlayer, inputText;
+    [SerializeField] private GameObject csvObj, levelUpScreen, externalAudioPlayer, inputText, missionsPanel;
     [SerializeField] private ParticleSystem particle;
     [SerializeField] private AudioClip levelUp;
 
@@ -142,6 +142,66 @@ public class Statistics : MonoBehaviour
         //print("xpFill is " + xpFill.fillAmount + "nextVal is " + nextVal + "xp is " + xp);
         print("Updated stats");
         saveloadobj.GetComponent<saveloadsystem>().saveStats();
+
+        // Type 0 Missions --------------
+        if (missionsPanel.GetComponent<missionParent>().missionList != null)
+        {
+            foreach (var item in missionsPanel.GetComponent<missionParent>().missionList)
+            {
+                if (item.msnType == 0)
+                {
+                    if (item.msnName == "Cash Is King I" && money >= 1000000)
+                    {
+                        missionsPanel.GetComponent<missionParent>().completeMission(item);
+                    }
+                    else if (item.msnName == "Cash Is King II" && money >= 5000000)
+                    {
+                        missionsPanel.GetComponent<missionParent>().completeMission(item);
+                    }
+                    else if (item.msnName == "Cash Is King III" && money >= 10000000)
+                    {
+                        missionsPanel.GetComponent<missionParent>().completeMission(item);
+                    }
+                    else if (item.msnName == "Cash Is King IV" && money >= 100000000)
+                    {
+                        missionsPanel.GetComponent<missionParent>().completeMission(item);
+                    }
+                    else if (item.msnName == "Youre a Millionaire I")
+                    {
+                        HQ.GetComponent<HQstats>().calcHQ();
+                        if (HQ.GetComponent<HQstats>().totalLong >= 1000000)
+                        {
+                            missionsPanel.GetComponent<missionParent>().completeMission(item);
+                        }
+                    }
+                    else if (item.msnName == "Youre a Millionaire II")
+                    {
+                        HQ.GetComponent<HQstats>().calcHQ();
+                        if (HQ.GetComponent<HQstats>().totalLong >= 5000000)
+                        {
+                            missionsPanel.GetComponent<missionParent>().completeMission(item);
+                        }
+                    }
+                    else if (item.msnName == "Beat Ronald Goldtooth")
+                    {
+                        HQ.GetComponent<HQstats>().calcHQ();
+                        if (HQ.GetComponent<HQstats>().totalLong >= 100000000)
+                        {
+                            missionsPanel.GetComponent<missionParent>().completeMission(item);
+                        }
+                    }
+                    else if (item.msnName == "Beat Sheik")
+                    {
+                        HQ.GetComponent<HQstats>().calcHQ();
+                        if (HQ.GetComponent<HQstats>().totalLong >= 900000000)
+                        {
+                            missionsPanel.GetComponent<missionParent>().completeMission(item);
+                        }
+                    }
+
+                }
+            }
+        }
     }
 
     public void updateName()

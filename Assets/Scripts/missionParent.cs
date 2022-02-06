@@ -9,13 +9,15 @@ public class Mission
     public string msnDesc;
     public int msnType;
     public string msnReward;
+    public bool msnPending;
 
-    public Mission(string n, string d, int t, string r)
+    public Mission(string n, string d, int t, string r, bool b)
     {
         msnName = n;
         msnDesc = d;
         msnType = t;
         msnReward = r;
+        msnPending = b;
     }
 }
 
@@ -28,15 +30,21 @@ public class missionParent : MonoBehaviour
     public Text rewardText;
     public bool extended = false;
     public int chosenIndex;
-    public GameObject missionController, stats, saveObj;
+    public GameObject missionController, stats, saveObj, claimButton;
     public Image rewardImage;
     public Sprite money, gold;
 
     public List<Mission> missionList;
     public List<string> doneMissionList;
+    public List<string> pendingMissionList;
 
     // Start is called before the first frame update
     void Start()
+    {
+        
+    }
+
+    public void initMissions()
     {
         List<Mission> temp = new List<Mission>();
         foreach (var item in GameObject.Find("CSV").GetComponent<CSVReader>().missionList)
@@ -58,6 +66,13 @@ public class missionParent : MonoBehaviour
         missionController.GetComponent<RecyclableScrollerMission>().missionlist = missionList;
     }
 
+    public void completeMission(Mission m)
+    {
+        m.msnPending = true;
+        pendingMissionList.Add(m.msnName);
+        missionController.GetComponent<RecyclableScrollerMission>().missionlist = missionList;
+    }
+
     public void resetDesc()
     {
         chosenIndex = 0;
@@ -68,6 +83,7 @@ public class missionParent : MonoBehaviour
 
     public void toggleDesc(int index)
     {
+        claimButton.SetActive(false);
         if (chosenIndex == index || extended == false)
         {
             if (extended == false)
@@ -95,6 +111,10 @@ public class missionParent : MonoBehaviour
             rewardImage.sprite = money;
         }
         chosenIndex = index;
+        if (missionList[index].msnPending == true)
+        {
+            claimButton.SetActive(true);
+        }
     }
 
     public void claimReward()

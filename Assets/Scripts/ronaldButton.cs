@@ -15,8 +15,12 @@ public class ronaldButton : MonoBehaviour
     {
         missionPanel.SetActive(true);
         missionPanel.GetComponent<missionParent>().resetDesc();
-        rect.ReloadData();
+        
         //stats.updateStats(diffmoney: 1000000, diffgold: 100, diffxp: 1000);
+    }
+    public void reload()
+    {
+        rect.ReloadData();
     }
 
     // Start is called before the first frame update

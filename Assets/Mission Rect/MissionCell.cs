@@ -12,6 +12,7 @@ public class MissionCell : MonoBehaviour, ICell
     //UI
     public Button readMoreButton;
     public Text missionName;
+    public Image bgImage;
 
     public AudioClip touchSound;
 
@@ -31,10 +32,18 @@ public class MissionCell : MonoBehaviour, ICell
     }
 
     //This is called from the SetCell method in DataSource
-    public void ConfigureCell(int cellIndex, string text)
+    public void ConfigureCell(int cellIndex, string text, bool pending)
     {
         _cellIndex = cellIndex;
         missionName.text = text;
+        print("config cell " + text + "which has pending " + pending);
+        if (pending == true)
+        {
+            bgImage.color = Color.green;
+        } else
+        {
+            bgImage.color = Color.white;
+        }
     }
 
 }

@@ -45,12 +45,10 @@ public class RecyclableScrollerMission : CSVReader, IRecyclableScrollRectDataSou
     public void SetCell(ICell cell, int index)
     {
         //Casting to the implemented Cell
-        //print("in recycablescrollcontract setting cell");
 
-        //print("Clicked on a " + pCard.displayName + "'s contract");
         var item = cell as MissionCell;
 
-        item.ConfigureCell(index, missionlist[index].msnName);
+        item.ConfigureCell(index, missionlist[index].msnName, missionlist[index].msnPending);
     }
 
     #endregion

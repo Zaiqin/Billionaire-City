@@ -17,6 +17,8 @@ public class HQstats : MonoBehaviour
     [SerializeField]
     private Text money, gold, property, land, total, cityName;
 
+    public long totalLong;
+
     public InputField field;
 
     public Camera mainCam;
@@ -56,6 +58,7 @@ public class HQstats : MonoBehaviour
         }
         property.text = "$" + propValue.ToString("#,##0");
         land.text = "$" + ((stats.GetComponent<Statistics>().noOfPlots*1000) + stats.GetComponent<Statistics>().expCost).ToString("#,##0");
+        totalLong = (stats.money + goldvalue + (stats.GetComponent<Statistics>().noOfPlots * 1000) + propValue);
         total.text = "$" + (stats.money + goldvalue + (stats.GetComponent<Statistics>().noOfPlots *1000) + propValue).ToString("#,##0");
         field.text = stats.cityName;
     }

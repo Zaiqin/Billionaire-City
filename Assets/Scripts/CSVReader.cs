@@ -272,7 +272,7 @@ public class CSVReader : MonoBehaviour
         
         for (int i = 1; i < data.Length; i++)
         {
-            missionList.Add(new Mission(data[(cols * (i)) + 35], data[(cols * (i)) + 36], int.Parse(data[(cols * (i)) + 37]), data[(cols * (i)) + 38]));
+            missionList.Add(new Mission(data[(cols * (i)) + 35], data[(cols * (i)) + 36], int.Parse(data[(cols * (i)) + 37]), data[(cols * (i)) + 38], false));
             if (data[(cols * (i)) + 39] == "Last Mission"){
                 print("There are " + i + " Missions");
                 break;

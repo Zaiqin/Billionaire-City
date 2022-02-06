@@ -3534,7 +3534,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &185937602
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3551,8 +3551,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 216, y: -172.2}
-  m_SizeDelta: {x: 125.6, y: 36.2}
+  m_AnchoredPosition: {x: 216, y: -172.3}
+  m_SizeDelta: {x: 147.79, y: 42.59}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &185937603
 MonoBehaviour:
@@ -3643,7 +3643,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 272dbb452bb0d504d8bd761c08ea1f65, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4988404f0e9e5324d8ce76083ecbd7a8, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -5478,10 +5478,12 @@ MonoBehaviour:
   missionController: {fileID: 1112744950}
   stats: {fileID: 973017964}
   saveObj: {fileID: 25462474}
+  claimButton: {fileID: 185937601}
   rewardImage: {fileID: 192705362}
   money: {fileID: 21300000, guid: cc10f08c0bc1bdb4e9fb4bd813b56e16, type: 3}
   gold: {fileID: 21300000, guid: 7eb9620ab3816354ea8f15c94cc2f4cc, type: 3}
   doneMissionList: []
+  pendingMissionList: []
 --- !u!1 &275365437
 GameObject:
   m_ObjectHideFlags: 0
@@ -68685,6 +68687,7 @@ MonoBehaviour:
   land: {fileID: 2111853006}
   total: {fileID: 805826345}
   cityName: {fileID: 351022006}
+  totalLong: 0
   field: {fileID: 1165604900}
   mainCam: {fileID: 519420031}
 --- !u!114 &502592030
@@ -70244,6 +70247,18 @@ MonoBehaviour:
             m_ObjectArgument: {fileID: 8300000, guid: bd5423d63b2c64bff84c70238339e6d6,
               type: 3}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+        - m_Target: {fileID: 584236255}
+          m_TargetAssemblyTypeName: ronaldButton, Assembly-CSharp
+          m_MethodName: reload
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -74606,10 +74621,12 @@ MonoBehaviour:
   inputXP: 0
   saveloadobj: {fileID: 25462474}
   shopButton: {fileID: 52499396}
+  HQ: {fileID: 502592024}
   csvObj: {fileID: 1673960463}
   levelUpScreen: {fileID: 208941323}
   externalAudioPlayer: {fileID: 1820829991}
   inputText: {fileID: 351022004}
+  missionsPanel: {fileID: 273355504}
   particle: {fileID: 1477764395}
   levelUp: {fileID: 8300000, guid: 024b969c6e50193489cba7594e11e681, type: 3}
 --- !u!4 &973017966

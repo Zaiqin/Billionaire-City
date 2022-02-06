@@ -59,7 +59,7 @@ public class RecyclableScrollerDemo : MonoBehaviour, IRecyclableScrollRectDataSo
     public void SetCell(ICell cell, int index)
     {
         //Casting to the implemented Cell
-        //print("in recycablescrolldemo setting cell");
+        print("in recycablescrolldemo setting cell");
         //print("in recycablescrolldemo selected tab now is " + tabGroup.selectedTab.buttonName);
         var item = cell as DemoCell;
         switch (tabGroup.selectedTab.buttonName)

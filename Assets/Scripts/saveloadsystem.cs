@@ -106,29 +106,6 @@ public class saveloadsystem : MonoBehaviour
             //Do your stuff here
             loadSaveGame();
         }
-
-        /*string prevString = "2022/01/15 11:32:01";
-        if (testString.Contains(prevString))
-        {
-            print("detected fake copy");
-            foreach (var directory in Directory.GetDirectories(Application.persistentDataPath))
-            {
-                DirectoryInfo data_dir = new DirectoryInfo(directory);
-                data_dir.Delete(true);
-            }
-
-            foreach (var file in Directory.GetFiles(Application.persistentDataPath))
-            {
-                FileInfo file_info = new FileInfo(file);
-                file_info.Delete();
-            }
-            LoadNewGame();
-            saveGame();
-        }
-        else
-        {
-            loadSaveGame();
-        }*/
     }
 
     [ContextMenu("Save Game")]
@@ -189,6 +166,8 @@ public class saveloadsystem : MonoBehaviour
         // ------------- Save Missions ---------------------
         List<string> doneMissionList = missionParent.GetComponent<missionParent>().doneMissionList;
         FileHandler.SaveToJSON<string>(doneMissionList, "doneMission.json");
+        List<string> pendingMissionList = missionParent.GetComponent<missionParent>().pendingMissionList;
+        FileHandler.SaveToJSON<string>(pendingMissionList, "pendingMission.json");
         print("Game saved");
     }
 
@@ -332,8 +311,10 @@ public class saveloadsystem : MonoBehaviour
 
             // Loading missions that are done
             missionParent.GetComponent<missionParent>().doneMissionList = FileHandler.ReadListFromJSON<string>("doneMission.json");
+            missionParent.GetComponent<missionParent>().pendingMissionList = FileHandler.ReadListFromJSON<string>("pendingMission.json");
         }
         dailyBonus.SetActive(true);
+        missionParent.GetComponent<missionParent>().initMissions();
     }
 
     [ContextMenu("Load New Game")]
