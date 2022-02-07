@@ -142,9 +142,11 @@ MonoBehaviour:
   bgImage: {fileID: 6607455146852868338}
   missionImg: {fileID: 6763987072504278003}
   touchSound: {fileID: 8300000, guid: bd5423d63b2c64bff84c70238339e6d6, type: 3}
+  type0: {fileID: 21300000, guid: a48a2bc53f3ea8d48b619eee34eddec3, type: 3}
   type1: {fileID: 21300000, guid: 7b9d4262393f90746812bbe26804a8b8, type: 3}
   type2: {fileID: 21300000, guid: 982eab31a4a23214f9b956c998ec1830, type: 3}
   type3: {fileID: 21300000, guid: b813881b3340d5740b402cd21105ccc9, type: 3}
+  type4: {fileID: 21300000, guid: fa5510df20335d74ea0c293576d0a8cc, type: 3}
   typeError: {fileID: 21300000, guid: e94823947be83e147a4f638ad682e6d9, type: 3}
 --- !u!1 &545181832290568109
 GameObject:

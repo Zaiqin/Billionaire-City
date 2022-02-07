@@ -17,7 +17,7 @@ public class MissionCell : MonoBehaviour, ICell
 
     public AudioClip touchSound;
 
-    public Sprite type1, type2, type3, typeError;
+    public Sprite type0, type1, type2, type3, type4, typeError;
 
     //Model
     private int _cellIndex;
@@ -48,9 +48,11 @@ public class MissionCell : MonoBehaviour, ICell
         }
         switch (type)
         {
+            case 0: missionImg.sprite = type0; break;
             case 1: missionImg.sprite = type1; break;
             case 2: missionImg.sprite = type2; break;
             case 3: missionImg.sprite = type3; break;
+            case 4: missionImg.sprite = type4; break;
             default: missionImg.sprite = typeError; break;
         }
     }
