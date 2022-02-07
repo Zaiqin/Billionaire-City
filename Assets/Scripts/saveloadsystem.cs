@@ -178,6 +178,8 @@ public class saveloadsystem : MonoBehaviour
         // ------------- Save Missions ---------------------
         List<string> doneMissionList = missionParent.GetComponent<missionParent>().doneMissionList;
         FileHandler.SaveToJSON<string>(doneMissionList, "doneMission.json");
+        List<string> pendingMissionList = missionParent.GetComponent<missionParent>().pendingMissionList;
+        FileHandler.SaveToJSON<string>(pendingMissionList, "pendingMission.json");
         print("Missions saved");
     }
 
@@ -437,7 +439,7 @@ public class saveloadsystem : MonoBehaviour
             pp.transform.GetChild(1).gameObject.AddComponent<BoxCollider2D>();
             var dateAndTimeVar = System.DateTime.Now;
             //print("going check contract for " + pp.name + "which is signtime " + pp.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signTime);
-            if (pp.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signTime == "notsigned" && pp.constructEnd == "na")
+            if (pp.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signTime == "notsigned")
             {
                 //print("notsigned, thus signing now");
                 pp.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
@@ -467,6 +469,15 @@ public class saveloadsystem : MonoBehaviour
                 pp.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
                 pp.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signCreationTime = comSignCreationTime;
                 //print("sign still ongoiing");
+            }
+
+            if (pp.constructEnd != "na")
+            {
+                pp.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2;
+                pp.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
+                pp.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signTime = "notsigned";
+                pp.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signCreationTime = "notsigned";
+                print("not equals na");
             }
         }
         else if (pp.Card.type == "Deco") // check to only do these thats only for houses

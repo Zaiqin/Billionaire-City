@@ -148,7 +148,7 @@ public class Statistics : MonoBehaviour
         {
             foreach (var item in missionsPanel.GetComponent<missionParent>().missionList)
             {
-                if (item.msnType == 0)
+                if (item.msnType == 0 && item.msnPending == false)
                 {
                     if (item.msnName == "Cash Is King I" && money >= 1000000)
                     {

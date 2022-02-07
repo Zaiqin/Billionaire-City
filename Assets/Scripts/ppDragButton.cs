@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class ppDragButton : MonoBehaviour
 {
     [SerializeField]
-    private GameObject pendingParent, propParent, ppDrag, externalAudioPlayer, saveloadsystem, shopToggle, shopMenu;
+    private GameObject pendingParent, propParent, ppDrag, externalAudioPlayer, saveloadsystem, shopToggle, shopMenu, missionsPanel;
 
     [SerializeField]
     private Statistics stats;
@@ -317,7 +317,30 @@ public class ppDragButton : MonoBehaviour
             // --------------------- Save Game ----------------------------------
             saveloadsystem.GetComponent<saveloadsystem>().saveGame();
             // ------------------------------------------------------------------
-            
+
+            // ------------ Type 1 Missions -------------------------------------
+            if (missionsPanel.GetComponent<missionParent>().missionList != null)
+            {
+                foreach (var item in missionsPanel.GetComponent<missionParent>().missionList)
+                {
+                    if (item.msnType == 1 && item.msnPending == false)
+                    {
+                        if (item.msnName == "Pizzalicious" && pCard.propName == "pizzeria")
+                        {
+                            missionsPanel.GetComponent<missionParent>().completeMission(item);
+                        }
+                        else if (item.msnName == "Build I" && pCard.type == "House")
+                        {
+                            missionsPanel.GetComponent<missionParent>().completeMission(item);
+                        }
+                        else if (item.msnName == "World Wonder" && pCard.propName == "goldenstatue")
+                        {
+                            missionsPanel.GetComponent<missionParent>().completeMission(item);
+                        }
+                    }
+                }
+            }
+
         }
     }
 

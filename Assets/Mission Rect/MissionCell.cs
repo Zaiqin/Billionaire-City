@@ -36,7 +36,6 @@ public class MissionCell : MonoBehaviour, ICell
     {
         _cellIndex = cellIndex;
         missionName.text = text;
-        print("config cell " + text + "which has pending " + pending);
         if (pending == true)
         {
             bgImage.color = Color.green;

@@ -46,11 +46,17 @@ public class missionParent : MonoBehaviour
 
     public void initMissions()
     {
-        print("init missions start");
         List<Mission> temp = new List<Mission>();
         foreach (var item in GameObject.Find("CSV").GetComponent<CSVReader>().missionList)
         {
             temp.Add(item);
+            foreach (var pend in pendingMissionList)
+            {
+                if (item.msnName == pend)
+                {
+                    item.msnPending = true;
+                }
+            }
         }
         foreach (var item in GameObject.Find("CSV").GetComponent<CSVReader>().missionList)
         {
@@ -65,14 +71,15 @@ public class missionParent : MonoBehaviour
         }
         missionList = temp;
         missionController.GetComponent<RecyclableScrollerMission>().missionlist = missionList;
-        print("init missions end");
     }
 
     public void completeMission(Mission m)
     {
+        print("complete mission " + m.msnName);
         m.msnPending = true;
         pendingMissionList.Add(m.msnName);
         missionController.GetComponent<RecyclableScrollerMission>().missionlist = missionList;
+        saveObj.GetComponent<saveloadsystem>().saveMissions();
     }
 
     public void resetDesc()
