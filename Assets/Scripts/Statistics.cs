@@ -44,12 +44,6 @@ public class Statistics : MonoBehaviour
     [SerializeField] private ParticleSystem particle;
     [SerializeField] private AudioClip levelUp;
 
-    [ContextMenu("Whats the Wonder Bonus")]
-    public void func()
-    {
-        print("Wonder House bonus at " + wonderBonus + "%, Commerce Bonus at " + wonderCommerceBonus + "%");
-    }
-
     [ContextMenu("Input Values into Game")]
     public void inputValues()
     {

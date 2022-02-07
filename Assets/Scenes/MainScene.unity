@@ -599,6 +599,7 @@ MonoBehaviour:
   ppDragButton: {fileID: 184177505}
   Astar: {fileID: 68398485}
   missionParent: {fileID: 273355504}
+  storageController: {fileID: 835569546}
   nameField: {fileID: 1165604900}
 --- !u!4 &25462476
 Transform:
@@ -1889,6 +1890,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 1702639542}
+          m_TargetAssemblyTypeName: PolyAndCode.UI.RecyclableScrollRect, Assembly-CSharp
+          m_MethodName: ReloadData
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!82 &88028607
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2066,6 +2079,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StorageMenu: {fileID: 1056730518}
+  storageController: {fileID: 835569546}
+  count: {fileID: 370062826}
   storageTog: {fileID: 88028608}
 --- !u!1 &93334633
 GameObject:
@@ -3263,6 +3278,9 @@ MonoBehaviour:
   shopToggle: {fileID: 52499396}
   shopMenu: {fileID: 252825800}
   missionsPanel: {fileID: 273355504}
+  storagePanel: {fileID: 1056730518}
+  storageToggle: {fileID: 88028603}
+  storageController: {fileID: 835569546}
   stats: {fileID: 973017965}
   buildSound: {fileID: 8300000, guid: af8e188edf22047efbe5414eb16f16df, type: 3}
   touchSound: {fileID: 8300000, guid: bd5423d63b2c64bff84c70238339e6d6, type: 3}
@@ -66631,6 +66649,117 @@ MonoBehaviour:
   m_EffectColor: {r: 0.1175507, g: 0.34862208, b: 0.49056602, a: 1}
   m_EffectDistance: {x: 2, y: -2}
   m_UseGraphicAlpha: 1
+--- !u!1 &370062825
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 370062830}
+  - component: {fileID: 370062829}
+  - component: {fileID: 370062826}
+  - component: {fileID: 370062828}
+  - component: {fileID: 370062827}
+  m_Layer: 6
+  m_Name: count
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &370062826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 370062825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: ac69ead4238ee4edca81114c3ac1de6a, type: 3}
+    m_FontSize: 29
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 75
+    m_Alignment: 3
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 99 items
+--- !u!114 &370062827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 370062825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.61960787}
+  m_EffectDistance: {x: 4, y: -3}
+  m_UseGraphicAlpha: 1
+--- !u!114 &370062828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 370062825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0.078431375, g: 0.34901962, b: 0.5137255, a: 1}
+  m_EffectDistance: {x: 2, y: -2}
+  m_UseGraphicAlpha: 1
+--- !u!222 &370062829
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 370062825}
+  m_CullTransparentMesh: 1
+--- !u!224 &370062830
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 370062825}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1056730519}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -307, y: 136}
+  m_SizeDelta: {x: 181.91, y: 41.65}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &374950764
 GameObject:
   m_ObjectHideFlags: 0
@@ -73533,6 +73662,11 @@ MonoBehaviour:
   ratios: []
   _recyclableScrollRect: {fileID: 1702639542}
   storageRect: {fileID: 1702639542}
+  shopMenu: {fileID: 252825800}
+  saveObj: {fileID: 25462474}
+  CSVObject: {fileID: 1673960464}
+  inputName: 
+  storageList: []
 --- !u!4 &835569548
 Transform:
   m_ObjectHideFlags: 0
@@ -75848,6 +75982,7 @@ RectTransform:
   m_Children:
   - {fileID: 1936628602}
   - {fileID: 1170368435}
+  - {fileID: 370062830}
   - {fileID: 1492573301}
   - {fileID: 1702639540}
   m_Father: {fileID: 523200279}
@@ -77619,7 +77754,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 137}
+  m_AnchoredPosition: {x: -9, y: 137}
   m_SizeDelta: {x: 143.47, y: 41.653}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1170368436
@@ -87347,7 +87482,7 @@ RectTransform:
   m_LocalScale: {x: 1.0000715, y: 1.0000715, z: 1.0000715}
   m_Children: []
   m_Father: {fileID: 1056730519}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -88551,6 +88686,9 @@ MonoBehaviour:
   shopToggle: {fileID: 52499396}
   shopMenu: {fileID: 252825800}
   missionsPanel: {fileID: 273355504}
+  storagePanel: {fileID: 1056730518}
+  storageToggle: {fileID: 88028603}
+  storageController: {fileID: 835569546}
   stats: {fileID: 973017965}
   buildSound: {fileID: 8300000, guid: af8e188edf22047efbe5414eb16f16df, type: 3}
   touchSound: {fileID: 8300000, guid: bd5423d63b2c64bff84c70238339e6d6, type: 3}
@@ -90936,7 +91074,7 @@ PrefabInstance:
     - target: {fileID: 224141822819573504, guid: 3c01abf790e1a42ca8d10525f571cab5,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 224141822819573504, guid: 3c01abf790e1a42ca8d10525f571cab5,
         type: 3}

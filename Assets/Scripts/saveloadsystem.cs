@@ -67,7 +67,7 @@ public class saveloadsystem : MonoBehaviour
 {
     public CSVReader csv;
     public Tilemap map;
-    public GameObject PropertiesParent, Stats, expPopup, cityText, hq, dailyBonus, ppDragButton, Astar, missionParent;
+    public GameObject PropertiesParent, Stats, expPopup, cityText, hq, dailyBonus, ppDragButton, Astar, missionParent, storageController;
     public InputField nameField;
     public void Start()
     {
@@ -171,8 +171,20 @@ public class saveloadsystem : MonoBehaviour
         List<string> pendingMissionList = missionParent.GetComponent<missionParent>().pendingMissionList;
         FileHandler.SaveToJSON<string>(pendingMissionList, "pendingMission.json");
         print("Game saved");
+
+        // ------------- Save Storage ---------------------
+        List<string> storageList = storageController.GetComponent<RecyclableScrollerStorage>().storageList;
+        FileHandler.SaveToJSON<string>(storageList, "storage.json");
+        print("Storage saved");
     }
 
+    public void saveStorage()
+    {
+        // ------------- Save Storage ---------------------
+        List<string> storageList = storageController.GetComponent<RecyclableScrollerStorage>().storageList;
+        FileHandler.SaveToJSON<string>(storageList, "storage.json");
+        print("Storage saved");
+    }
     public void saveMissions()
     {
         // ------------- Save Missions ---------------------
@@ -316,6 +328,9 @@ public class saveloadsystem : MonoBehaviour
             // Loading missions that are done
             missionParent.GetComponent<missionParent>().doneMissionList = FileHandler.ReadListFromJSON<string>("doneMission.json");
             missionParent.GetComponent<missionParent>().pendingMissionList = FileHandler.ReadListFromJSON<string>("pendingMission.json");
+
+            // Load storage ----
+            storageController.GetComponent<RecyclableScrollerStorage>().storageList = FileHandler.ReadListFromJSON<string>("storage.json");
         }
         
     }

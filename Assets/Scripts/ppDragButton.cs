@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class ppDragButton : MonoBehaviour
 {
     [SerializeField]
-    private GameObject pendingParent, propParent, ppDrag, externalAudioPlayer, saveloadsystem, shopToggle, shopMenu, missionsPanel;
+    private GameObject pendingParent, propParent, ppDrag, externalAudioPlayer, saveloadsystem, shopToggle, shopMenu, missionsPanel, storagePanel, storageToggle, storageController;
 
     [SerializeField]
     private Statistics stats;
@@ -162,7 +162,7 @@ public class ppDragButton : MonoBehaviour
 
         if (pp.GetComponent<Draggable>().buildable == true && canBuild == true)
         {
-            shopToggle.GetComponent<Toggle>().isOn = false;
+            
             removePlots(pp.Card, pp.GetComponent<Draggable>().XY);
             // Setting position and parent to main properties -----------
             pp.transform.position = new Vector3(pp.transform.position.x, pp.transform.position.y, getZ(pp.GetComponent<Draggable>().XY));
@@ -174,20 +174,28 @@ public class ppDragButton : MonoBehaviour
             pp.GetComponent<Renderer>().material.color = Color.white;
             pp.GetComponent<Draggable>().dragEnabled = false;
             pp.GetComponent<Draggable>().buildable = false;
+            
+            PropertyCard pCard = pp.GetComponent<Property>().Card;
 
             // Deducting money ---------------
-            PropertyCard pCard = pp.GetComponent<Property>().Card;
-            if (pCard.cost.Contains("Gold"))
+            if (shopToggle.GetComponent<Toggle>().isOn == true)
             {
-                stats.updateStats(diffgold: -(int.Parse(pCard.cost.Remove(pCard.cost.Length - 5))));
-                stats.updateStats(diffxp: pCard.XP);
-            }
-            else
-            {
-                stats.updateStats(diffmoney: -(int.Parse(pCard.cost)));
-                stats.updateStats(diffxp: pCard.XP);
+                if (pCard.cost.Contains("Gold"))
+                {
+                    stats.updateStats(diffgold: -(int.Parse(pCard.cost.Remove(pCard.cost.Length - 5))));
+                    stats.updateStats(diffxp: pCard.XP);
+                }
+                else
+                {
+                    stats.updateStats(diffmoney: -(int.Parse(pCard.cost)));
+                    stats.updateStats(diffxp: pCard.XP);
+                }
             }
             // -------------------------------
+
+            shopToggle.GetComponent<Toggle>().isOn = false;
+            storageToggle.GetComponent<Toggle>().isOn = false;
+            storageController.GetComponent<RecyclableScrollerStorage>().deleteFromStorage(pCard.displayName);
 
             externalAudioPlayer.GetComponent<AudioSource>().PlayOneShot(buildSound);
 
@@ -367,7 +375,13 @@ public class ppDragButton : MonoBehaviour
         Destroy(pendingParent.transform.GetChild(0).gameObject);
         externalAudioPlayer.GetComponent<AudioSource>().PlayOneShot(touchSound);
         ppDrag.SetActive(false);
-        shopMenu.SetActive(true);
+        if (shopToggle.GetComponent<Toggle>().isOn == true)
+        {
+            shopMenu.SetActive(true);
+        } else
+        {
+            storagePanel.SetActive(true);
+        }
         // --------------------- Swapping to green border grass -------------
         map.SwapTile(greenGrass, tileGrass);
         // ------------------------------------------------------------------

@@ -17,16 +17,50 @@ public class RecyclableScrollerStorage : CSVReader, IRecyclableScrollRectDataSou
     [SerializeField]
     private RecyclableScrollRect storageRect;
 
+    public GameObject shopMenu, saveObj;
+
+    [SerializeField]
+    private CSVReader CSVObject;
+    private Dictionary<string, PropertyCard> database;
+
+    public string inputName;
+
+    public List<string> storageList = new List<string>() {};
+
     //Recyclable scroll rect's data source must be assigned in Awake.
     private void Awake()
     {
+        database = CSVObject.CardDatabase;
         _recyclableScrollRect.DataSource = this;
+
     }
 
     public void userReloadData()
     {
-        print("resetting data for contracts selection");
         storageRect.ReloadData();
+    }
+
+    public void deleteFromStorage(string s)
+    {
+        storageList.Remove(s);
+        saveObj.GetComponent<saveloadsystem>().saveStorage();
+    }
+
+    [ContextMenu("Add to Storage List")]
+    public void addIntoStorage()
+    {
+        print("Added " + inputName + " into storage");
+        storageList.Add(inputName);
+        saveObj.GetComponent<saveloadsystem>().saveStorage();
+    }
+
+    [ContextMenu("Check Storage List")]
+    public void checkstorage()
+    {
+        foreach (var item in storageList)
+        {
+            print("there is " + item + " in the storage");
+        }
     }
 
     #region DATA-SOURCE
@@ -36,7 +70,7 @@ public class RecyclableScrollerStorage : CSVReader, IRecyclableScrollRectDataSou
     /// </summary>
     public int GetItemCount()
     {
-        return 9;
+        return storageList.Count;
     }
 
     /// <summary>
@@ -51,7 +85,7 @@ public class RecyclableScrollerStorage : CSVReader, IRecyclableScrollRectDataSou
         //print("Clicked on a " + pCard.displayName + "'s contract");
         var item = cell as StorageCell;
 
-        item.ConfigureCell(index);
+        item.ConfigureCell(index, database[storageList[index]]);
     }
 
     #endregion

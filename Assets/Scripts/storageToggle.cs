@@ -8,6 +8,8 @@ using PolyAndCode.UI;
 public class storageToggle : MonoBehaviour
 {
     public GameObject StorageMenu;
+    public GameObject storageController;
+    public Text count;
     //public RecyclableScrollRect rect;
     public Toggle storageTog;
 
@@ -17,6 +19,18 @@ public class storageToggle : MonoBehaviour
         {
             storageTog.isOn = true;
             StorageMenu.SetActive(true);
+            if (storageController.GetComponent<RecyclableScrollerStorage>().storageList.Count == 0)
+            {
+                count.text = "No items";
+            }
+            else if (storageController.GetComponent<RecyclableScrollerStorage>().storageList.Count == 1)
+            {
+                count.text = "1 item";
+            }
+            else
+            {
+                count.text = storageController.GetComponent<RecyclableScrollerStorage>().storageList.Count + " items";
+            }
 
         }
         else if (StorageMenu.activeSelf == true)

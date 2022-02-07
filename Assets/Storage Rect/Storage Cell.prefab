@@ -138,6 +138,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useButton: {fileID: 2433357107273617212}
+  itemImage: {fileID: 2013706596307934747}
+  itemText: {fileID: 5801452484833678298}
+  map: {fileID: 0}
+  greenGrass: {fileID: 11400000, guid: 68a3091ae6a3000469a13bd060a098ad, type: 2}
+  tileGrass: {fileID: 11400000, guid: b3e8f3a2e14494bcc9001c2bd1e27c1f, type: 2}
   touchSound: {fileID: 8300000, guid: bd5423d63b2c64bff84c70238339e6d6, type: 3}
 --- !u!1 &618352944499969731
 GameObject:
