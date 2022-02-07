@@ -71,7 +71,7 @@ public class Draggable : MonoBehaviour
 
     public bool buildCheck(PropertyCard card, float[] XY, Tilemap map)
     {
-        print("called build check");
+        //print("called build check");
         map = GameObject.Find("Tilemap").GetComponent<Tilemap>();
         bool result = true;
         if (card.type != "Deco")

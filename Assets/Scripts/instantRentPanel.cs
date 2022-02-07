@@ -7,7 +7,7 @@ public class instantRentPanel : MonoBehaviour
 {
     public GameObject infoPanel;
     public Text beforeText, timeText;
-    public GameObject stats, saveObj;
+    public GameObject stats, saveObj, missionsPanel;
 
     public void initPanel()
     {
@@ -26,6 +26,20 @@ public class instantRentPanel : MonoBehaviour
             this.gameObject.SetActive(false);
             infoPanel.SetActive(false);
             saveObj.GetComponent<saveloadsystem>().saveGame();
+            // ---------- Type 4 Missions -------------------
+            if (missionsPanel.GetComponent<missionParent>().missionList != null)
+            {
+                foreach (var item in missionsPanel.GetComponent<missionParent>().missionList)
+                {
+                    if (item.msnType == 4 && item.msnPending == false)
+                    {
+                        if (item.msnName == "Instant Rent")
+                        {
+                            missionsPanel.GetComponent<missionParent>().completeMission(item);
+                        }
+                    }
+                }
+            }
         }
     }
 

@@ -207,6 +207,20 @@ public class Statistics : MonoBehaviour
     public void updateName()
     {
         cityName = inputText.GetComponent<Text>().text;
+        // Type 3 Missions --------------
+        if (missionsPanel.GetComponent<missionParent>().missionList != null)
+        {
+            foreach (var item in missionsPanel.GetComponent<missionParent>().missionList)
+            {
+                if (item.msnType == 3 && item.msnPending == false)
+                {
+                    if (item.msnName == "Name It" && cityName != "Chocolate Fields")
+                    {
+                        missionsPanel.GetComponent<missionParent>().completeMission(item);
+                    }
+                }
+            }
+        }
     }
 
     public void setStats(long m, long g, long l, long x)

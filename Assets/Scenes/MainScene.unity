@@ -77819,6 +77819,7 @@ MonoBehaviour:
   timeText: {fileID: 1066882151}
   stats: {fileID: 973017964}
   saveObj: {fileID: 25462474}
+  missionsPanel: {fileID: 273355504}
 --- !u!1 &1179439593
 GameObject:
   m_ObjectHideFlags: 0
@@ -87527,6 +87528,7 @@ MonoBehaviour:
   infoPanel: {fileID: 374950764}
   stats: {fileID: 973017964}
   extAudio: {fileID: 1820829991}
+  missionsPanel: {fileID: 273355504}
   constSound: {fileID: 8300000, guid: af8e188edf22047efbe5414eb16f16df, type: 3}
 --- !u!114 &1557169956
 MonoBehaviour:

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class instantBuild : MonoBehaviour
 {
-    public GameObject save, infoPanel, stats, extAudio;
+    public GameObject save, infoPanel, stats, extAudio, missionsPanel;
     public AudioClip constSound;
 
     // Start is called before the first frame update
@@ -74,5 +74,19 @@ public class instantBuild : MonoBehaviour
 
         save.GetComponent<saveloadsystem>().saveGame();
         infoPanel.SetActive(false);
+        // ----- Type 2 Missions -----------------
+        if (missionsPanel.GetComponent<missionParent>().missionList != null)
+        {
+            foreach (var item in missionsPanel.GetComponent<missionParent>().missionList)
+            {
+                if (item.msnType == 2 && item.msnPending == false)
+                {
+                    if (item.msnName == "Instant Build")
+                    {
+                        missionsPanel.GetComponent<missionParent>().completeMission(item);
+                    }
+                }
+            }
+        }
     }
 }

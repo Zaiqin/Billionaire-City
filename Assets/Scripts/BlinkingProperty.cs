@@ -32,7 +32,7 @@ public class BlinkingProperty : MonoBehaviour
     [ContextMenu("stopBlink")]
     public void StopBlink()
     {
-        print("stopping blink");
+        //print("stopping blink");
         CancelInvoke();
         stop = true;
 

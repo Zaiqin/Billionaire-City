@@ -337,6 +337,24 @@ public class ppDragButton : MonoBehaviour
                         {
                             missionsPanel.GetComponent<missionParent>().completeMission(item);
                         }
+                        else if (item.msnName == "Bungalow Bonanza")
+                        {
+                            int bungalowCount = 0;
+                            foreach (Transform child in propParent.transform)
+                            {
+                                if (child.name != "HQ")
+                                {
+                                    if (child.GetComponent<Property>().Card.displayName == "Bungalow")
+                                    {
+                                        bungalowCount++;
+                                    }
+                                }
+                            }
+                            if (bungalowCount >= 5)
+                            {
+                                missionsPanel.GetComponent<missionParent>().completeMission(item);
+                            }
+                        }
                     }
                 }
             }
