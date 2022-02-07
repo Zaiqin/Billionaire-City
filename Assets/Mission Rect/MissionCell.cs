@@ -13,8 +13,11 @@ public class MissionCell : MonoBehaviour, ICell
     public Button readMoreButton;
     public Text missionName;
     public Image bgImage;
+    public Image missionImg;
 
     public AudioClip touchSound;
+
+    public Sprite type1, type2, type3, typeError;
 
     //Model
     private int _cellIndex;
@@ -32,7 +35,7 @@ public class MissionCell : MonoBehaviour, ICell
     }
 
     //This is called from the SetCell method in DataSource
-    public void ConfigureCell(int cellIndex, string text, bool pending)
+    public void ConfigureCell(int cellIndex, string text, bool pending, int type)
     {
         _cellIndex = cellIndex;
         missionName.text = text;
@@ -42,6 +45,13 @@ public class MissionCell : MonoBehaviour, ICell
         } else
         {
             bgImage.color = Color.white;
+        }
+        switch (type)
+        {
+            case 1: missionImg.sprite = type1; break;
+            case 2: missionImg.sprite = type2; break;
+            case 3: missionImg.sprite = type3; break;
+            default: missionImg.sprite = typeError; break;
         }
     }
 

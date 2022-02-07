@@ -48,7 +48,7 @@ public class RecyclableScrollerMission : CSVReader, IRecyclableScrollRectDataSou
 
         var item = cell as MissionCell;
 
-        item.ConfigureCell(index, missionlist[index].msnName, missionlist[index].msnPending);
+        item.ConfigureCell(index, missionlist[index].msnName, missionlist[index].msnPending, missionlist[index].msnType);
     }
 
     #endregion
