@@ -30,7 +30,7 @@ public class missionParent : MonoBehaviour
     public Text rewardText;
     public bool extended = false;
     public int chosenIndex;
-    public GameObject missionController, stats, saveObj, claimButton;
+    public GameObject missionController, stats, saveObj, claimButton, exclaimButton;
     public Image rewardImage;
     public Sprite money, gold;
 
@@ -71,6 +71,14 @@ public class missionParent : MonoBehaviour
         }
         missionList = temp;
         missionController.GetComponent<RecyclableScrollerMission>().missionlist = missionList;
+        if (pendingMissionList.Count != 0)
+        {
+            exclaimButton.SetActive(true);
+        }
+        else
+        {
+            exclaimButton.SetActive(false);
+        }
     }
 
     public void completeMission(Mission m)
@@ -80,6 +88,7 @@ public class missionParent : MonoBehaviour
         pendingMissionList.Add(m.msnName);
         missionController.GetComponent<RecyclableScrollerMission>().missionlist = missionList;
         saveObj.GetComponent<saveloadsystem>().saveMissions();
+        exclaimButton.SetActive(true);
     }
 
     public void resetDesc()
@@ -138,6 +147,7 @@ public class missionParent : MonoBehaviour
         {
             stats.GetComponent<Statistics>().updateStats(diffmoney: int.Parse(missionList[chosenIndex].msnReward));
         }
+        pendingMissionList.Remove(missionList[chosenIndex].msnName);
         doneMissionList.Add(missionList[chosenIndex].msnName);
         missionList.Remove(missionList[chosenIndex]);
         saveObj.GetComponent<saveloadsystem>().saveMissions();
@@ -145,5 +155,12 @@ public class missionParent : MonoBehaviour
         descPanel.transform.localPosition = new Vector3(descPanel.transform.localPosition.x - 290, descPanel.transform.localPosition.y, descPanel.transform.localPosition.z);
         missionPanel.transform.localPosition = new Vector3(missionPanel.transform.localPosition.x + 132, missionPanel.transform.localPosition.y, missionPanel.transform.localPosition.z);
         extended = false;
+        if (pendingMissionList.Count != 0)
+        {
+            exclaimButton.SetActive(true);
+        } else
+        {
+            exclaimButton.SetActive(false);
+        }
     }
 }
