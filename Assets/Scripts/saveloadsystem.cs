@@ -107,7 +107,6 @@ public class saveloadsystem : MonoBehaviour
             //Do your stuff here
             loadSaveGame();
         }
-        dailyBonus.SetActive(true);
         missionParent.GetComponent<missionParent>().initMissions();
     }
 
@@ -254,6 +253,7 @@ public class saveloadsystem : MonoBehaviour
         }
         else
         {
+            dailyBonus.SetActive(true);
             print("Save Game Found, loading from save");
             // ----------- Loading Tilemap ------------------
             foreach (var item in tilelist)
@@ -355,6 +355,7 @@ public class saveloadsystem : MonoBehaviour
 
         cover.SetActive(true);
         tutorialPanel.SetActive(true);
+        dailyBonus.SetActive(false);
         print("Successfully Loaded New Game");
     }
 

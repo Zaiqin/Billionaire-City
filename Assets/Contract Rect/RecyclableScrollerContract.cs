@@ -18,7 +18,7 @@ public class RecyclableScrollerContract : CSVReader, IRecyclableScrollRectDataSo
     Sprite threeMinSprite, thirtyMinSprite, oneHrSprite, fourHrSprite, eightHrSprite, twelveHrSprite, oneDaySprite, twoDaySprite, threeDaySprite;
 
     public PropertyCard pCard;
-    public GameObject selProp;
+    public GameObject selProp, contractParent;
 
     [SerializeField]
     private RecyclableScrollRect contractRect;

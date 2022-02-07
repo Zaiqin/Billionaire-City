@@ -447,11 +447,11 @@ public class contractScript : MonoBehaviour, IPointerClickHandler
         {
             print("clicked on contract");
             GameObject canvas = GameObject.Find("Canvas");
-            GameObject contractMenu = canvas.transform.GetChild(canvas.transform.childCount - 7).gameObject;
+            GameObject contractController = GameObject.Find("Contract Scroll Controller");
+            GameObject contractMenu = contractController.GetComponent<RecyclableScrollerContract>().contractParent;
             contractMenu.SetActive(true);
             GameObject infoPanel = canvas.transform.GetChild(0).gameObject;
             infoPanel.SetActive(false);
-            GameObject contractController = GameObject.Find("Contract Scroll Controller");
             contractController.GetComponent<RecyclableScrollerContract>().pCard = propCard;
             contractController.GetComponent<RecyclableScrollerContract>().selProp = this.transform.parent.gameObject;
             contractController.GetComponent<RecyclableScrollerContract>().userReloadData();

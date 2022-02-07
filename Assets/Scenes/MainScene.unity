@@ -68987,6 +68987,7 @@ GameObject:
   - component: {fileID: 514689980}
   - component: {fileID: 514689982}
   - component: {fileID: 514689981}
+  - component: {fileID: 514689983}
   m_Layer: 6
   m_Name: tutorialPanel
   m_TagString: Untagged
@@ -69014,7 +69015,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -42.44}
-  m_SizeDelta: {x: 897.6, y: 477.23}
+  m_SizeDelta: {x: 679.29, y: 477.23}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &514689981
 MonoBehaviour:
@@ -69054,6 +69055,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 514689979}
   m_CullTransparentMesh: 1
+--- !u!114 &514689983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 514689979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c6a1d7e70e9c644e8485e5a3d4d44e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorialPage: 0
+  descText: {fileID: 654812230}
+  button: {fileID: 1163332943}
+  cover: {fileID: 1435088136}
+  dailyBonus: {fileID: 662742294}
+  particle: {fileID: 1477764395}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -70734,6 +70753,7 @@ MonoBehaviour:
   twoDaySprite: {fileID: 21300000, guid: 7f2bae054ef4c5d4f9ae16d88be5cb1d, type: 3}
   threeDaySprite: {fileID: 21300000, guid: d1d8d3e7b0788fd47b6cbd98722a14c1, type: 3}
   selProp: {fileID: 0}
+  contractParent: {fileID: 776026746}
   contractRect: {fileID: 1124475071}
 --- !u!4 &603615507
 Transform:
@@ -71416,8 +71436,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0.84}
-  m_SizeDelta: {x: 786.37, y: 278.66}
+  m_AnchoredPosition: {x: -4.67, y: 0.84}
+  m_SizeDelta: {x: 599.3, y: 278.66}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &654812228
 MonoBehaviour:
@@ -71482,19 +71502,12 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Welcome to Billionaire City!!
+  m_Text: 'Hello my name is Ronald Goldtooth. This is Chocolate Fields, the city
+    where you will start your own real estate business.
 
 
-    This is a game where you just wait
-    and wait and collect money and no one really cares how well you do cus no neighbours
-    and friends has been added yet.
-
-
-    Also, you can help to donate me money by
-    buying gold for your useless purchases.
-
-
-    Enjoy and have fun, loser!'
+    Your objective is to
+    turn this small city into a metropolis and become a billionaire.'
 --- !u!222 &654812231
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -73225,8 +73238,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 184.38}
-  m_SizeDelta: {x: 786.37, y: 47.58}
+  m_AnchoredPosition: {x: -4.67, y: 184.38}
+  m_SizeDelta: {x: 599.3, y: 47.58}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &782397704
 MonoBehaviour:
@@ -73291,7 +73304,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Welcome To Billionaire City
+  m_Text: Tutorial
 --- !u!222 &782397707
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -77793,22 +77806,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 514689979}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1435088136}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 514689983}
+        m_TargetAssemblyTypeName: tutorialParent, Assembly-CSharp
+        m_MethodName: nextPage
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
