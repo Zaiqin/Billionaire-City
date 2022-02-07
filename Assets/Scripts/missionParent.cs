@@ -30,9 +30,12 @@ public class missionParent : MonoBehaviour
     public Text rewardText;
     public bool extended = false;
     public int chosenIndex;
-    public GameObject missionController, stats, saveObj, claimButton, exclaimButton;
+    public GameObject missionController, stats, saveObj, claimButton, exclaimButton, storageController;
     public Image rewardImage;
     public Sprite money, gold;
+
+    public CSVReader CSVObject;
+    private Dictionary<string, PropertyCard> database;
 
     public List<Mission> missionList;
     public List<string> doneMissionList;
@@ -41,7 +44,7 @@ public class missionParent : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        database = CSVObject.CardDatabase;
     }
 
     public void initMissions()
@@ -121,7 +124,12 @@ public class missionParent : MonoBehaviour
         }
         descTitle.text = missionList[index].msnName;
         descText.text = missionList[index].msnDesc;
-        if (missionList[index].msnReward.Contains("Gold"))
+        if (missionList[index].msnReward.Contains("Prop"))
+        {
+            print("string is " + missionList[index].msnReward.Substring(4, missionList[index].msnReward.Length-4));
+            rewardText.text = database[missionList[index].msnReward.Substring(4, missionList[index].msnReward.Length - 4)].displayName + " x1";
+            rewardImage.sprite = database[missionList[index].msnReward.Substring(4, missionList[index].msnReward.Length-4)].propImage;
+        } else if (missionList[index].msnReward.Contains("Gold"))
         {
             rewardText.text = missionList[index].msnReward.Substring(0, missionList[index].msnReward.Length - 5);
             rewardImage.sprite = gold;
@@ -139,7 +147,12 @@ public class missionParent : MonoBehaviour
 
     public void claimReward()
     {
-        if (missionList[chosenIndex].msnReward.Contains("Gold"))
+        if (missionList[chosenIndex].msnReward.Contains("Prop"))
+        {
+            print("string is " + missionList[chosenIndex].msnReward.Substring(4, missionList[chosenIndex].msnReward.Length - 4));
+            storageController.GetComponent<RecyclableScrollerStorage>().addIntoStorage(missionList[chosenIndex].msnReward.Substring(4, missionList[chosenIndex].msnReward.Length - 4));
+        }
+        else if (missionList[chosenIndex].msnReward.Contains("Gold"))
         {
             stats.GetComponent<Statistics>().updateStats(diffgold: int.Parse(missionList[chosenIndex].msnReward.Substring(0, missionList[chosenIndex].msnReward.Length - 5)));
         }

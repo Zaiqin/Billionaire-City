@@ -5499,9 +5499,11 @@ MonoBehaviour:
   saveObj: {fileID: 25462474}
   claimButton: {fileID: 185937601}
   exclaimButton: {fileID: 833860550}
+  storageController: {fileID: 835569546}
   rewardImage: {fileID: 192705362}
   money: {fileID: 21300000, guid: cc10f08c0bc1bdb4e9fb4bd813b56e16, type: 3}
   gold: {fileID: 21300000, guid: 7eb9620ab3816354ea8f15c94cc2f4cc, type: 3}
+  CSVObject: {fileID: 1673960464}
   doneMissionList: []
   pendingMissionList: []
 --- !u!1 &275365437
@@ -67487,7 +67489,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 263.85, y: -103.8}
+  m_AnchoredPosition: {x: 263.85, y: -112.8}
   m_SizeDelta: {x: 142.36, y: 32.74}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &425568915

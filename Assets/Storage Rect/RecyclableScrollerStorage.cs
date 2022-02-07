@@ -47,10 +47,16 @@ public class RecyclableScrollerStorage : CSVReader, IRecyclableScrollRectDataSou
     }
 
     [ContextMenu("Add to Storage List")]
-    public void addIntoStorage()
+    public void addIntoStorage(string s = "na")
     {
         print("Added " + inputName + " into storage");
-        storageList.Add(inputName);
+        if (s == "na")
+        {
+            storageList.Add(inputName);
+        } else
+        {
+            storageList.Add(s);
+        }
         saveObj.GetComponent<saveloadsystem>().saveStorage();
     }
 
