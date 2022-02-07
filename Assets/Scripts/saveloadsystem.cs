@@ -68,6 +68,7 @@ public class saveloadsystem : MonoBehaviour
     public CSVReader csv;
     public Tilemap map;
     public GameObject PropertiesParent, Stats, expPopup, cityText, hq, dailyBonus, ppDragButton, Astar, missionParent, storageController;
+    public GameObject cover, tutorialPanel;
     public InputField nameField;
     public void Start()
     {
@@ -351,7 +352,9 @@ public class saveloadsystem : MonoBehaviour
         loadProperty("Townhouse Luxury", new Vector2Int(6, 0), "notsigned");
         loadProperty("Bungalow Luxury", new Vector2Int(-11, -3), "notsigned");
         loadProperty("Cypress Tree", new Vector2Int(2, -7));
-        
+
+        cover.SetActive(true);
+        tutorialPanel.SetActive(true);
         print("Successfully Loaded New Game");
     }
 
