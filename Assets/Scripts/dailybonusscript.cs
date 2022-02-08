@@ -73,6 +73,7 @@ public class dailybonusscript : MonoBehaviour
                 string amount = this.transform.parent.GetChild(1).transform.GetChild(1).GetComponent<Text>().text;
                 stats.GetComponent<Statistics>().updateStats(diffxp: long.Parse(amount));
             }
+            this.GetComponent<Button>().image.sprite = faded;
 
             stats.GetComponent<Statistics>().noDailyCollected += 1;
             stats.GetComponent<Statistics>().lastDailyCollected = System.DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
