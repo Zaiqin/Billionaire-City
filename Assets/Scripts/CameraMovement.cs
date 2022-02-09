@@ -131,6 +131,11 @@ public class CameraMovement : MonoBehaviour
                 {
                     Destroy(infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(4).gameObject);
                 }
+                if (infoPanel.GetComponent<infoScript>().highlightedProp.GetComponent<Property>().Card.type == "Deco")
+                {
+                    infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(0).gameObject.SetActive(false);
+                    infoPanel.GetComponent<infoScript>().selProp.transform.GetChild(0).GetComponent<influence>().removeHighlights();
+                }
             }
             if (infoPanel.GetComponent<infoScript>().selProp != null && infoPanel.GetComponent<infoScript>().selProp.transform.childCount > 1)
             {

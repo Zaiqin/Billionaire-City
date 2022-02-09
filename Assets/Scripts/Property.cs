@@ -166,112 +166,119 @@ public class Property : MonoBehaviour, IPointerClickHandler
         if (GameObject.Find("Main Camera").GetComponent<CameraMovement>().dragging == false)
         {
             print("From property.cs clicked on" + this.name);
-            GameObject propParent = GameObject.Find("Properties");
-            GameObject infoPanel = GameObject.Find("Canvas").transform.GetChild(0).gameObject;
+            clickedPropertyFunc();
+        }
+    }
 
-            if (GameObject.Find("deleteToggle").GetComponent<Toggle>().isOn == true)
+    public void clickedPropertyFunc()
+    {
+        GameObject propParent = GameObject.Find("Properties");
+        GameObject infoPanel = GameObject.Find("Canvas").transform.GetChild(0).gameObject;
+
+        if (GameObject.Find("deleteToggle").GetComponent<Toggle>().isOn == true)
+        {
+            print("show del popup");
+            GameObject delPopup = GameObject.Find("Canvas").transform.GetChild(1).gameObject;
+            delPopup.SetActive(true);
+            // Deducting money ---------------
+            long refund;
+            if (this.Card.cost.Contains("Gold"))
             {
-                print("show del popup");
-                GameObject delPopup = GameObject.Find("Canvas").transform.GetChild(1).gameObject;
-                delPopup.SetActive(true);
-                // Deducting money ---------------
-                long refund;
-                if (this.Card.cost.Contains("Gold"))
+                refund = (long)(21000 * double.Parse(this.Card.cost.Remove(this.Card.cost.Length - 5)));
+                if (refund >= 100000000)
                 {
-                    refund = (long)(21000 * double.Parse(this.Card.cost.Remove(this.Card.cost.Length - 5)));
-                    if (refund >= 100000000)
-                    {
-                        string temp = refund.ToString("#,##0");
-                        delPopup.transform.GetChild(1).GetComponent<Text>().text = "$" + temp.Substring(0, temp.Length - 8) + "M";
-                    }
-                    else
-                    {
-                        delPopup.transform.GetChild(1).GetComponent<Text>().text = "$" + refund.ToString("#,##0");
-                    }
-                    print("refund convert from gold is " + refund);
+                    string temp = refund.ToString("#,##0");
+                    delPopup.transform.GetChild(1).GetComponent<Text>().text = "$" + temp.Substring(0, temp.Length - 8) + "M";
                 }
                 else
                 {
-                    refund = (long)(0.35 * double.Parse(this.Card.cost));
-                    if (refund >= 100000000)
-                    {
-                        string temp = refund.ToString("#,##0");
-                        delPopup.transform.GetChild(1).GetComponent<Text>().text = "$" + temp.Substring(0, temp.Length - 8) + "M";
-                    }
-                    else
-                    {
-                        delPopup.transform.GetChild(1).GetComponent<Text>().text = "$" + refund.ToString("#,##0");
-                    }
-                    print("refund is " + refund);
+                    delPopup.transform.GetChild(1).GetComponent<Text>().text = "$" + refund.ToString("#,##0");
                 }
-                // -------------------------------
-                delPopup.transform.GetChild(2).GetComponent<delConfirm>().refundValue = refund;
-                delPopup.transform.GetChild(2).GetComponent<delConfirm>().selProp = this.gameObject;
-                this.gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+                print("refund convert from gold is " + refund);
+            }
+            else
+            {
+                refund = (long)(0.35 * double.Parse(this.Card.cost));
+                if (refund >= 100000000)
+                {
+                    string temp = refund.ToString("#,##0");
+                    delPopup.transform.GetChild(1).GetComponent<Text>().text = "$" + temp.Substring(0, temp.Length - 8) + "M";
+                }
+                else
+                {
+                    delPopup.transform.GetChild(1).GetComponent<Text>().text = "$" + refund.ToString("#,##0");
+                }
+                print("refund is " + refund);
+            }
+            // -------------------------------
+            delPopup.transform.GetChild(2).GetComponent<delConfirm>().refundValue = refund;
+            delPopup.transform.GetChild(2).GetComponent<delConfirm>().selProp = this.gameObject;
+            this.gameObject.GetComponent<SpriteRenderer>().color = Color.red;
 
-            }
-            else if (this.transform.parent == propParent.transform && GameObject.Find("Canvas").GetComponent<toggleMaster>().checkAllOff() == true)
+        }
+        else if (this.transform.parent == propParent.transform && GameObject.Find("Canvas").GetComponent<toggleMaster>().checkAllOff() == true)
+        {
+            if ((this.Card.type == "House" && this.gameObject.transform.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder != 2 && this.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder != 2 && this.gameObject.transform.GetChild(3).GetComponent<SpriteRenderer>().sortingOrder != 2)
+                || (this.Card.type == "Commerce" && this.gameObject.transform.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder != 2)
+                || (this.Card.type == "Deco")
+                || (this.Card.type == "Wonder")
+                || (this.GetComponent<Property>().constructEnd != null && this.GetComponent<Property>().constructEnd != "na"))
             {
-                if (   (this.Card.type == "House" && this.gameObject.transform.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder != 2 && this.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder != 2 && this.gameObject.transform.GetChild(3).GetComponent<SpriteRenderer>().sortingOrder != 2) 
-                    || (this.Card.type == "Commerce" && this.gameObject.transform.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder != 2) 
-                    || (this.Card.type == "Deco") 
-                    || (this.Card.type == "Wonder")  
-                    || (this.GetComponent<Property>().constructEnd != null && this.GetComponent<Property>().constructEnd != "na")   )
+                infoPanel.SetActive(true);
+                infoPanel.GetComponent<infoScript>().selProp = this.gameObject;
+                if (infoPanel.GetComponent<infoScript>().highlightedProp != null)
                 {
-                    infoPanel.SetActive(true);
-                    infoPanel.GetComponent<infoScript>().selProp = this.gameObject;
-                    if (infoPanel.GetComponent<infoScript>().highlightedProp != null)
+                    if (infoPanel.GetComponent<infoScript>().highlightedProp.transform.childCount > 4 && infoPanel.GetComponent<infoScript>().highlightedProp.name != this.gameObject.name)
                     {
-                        if (infoPanel.GetComponent<infoScript>().highlightedProp.transform.childCount > 4 && infoPanel.GetComponent<infoScript>().highlightedProp.name != this.gameObject.name)
-                        {
-                            print("Destroy this");
-                            Destroy(infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(4).gameObject);
-                        }
-                    }
-                    infoPanel.GetComponent<infoScript>().initInfo();
-                    
-                    print("show info Panel");
-                    infoPanel.GetComponent<infoScript>().rightSide = true;
-                    infoPanel.transform.position = new Vector3(0.2f + this.gameObject.transform.position.x + (infoPanel.GetComponent<BoxCollider2D>().bounds.size.x / 2) + float.Parse(this.GetComponent<Property>().Card.space.Substring(0, 1)), this.gameObject.transform.position.y + (infoPanel.GetComponent<BoxCollider2D>().bounds.size.y / 4) + 1f, 0f);
-                    if ( infoPanel.transform.position.x + (infoPanel.GetComponent<BoxCollider2D>().bounds.size.x / 2) + 0.6f > (Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0))).x ){
-                        print("show infoPanel on left side of house");
-                        infoPanel.GetComponent<infoScript>().rightSide = false;
-                        infoPanel.transform.position = new Vector3(-0.2f + this.gameObject.transform.position.x - (infoPanel.GetComponent<BoxCollider2D>().bounds.size.x / 2), this.gameObject.transform.position.y + (infoPanel.GetComponent<BoxCollider2D>().bounds.size.y / 4) + 1f, 0f);
+                        print("Destroy this");
+                        Destroy(infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(4).gameObject);
                     }
                 }
-                GameObject hqmenu = GameObject.Find("HQStats");
-                if (hqmenu != null)
+                infoPanel.GetComponent<infoScript>().initInfo();
+
+                print("show info Panel");
+                infoPanel.GetComponent<infoScript>().rightSide = true;
+                infoPanel.transform.position = new Vector3(0.2f + this.gameObject.transform.position.x + (infoPanel.GetComponent<BoxCollider2D>().bounds.size.x / 2) + float.Parse(this.GetComponent<Property>().Card.space.Substring(0, 1)), this.gameObject.transform.position.y + (infoPanel.GetComponent<BoxCollider2D>().bounds.size.y / 4) + 1f, 0f);
+                if (infoPanel.transform.position.x + (infoPanel.GetComponent<BoxCollider2D>().bounds.size.x / 2) + 0.6f > (Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0))).x)
                 {
-                    hqmenu.SetActive(false);
+                    print("show infoPanel on left side of house");
+                    infoPanel.GetComponent<infoScript>().rightSide = false;
+                    infoPanel.transform.position = new Vector3(-0.2f + this.gameObject.transform.position.x - (infoPanel.GetComponent<BoxCollider2D>().bounds.size.x / 2), this.gameObject.transform.position.y + (infoPanel.GetComponent<BoxCollider2D>().bounds.size.y / 4) + 1f, 0f);
                 }
             }
-            if (this.Card.type == "House")
+            GameObject hqmenu = GameObject.Find("HQStats");
+            if (hqmenu != null)
             {
-                if (this.transform.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder == 0 && this.gameObject.transform.GetChild(3).GetComponent<SpriteRenderer>().sortingOrder != 2 && this.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder == 0 && this.transform.childCount <= 4 && this.transform.parent.name == "Properties" && GameObject.Find("Canvas").GetComponent<toggleMaster>().checkAllOff() == true) {
-                    GameObject decoObj = Instantiate(Resources.Load<GameObject>("decoObj"), new Vector3(this.transform.position.x + (float.Parse(this.Card.space.Substring(0, 1))) / 2, this.transform.position.y, -5f), Quaternion.identity) as GameObject;
-                    decoObj.transform.parent = this.gameObject.transform;
-                    decoObj.transform.GetChild(1).GetComponent<TextMesh>().text = "+" + bonus.ToString() + "%";
-                }
-                if (this.transform.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder == 2)
-                {
-                    this.transform.GetChild(1).GetComponent<moneyPickupScript>().collectMoney();
-                }
+                hqmenu.SetActive(false);
             }
-            if (this.Card.type == "Commerce" && this.transform.parent.name == "Properties" && GameObject.Find("Canvas").GetComponent<toggleMaster>().checkAllOff() == true && this.gameObject.transform.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder != 2)
+        }
+        if (this.Card.type == "House")
+        {
+            if (this.transform.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder == 0 && this.gameObject.transform.GetChild(3).GetComponent<SpriteRenderer>().sortingOrder != 2 && this.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder == 0 && this.transform.childCount <= 4 && this.transform.parent.name == "Properties" && GameObject.Find("Canvas").GetComponent<toggleMaster>().checkAllOff() == true)
             {
-                GameObject influence = this.transform.GetChild(0).gameObject;
-                influence.SetActive(true);
-                influence.GetComponent<influence>().detectInfluence();
-                GameObject.Find("Main Camera").GetComponent<SpriteDetector>().selectedCommerce = this.gameObject;
+                GameObject decoObj = Instantiate(Resources.Load<GameObject>("decoObj"), new Vector3(this.transform.position.x + (float.Parse(this.Card.space.Substring(0, 1))) / 2, this.transform.position.y, -5f), Quaternion.identity) as GameObject;
+                decoObj.transform.parent = this.gameObject.transform;
+                decoObj.transform.GetChild(1).GetComponent<TextMesh>().text = "+" + bonus.ToString() + "%";
             }
-            if (this.Card.type == "Deco" && this.transform.parent.name == "Properties" && GameObject.Find("Canvas").GetComponent<toggleMaster>().checkAllOff() == true)
+            if (this.transform.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder == 2)
             {
-                print("clicked ind deco");
-                GameObject influence = this.transform.GetChild(0).gameObject;
-                influence.SetActive(true);
-                influence.GetComponent<influence>().detectInfluence();
-                GameObject.Find("Main Camera").GetComponent<SpriteDetector>().selectedCommerce = this.gameObject;
+                this.transform.GetChild(1).GetComponent<moneyPickupScript>().collectMoney();
             }
+        }
+        if (this.Card.type == "Commerce" && this.transform.parent.name == "Properties" && GameObject.Find("Canvas").GetComponent<toggleMaster>().checkAllOff() == true && this.gameObject.transform.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder != 2)
+        {
+            print("2");
+            GameObject influence = this.transform.GetChild(0).gameObject;
+            influence.SetActive(true);
+            influence.GetComponent<influence>().detectInfluence();
+            GameObject.Find("Main Camera").GetComponent<SpriteDetector>().selectedCommerce = this.gameObject;
+        }
+        if (this.Card.type == "Deco" && this.transform.parent.name == "Properties" && GameObject.Find("Canvas").GetComponent<toggleMaster>().checkAllOff() == true)
+        {
+            print("clicked in deco");
+            GameObject influence = this.transform.GetChild(0).gameObject;
+            influence.SetActive(true);
+            influence.GetComponent<influence>().detectInfluence();
         }
     }
 
