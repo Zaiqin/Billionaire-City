@@ -115,14 +115,17 @@ public class CameraMovement : MonoBehaviour
         }
         // calc dist between drag origin and new pos if it is still held down
         Vector3 difference = dragOrigin - cam.ScreenToWorldPoint(Input.mousePosition);
+        print("difference is " + difference.magnitude);
 
-        if (Input.GetMouseButton(0) && startOnGrid == true && ShopMenu.activeSelf == false && difference != Vector3.zero) {
+        // If too choppy then change difference.magnitude > 0.06 to != Vector3.zero ---- Was done to stop accidental dragging from annoyingly closing infoPanel
+        if (Input.GetMouseButton(0) && startOnGrid == true && ShopMenu.activeSelf == false && difference.magnitude > 0.06) {
             //print("origin " + dragOrigin + "newPosition " + cam.ScreenToWorldPoint(Input.mousePosition) + " =difference " + difference);
             // move the camera by that dist
 
             cam.transform.position = ClampCamera(cam.transform.position + difference);
             //cam.transform.position += difference;
             hqMenu.SetActive(false);
+
             infoPanel.SetActive(false);
             if (infoPanel.GetComponent<infoScript>().highlightedProp != null)
             {
