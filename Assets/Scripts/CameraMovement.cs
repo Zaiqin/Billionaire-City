@@ -118,7 +118,7 @@ public class CameraMovement : MonoBehaviour
         print("difference is " + difference.magnitude);
 
         // If too choppy then change difference.magnitude > 0.06 to != Vector3.zero ---- Was done to stop accidental dragging from annoyingly closing infoPanel
-        if (Input.GetMouseButton(0) && startOnGrid == true && ShopMenu.activeSelf == false && difference.magnitude > 0.06) {
+        if (Input.GetMouseButton(0) && startOnGrid == true && ShopMenu.activeSelf == false && difference.magnitude > 0.03) {
             //print("origin " + dragOrigin + "newPosition " + cam.ScreenToWorldPoint(Input.mousePosition) + " =difference " + difference);
             // move the camera by that dist
 
