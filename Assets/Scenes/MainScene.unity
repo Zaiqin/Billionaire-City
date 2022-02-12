@@ -69328,6 +69328,7 @@ MonoBehaviour:
   infoPanel: {fileID: 374950764}
   hqMenu: {fileID: 1053581159}
   selectedCommerce: {fileID: 0}
+  dailyPanel: {fileID: 662742294}
   deleteToggle: {fileID: 1580363176}
 --- !u!1 &520826243
 GameObject:
@@ -81976,7 +81977,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0.281
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0

@@ -10,9 +10,11 @@ public class SpriteDetector : MonoBehaviour
     [SerializeField]
     private GameObject infoPanel, hqMenu;
 
-    public GameObject selectedCommerce;
+    public GameObject selectedCommerce, dailyPanel;
 
     public Toggle deleteToggle;
+
+    bool dailyPressed;
 
     void Start()
     {
@@ -157,7 +159,7 @@ public class SpriteDetector : MonoBehaviour
                 }
                 hit.collider.gameObject.GetComponent<Property>().clickedPropertyFunc();
             }
-            if (hit.collider.gameObject.name == "Money")
+            if (hit.collider.gameObject.name == "Money" || hit.collider.gameObject.name == "Influence")
             {
                 print("hit money of influence");
                 infoPanel.SetActive(false);
@@ -300,6 +302,12 @@ public class SpriteDetector : MonoBehaviour
                 {
                     Destroy(infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(4).gameObject);
                 }
+                if (infoPanel.GetComponent<infoScript>().highlightedProp.GetComponent<Property>().Card.type == "Deco")
+                {
+                    infoPanel.GetComponent<infoScript>().highlightedProp.GetComponent<SpriteRenderer>().material.color = Color.white;
+                    infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(0).gameObject.SetActive(false);
+                    infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(0).GetComponent<influence>().removeHighlights();
+                }
             }
             infoPanel.SetActive(false);
             hqMenu.SetActive(false);
@@ -348,11 +356,24 @@ public class SpriteDetector : MonoBehaviour
 
     void Update()
     {
-        //print("updateing");
         if (Input.GetMouseButtonDown(0))
         {
-            //print("mouse down");
-            CastRay();
+            if (dailyPanel.activeSelf == true)
+            {
+                dailyPressed = true;
+            } else
+            {
+                dailyPressed = false;
+            }
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            if (this.GetComponent<CameraMovement>().dragging == false && dailyPressed == false)
+            {
+                //print("mouse down");
+                CastRay();
+            }
         }
     }
 

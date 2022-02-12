@@ -115,7 +115,7 @@ public class CameraMovement : MonoBehaviour
         }
         // calc dist between drag origin and new pos if it is still held down
         Vector3 difference = dragOrigin - cam.ScreenToWorldPoint(Input.mousePosition);
-        print("difference is " + difference.magnitude);
+        //print("difference is " + difference.magnitude);
 
         // If too choppy then change difference.magnitude > 0.06 to != Vector3.zero ---- Was done to stop accidental dragging from annoyingly closing infoPanel
         if (Input.GetMouseButton(0) && startOnGrid == true && ShopMenu.activeSelf == false && difference.magnitude > 0.03) {
