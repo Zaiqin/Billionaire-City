@@ -147,6 +147,8 @@ MonoBehaviour:
   type2: {fileID: 21300000, guid: 982eab31a4a23214f9b956c998ec1830, type: 3}
   type3: {fileID: 21300000, guid: b813881b3340d5740b402cd21105ccc9, type: 3}
   type4: {fileID: 21300000, guid: fa5510df20335d74ea0c293576d0a8cc, type: 3}
+  type5: {fileID: 21300000, guid: 19ddd2e4de156894d8af92860a47b677, type: 3}
+  type6: {fileID: 21300000, guid: 758263001a950074fb6a361c565c15d8, type: 3}
   typeError: {fileID: 21300000, guid: e94823947be83e147a4f638ad682e6d9, type: 3}
 --- !u!1 &545181832290568109
 GameObject:

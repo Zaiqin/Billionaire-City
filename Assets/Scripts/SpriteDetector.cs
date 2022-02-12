@@ -10,7 +10,7 @@ public class SpriteDetector : MonoBehaviour
     [SerializeField]
     private GameObject infoPanel, hqMenu;
 
-    public GameObject selectedCommerce, dailyPanel;
+    public GameObject selectedCommerce, dailyPanel, cover;
 
     public Toggle deleteToggle;
 
@@ -159,7 +159,7 @@ public class SpriteDetector : MonoBehaviour
                 }
                 hit.collider.gameObject.GetComponent<Property>().clickedPropertyFunc();
             }
-            if (hit.collider.gameObject.name == "Money" || hit.collider.gameObject.name == "Influence")
+            if ((hit.collider.gameObject.name == "Money" && hit.collider.gameObject.GetComponent<SpriteRenderer>().sortingOrder != 2) || hit.collider.gameObject.name == "Influence")
             {
                 print("hit money of influence");
                 infoPanel.SetActive(false);
@@ -367,8 +367,9 @@ public class SpriteDetector : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0) && cover.activeSelf == false)
         {
+            print("dragging is " + this.GetComponent<CameraMovement>().dragging + " and daily pressed is " + dailyPressed);
             if (this.GetComponent<CameraMovement>().dragging == false && dailyPressed == false)
             {
                 //print("mouse down");

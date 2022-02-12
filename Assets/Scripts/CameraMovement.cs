@@ -15,7 +15,7 @@ public class CameraMovement : MonoBehaviour
 	private float zoomStep, minCamSize, maxCamSize;
 
     [SerializeField]
-    private GameObject ShopMenu, hqMenu, infoPanel;
+    private GameObject ShopMenu, hqMenu, infoPanel, cover;
 
 	private Vector3 dragOrigin;
     private bool startOnGrid;
@@ -117,8 +117,7 @@ public class CameraMovement : MonoBehaviour
         Vector3 difference = dragOrigin - cam.ScreenToWorldPoint(Input.mousePosition);
         //print("difference is " + difference.magnitude);
 
-        // If too choppy then change difference.magnitude > 0.06 to != Vector3.zero ---- Was done to stop accidental dragging from annoyingly closing infoPanel
-        if (Input.GetMouseButton(0) && startOnGrid == true && ShopMenu.activeSelf == false && difference.magnitude > 0.03) {
+        if (Input.GetMouseButton(0) && startOnGrid == true && ShopMenu.activeSelf == false && difference != Vector3.zero && cover.activeSelf == false) {
             //print("origin " + dragOrigin + "newPosition " + cam.ScreenToWorldPoint(Input.mousePosition) + " =difference " + difference);
             // move the camera by that dist
 

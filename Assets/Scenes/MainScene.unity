@@ -3209,7 +3209,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 100
+  m_Text: 200
 --- !u!222 &171632648
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3784,7 +3784,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: $5000
+  m_Text: 35000
 --- !u!222 &192690296
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -67250,7 +67250,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: $10000
+  m_Text: 100000
 --- !u!222 &410024330
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -69157,6 +69157,7 @@ MonoBehaviour:
   ShopMenu: {fileID: 252825800}
   hqMenu: {fileID: 1053581159}
   infoPanel: {fileID: 374950764}
+  cover: {fileID: 1435088136}
   dragging: 0
   map: {fileID: 280726322}
   zoomSlider: {fileID: 557953005}
@@ -69329,6 +69330,7 @@ MonoBehaviour:
   hqMenu: {fileID: 1053581159}
   selectedCommerce: {fileID: 0}
   dailyPanel: {fileID: 662742294}
+  cover: {fileID: 1435088136}
   deleteToggle: {fileID: 1580363176}
 --- !u!1 &520826243
 GameObject:
@@ -75344,11 +75346,11 @@ MonoBehaviour:
   saveloadobj: {fileID: 25462474}
   shopButton: {fileID: 52499396}
   HQ: {fileID: 502592024}
+  missionsPanel: {fileID: 273355504}
   csvObj: {fileID: 1673960463}
   levelUpScreen: {fileID: 208941323}
   externalAudioPlayer: {fileID: 1820829991}
   inputText: {fileID: 351022004}
-  missionsPanel: {fileID: 273355504}
   particle: {fileID: 1477764395}
   levelUp: {fileID: 8300000, guid: 024b969c6e50193489cba7594e11e681, type: 3}
 --- !u!4 &973017966

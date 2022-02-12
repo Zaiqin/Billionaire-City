@@ -337,7 +337,15 @@ public class ppDragButton : MonoBehaviour
                         {
                             missionsPanel.GetComponent<missionParent>().completeMission(item);
                         }
+                        else if (item.msnName == "Coffeelicious" && pCard.propName == "coffeeshop")
+                        {
+                            missionsPanel.GetComponent<missionParent>().completeMission(item);
+                        }
                         else if (item.msnName == "Build I" && pCard.type == "House")
+                        {
+                            missionsPanel.GetComponent<missionParent>().completeMission(item);
+                        }
+                        else if (item.msnName == "Build II" && pCard.propName == "townhouse")
                         {
                             missionsPanel.GetComponent<missionParent>().completeMission(item);
                         }
@@ -361,6 +369,43 @@ public class ppDragButton : MonoBehaviour
                             if (bungalowCount >= 5)
                             {
                                 missionsPanel.GetComponent<missionParent>().completeMission(item);
+                            }
+                        }
+                        else if (item.msnName == "Fountain Dream")
+                        {
+                            int fCount = 0;
+                            foreach (Transform child in propParent.transform)
+                            {
+                                if (child.name != "HQ")
+                                {
+                                    if (child.GetComponent<Property>().Card.displayName == "Fountain")
+                                    {
+                                        fCount++;
+                                    }
+                                }
+                            }
+                            if (fCount >= 4)
+                            {
+                                missionsPanel.GetComponent<missionParent>().completeMission(item);
+                            }
+
+                            else if (item.msnName == "Chateau Dream")
+                            {
+                                int cCount = 2;
+                                foreach (Transform child in propParent.transform)
+                                {
+                                    if (child.name != "HQ")
+                                    {
+                                        if (child.GetComponent<Property>().Card.displayName == "Chateau")
+                                        {
+                                            fCount++;
+                                        }
+                                    }
+                                }
+                                if (cCount >= 2)
+                                {
+                                    missionsPanel.GetComponent<missionParent>().completeMission(item);
+                                }
                             }
                         }
                     }

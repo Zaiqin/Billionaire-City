@@ -37,10 +37,10 @@ public class Statistics : MonoBehaviour
     public long inputLevel;
     public long inputXP;
 
-    public GameObject saveloadobj, shopButton, HQ;
+    public GameObject saveloadobj, shopButton, HQ, missionsPanel;
 
     private Dictionary<int, long> levelValues;
-    [SerializeField] private GameObject csvObj, levelUpScreen, externalAudioPlayer, inputText, missionsPanel;
+    [SerializeField] private GameObject csvObj, levelUpScreen, externalAudioPlayer, inputText;
     [SerializeField] private ParticleSystem particle;
     [SerializeField] private AudioClip levelUp;
 
@@ -148,15 +148,7 @@ public class Statistics : MonoBehaviour
                     {
                         missionsPanel.GetComponent<missionParent>().completeMission(item);
                     }
-                    else if (item.msnName == "Cash Is King II" && money >= 5000000)
-                    {
-                        missionsPanel.GetComponent<missionParent>().completeMission(item);
-                    }
-                    else if (item.msnName == "Cash Is King III" && money >= 10000000)
-                    {
-                        missionsPanel.GetComponent<missionParent>().completeMission(item);
-                    }
-                    else if (item.msnName == "Cash Is King IV" && money >= 100000000)
+                    else if (item.msnName == "Cash Is King II" && money >= 10000000)
                     {
                         missionsPanel.GetComponent<missionParent>().completeMission(item);
                     }
@@ -176,6 +168,38 @@ public class Statistics : MonoBehaviour
                             missionsPanel.GetComponent<missionParent>().completeMission(item);
                         }
                     }
+                    else if (item.msnName == "Youre a Millionaire III")
+                    {
+                        HQ.GetComponent<HQstats>().calcHQ();
+                        if (HQ.GetComponent<HQstats>().totalLong >= 10000000)
+                        {
+                            missionsPanel.GetComponent<missionParent>().completeMission(item);
+                        }
+                    }
+                    else if (item.msnName == "Youre a Millionaire IV")
+                    {
+                        HQ.GetComponent<HQstats>().calcHQ();
+                        if (HQ.GetComponent<HQstats>().totalLong >= 375000000)
+                        {
+                            missionsPanel.GetComponent<missionParent>().completeMission(item);
+                        }
+                    }
+                    else if (item.msnName == "Youre a Millionaire V")
+                    {
+                        HQ.GetComponent<HQstats>().calcHQ();
+                        if (HQ.GetComponent<HQstats>().totalLong >= 1000000000)
+                        {
+                            missionsPanel.GetComponent<missionParent>().completeMission(item);
+                        }
+                    }
+                    else if (item.msnName == "Youre a Millionaire VI")
+                    {
+                        HQ.GetComponent<HQstats>().calcHQ();
+                        if (HQ.GetComponent<HQstats>().totalLong >= 2000000000)
+                        {
+                            missionsPanel.GetComponent<missionParent>().completeMission(item);
+                        }
+                    }
                     else if (item.msnName == "Beat Ronald Goldtooth")
                     {
                         HQ.GetComponent<HQstats>().calcHQ();
@@ -184,7 +208,7 @@ public class Statistics : MonoBehaviour
                             missionsPanel.GetComponent<missionParent>().completeMission(item);
                         }
                     }
-                    else if (item.msnName == "Beat Sheik")
+                    else if (item.msnName == "The Sheik Challenge")
                     {
                         HQ.GetComponent<HQstats>().calcHQ();
                         if (HQ.GetComponent<HQstats>().totalLong >= 900000000)
