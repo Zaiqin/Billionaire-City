@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class toggleMaster : MonoBehaviour
 {
-    public Toggle shopToggle, plotToggle, roadToggle, deleteToggle;
+    public Toggle shopToggle, plotToggle, roadToggle, deleteToggle, storageToggle;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +20,7 @@ public class toggleMaster : MonoBehaviour
 
     public bool checkAllOff()
     {
-        if (shopToggle.isOn == false && plotToggle.isOn == false && roadToggle.isOn == false && deleteToggle.isOn == false)
+        if (shopToggle.isOn == false && plotToggle.isOn == false && roadToggle.isOn == false && deleteToggle.isOn == false && storageToggle.isOn == false)
         {
             return true;
         }

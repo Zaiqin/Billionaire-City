@@ -194,8 +194,6 @@ public class ppDragButton : MonoBehaviour
             // -------------------------------
 
             shopToggle.GetComponent<Toggle>().isOn = false;
-            storageToggle.GetComponent<Toggle>().isOn = false;
-            storageController.GetComponent<RecyclableScrollerStorage>().deleteFromStorage(pCard.displayName);
 
             externalAudioPlayer.GetComponent<AudioSource>().PlayOneShot(buildSound);
 
@@ -216,7 +214,7 @@ public class ppDragButton : MonoBehaviour
 
                 pp.transform.GetChild(0).gameObject.SetActive(false);
             }
-            if (pp.Card.type == "Deco")
+            if (pp.Card.type == "Deco" && storageToggle.GetComponent<Toggle>().isOn == false)
             {
                 pp.transform.GetChild(0).gameObject.AddComponent<BoxCollider2D>();
                 pp.transform.GetChild(0).gameObject.GetComponent<BoxCollider2D>().size = new Vector2(float.Parse(pp.Card.influence.Substring(0, 2)) - 0.2f, float.Parse(pp.Card.influence.Substring(pp.Card.influence.Length - 2)) - 0.2f);
@@ -321,6 +319,21 @@ public class ppDragButton : MonoBehaviour
                 // End of astar detection -------
             }
             // ------------------------------------------------------------------
+
+            if (storageToggle.GetComponent<Toggle>().isOn == true)
+            {
+                storageToggle.GetComponent<Toggle>().isOn = false;
+                storageController.GetComponent<RecyclableScrollerStorage>().deleteFromStorage(pCard.displayName);
+                pp.transform.GetChild(0).gameObject.AddComponent<BoxCollider2D>();
+                pp.transform.GetChild(0).gameObject.GetComponent<BoxCollider2D>().size = new Vector2(float.Parse(pp.Card.influence.Substring(0, 2)) - 0.2f, float.Parse(pp.Card.influence.Substring(pp.Card.influence.Length - 2)) - 0.2f);
+                pp.transform.GetChild(0).gameObject.SetActive(false);
+                pp.constructEnd = "na"; pp.constructStart = "na";
+                if (pp.Card.type == "Deco")
+                {
+                    map.SwapTile(greenGrass, tileGrass);
+                    ppDrag.SetActive(false);
+                }
+            }
 
             // --------------------- Save Game ----------------------------------
             saveloadsystem.GetComponent<saveloadsystem>().saveGame();

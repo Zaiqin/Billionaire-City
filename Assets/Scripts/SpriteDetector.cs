@@ -12,7 +12,7 @@ public class SpriteDetector : MonoBehaviour
 
     public GameObject selectedCommerce, dailyPanel, cover;
 
-    public Toggle deleteToggle;
+    public Toggle deleteToggle, storageToggle;
 
     bool dailyPressed;
 
@@ -366,7 +366,7 @@ public class SpriteDetector : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButtonUp(0) && cover.activeSelf == false)
+        if (Input.GetMouseButtonUp(0) && cover.activeSelf == false && storageToggle.isOn == false)
         {
             print("dragging is " + this.GetComponent<CameraMovement>().dragging + " and daily pressed is " + dailyPressed);
             if (this.GetComponent<CameraMovement>().dragging == false && dailyPressed == false)
