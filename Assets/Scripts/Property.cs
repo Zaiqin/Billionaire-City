@@ -369,6 +369,7 @@ public class Property : MonoBehaviour, IPointerClickHandler
     public void updateConnected()
     {
         this.justConnected = false;
+
         Property pp = this.gameObject.GetComponent<Property>();
         if (pp.Card.type == "House") // check to only do these thats only for houses
         {

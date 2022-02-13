@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 329432853094784087}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.001, y: -0.05, z: 0}
+  m_LocalPosition: {x: 0.001, y: -0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8562480631637144314}
@@ -81,16 +81,16 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 329432853094784087}
-  m_Text: 'Contract
+  m_Text: 'Property
 
-    Signed'
+    Connected!'
   m_OffsetZ: 0
   m_CharacterSize: 0.1
   m_LineSpacing: 1
   m_Anchor: 4
   m_Alignment: 1
   m_TabSize: 4
-  m_FontSize: 80
+  m_FontSize: 74
   m_FontStyle: 0
   m_RichText: 1
   m_Font: {fileID: 12800000, guid: ac69ead4238ee4edca81114c3ac1de6a, type: 3}
@@ -123,7 +123,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 599708949168105753}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.05, y: 0, z: 0}
+  m_LocalPosition: {x: -0.05, y: 0.049999997, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8562480631637144314}
@@ -178,16 +178,16 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 599708949168105753}
-  m_Text: 'Contract
+  m_Text: 'Property
 
-    Signed'
+    Connected!'
   m_OffsetZ: 0
   m_CharacterSize: 0.1
   m_LineSpacing: 1
   m_Anchor: 4
   m_Alignment: 1
   m_TabSize: 4
-  m_FontSize: 80
+  m_FontSize: 74
   m_FontStyle: 0
   m_RichText: 1
   m_Font: {fileID: 12800000, guid: ac69ead4238ee4edca81114c3ac1de6a, type: 3}
@@ -220,7 +220,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1113933772544510860}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.05, z: 0}
+  m_LocalPosition: {x: 0, y: 0.099999994, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8562480631637144314}
@@ -275,16 +275,16 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1113933772544510860}
-  m_Text: 'Contract
+  m_Text: 'Property
 
-    Signed'
+    Connected!'
   m_OffsetZ: 0
   m_CharacterSize: 0.1
   m_LineSpacing: 1
   m_Anchor: 4
   m_Alignment: 1
   m_TabSize: 4
-  m_FontSize: 80
+  m_FontSize: 74
   m_FontStyle: 0
   m_RichText: 1
   m_Font: {fileID: 12800000, guid: ac69ead4238ee4edca81114c3ac1de6a, type: 3}
@@ -317,7 +317,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2970566470963008373}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.05, y: 0, z: 0}
+  m_LocalPosition: {x: 0.05, y: 0.049999997, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8562480631637144314}
@@ -372,16 +372,16 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2970566470963008373}
-  m_Text: 'Contract
+  m_Text: 'Property
 
-    Signed'
+    Connected!'
   m_OffsetZ: 0
   m_CharacterSize: 0.1
   m_LineSpacing: 1
   m_Anchor: 4
   m_Alignment: 1
   m_TabSize: 4
-  m_FontSize: 80
+  m_FontSize: 74
   m_FontStyle: 0
   m_RichText: 1
   m_Font: {fileID: 12800000, guid: ac69ead4238ee4edca81114c3ac1de6a, type: 3}
@@ -516,7 +516,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7090959758369979502}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.049999997, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8562480631637144314}
@@ -571,16 +571,16 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7090959758369979502}
-  m_Text: 'Contract
+  m_Text: 'Property
 
-    Signed'
+    Connected!'
   m_OffsetZ: 0
   m_CharacterSize: 0.1
   m_LineSpacing: 1
   m_Anchor: 4
   m_Alignment: 1
   m_TabSize: 4
-  m_FontSize: 80
+  m_FontSize: 74
   m_FontStyle: 0
   m_RichText: 1
   m_Font: {fileID: 12800000, guid: ac69ead4238ee4edca81114c3ac1de6a, type: 3}
@@ -599,7 +599,7 @@ GameObject:
   - component: {fileID: -4113028384260618853}
   - component: {fileID: 5657330364382929652}
   m_Layer: 0
-  m_Name: contractValue
+  m_Name: propertyConnected
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

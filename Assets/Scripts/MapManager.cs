@@ -313,9 +313,27 @@ public class MapManager : MonoBehaviour
                                 pp.justConnected = true;
                                 switch (pp.Card.type)
                                 {
-                                    case "House": pp.transform.GetChild(3).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0; break;
-                                    case "Commerce": pp.transform.GetChild(2).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0; break;
-                                    case "Wonder": pp.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0; break;
+                                    case "House":
+                                        if (pp.transform.GetChild(3).gameObject.GetComponent<SpriteRenderer>().sortingOrder == 2)
+                                        {
+                                            GameObject contractPopup = Instantiate(Resources.Load<GameObject>("propertyConnected"), new Vector3(pp.transform.position.x + (float.Parse(pp.GetComponent<Property>().Card.space.Substring(0, 1))) / 2, pp.transform.position.y + ((float.Parse(pp.GetComponent<Property>().Card.space.Substring(pp.GetComponent<Property>().Card.space.Length - 1))) / 2), -5f), Quaternion.identity) as GameObject;
+                                            pp.transform.GetChild(3).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
+                                        }
+                                        break;
+                                    case "Commerce":
+                                        if (pp.transform.GetChild(2).gameObject.GetComponent<SpriteRenderer>().sortingOrder == 2)
+                                        {
+                                            GameObject contractPopup = Instantiate(Resources.Load<GameObject>("propertyConnected"), new Vector3(pp.transform.position.x + (float.Parse(pp.GetComponent<Property>().Card.space.Substring(0, 1))) / 2, pp.transform.position.y + ((float.Parse(pp.GetComponent<Property>().Card.space.Substring(pp.GetComponent<Property>().Card.space.Length - 1))) / 2), -5f), Quaternion.identity) as GameObject;
+                                            pp.transform.GetChild(2).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
+                                        }
+                                        break;
+                                    case "Wonder":
+                                        if (pp.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder == 2)
+                                        {
+                                            GameObject contractPopup = Instantiate(Resources.Load<GameObject>("propertyConnected"), new Vector3(pp.transform.position.x + (float.Parse(pp.GetComponent<Property>().Card.space.Substring(0, 1))) / 2, pp.transform.position.y + ((float.Parse(pp.GetComponent<Property>().Card.space.Substring(pp.GetComponent<Property>().Card.space.Length - 1))) / 2), -5f), Quaternion.identity) as GameObject;
+                                            pp.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
+                                        }
+                                        break;
                                     default: break;
                                 }
                             }
