@@ -9,6 +9,7 @@ public class delConfirm : MonoBehaviour
     public void deleteProp()
     {
         print("called destroy");
+        this.transform.parent.gameObject.SetActive(false);
         print("xy is " + selProp.GetComponent<Draggable>().XY[0] + "card is " + selProp.GetComponent<Property>().Card);
         if (selProp.GetComponent<Property>().Card.type == "Wonder")
         {

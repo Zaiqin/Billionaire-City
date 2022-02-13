@@ -21,7 +21,6 @@ public class instantRentPanel : MonoBehaviour
         {
             stats.GetComponent<Statistics>().updateStats(diffgold: -1);
             prop.GetComponent<SpriteRenderer>().material.color = Color.white;
-            Destroy(prop.transform.GetChild(4).gameObject);
             prop.transform.GetChild(0).GetComponent<contractScript>().signTime = System.DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
             this.gameObject.SetActive(false);
             infoPanel.SetActive(false);
@@ -47,7 +46,6 @@ public class instantRentPanel : MonoBehaviour
     {
         GameObject prop = infoPanel.GetComponent<infoScript>().selProp;
         prop.GetComponent<SpriteRenderer>().material.color = Color.white;
-        Destroy(prop.transform.GetChild(4).gameObject);
         prop.transform.GetChild(0).GetComponent<contractScript>().signTime = "notsigned";
         prop.transform.GetChild(0).GetComponent<contractScript>().signCreationTime = "notsigned";
         prop.transform.GetChild(0).GetComponent<contractScript>().signIndex = -1;

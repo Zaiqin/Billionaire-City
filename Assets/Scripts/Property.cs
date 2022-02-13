@@ -94,7 +94,7 @@ public class Property : MonoBehaviour, IPointerClickHandler
             infRenderer.drawMode = SpriteDrawMode.Sliced;
             infRenderer.sprite = infSprite;
             infRenderer.size = new Vector2(float.Parse(pcard.influence.Substring(0, 2)) - 0.2f, float.Parse(pcard.influence.Substring(pcard.influence.Length - 2)) - 0.2f);
-            infRenderer.color = new Color(35f / 255f, 206f / 255f, 241f / 255f, 125f/ 255f);
+            infRenderer.color = new Color(35f / 255f, 206f / 255f, 241f / 255f, 125f / 255f);
             infRenderer.sortingOrder = 2;
             inf.transform.parent = this.transform;
             inf.transform.localPosition = new Vector3(float.Parse(pcard.space.Substring(0, 1)) / 2, (float.Parse(pcard.space.Substring(pcard.space.Length - 1)) / 2) -0.05f, 0f);

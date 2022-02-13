@@ -40,7 +40,7 @@ public class SpriteDetector : MonoBehaviour
         if (hit.collider != null)
         {
             print("Spritedetector hit object: " + hit.collider.gameObject.name);
-            if (hit.collider.gameObject.name != "infoPanel" && hit.collider.gameObject.name != "Money" && hit.collider.GetComponent<Property>() == null)
+            if (hit.collider.gameObject.name != "infoPanel" && hit.collider.gameObject.name != "Money" && hit.collider.GetComponent<Property>() == null && hit.collider.gameObject.name != "Contract")
             {
                 print("did not hit any property");
                 if (selectedCommerce != null)
@@ -159,9 +159,8 @@ public class SpriteDetector : MonoBehaviour
                 }
                 hit.collider.gameObject.GetComponent<Property>().clickedPropertyFunc();
             }
-            if ((hit.collider.gameObject.name == "Money" && hit.collider.gameObject.GetComponent<SpriteRenderer>().sortingOrder != 2) || hit.collider.gameObject.name == "Influence")
+            if ((hit.collider.gameObject.name == "Money" && hit.collider.gameObject.GetComponent<SpriteRenderer>().sortingOrder != 2) || hit.collider.gameObject.name == "Influence" || hit.collider.gameObject.name == "Contract")
             {
-                print("hit money of influence");
                 infoPanel.SetActive(false);
                 hit.collider.transform.parent.GetComponent<Property>().clickedPropertyFunc();
                 if (hit.collider.transform.parent.GetComponent<Property>().Card.type == "House")
@@ -209,7 +208,7 @@ public class SpriteDetector : MonoBehaviour
                     {
                         selectedCommerce.GetComponent<SpriteRenderer>().material.color = Color.white;
                         selectedCommerce.transform.GetChild(0).gameObject.SetActive(false);
-                        selectedCommerce.transform.GetChild(0).GetComponent<influence>().removeHighlights();
+                        //selectedCommerce.transform.GetChild(0).GetComponent<influence>().removeHighlights();
                     }
                     if (infoPanel.GetComponent<infoScript>().highlightedProp != null)
                     {
