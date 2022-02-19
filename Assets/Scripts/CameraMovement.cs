@@ -15,7 +15,7 @@ public class CameraMovement : MonoBehaviour
 	private float zoomStep, minCamSize, maxCamSize;
 
     [SerializeField]
-    private GameObject ShopMenu, hqMenu, infoPanel, cover;
+    private GameObject ShopMenu, hqMenu, infoPanel, cover, loadingGroup;
 
 	private Vector3 dragOrigin;
     private bool startOnGrid;
@@ -39,6 +39,8 @@ public class CameraMovement : MonoBehaviour
 
         mapMinY = map.transform.position.y - map.localBounds.size.y / 2f;
         mapMaxY = map.transform.position.y + map.localBounds.size.y / 2f;
+
+        loadingGroup.SetActive(true);
     }
 
     // Start is called before the first frame update
