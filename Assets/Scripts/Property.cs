@@ -163,7 +163,7 @@ public class Property : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (GameObject.Find("Main Camera").GetComponent<CameraMovement>().dragging == false)
+        if (GameObject.Find("Main Camera").GetComponent<CameraMovement>().dragging == false && GameObject.Find("Main Camera").GetComponent<SpriteDetector>().buttonDownLayer == 0)
         {
             print("From property.cs clicked on" + this.name);
             clickedPropertyFunc();
