@@ -23,7 +23,7 @@ public class loadingScreen : MonoBehaviour
         extAudio.GetComponent<AudioSource>().PlayOneShot(introAudio);
 
         bgPan.GetComponent<CanvasGroup>().LeanAlpha(1f, 3f);
-        bgPan.transform.LeanMoveLocalY(titleImage.transform.position.y - 450, 25f);
+        bgPan.transform.LeanMoveLocalY(titleImage.transform.position.y - 400, 25f);
         titleImage.GetComponent<CanvasGroup>().LeanAlpha(1f, 1f);
         titleImage.transform.LeanScale(new Vector2(1.8f, 1.8f), 8f);
         yield return new WaitForSeconds(10f);
