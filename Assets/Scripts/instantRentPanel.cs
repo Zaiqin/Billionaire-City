@@ -25,7 +25,7 @@ public class instantRentPanel : MonoBehaviour
             stats.GetComponent<Statistics>().updateStats(diffgold: -1);
             prop.GetComponent<SpriteRenderer>().material.color = Color.white;
             prop.transform.GetChild(0).GetComponent<contractScript>().signTime = System.DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
-            this.gameObject.SetActive(false);
+            closePanel();
             infoPanel.SetActive(false);
             saveObj.GetComponent<saveloadsystem>().saveGame();
             // ---------- Type 4 Missions -------------------
@@ -53,8 +53,20 @@ public class instantRentPanel : MonoBehaviour
         prop.transform.GetChild(0).GetComponent<contractScript>().signCreationTime = "notsigned";
         prop.transform.GetChild(0).GetComponent<contractScript>().signIndex = -1;
         prop.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2;
-        this.gameObject.SetActive(false);
+        closePanel();
         infoPanel.SetActive(false);
         saveObj.GetComponent<saveloadsystem>().saveGame();
+    }
+
+    public void closePanel()
+    {
+        this.transform.LeanScale(Vector2.zero, 0.2f).setEaseInBack();
+        Invoke("setInactive", 0.2f);
+    }
+
+    void setInactive()
+    {
+        this.gameObject.SetActive(false);
+        this.gameObject.transform.localScale = Vector2.one;
     }
 }

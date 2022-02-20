@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -134,7 +135,18 @@ public class SpriteDetector : MonoBehaviour
         if (hitProp == true && buttonDownLayer == 0)
         {
             print("hit a property in spritedetector");
-            hit.collider.gameObject.GetComponent<Property>().clickedPropertyFunc();
+
+            if (hit.collider.GetComponent<Property>().Card.type == "Commerce")
+            {
+                var diff = DateTime.Parse(hit.collider.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signTime) - System.DateTime.Now;
+
+                if (diff.TotalSeconds < 179)
+                {
+                    hit.collider.gameObject.GetComponent<Property>().clickedPropertyFunc();
+                }
+            } else {
+                hit.collider.gameObject.GetComponent<Property>().clickedPropertyFunc();
+            }
 
             if ((hit.collider.gameObject.name == "Money" || hit.collider.gameObject.name == "Contract") && deleteToggle.isOn == true)
             {

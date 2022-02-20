@@ -28,7 +28,7 @@ public class signController : MonoBehaviour
         {
             print("signing property " + selProperty.name + "with sign index: " + i);
             selProperty.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
-            contractsParent.SetActive(false);
+            closePanel();
             string datetime = theTime.ToString("yyyy/MM/dd HH:mm:ss");
             selProperty.transform.GetChild(0).gameObject.GetComponent<contractScript>().signTime = datetime;
             selProperty.transform.GetChild(0).gameObject.GetComponent<contractScript>().signCreationTime = System.DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
@@ -47,5 +47,17 @@ public class signController : MonoBehaviour
         {
             print("no money to sign contract");
         }
+    }
+
+    public void closePanel()
+    {
+        contractsParent.transform.LeanScale(Vector2.zero, 0.2f).setEaseInBack();
+        Invoke("setInactive", 0.2f);
+    }
+
+    void setInactive()
+    {
+        contractsParent.gameObject.SetActive(false);
+        contractsParent.gameObject.transform.localScale = Vector2.one;
     }
 }
