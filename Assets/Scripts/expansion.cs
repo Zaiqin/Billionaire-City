@@ -29,6 +29,19 @@ public class expansion : MonoBehaviour
         }
     }
 
+    public void closePanel()
+    {
+        print("clsoe luck");
+        expPopup.transform.LeanScale(Vector2.zero, 0.2f).setEaseInBack();
+        Invoke("setInactive", 0.2f);
+    }
+
+    void setInactive()
+    {
+        expPopup.gameObject.SetActive(false);
+        expPopup.gameObject.transform.localScale = Vector2.one;
+    }
+
     public void updateSprite()
     {
         if (deletedExp.Count >= 20)
@@ -191,7 +204,9 @@ public class expansion : MonoBehaviour
         else if (result == true && stats.GetComponent<Statistics>().returnStats()[0] < cost)
         {
             nocash.gameObject.SetActive(true);
-            expPopup.SetActive(false);
+            nocash.transform.localScale = Vector2.zero;
+            nocash.transform.LeanScale(Vector2.one, 0.2f).setEaseOutBack();
+            closePanel();
         }
     }
 

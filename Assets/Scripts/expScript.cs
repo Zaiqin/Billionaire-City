@@ -62,6 +62,8 @@ public class expScript : MonoBehaviour, IPointerClickHandler
             if (selectedLocked == false)
             {
                 expPopup.SetActive(true);
+                expPopup.transform.localScale = Vector2.zero;
+                expPopup.transform.LeanScale(Vector2.one, 0.2f).setEaseOutBack();
 
                 int cost = 0;
                 switch (expPopup.GetComponent<expansion>().deletedExp.Count)
@@ -97,6 +99,8 @@ public class expScript : MonoBehaviour, IPointerClickHandler
             } else
             {
                 expPopup.GetComponent<expansion>().failPopup.SetActive(true);
+                expPopup.GetComponent<expansion>().failPopup.transform.localScale = Vector2.zero;
+                expPopup.GetComponent<expansion>().failPopup.transform.LeanScale(Vector2.one, 0.2f).setEaseOutBack();
             }
         }
     }

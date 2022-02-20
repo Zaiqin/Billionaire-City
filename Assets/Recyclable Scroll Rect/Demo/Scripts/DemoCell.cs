@@ -156,6 +156,19 @@ public class DemoCell : MonoBehaviour, ICell
         }
     }
 
+    public void closePanel()
+    {
+        GameObject ShopMenu = GameObject.FindGameObjectWithTag("ShopMenu");
+        ShopMenu.transform.LeanScale(Vector2.zero, 0.2f).setEaseInBack();
+        Invoke("setInactive", 0.2f);
+    }
+
+    void setInactive()
+    {
+        GameObject ShopMenu = GameObject.FindGameObjectWithTag("ShopMenu");
+        ShopMenu.SetActive(false);
+    }
+
     void buyListener()
     {
         print("Buying " + _propertyCard.propName + " which costs " + _propertyCard.cost);
@@ -177,7 +190,7 @@ public class DemoCell : MonoBehaviour, ICell
             else
             {
                 print("enough gold");
-                shopMenu.SetActive(false);
+                closePanel();
                 shopMenu.GetComponent<PurchaseController>().purchaseProperty(_propertyCard);
                 // --------------------- Swapping to green border grass -------------
                 map = GameObject.Find("Tilemap").GetComponent<Tilemap>();
@@ -197,7 +210,7 @@ public class DemoCell : MonoBehaviour, ICell
             else
             {
                 print("enough money");
-                shopMenu.SetActive(false);
+                closePanel();
                 shopMenu.GetComponent<PurchaseController>().purchaseProperty(_propertyCard);
                 // --------------------- Swapping to green border grass -------------
                 map = GameObject.Find("Tilemap").GetComponent<Tilemap>();
@@ -213,11 +226,25 @@ public class DemoCell : MonoBehaviour, ICell
         if (infoParent.activeSelf == false)
         {
             infoParent.SetActive(true);
+            infoParent.transform.localScale = Vector2.zero;
+            infoParent.transform.LeanScale(Vector2.one, 0.2f).setEaseOutBack();
         }
         else if (infoParent.activeSelf == true)
-        {   
-            infoParent.SetActive(false);
+        {
+            closeinfoPanel();
         }
         print("Space: "+ _propertyCard.space+"\nNo of tenants: "+ _propertyCard.tenants + " Earnings in 3mins: $" + _propertyCard.threemins);
+    }
+
+    public void closeinfoPanel()
+    {
+        infoParent.transform.LeanScale(Vector2.zero, 0.2f).setEaseInBack();
+        Invoke("setinfoInactive", 0.2f);
+    }
+
+    void setinfoInactive()
+    {
+        infoParent.gameObject.SetActive(false);
+        infoParent.gameObject.transform.localScale = Vector2.one;
     }
 }

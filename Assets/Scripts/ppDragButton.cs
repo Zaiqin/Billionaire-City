@@ -436,9 +436,13 @@ public class ppDragButton : MonoBehaviour
         if (shopToggle.GetComponent<Toggle>().isOn == true)
         {
             shopMenu.SetActive(true);
+            shopMenu.transform.localScale = Vector2.zero;
+            shopMenu.transform.LeanScale(new Vector2(73.9463f, 73.9463f), 0.2f).setEaseOutBack();
         } else
         {
             storagePanel.SetActive(true);
+            storagePanel.transform.localScale = Vector2.zero;
+            storagePanel.transform.LeanScale(Vector2.one, 0.2f).setEaseOutBack();
         }
         // --------------------- Swapping to green border grass -------------
         map.SwapTile(greenGrass, tileGrass);

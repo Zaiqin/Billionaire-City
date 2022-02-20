@@ -5,13 +5,16 @@ using UnityEngine.UI;
 
 public class instantRentPanel : MonoBehaviour
 {
-    public GameObject infoPanel;
+    public GameObject infoPanel, instantPanel;
     public Text beforeText, timeText;
     public GameObject stats, saveObj, missionsPanel;
 
     public void initPanel()
     {
         beforeText.text = timeText.text;
+        instantPanel.SetActive(true);
+        instantPanel.transform.localScale = Vector2.zero;
+        instantPanel.transform.LeanScale(Vector2.one, 0.2f).setEaseOutBack();
     }
 
     public void confirmInstant()

@@ -8,7 +8,7 @@ public class loadingScreen : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Invoke("closeIntro", 5.0f);
+        Invoke("closeIntro", 1.0f);
     }
 
     // Update is called once per frame

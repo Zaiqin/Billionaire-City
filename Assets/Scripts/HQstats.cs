@@ -72,15 +72,29 @@ public class HQstats : MonoBehaviour
             {
                 calcHQ();
                 hqMenu.SetActive(true);
+                hqMenu.transform.localScale = Vector2.zero;
+                hqMenu.transform.LeanScale(Vector2.one, 0.2f).setEaseOutBack();
                 externalAudioPlayer.GetComponent<AudioSource>().PlayOneShot(touchSound);
                 infoPanel.SetActive(false);
                 shopMenu.SetActive(false);
             }
             else
             {
-                hqMenu.SetActive(false);
+                closePanel();
             }
         }
+    }
+
+    public void closePanel()
+    {
+        hqMenu.transform.LeanScale(Vector2.zero, 0.2f).setEaseInBack();
+        Invoke("setInactive", 0.2f);
+    }
+
+    void setInactive()
+    {
+        hqMenu.gameObject.SetActive(false);
+        hqMenu.gameObject.transform.localScale = Vector2.one;
     }
 }
 

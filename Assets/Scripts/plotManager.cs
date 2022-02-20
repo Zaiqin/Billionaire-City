@@ -346,6 +346,8 @@ public class plotManager : MonoBehaviour
                 shopToggle.GetComponent<UIToggle>().toggleToggles(shopToggle);
                 shopToggle.GetComponent<shopButton>().shopToggle.isOn = true;
                 shopToggle.GetComponent<shopButton>().ShopMenu.SetActive(true);
+                shopToggle.GetComponent<shopButton>().ShopMenu.transform.localScale = Vector2.zero;
+                shopToggle.GetComponent<shopButton>().ShopMenu.transform.LeanScale(new Vector2(73.9463f, 73.9463f), 0.2f).setEaseOutBack();
                 if (shopToggle.GetComponent<shopButton>().requireReload == true)
                 {
                     shopToggle.GetComponent<shopButton>().rect.ReloadData();

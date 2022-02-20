@@ -38,7 +38,7 @@ public class StorageCell : MonoBehaviour, ICell
         GameObject.Find("ExternalAudioPlayer").GetComponent<AudioSource>().PlayOneShot(touchSound);
         GameObject shopMenu = GameObject.Find("Storage Scroll Controller").GetComponent<RecyclableScrollerStorage>().shopMenu;
         GameObject storageMenu = GameObject.Find("storageParent");
-        storageMenu.SetActive(false);
+        closePanel();
         shopMenu.GetComponent<PurchaseController>().purchaseProperty(_propertyCard);
         // --------------------- Swapping to green border grass -------------
         map = GameObject.Find("Tilemap").GetComponent<Tilemap>();
@@ -53,6 +53,21 @@ public class StorageCell : MonoBehaviour, ICell
         _propertyCard = card;
         itemImage.sprite = card.propImage;
         itemText.text = card.displayName;
+    }
+
+    public void closePanel()
+    {
+        GameObject StorageMenu = GameObject.Find("storageParent");
+        print("close");
+        StorageMenu.transform.LeanScale(Vector2.zero, 0.2f).setEaseInBack();
+        Invoke("setInactive", 0.2f);
+    }
+
+    void setInactive()
+    {
+        GameObject StorageMenu = GameObject.Find("storageParent");
+        StorageMenu.SetActive(false);
+        StorageMenu.transform.localScale = Vector2.one;
     }
 
 }

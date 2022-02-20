@@ -19,6 +19,8 @@ public class storageToggle : MonoBehaviour
         {
             storageTog.isOn = true;
             StorageMenu.SetActive(true);
+            StorageMenu.transform.localScale = Vector2.zero;
+            StorageMenu.transform.LeanScale(Vector2.one, 0.2f).setEaseOutBack();
             if (storageController.GetComponent<RecyclableScrollerStorage>().storageList.Count == 0)
             {
                 count.text = "No items";
@@ -37,9 +39,23 @@ public class storageToggle : MonoBehaviour
         {
             print("offing");
             storageTog.isOn = false;
-            StorageMenu.SetActive(false);
+            StorageMenu.transform.LeanScale(Vector2.zero, 0.2f).setEaseInBack();
+            Invoke("setInactive", 0.2f);
         }
 
+    }
+
+    public void closePanel()
+    {
+        print("clsoe luck");
+        StorageMenu.transform.LeanScale(Vector2.zero, 0.2f).setEaseInBack();
+        Invoke("setInactive", 0.2f);
+    }
+
+    void setInactive()
+    {
+        StorageMenu.SetActive(false);
+        StorageMenu.transform.localScale = Vector2.one;
     }
 
     // Start is called before the first frame update

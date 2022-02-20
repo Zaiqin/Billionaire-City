@@ -50,157 +50,33 @@ public class SpriteDetector : MonoBehaviour
         //print("called cast ray");
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity);
-        if (hit.collider != null)
+
+        RaycastHit2D[] hits;
+        hits = Physics2D.RaycastAll(ray.origin, ray.direction, Mathf.Infinity);
+
+        bool hitProp = false;
+        for (int i = 0; i < hits.Length; i++)
         {
-            print("Spritedetector hit object: " + hit.collider.gameObject.name);
-            if (hit.collider.gameObject.name != "infoPanel" && hit.collider.gameObject.name != "Money" && hit.collider.GetComponent<Property>() == null && hit.collider.gameObject.name != "Contract")
+            RaycastHit2D hita = hits[i];
+            print("raycast all hit object: " + hita.collider.gameObject.name);
+            if (hita.collider != null)
             {
-                print("did not hit any property");
-                if (selectedCommerce != null)
+                if (hita.collider.GetComponent<Property>() != null)
                 {
-                    selectedCommerce.GetComponent<SpriteRenderer>().material.color = Color.white;
-                    selectedCommerce.transform.GetChild(0).gameObject.SetActive(false);
-                    selectedCommerce.transform.GetChild(0).GetComponent<influence>().removeHighlights();
-                }
-                if (infoPanel.GetComponent<infoScript>().highlightedProp != null)
-                {
-                    infoPanel.GetComponent<infoScript>().highlightedProp.GetComponent<SpriteRenderer>().material.color = Color.white;
-                    if (infoPanel.GetComponent<infoScript>().highlightedProp.transform.childCount > 4)
-                    {
-                        print("Destroy this too");
-                        Destroy(infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(4).gameObject);
-                    }
-                    if (infoPanel.GetComponent<infoScript>().highlightedProp.GetComponent<Property>().Card.type == "Deco")
-                    {
-                        infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(0).gameObject.SetActive(false);
-                    }
-                }
-                infoPanel.SetActive(false);
-            }
-            if (hit.collider.GetComponent<Property>() != null && buttonDownLayer == 0)
-            {
-                infoPanel.SetActive(false);
-                
-                if (hit.collider.GetComponent<Property>().Card.type == "House")
-                {
-                    print("detected clicked a house");
-                    if (selectedCommerce != null)
-                    {
-                        selectedCommerce.GetComponent<SpriteRenderer>().material.color = Color.white;
-                        selectedCommerce.transform.GetChild(0).gameObject.SetActive(false);
-                        selectedCommerce.transform.GetChild(0).GetComponent<influence>().removeHighlights();
-                    }
+                    hitProp = true;
+                    hit = hita;
                     if (infoPanel.GetComponent<infoScript>().highlightedProp != null)
                     {
-                        if (infoPanel.GetComponent<infoScript>().highlightedProp.GetComponent<Property>().Card.type == "Deco")
+                        if ((hit.collider.GetComponent<Property>().Card.type == "Commerce" && hit.collider.gameObject.name != selectedCommerce.name) || infoPanel.GetComponent<infoScript>().highlightedProp.name != hit.collider.gameObject.name)
                         {
-                            infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(0).gameObject.SetActive(false);
-                        }
-                    }
-                }
-                else if (hit.collider.GetComponent<Property>().Card.type == "Commerce")
-                {
-                    print("detected clicked a commerce");
-                    if (infoPanel.GetComponent<infoScript>().highlightedProp != null)
-                    {
-                        if (infoPanel.GetComponent<infoScript>().highlightedProp.GetComponent<Property>().Card.type == "House")
-                        {
-                            infoPanel.GetComponent<infoScript>().highlightedProp.GetComponent<SpriteRenderer>().material.color = Color.white;
-                            if (infoPanel.GetComponent<infoScript>().highlightedProp.transform.childCount > 4)
+                            print("selected a diff property");
+                            if (selectedCommerce != null)
                             {
-                                print("Destroy this too");
-                                Destroy(infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(4).gameObject);
+                                selectedCommerce.GetComponent<SpriteRenderer>().material.color = Color.white;
+                                selectedCommerce.transform.GetChild(0).gameObject.SetActive(false);
+                                selectedCommerce.transform.GetChild(0).GetComponent<influence>().removeHighlights();
                             }
-                        }
-                        else
-                        if (infoPanel.GetComponent<infoScript>().highlightedProp.GetComponent<Property>().Card.type == "Deco")
-                        {
-                            infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(0).gameObject.SetActive(false);
-                        }
-                    }
-                } else if (hit.collider.GetComponent<Property>().Card.type == "Deco")
-                {
-                    print("detected clicked a deco");
-                    if (selectedCommerce != null)
-                    {
-                        selectedCommerce.GetComponent<SpriteRenderer>().material.color = Color.white;
-                        selectedCommerce.transform.GetChild(0).gameObject.SetActive(false);
-                        selectedCommerce.transform.GetChild(0).GetComponent<influence>().removeHighlights();
-                    }
-                    if (infoPanel.GetComponent<infoScript>().highlightedProp != null)
-                    {
-                        if (infoPanel.GetComponent<infoScript>().highlightedProp.GetComponent<Property>().Card.type == "House")
-                        {
-                            infoPanel.GetComponent<infoScript>().highlightedProp.GetComponent<SpriteRenderer>().material.color = Color.white;
-                            if (infoPanel.GetComponent<infoScript>().highlightedProp.transform.childCount > 4)
-                            {
-                                print("Destroy this too");
-                                Destroy(infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(4).gameObject);
-                            }
-                        }
-                        if (infoPanel.GetComponent<infoScript>().highlightedProp.GetComponent<Property>().Card.type == "Deco")
-                        {
-                            infoPanel.GetComponent<infoScript>().highlightedProp.GetComponent<SpriteRenderer>().material.color = Color.white;
-                            infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(0).gameObject.SetActive(false);
-                        }
-                    }
-                } else
-                {
-                    if (selectedCommerce != null)
-                    {
-                        selectedCommerce.GetComponent<SpriteRenderer>().material.color = Color.white;
-                        selectedCommerce.transform.GetChild(0).gameObject.SetActive(false);
-                        selectedCommerce.transform.GetChild(0).GetComponent<influence>().removeHighlights();
-                    }
-                    if (infoPanel.GetComponent<infoScript>().highlightedProp != null)
-                    {
-                        if (infoPanel.GetComponent<infoScript>().highlightedProp.GetComponent<Property>().Card.type == "House")
-                        {
-                            infoPanel.GetComponent<infoScript>().highlightedProp.GetComponent<SpriteRenderer>().material.color = Color.white;
-                            if (infoPanel.GetComponent<infoScript>().highlightedProp.transform.childCount > 4)
-                            {
-                                print("Destroy this too");
-                                Destroy(infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(4).gameObject);
-                            }
-                        }
-                        if (infoPanel.GetComponent<infoScript>().highlightedProp.GetComponent<Property>().Card.type == "Deco")
-                        {
-                            infoPanel.GetComponent<infoScript>().highlightedProp.GetComponent<SpriteRenderer>().material.color = Color.white;
-                            infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(0).gameObject.SetActive(false);
-                        }
-                    }
-                }
-                hit.collider.gameObject.GetComponent<Property>().clickedPropertyFunc();
-            }
-            if ((hit.collider.gameObject.name == "Money" && hit.collider.gameObject.GetComponent<SpriteRenderer>().sortingOrder != 2) || hit.collider.gameObject.name == "Influence" || hit.collider.gameObject.name == "Contract")
-            {
-                if (buttonDownLayer == 0)
-                {
-                    infoPanel.SetActive(false);
-                    hit.collider.transform.parent.GetComponent<Property>().clickedPropertyFunc();
-                    if (hit.collider.transform.parent.GetComponent<Property>().Card.type == "House")
-                    {
-                        print("detected clicked a housem");
-                        if (selectedCommerce != null)
-                        {
-                            selectedCommerce.GetComponent<SpriteRenderer>().material.color = Color.white;
-                            selectedCommerce.transform.GetChild(0).gameObject.SetActive(false);
-                            selectedCommerce.transform.GetChild(0).GetComponent<influence>().removeHighlights();
-                        }
-                        if (infoPanel.GetComponent<infoScript>().highlightedProp != null)
-                        {
-                            if (infoPanel.GetComponent<infoScript>().highlightedProp.GetComponent<Property>().Card.type == "Deco")
-                            {
-                                infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(0).gameObject.SetActive(false);
-                            }
-                        }
-                    }
-                    else if (hit.collider.transform.parent.GetComponent<Property>().Card.type == "Commerce")
-                    {
-                        print("detected clicked a commercem");
-                        if (infoPanel.GetComponent<infoScript>().highlightedProp != null)
-                        {
-                            if (infoPanel.GetComponent<infoScript>().highlightedProp.GetComponent<Property>().Card.type == "House")
+                            if (infoPanel.GetComponent<infoScript>().highlightedProp != null)
                             {
                                 infoPanel.GetComponent<infoScript>().highlightedProp.GetComponent<SpriteRenderer>().material.color = Color.white;
                                 if (infoPanel.GetComponent<infoScript>().highlightedProp.transform.childCount > 4)
@@ -208,64 +84,57 @@ public class SpriteDetector : MonoBehaviour
                                     print("Destroy this too");
                                     Destroy(infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(4).gameObject);
                                 }
-                            }
-                            else
-                        if (infoPanel.GetComponent<infoScript>().highlightedProp.GetComponent<Property>().Card.type == "Deco")
-                            {
-                                infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(0).gameObject.SetActive(false);
-                            }
-                        }
-                    }
-                    else if (hit.collider.transform.parent.GetComponent<Property>().Card.type == "Deco")
-                    {
-                        print("detected clicked a decom");
-                        if (selectedCommerce != null)
-                        {
-                            selectedCommerce.GetComponent<SpriteRenderer>().material.color = Color.white;
-                            selectedCommerce.transform.GetChild(0).gameObject.SetActive(false);
-                            //selectedCommerce.transform.GetChild(0).GetComponent<influence>().removeHighlights();
-                        }
-                        if (infoPanel.GetComponent<infoScript>().highlightedProp != null)
-                        {
-                            if (infoPanel.GetComponent<infoScript>().highlightedProp.GetComponent<Property>().Card.type == "House")
-                            {
-                                infoPanel.GetComponent<infoScript>().highlightedProp.GetComponent<SpriteRenderer>().material.color = Color.white;
-                                if (infoPanel.GetComponent<infoScript>().highlightedProp.transform.childCount > 4)
+                                if (infoPanel.GetComponent<infoScript>().highlightedProp.GetComponent<Property>().Card.type == "Deco")
                                 {
-                                    print("Destroy this too");
-                                    Destroy(infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(4).gameObject);
+                                    infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(0).gameObject.SetActive(false);
+                                }
+                                if (infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(0).name == "Influence")
+                                {
+                                    infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(0).gameObject.SetActive(false);
+                                    infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(0).GetComponent<influence>().removeHighlights();
                                 }
                             }
                         }
                     }
-                    else
-                    {
-                        if (selectedCommerce != null)
-                        {
-                            selectedCommerce.GetComponent<SpriteRenderer>().material.color = Color.white;
-                            selectedCommerce.transform.GetChild(0).gameObject.SetActive(false);
-                            selectedCommerce.transform.GetChild(0).GetComponent<influence>().removeHighlights();
-                        }
-                        if (infoPanel.GetComponent<infoScript>().highlightedProp != null)
-                        {
-                            if (infoPanel.GetComponent<infoScript>().highlightedProp.GetComponent<Property>().Card.type == "House")
-                            {
-                                infoPanel.GetComponent<infoScript>().highlightedProp.GetComponent<SpriteRenderer>().material.color = Color.white;
-                                if (infoPanel.GetComponent<infoScript>().highlightedProp.transform.childCount > 4)
-                                {
-                                    print("Destroy this too");
-                                    Destroy(infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(4).gameObject);
-                                }
-                            }
-                            if (infoPanel.GetComponent<infoScript>().highlightedProp.GetComponent<Property>().Card.type == "Deco")
-                            {
-                                infoPanel.GetComponent<infoScript>().highlightedProp.GetComponent<SpriteRenderer>().material.color = Color.white;
-                                infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(0).gameObject.SetActive(false);
-                            }
-                        }
-                    }
+                    break;
                 }
             }
+        }
+
+        if (hitProp == false)
+        {
+            print("did not hit any property");
+            if (selectedCommerce != null)
+            {
+                selectedCommerce.GetComponent<SpriteRenderer>().material.color = Color.white;
+                selectedCommerce.transform.GetChild(0).gameObject.SetActive(false);
+                selectedCommerce.transform.GetChild(0).GetComponent<influence>().removeHighlights();
+            }
+            if (infoPanel.GetComponent<infoScript>().highlightedProp != null)
+            {
+                infoPanel.GetComponent<infoScript>().highlightedProp.GetComponent<SpriteRenderer>().material.color = Color.white;
+                if (infoPanel.GetComponent<infoScript>().highlightedProp.transform.childCount > 4)
+                {
+                    print("Destroy this too");
+                    Destroy(infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(4).gameObject);
+                }
+                if (infoPanel.GetComponent<infoScript>().highlightedProp.GetComponent<Property>().Card.type == "Deco")
+                {
+                    infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(0).gameObject.SetActive(false);
+                }
+                if (infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(0).name == "Influence")
+                {
+                    infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(0).gameObject.SetActive(false);
+                    infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(0).GetComponent<influence>().removeHighlights();
+                }
+            }
+            infoPanel.SetActive(false);
+        }
+
+        if (hitProp == true && buttonDownLayer == 0)
+        {
+            print("hit a property in spritedetector");
+            hit.collider.gameObject.GetComponent<Property>().clickedPropertyFunc();
 
             if ((hit.collider.gameObject.name == "Money" || hit.collider.gameObject.name == "Contract") && deleteToggle.isOn == true)
             {
@@ -274,6 +143,8 @@ public class SpriteDetector : MonoBehaviour
                     print("showing del popup pressed on contract");
                     GameObject delPopup = GameObject.Find("Canvas").transform.GetChild(1).gameObject;
                     delPopup.SetActive(true);
+                    delPopup.transform.localScale = Vector2.zero;
+                    delPopup.transform.LeanScale(Vector2.one, 0.2f).setEaseOutBack();
                     PropertyCard Card = hit.collider.gameObject.transform.parent.GetComponent<Property>().Card;
                     // Deducting money ---------------
                     long refund;
@@ -311,32 +182,9 @@ public class SpriteDetector : MonoBehaviour
                     hit.collider.gameObject.transform.parent.GetComponent<SpriteRenderer>().color = Color.red;
                 }
             }
-        } else
-        {
-            // Hit nothing, hiding highlightedProp and selectedCommerce
-            if (infoPanel.GetComponent<infoScript>().highlightedProp != null)
-            {
-                infoPanel.GetComponent<infoScript>().highlightedProp.GetComponent<SpriteRenderer>().material.color = Color.white;
-                if (infoPanel.GetComponent<infoScript>().highlightedProp.transform.childCount == 5)
-                {
-                    Destroy(infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(4).gameObject);
-                }
-                if (infoPanel.GetComponent<infoScript>().highlightedProp.GetComponent<Property>().Card.type == "Deco")
-                {
-                    infoPanel.GetComponent<infoScript>().highlightedProp.GetComponent<SpriteRenderer>().material.color = Color.white;
-                    infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(0).gameObject.SetActive(false);
-                    infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(0).GetComponent<influence>().removeHighlights();
-                }
-            }
-            infoPanel.SetActive(false);
-            hqMenu.SetActive(false);
-            if (selectedCommerce != null)
-            {
-                selectedCommerce.transform.GetChild(0).gameObject.SetActive(false);
-                selectedCommerce.transform.GetChild(0).GetComponent<influence>().removeHighlights();
-            }
         }
     }
+            
 
     public bool isMouseOverUI() //return true if mouse is over ui
     {

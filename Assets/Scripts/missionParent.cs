@@ -94,6 +94,18 @@ public class missionParent : MonoBehaviour
         exclaimButton.SetActive(true);
     }
 
+    public void closePanel()
+    {
+        this.transform.LeanScale(Vector2.zero, 0.2f).setEaseInBack();
+        Invoke("setInactive", 0.2f);
+    }
+
+    void setInactive()
+    {
+        this.gameObject.SetActive(false);
+        this.gameObject.transform.localScale = Vector2.one;
+    }
+
     public void resetDesc()
     {
         print("resetting desc");
@@ -111,14 +123,14 @@ public class missionParent : MonoBehaviour
         {
             if (extended == false)
             {
-                descPanel.transform.localPosition = new Vector3(descPanel.transform.localPosition.x + 290, descPanel.transform.localPosition.y, descPanel.transform.localPosition.z);
-                missionPanel.transform.localPosition = new Vector3(missionPanel.transform.localPosition.x - 132, missionPanel.transform.localPosition.y, missionPanel.transform.localPosition.z);
+                descPanel.transform.LeanMoveLocalX(descPanel.transform.localPosition.x + 290, 0.2f).setEaseOutBack();
+                missionPanel.transform.LeanMoveLocalX(missionPanel.transform.localPosition.x - 132, 0.2f).setEaseOutBack();
                 extended = true;
             }
             else
             {
-                descPanel.transform.localPosition = new Vector3(descPanel.transform.localPosition.x - 290, descPanel.transform.localPosition.y, descPanel.transform.localPosition.z);
-                missionPanel.transform.localPosition = new Vector3(missionPanel.transform.localPosition.x + 132, missionPanel.transform.localPosition.y, missionPanel.transform.localPosition.z);
+                descPanel.transform.LeanMoveLocalX(descPanel.transform.localPosition.x - 290, 0.2f).setEaseInBack();
+                missionPanel.transform.LeanMoveLocalX(missionPanel.transform.localPosition.x + 132, 0.2f).setEaseInBack();
                 extended = false;
             }
         }
@@ -165,8 +177,8 @@ public class missionParent : MonoBehaviour
         missionList.Remove(missionList[chosenIndex]);
         saveObj.GetComponent<saveloadsystem>().saveMissions();
         missionController.GetComponent<RecyclableScrollerMission>().missionRect.ReloadData();
-        descPanel.transform.localPosition = new Vector3(descPanel.transform.localPosition.x - 290, descPanel.transform.localPosition.y, descPanel.transform.localPosition.z);
-        missionPanel.transform.localPosition = new Vector3(missionPanel.transform.localPosition.x + 132, missionPanel.transform.localPosition.y, missionPanel.transform.localPosition.z);
+        descPanel.transform.LeanMoveLocalX(descPanel.transform.localPosition.x - 290, 0.2f).setEaseInBack();
+        missionPanel.transform.LeanMoveLocalX(missionPanel.transform.localPosition.x + 132, 0.2f).setEaseInBack();
         extended = false;
         if (pendingMissionList.Count != 0)
         {

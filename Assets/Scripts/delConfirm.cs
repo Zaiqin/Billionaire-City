@@ -9,7 +9,6 @@ public class delConfirm : MonoBehaviour
     public void deleteProp()
     {
         print("called destroy");
-        this.transform.parent.gameObject.SetActive(false);
         print("xy is " + selProp.GetComponent<Draggable>().XY[0] + "card is " + selProp.GetComponent<Property>().Card);
         if (selProp.GetComponent<Property>().Card.type == "Wonder")
         {
@@ -33,6 +32,7 @@ public class delConfirm : MonoBehaviour
         Destroy(selProp);
         statsObj.GetComponent<Statistics>().updateStats(diffmoney: refundValue);
         saveloadobj.GetComponent<saveloadsystem>().saveGame();
+        closePanel();
     }
 
     public void cancelDel()
@@ -40,6 +40,20 @@ public class delConfirm : MonoBehaviour
         if (selProp.name != "Main Camera")
         {
             selProp.GetComponent<SpriteRenderer>().color = Color.white;
+            closePanel();
         }
+    }
+
+    public void closePanel()
+    {
+        print("close");
+        this.transform.parent.gameObject.transform.LeanScale(Vector2.zero, 0.2f).setEaseInBack();
+        Invoke("setInactive", 0.2f);
+    }
+
+    void setInactive()
+    {
+        this.transform.parent.gameObject.SetActive(false);
+        this.transform.parent.gameObject.transform.localScale = Vector2.one;
     }
 }

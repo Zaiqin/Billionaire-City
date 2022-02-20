@@ -33,6 +33,8 @@ public class ShopInsuff : MonoBehaviour
         }
         print("turn on");
         insuffParent.SetActive(true);
+        insuffParent.transform.localScale = Vector2.zero;
+        insuffParent.transform.LeanScale(Vector2.one, 0.2f).setEaseOutBack();
     }
 
     public void turnOffInsuff()

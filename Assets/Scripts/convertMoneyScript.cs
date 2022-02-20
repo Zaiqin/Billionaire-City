@@ -28,4 +28,17 @@ public class convertMoneyScript : MonoBehaviour
             convGoldBar.transform.GetChild(0).GetComponent<Text>().text = stats.GetComponent<Statistics>().goldText.text;
         }
     }
+
+    public void closePanel()
+    {
+        print("close");
+        this.transform.LeanScale(Vector2.zero, 0.2f).setEaseInBack();
+        Invoke("setInactive", 0.2f);
+    }
+
+    void setInactive()
+    {
+        this.gameObject.SetActive(false);
+        this.gameObject.transform.localScale = Vector2.one;
+    }
 }

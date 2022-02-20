@@ -14,6 +14,8 @@ public class ronaldButton : MonoBehaviour
     public void OnButtonClick()
     {
         missionPanel.SetActive(true);
+        missionPanel.transform.localScale = Vector2.zero;
+        missionPanel.transform.LeanScale(Vector2.one, 0.2f).setEaseOutBack();
         missionPanel.GetComponent<missionParent>().resetDesc();
         
         //stats.updateStats(diffmoney: 1000000, diffgold: 100, diffxp: 1000);

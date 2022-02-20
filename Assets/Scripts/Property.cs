@@ -180,6 +180,8 @@ public class Property : MonoBehaviour, IPointerClickHandler
             print("show del popup");
             GameObject delPopup = GameObject.Find("Canvas").transform.GetChild(1).gameObject;
             delPopup.SetActive(true);
+            delPopup.transform.localScale = Vector2.zero;
+            delPopup.transform.LeanScale(Vector2.one, 0.2f).setEaseOutBack();
             // Deducting money ---------------
             long refund;
             if (this.Card.cost.Contains("Gold"))
@@ -224,27 +226,32 @@ public class Property : MonoBehaviour, IPointerClickHandler
                 || (this.Card.type == "Wonder")
                 || (this.GetComponent<Property>().constructEnd != null && this.GetComponent<Property>().constructEnd != "na"))
             {
-                infoPanel.SetActive(true);
-                infoPanel.GetComponent<infoScript>().selProp = this.gameObject;
-                if (infoPanel.GetComponent<infoScript>().highlightedProp != null)
-                {
-                    if (infoPanel.GetComponent<infoScript>().highlightedProp.transform.childCount > 4 && infoPanel.GetComponent<infoScript>().highlightedProp.name != this.gameObject.name)
+                    infoPanel.SetActive(true);
+                    infoPanel.transform.localScale = Vector2.zero;
+                    infoPanel.transform.LeanScale(Vector2.one, 0.2f).setEaseOutBack();
+                    infoPanel.GetComponent<infoScript>().selProp = this.gameObject;
+                    if (infoPanel.GetComponent<infoScript>().highlightedProp != null)
                     {
-                        print("Destroy this");
-                        Destroy(infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(4).gameObject);
+                        if (infoPanel.GetComponent<infoScript>().highlightedProp.transform.childCount > 4 && infoPanel.GetComponent<infoScript>().highlightedProp.name != this.gameObject.name)
+                        {
+                            print("Destroy this");
+                            Destroy(infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(4).gameObject);
+                        }
                     }
-                }
-                infoPanel.GetComponent<infoScript>().initInfo();
+                    infoPanel.GetComponent<infoScript>().initInfo();
 
-                print("show info Panel");
-                infoPanel.GetComponent<infoScript>().rightSide = true;
-                infoPanel.transform.position = new Vector3(0.2f + this.gameObject.transform.position.x + (infoPanel.GetComponent<BoxCollider2D>().bounds.size.x / 2) + float.Parse(this.GetComponent<Property>().Card.space.Substring(0, 1)), this.gameObject.transform.position.y + (infoPanel.GetComponent<BoxCollider2D>().bounds.size.y / 4) + 1f, 0f);
-                if (infoPanel.transform.position.x + (infoPanel.GetComponent<BoxCollider2D>().bounds.size.x / 2) + 0.6f > (Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0))).x)
-                {
-                    print("show infoPanel on left side of house");
-                    infoPanel.GetComponent<infoScript>().rightSide = false;
-                    infoPanel.transform.position = new Vector3(-0.2f + this.gameObject.transform.position.x - (infoPanel.GetComponent<BoxCollider2D>().bounds.size.x / 2), this.gameObject.transform.position.y + (infoPanel.GetComponent<BoxCollider2D>().bounds.size.y / 4) + 1f, 0f);
-                }
+                    print("show info Panel");
+                    infoPanel.GetComponent<infoScript>().rightSide = true;
+                    infoPanel.transform.position = new Vector3(0.2f + this.gameObject.transform.position.x + (infoPanel.GetComponent<BoxCollider2D>().bounds.size.x / 2) + float.Parse(this.GetComponent<Property>().Card.space.Substring(0, 1)), this.gameObject.transform.position.y + (infoPanel.GetComponent<BoxCollider2D>().bounds.size.y / 4) + 1f, 0f);
+                    if (infoPanel.transform.position.x + (infoPanel.GetComponent<BoxCollider2D>().bounds.size.x / 2) + 0.6f > (Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0))).x)
+                    {
+                        print("show infoPanel on left side of house");
+                        infoPanel.GetComponent<infoScript>().rightSide = false;
+                        infoPanel.transform.position = new Vector3(-0.2f + this.gameObject.transform.position.x - (infoPanel.GetComponent<BoxCollider2D>().bounds.size.x / 2), this.gameObject.transform.position.y + (infoPanel.GetComponent<BoxCollider2D>().bounds.size.y / 4) + 1f, 0f);
+                    }
+                    print("info localpos is " + infoPanel.transform.localPosition);
+                    /*infoPanel.transform.localScale = Vector2.zero;
+                    infoPanel.transform.LeanScale(Vector2.one, 0.1f);*/
             }
             GameObject hqmenu = GameObject.Find("HQStats");
             if (hqmenu != null)
@@ -458,6 +465,8 @@ public class contractScript : MonoBehaviour, IPointerClickHandler
             GameObject contractController = GameObject.Find("Contract Scroll Controller");
             GameObject contractMenu = contractController.GetComponent<RecyclableScrollerContract>().contractParent;
             contractMenu.SetActive(true);
+            contractMenu.transform.localScale = Vector2.zero;
+            contractMenu.transform.LeanScale(Vector2.one, 0.2f).setEaseOutBack();
             GameObject infoPanel = canvas.transform.GetChild(0).gameObject;
             infoPanel.SetActive(false);
             contractController.GetComponent<RecyclableScrollerContract>().pCard = propCard;
