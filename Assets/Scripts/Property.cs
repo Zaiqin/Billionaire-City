@@ -465,7 +465,7 @@ public class contractScript : MonoBehaviour, IPointerClickHandler
             GameObject contractController = GameObject.Find("Contract Scroll Controller");
             GameObject contractMenu = contractController.GetComponent<RecyclableScrollerContract>().contractParent;
             contractMenu.SetActive(true);
-            contractMenu.transform.localScale = Vector2.zero;
+            contractMenu.transform.localScale = new Vector2(0.5f, 0.5f);
             contractMenu.transform.LeanScale(Vector2.one, 0.2f).setEaseOutBack();
             GameObject infoPanel = canvas.transform.GetChild(0).gameObject;
             infoPanel.SetActive(false);

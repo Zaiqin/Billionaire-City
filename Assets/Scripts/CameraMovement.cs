@@ -21,6 +21,7 @@ public class CameraMovement : MonoBehaviour
     private bool startOnGrid;
 
     public bool dragging = false;
+    public bool fingerZoom = false;
 
     private float mapMinX, mapMaxX, mapMinY, mapMaxY;
 
@@ -31,7 +32,7 @@ public class CameraMovement : MonoBehaviour
     private void Awake()
     {
         // Disable multi touch
-        Input.multiTouchEnabled = false;
+        //Input.multiTouchEnabled = false;
         dragging = false;
 
         mapMinX = map.transform.position.x - map.localBounds.size.x / 2f;
@@ -58,7 +59,21 @@ public class CameraMovement : MonoBehaviour
             //print("set drag to false");
             dragging = false;
         }
-        if (Input.GetMouseButton(0))
+        if (Input.touchCount == 2 && startOnGrid == true && ShopMenu.activeSelf == false && cover.activeSelf == false)
+        {
+            Touch touchZero = Input.GetTouch(0);
+            Touch touchOne = Input.GetTouch(1);
+
+            Vector2 touchZeroPrevPos = touchZero.position - touchZero.deltaPosition;
+            Vector2 touchOnePrevPos = touchOne.position - touchOne.deltaPosition;
+
+            float prevMagnitude = (touchZeroPrevPos - touchOnePrevPos).magnitude;
+            float currentMagnitude = (touchZero.position - touchOne.position).magnitude;
+
+            float difference = currentMagnitude - prevMagnitude;
+
+            zoom(difference * 0.01f);
+        } else if (Input.GetMouseButton(0) && fingerZoom == false)
         {
             PanCamera(); //called when mouse button is pressed down and remains down
         }
@@ -67,7 +82,48 @@ public class CameraMovement : MonoBehaviour
             startOnGrid = false;
             Invoke("setDrag", 0.01f);
         }
+        if (Input.touchCount == 0)
+        {
+            fingerZoom = false;
+        }
         //print("dragging is " + dragging);
+    }
+
+    void zoom(float increment)
+    {
+        fingerZoom = true;
+        Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize - increment, minCamSize, maxCamSize);
+        cam.transform.position = ClampCamera(cam.transform.position);
+        dragging = true;
+        closePanels();
+    }
+
+    void closePanels()
+    {
+        hqMenu.SetActive(false);
+
+        infoPanel.SetActive(false);
+        if (infoPanel.GetComponent<infoScript>().highlightedProp != null)
+        {
+            infoPanel.GetComponent<infoScript>().highlightedProp.GetComponent<SpriteRenderer>().material.color = Color.white;
+            if (infoPanel.GetComponent<infoScript>().highlightedProp.transform.childCount == 5)
+            {
+                Destroy(infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(4).gameObject);
+            }
+            if (infoPanel.GetComponent<infoScript>().highlightedProp.GetComponent<Property>().Card.type == "Deco")
+            {
+                infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(0).gameObject.SetActive(false);
+                infoPanel.GetComponent<infoScript>().selProp.transform.GetChild(0).GetComponent<influence>().removeHighlights();
+            }
+        }
+        if (infoPanel.GetComponent<infoScript>().selProp != null && infoPanel.GetComponent<infoScript>().selProp.transform.childCount > 1)
+        {
+            if (infoPanel.GetComponent<infoScript>().selProp.transform.GetChild(0).name == "Influence")
+            {
+                infoPanel.GetComponent<infoScript>().selProp.transform.GetChild(0).gameObject.SetActive(false);
+                infoPanel.GetComponent<infoScript>().selProp.transform.GetChild(0).GetComponent<influence>().removeHighlights();
+            }
+        }
     }
 
     void setDrag()
@@ -125,30 +181,7 @@ public class CameraMovement : MonoBehaviour
 
             cam.transform.position = ClampCamera(cam.transform.position + difference);
             //cam.transform.position += difference;
-            hqMenu.SetActive(false);
-
-            infoPanel.SetActive(false);
-            if (infoPanel.GetComponent<infoScript>().highlightedProp != null)
-            {
-                infoPanel.GetComponent<infoScript>().highlightedProp.GetComponent<SpriteRenderer>().material.color = Color.white;
-                if (infoPanel.GetComponent<infoScript>().highlightedProp.transform.childCount == 5)
-                {
-                    Destroy(infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(4).gameObject);
-                }
-                if (infoPanel.GetComponent<infoScript>().highlightedProp.GetComponent<Property>().Card.type == "Deco")
-                {
-                    infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(0).gameObject.SetActive(false);
-                    infoPanel.GetComponent<infoScript>().selProp.transform.GetChild(0).GetComponent<influence>().removeHighlights();
-                }
-            }
-            if (infoPanel.GetComponent<infoScript>().selProp != null && infoPanel.GetComponent<infoScript>().selProp.transform.childCount > 1)
-            {
-                if (infoPanel.GetComponent<infoScript>().selProp.transform.GetChild(0).name == "Influence")
-                {
-                    infoPanel.GetComponent<infoScript>().selProp.transform.GetChild(0).gameObject.SetActive(false);
-                    infoPanel.GetComponent<infoScript>().selProp.transform.GetChild(0).GetComponent<influence>().removeHighlights();
-                }
-            }
+            closePanels();
             dragging = true;
         }
     	
