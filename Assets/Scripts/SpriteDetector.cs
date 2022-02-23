@@ -42,7 +42,23 @@ public class SpriteDetector : MonoBehaviour
         if (hit.collider != null)
         {
             buttonDownLayer = hit.collider.gameObject.layer;
-            print("layer " + buttonDownLayer);
+            print("layer " + buttonDownLayer + "for " + hit.collider.gameObject.name);
+
+            RaycastHit2D[] hits;
+            hits = Physics2D.RaycastAll(ray.origin, ray.direction, Mathf.Infinity);
+            for (int i = 0; i < hits.Length; i++)
+            {
+                RaycastHit2D hita = hits[i];
+                print("raycastedasff all hit object: " + hita.collider.gameObject.name);
+                if (hita.collider.gameObject.layer == 6)
+                {
+                    buttonDownLayer = 6;
+                }
+                if (hita.collider.gameObject.layer == 5)
+                {
+                    buttonDownLayer = 5;
+                }
+            }
         }
     }
 
@@ -56,48 +72,51 @@ public class SpriteDetector : MonoBehaviour
         hits = Physics2D.RaycastAll(ray.origin, ray.direction, Mathf.Infinity);
 
         bool hitProp = false;
-        for (int i = 0; i < hits.Length; i++)
+        if (buttonDownLayer == 0)
         {
-            RaycastHit2D hita = hits[i];
-            print("raycast all hit object: " + hita.collider.gameObject.name);
-            if (hita.collider != null)
+            for (int i = 0; i < hits.Length; i++)
             {
-                if (hita.collider.GetComponent<Property>() != null)
+                RaycastHit2D hita = hits[i];
+                print("raycast all hit object: " + hita.collider.gameObject.name);
+                if (hita.collider != null)
                 {
-                    hitProp = true;
-                    hit = hita;
-                    if (infoPanel.GetComponent<infoScript>().highlightedProp != null)
+                    if (hita.collider.GetComponent<Property>() != null)
                     {
-                        if ((hit.collider.GetComponent<Property>().Card.type == "Commerce" && hit.collider.gameObject.name != selectedCommerce.name) || infoPanel.GetComponent<infoScript>().highlightedProp.name != hit.collider.gameObject.name)
+                        hitProp = true;
+                        hit = hita;
+                        if (infoPanel.GetComponent<infoScript>().highlightedProp != null)
                         {
-                            print("selected a diff property");
-                            if (selectedCommerce != null)
+                            if ((hit.collider.GetComponent<Property>().Card.type == "Commerce" && selectedCommerce != null && hit.collider.gameObject.name != selectedCommerce.name) || infoPanel.GetComponent<infoScript>().highlightedProp.name != hit.collider.gameObject.name)
                             {
-                                selectedCommerce.GetComponent<SpriteRenderer>().material.color = Color.white;
-                                selectedCommerce.transform.GetChild(0).gameObject.SetActive(false);
-                                selectedCommerce.transform.GetChild(0).GetComponent<influence>().removeHighlights();
-                            }
-                            if (infoPanel.GetComponent<infoScript>().highlightedProp != null)
-                            {
-                                infoPanel.GetComponent<infoScript>().highlightedProp.GetComponent<SpriteRenderer>().material.color = Color.white;
-                                if (infoPanel.GetComponent<infoScript>().highlightedProp.transform.childCount > 4)
+                                print("selected a diff property");
+                                if (selectedCommerce != null)
                                 {
-                                    print("Destroy this too");
-                                    Destroy(infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(4).gameObject);
+                                    selectedCommerce.GetComponent<SpriteRenderer>().material.color = Color.white;
+                                    selectedCommerce.transform.GetChild(0).gameObject.SetActive(false);
+                                    selectedCommerce.transform.GetChild(0).GetComponent<influence>().removeHighlights();
                                 }
-                                if (infoPanel.GetComponent<infoScript>().highlightedProp.GetComponent<Property>().Card.type == "Deco")
+                                if (infoPanel.GetComponent<infoScript>().highlightedProp != null)
                                 {
-                                    infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(0).gameObject.SetActive(false);
-                                }
-                                if (infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(0).name == "Influence")
-                                {
-                                    infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(0).gameObject.SetActive(false);
-                                    infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(0).GetComponent<influence>().removeHighlights();
+                                    infoPanel.GetComponent<infoScript>().highlightedProp.GetComponent<SpriteRenderer>().material.color = Color.white;
+                                    if (infoPanel.GetComponent<infoScript>().highlightedProp.transform.childCount > 4)
+                                    {
+                                        print("Destroy this too");
+                                        Destroy(infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(4).gameObject);
+                                    }
+                                    if (infoPanel.GetComponent<infoScript>().highlightedProp.GetComponent<Property>().Card.type == "Deco")
+                                    {
+                                        infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(0).gameObject.SetActive(false);
+                                    }
+                                    if (infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(0).name == "Influence")
+                                    {
+                                        infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(0).gameObject.SetActive(false);
+                                        infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(0).GetComponent<influence>().removeHighlights();
+                                    }
                                 }
                             }
                         }
+                        break;
                     }
-                    break;
                 }
             }
         }
@@ -219,9 +238,9 @@ public class SpriteDetector : MonoBehaviour
                     //print("hit building that is draggable");
                 }
             }
-            if (hit.collider.gameObject.layer == 6)
+            if (hit.collider.gameObject.layer == 6 || hit.collider.gameObject.layer == 5)
             {
-                //print("return true for layer 6");
+                print("return true for layer 6 or 5" + hit.collider.gameObject.layer);
                 return true;
             }
         }

@@ -97,6 +97,8 @@ public class Statistics : MonoBehaviour
                     this.GetComponent<levelUp>().calcLevelUp((int)level, i-1);
                     level = i - 1;
                     levelUpScreen.SetActive(true);
+                    levelUpScreen.transform.localScale = Vector2.zero;
+                    levelUpScreen.transform.LeanScale(new Vector2(68f,68f), 0.2f).setEaseOutBack();
                     levelUpScreen.transform.GetChild(3).GetComponent<RecyclableScrollRect>().ReloadData();
                     levelUpScreen.transform.GetChild(0).GetComponent<Text>().text = "Level " + level.ToString();
                     levelUpScreen.transform.GetChild(1).GetComponent<Text>().text = this.GetComponent<levelUp>().noOfCards + " items unlocked";

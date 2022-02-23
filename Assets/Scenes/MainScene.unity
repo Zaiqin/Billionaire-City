@@ -2155,7 +2155,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 604.1, y: -77.500015}
+  m_AnchoredPosition: {x: 604.1, y: 142}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &88028610
@@ -70215,6 +70215,7 @@ MonoBehaviour:
   cover: {fileID: 1435088136}
   loadingGroup: {fileID: 1787093364}
   dragging: 0
+  fingerZoom: 0
   map: {fileID: 280726322}
   zoomSlider: {fileID: 557953005}
 --- !u!20 &519420031
@@ -71274,7 +71275,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &557953004
 RectTransform:
   m_ObjectHideFlags: 0
@@ -74291,7 +74292,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &760845340
 RectTransform:
   m_ObjectHideFlags: 0
@@ -74587,7 +74588,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 607.4, y: -170.9}
+  m_AnchoredPosition: {x: 607.4, y: 48.6}
   m_SizeDelta: {x: 78.71, y: 78.71}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!58 &773584276
@@ -92405,7 +92406,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0.25, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -93181,7 +93182,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1680335060
 RectTransform:
   m_ObjectHideFlags: 0
@@ -96992,8 +96993,8 @@ RectTransform:
   m_Father: {fileID: 131500070}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.25, y: 0}
+  m_AnchorMax: {x: 0.25, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
