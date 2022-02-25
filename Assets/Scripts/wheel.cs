@@ -9,9 +9,10 @@ public class wheel : MonoBehaviour
     int goal = 0;
     bool wheelEnabled = false;
 
-    public GameObject spinButton, closeButton, stats, luckReward, storageController;
+    public GameObject spinButton, closeButton, stats, luckReward, storageController, extAudio;
     public Image luckImg;
     public Text luckText;
+    public AudioClip celebSound;
 
     // Start is called before the first frame update
     void Start()
@@ -62,6 +63,7 @@ public class wheel : MonoBehaviour
     void showPopup()
     {
         luckReward.SetActive(true);
+        extAudio.GetComponent<AudioSource>().PlayOneShot(celebSound);
         int won = 1 + (int)(this.transform.eulerAngles.z / (360 / 8));
         luckImg.sprite = GameObject.Find("rew" + won).GetComponent<Image>().sprite;
         luckText.text = "x 1";

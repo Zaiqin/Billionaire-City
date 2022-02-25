@@ -67536,8 +67536,10 @@ MonoBehaviour:
   stats: {fileID: 973017964}
   luckReward: {fileID: 2140912378}
   storageController: {fileID: 835569546}
+  extAudio: {fileID: 1820829991}
   luckImg: {fileID: 2026489070}
   luckText: {fileID: 1383937916}
+  celebSound: {fileID: 8300000, guid: 024b969c6e50193489cba7594e11e681, type: 3}
 --- !u!1 &370062825
 GameObject:
   m_ObjectHideFlags: 0
@@ -73318,6 +73320,7 @@ GameObject:
   - component: {fileID: 684264866}
   - component: {fileID: 684264865}
   - component: {fileID: 684264864}
+  - component: {fileID: 684264867}
   m_Layer: 6
   m_Name: luckPanel
   m_TagString: Untagged
@@ -73405,6 +73408,32 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -18}
   m_SizeDelta: {x: 679.98, y: 549.41}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!61 &684264867
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 684264863}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.100738525, y: -1.6044464}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 676.22516, y: 545.0117}
+  m_EdgeRadius: 0
 --- !u!1 &698181098
 GameObject:
   m_ObjectHideFlags: 0
@@ -92571,6 +92600,8 @@ MonoBehaviour:
   tabButtons: []
   selectedTab: {fileID: 871913142}
   firstButton: {fileID: 871913142}
+  extAudio: {fileID: 1820829991}
+  touchSound: {fileID: 8300000, guid: bd5423d63b2c64bff84c70238339e6d6, type: 3}
   rect: {fileID: 1857201643}
 --- !u!61 &1636394983
 BoxCollider2D:

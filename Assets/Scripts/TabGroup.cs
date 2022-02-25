@@ -10,6 +10,9 @@ public class TabGroup : MonoBehaviour
     public TabButton selectedTab;
     public TabButton firstButton;
 
+    public GameObject extAudio;
+    public AudioClip touchSound;
+
     public RecyclableScrollRect rect;
 
     public void Start()
@@ -47,6 +50,7 @@ public class TabGroup : MonoBehaviour
     public void OnTabSelected(TabButton button)
     {
         print("selected a tab");
+        extAudio.GetComponent<AudioSource>().PlayOneShot(touchSound);
         selectedTab = button;
         rect.ReloadData();
         print("before reset tab is " + selectedTab);
