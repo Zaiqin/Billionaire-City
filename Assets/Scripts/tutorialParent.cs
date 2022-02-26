@@ -8,7 +8,7 @@ public class tutorialParent : MonoBehaviour
     public int tutorialPage = 0;
     public Text descText, title;
     public GameObject button, cover, dailyBonus, arrow;
-    public GameObject shopToggle, plotToggle, roadToggle, deleteToggle, ronaldToggle, storageToggle;
+    public GameObject shopToggle, plotToggle, roadToggle, deleteToggle, ronaldToggle, storageToggle, luckToggle, signContractorToggle;
     public ParticleSystem particle;
 
     List<string> tutorialList = new List<string>() {
@@ -20,6 +20,8 @@ public class tutorialParent : MonoBehaviour
      "This is the Delete tool. Use this to delete Properties in your city. \n\nDo note that you will only get 35% of your money in cash back, not the full refund for destroying your Houses.",
      "This is the Missions tool. This is where you see all the missions that you can work on. \n\nTip: Progress faster in the game by completing these missions and claiming the rewards.",
      "This is the Storage tool. This is where you can see all the items that are in your storage. These items are free to use.",
+     "This is the Lucky Draw panel. You can spin the wheel for 1 Gold each and win various prizes!",
+     "This is the Signing Contractor tool. This is where you can sign all the houses in your city in one click. \n\nNote that it takes time to calculate and has a taxation of 20% of the signing cost and 1 Gold",
      "Congratulations for finishing the tutorial! You have now mastered the basics of money making! \n\nGood Luck and all the best!"
     };
 
@@ -32,6 +34,8 @@ public class tutorialParent : MonoBehaviour
      "Delete Tool",
      "Missions Tool",
      "Storage Tool",
+     "Lucky Draw Panel",
+     "Contractor Tool",
      "Congratulations!"
     };
 
@@ -84,6 +88,10 @@ public class tutorialParent : MonoBehaviour
             case 5: arrow.transform.position = new Vector3(deleteToggle.transform.position.x + arrow.GetComponent<BoxCollider2D>().bounds.size.x + plotToggle.GetComponent<CircleCollider2D>().bounds.size.x / 4, deleteToggle.transform.position.y, 0); break;
             case 6: arrow.transform.position = new Vector3(ronaldToggle.transform.position.x + arrow.GetComponent<BoxCollider2D>().bounds.size.x + plotToggle.GetComponent<CircleCollider2D>().bounds.size.x / 4, ronaldToggle.transform.position.y, 0); break;
             case 7: arrow.transform.position = new Vector3(storageToggle.transform.position.x - arrow.GetComponent<BoxCollider2D>().bounds.size.x - plotToggle.GetComponent<CircleCollider2D>().bounds.size.x / 4, storageToggle.transform.position.y, 0);
+                    arrow.transform.eulerAngles = new Vector3(0, 180, 0); break;
+            case 8: arrow.transform.position = new Vector3(luckToggle.transform.position.x - arrow.GetComponent<BoxCollider2D>().bounds.size.x - plotToggle.GetComponent<CircleCollider2D>().bounds.size.x / 4, luckToggle.transform.position.y, 0);
+                    arrow.transform.eulerAngles = new Vector3(0, 180, 0); break;
+            case 9: arrow.transform.position = new Vector3(signContractorToggle.transform.position.x - arrow.GetComponent<BoxCollider2D>().bounds.size.x - plotToggle.GetComponent<CircleCollider2D>().bounds.size.x / 4, signContractorToggle.transform.position.y, 0);
                     arrow.transform.eulerAngles = new Vector3(0, 180, 0); break;
             default: arrow.transform.position = new Vector3(0, (Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0))).y + arrow.GetComponent<BoxCollider2D>().bounds.size.y, 0); arrow.transform.eulerAngles = new Vector3(0, 0, 0); break;
         }

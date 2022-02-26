@@ -20,6 +20,7 @@ public class RecyclableScrollerContract : CSVReader, IRecyclableScrollRectDataSo
     public PropertyCard pCard;
     public GameObject selProp, contractParent, signContractorToggle, close, cover;
     public bool contractor;
+    public bool goCalc;
 
     [SerializeField]
     private RecyclableScrollRect contractRect;
@@ -83,7 +84,7 @@ public class RecyclableScrollerContract : CSVReader, IRecyclableScrollRectDataSo
             case 8: setSprite = threeDaySprite; break;
             default: setSprite = threeMinSprite;  break;
         }
-        item.ConfigureCell(setSprite, pCard, index, selProp, contractor);
+        item.ConfigureCell(setSprite, pCard, index, selProp, contractor, goCalc);
     }
 
     #endregion

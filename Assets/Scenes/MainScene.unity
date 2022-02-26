@@ -70622,6 +70622,8 @@ MonoBehaviour:
   deleteToggle: {fileID: 1580363174}
   ronaldToggle: {fileID: 584236249}
   storageToggle: {fileID: 88028603}
+  luckToggle: {fileID: 773584274}
+  signContractorToggle: {fileID: 133501747}
   particle: {fileID: 1477764395}
 --- !u!61 &514689984
 BoxCollider2D:
@@ -72349,6 +72351,7 @@ MonoBehaviour:
   close: {fileID: 1315141313}
   cover: {fileID: 1435088136}
   contractor: 0
+  goCalc: 0
   contractRect: {fileID: 1124475071}
 --- !u!4 &603615507
 Transform:
@@ -73256,8 +73259,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
-  m_EffectDistance: {x: 1, y: -1}
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.34901962}
+  m_EffectDistance: {x: 2, y: -2}
   m_UseGraphicAlpha: 1
 --- !u!114 &654812229
 MonoBehaviour:

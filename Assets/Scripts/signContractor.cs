@@ -44,6 +44,7 @@ public class signContractor : MonoBehaviour
             GameObject infoPanel = canvas.transform.GetChild(0).gameObject;
             infoPanel.SetActive(false);
             contractController.GetComponent<RecyclableScrollerContract>().contractor = true;
+            contractController.GetComponent<RecyclableScrollerContract>().goCalc = false;
             contractController.GetComponent<RecyclableScrollerContract>().userReloadData();
 
             GameObject.Find("SignController").GetComponent<signController>().selProperty = this.gameObject.transform.parent.gameObject;
@@ -58,6 +59,15 @@ public class signContractor : MonoBehaviour
                     Destroy(hProp.transform.GetChild(4).gameObject);
                 }
             }
+
+            Invoke("calcAll", 0.3f);
         }
+    }
+
+    void calcAll()
+    {
+        GameObject contractController = GameObject.Find("Contract Scroll Controller");
+        contractController.GetComponent<RecyclableScrollerContract>().goCalc = true;
+        contractController.GetComponent<RecyclableScrollerContract>().userReloadData();
     }
 }

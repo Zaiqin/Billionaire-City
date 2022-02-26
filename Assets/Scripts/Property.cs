@@ -474,6 +474,7 @@ public class contractScript : MonoBehaviour, IPointerClickHandler
             contractController.GetComponent<RecyclableScrollerContract>().pCard = propCard;
             contractController.GetComponent<RecyclableScrollerContract>().selProp = this.transform.parent.gameObject;
             contractController.GetComponent<RecyclableScrollerContract>().contractor = false;
+            contractController.GetComponent<RecyclableScrollerContract>().goCalc = false;
             contractController.GetComponent<RecyclableScrollerContract>().userReloadData();
 
             GameObject.Find("SignController").GetComponent<signController>().selProperty = this.gameObject.transform.parent.gameObject;
