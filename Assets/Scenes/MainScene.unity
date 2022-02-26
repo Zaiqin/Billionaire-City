@@ -602,6 +602,7 @@ MonoBehaviour:
   storageController: {fileID: 835569546}
   cover: {fileID: 1435088136}
   tutorialPanel: {fileID: 514689979}
+  loadingScreen: {fileID: 1787093364}
   nameField: {fileID: 1165604900}
 --- !u!4 &25462476
 Transform:
@@ -95904,6 +95905,7 @@ MonoBehaviour:
   cover: {fileID: 1435088136}
   skipCover: {fileID: 1125643863}
   extAudio: {fileID: 1820829991}
+  tutorialScreen: {fileID: 514689979}
   introAudio: {fileID: 8300000, guid: 0666c9a5ba815184bacea13c6ee3c5d3, type: 3}
 --- !u!225 &1787093369
 CanvasGroup:
