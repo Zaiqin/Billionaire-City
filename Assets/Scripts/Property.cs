@@ -462,15 +462,18 @@ public class contractScript : MonoBehaviour, IPointerClickHandler
         {
             print("clicked on contract");
             GameObject canvas = GameObject.Find("Canvas");
+            canvas.GetComponent<toggleMaster>().cover.gameObject.SetActive(true);
             GameObject contractController = GameObject.Find("Contract Scroll Controller");
             GameObject contractMenu = contractController.GetComponent<RecyclableScrollerContract>().contractParent;
             contractMenu.SetActive(true);
             contractMenu.transform.localScale = Vector2.zero;
             contractMenu.transform.LeanScale(Vector2.one, 0.2f).setEaseOutBack();
+            contractMenu.transform.GetChild(3).gameObject.SetActive(false);
             GameObject infoPanel = canvas.transform.GetChild(0).gameObject;
             infoPanel.SetActive(false);
             contractController.GetComponent<RecyclableScrollerContract>().pCard = propCard;
             contractController.GetComponent<RecyclableScrollerContract>().selProp = this.transform.parent.gameObject;
+            contractController.GetComponent<RecyclableScrollerContract>().contractor = false;
             contractController.GetComponent<RecyclableScrollerContract>().userReloadData();
 
             GameObject.Find("SignController").GetComponent<signController>().selProperty = this.gameObject.transform.parent.gameObject;

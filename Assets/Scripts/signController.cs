@@ -2,10 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class signController : MonoBehaviour
 {
-    public GameObject selProperty, saveObj, stats, contractsParent, extAudio;
+    public GameObject selProperty, saveObj, stats, contractsParent, extAudio, cover, signToggle;
     public AudioClip contractSound;
 
     public void signer(int i)
@@ -26,6 +27,8 @@ public class signController : MonoBehaviour
         }
         if (stats.GetComponent<Statistics>().money >= cost)
         {
+            cover.SetActive(false);
+            signToggle.GetComponent<Toggle>().isOn = false;
             print("signing property " + selProperty.name + "with sign index: " + i);
             selProperty.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
             closePanel();

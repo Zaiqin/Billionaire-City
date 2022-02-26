@@ -18,7 +18,8 @@ public class RecyclableScrollerContract : CSVReader, IRecyclableScrollRectDataSo
     Sprite threeMinSprite, thirtyMinSprite, oneHrSprite, fourHrSprite, eightHrSprite, twelveHrSprite, oneDaySprite, twoDaySprite, threeDaySprite;
 
     public PropertyCard pCard;
-    public GameObject selProp, contractParent;
+    public GameObject selProp, contractParent, signContractorToggle, close, cover;
+    public bool contractor;
 
     [SerializeField]
     private RecyclableScrollRect contractRect;
@@ -43,6 +44,17 @@ public class RecyclableScrollerContract : CSVReader, IRecyclableScrollRectDataSo
     public int GetItemCount()
     {
         return 9;
+    }
+
+    public void closeContractCheck()
+    {
+        if (contractor == true)
+        {
+            signContractorToggle.GetComponent<Toggle>().isOn = false;
+            
+        }
+        close.GetComponent<insuffTween>().closePanel();
+        cover.SetActive(false);
     }
 
     /// <summary>
@@ -71,7 +83,7 @@ public class RecyclableScrollerContract : CSVReader, IRecyclableScrollRectDataSo
             case 8: setSprite = threeDaySprite; break;
             default: setSprite = threeMinSprite;  break;
         }
-        item.ConfigureCell(setSprite, pCard, index, selProp);
+        item.ConfigureCell(setSprite, pCard, index, selProp, contractor);
     }
 
     #endregion
