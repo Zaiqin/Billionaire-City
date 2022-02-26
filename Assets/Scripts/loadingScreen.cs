@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class loadingScreen : MonoBehaviour
 {
     public AudioSource cam;
-    public GameObject t, bgPan, titleImage, cover, skipCover, extAudio;
+    public GameObject t, bgPan, titleImage, cover, skipCover, extAudio, tutorialScreen;
     public AudioClip introAudio;
 
     // Start is called before the first frame update
@@ -25,7 +25,7 @@ public class loadingScreen : MonoBehaviour
         bgPan.GetComponent<CanvasGroup>().LeanAlpha(1f, 3f);
         bgPan.transform.LeanMoveLocalY(titleImage.transform.position.y - 400, 25f);
         titleImage.GetComponent<CanvasGroup>().LeanAlpha(1f, 1f);
-        titleImage.transform.LeanScale(new Vector2(1.8f, 1.8f), 8f);
+        titleImage.transform.LeanScale(new Vector2(1.6f, 1.6f), 6f);
         yield return new WaitForSeconds(10f);
 
         titleImage.GetComponent<CanvasGroup>().LeanAlpha(0f, 1f);
@@ -92,7 +92,10 @@ public class loadingScreen : MonoBehaviour
 
     void closeIntro()
     {
-        cover.SetActive(false);
+        if (tutorialScreen.activeSelf == false)
+        {
+            cover.SetActive(false);
+        }
         this.gameObject.SetActive(false);
         cam.Play();
     }

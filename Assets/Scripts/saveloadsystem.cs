@@ -68,7 +68,7 @@ public class saveloadsystem : MonoBehaviour
     public CSVReader csv;
     public Tilemap map;
     public GameObject PropertiesParent, Stats, expPopup, cityText, hq, dailyBonus, ppDragButton, Astar, missionParent, storageController;
-    public GameObject cover, tutorialPanel;
+    public GameObject cover, tutorialPanel, loadingScreen;
     public InputField nameField;
     public void Start()
     {
