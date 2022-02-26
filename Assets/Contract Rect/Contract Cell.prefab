@@ -145,6 +145,7 @@ MonoBehaviour:
   xpText: {fileID: 822943740777664250}
   tenantsText: {fileID: 7742418644164839790}
   costText: {fileID: 5136115563656836234}
+  signAllCost: 0
   touchSound: {fileID: 8300000, guid: a47222ca973f71a4883d2936e54edb77, type: 3}
   contractor: 0
 --- !u!1 &1425878250738862665
@@ -227,7 +228,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Income
+  m_Text: 9,999,999 XP
 --- !u!114 &8683146536780315077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -338,7 +339,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Income
+  m_Text: $9,999,999
 --- !u!114 &2777361862917234882
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -524,7 +525,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Income
+  m_Text: 9,999,999
 --- !u!114 &7412912988194941247
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -591,7 +592,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -42.2, y: -49.1}
+  m_AnchoredPosition: {x: -44, y: -49.1}
   m_SizeDelta: {x: 104.7501, y: 35.9484}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1333313224269614178
@@ -624,7 +625,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: ac69ead4238ee4edca81114c3ac1de6a, type: 3}
-    m_FontSize: 24
+    m_FontSize: 22
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10

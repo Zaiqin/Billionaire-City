@@ -6,10 +6,10 @@ using UnityEngine.UI;
 
 public class signController : MonoBehaviour
 {
-    public GameObject selProperty, saveObj, stats, contractsParent, extAudio, cover, signToggle;
+    public GameObject selProperty, saveObj, stats, contractsParent, extAudio, cover, signToggle, insuff;
     public AudioClip contractSound;
 
-    public void signer(int i)
+    public void signer(int i, bool contractor)
     {
         DateTime theTime; long cost;
         switch (i)
@@ -38,7 +38,10 @@ public class signController : MonoBehaviour
             print("sign time is " + datetime);
             stats.GetComponent<Statistics>().updateStats(diffmoney: -cost);
             saveObj.GetComponent<saveloadsystem>().saveGame();
-            extAudio.GetComponent<AudioSource>().PlayOneShot(contractSound);
+            if (contractor == false)
+            {
+                extAudio.GetComponent<AudioSource>().PlayOneShot(contractSound);
+            }
 
             GameObject value = Instantiate(Resources.Load<GameObject>("floatingParent"), new Vector3(selProperty.transform.position.x + (float.Parse(selProperty.GetComponent<Property>().Card.space.Substring(0, 1))) / 2, selProperty.transform.position.y + 2.8f, -5f), Quaternion.identity) as GameObject;
             value.transform.GetChild(0).GetComponent<TextMesh>().text = "- $" + cost;
