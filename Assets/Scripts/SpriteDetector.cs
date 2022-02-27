@@ -11,9 +11,10 @@ public class SpriteDetector : MonoBehaviour
     [SerializeField]
     private GameObject infoPanel, hqMenu;
 
-    public GameObject selectedCommerce, dailyPanel, cover;
+    public GameObject selectedCommerce, dailyPanel, cover, Shop, pendingParent;
+    public GameObject moveSelected;
 
-    public Toggle deleteToggle, storageToggle;
+    public Toggle deleteToggle, storageToggle, moveToggle;
 
     bool dailyPressed;
     public int buttonDownLayer;
@@ -84,7 +85,7 @@ public class SpriteDetector : MonoBehaviour
                     {
                         hitProp = true;
                         hit = hita;
-                        if (infoPanel.GetComponent<infoScript>().highlightedProp != null)
+                        if (infoPanel.GetComponent<infoScript>().highlightedProp != null && moveToggle.isOn == false)
                         {
                             if ((hit.collider.GetComponent<Property>().Card.type == "Commerce" && selectedCommerce != null && hit.collider.gameObject.name != selectedCommerce.name) || infoPanel.GetComponent<infoScript>().highlightedProp.name != hit.collider.gameObject.name)
                             {
@@ -121,7 +122,7 @@ public class SpriteDetector : MonoBehaviour
             }
         }
 
-        if (hitProp == false)
+        if (hitProp == false && moveToggle.isOn == false)
         {
             print("did not hit any property");
             if (selectedCommerce != null)
@@ -151,7 +152,13 @@ public class SpriteDetector : MonoBehaviour
             infoPanel.SetActive(false);
         }
 
-        if (hitProp == true && buttonDownLayer == 0)
+        if (hitProp == true && buttonDownLayer == 0 && moveToggle.isOn == true && pendingParent.transform.childCount == 0 && hit.collider.GetComponent<Property>().constructEnd == "na")
+        {
+            print("set gray");
+            moveSelected = hit.collider.gameObject;
+            moveSelected.GetComponent<SpriteRenderer>().material.color = Color.gray;
+            Shop.GetComponent<PurchaseController>().purchaseProperty(hit.collider.GetComponent<Property>().Card);
+        } else if (hitProp == true && buttonDownLayer == 0 && moveToggle.isOn == false)
         {
             print("hit a property in spritedetector");
 

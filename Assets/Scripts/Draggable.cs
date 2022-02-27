@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 
 public class Draggable : MonoBehaviour
 {
@@ -142,6 +143,10 @@ public class Draggable : MonoBehaviour
             } else
             {
                 map.SetTile(new Vector3Int(x, y, 0), Resources.Load<TileBase>("roadTiles/greenGrass"));
+            }
+            if (GameObject.Find("moveContractorToggle").GetComponent<Toggle>().isOn == true && card.type == "Deco")
+            {
+                map.SetTile(new Vector3Int(x, y, 0), Resources.Load<TileBase>("roadTiles/tileGrass"));
             }
             x += 1;
             if (x == ((int)XY[0] + spaceX))

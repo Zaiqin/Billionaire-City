@@ -105,7 +105,7 @@ public class plotTileChecker : MonoBehaviour
 
         // -------------------------------------------
         string id = "plot" + number.ToString();
-        print("final id is " + id);
+        //print("final id is " + id);
         //print("-------stopped function tileCheck--------");
         return id;
     }

@@ -1,15 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class delConfirm : MonoBehaviour
 {
-    public GameObject selProp, saveloadobj, statsObj;
+    public GameObject selProp, saveloadobj, statsObj, moveToggle;
     public long refundValue;
     public void deleteProp()
     {
         print("called destroy");
-        print("xy is " + selProp.GetComponent<Draggable>().XY[0] + "card is " + selProp.GetComponent<Property>().Card);
+        print("xy is " + selProp.GetComponent<Draggable>().XY[0] + "card is " + selProp.GetComponent<Property>().Card.propName);
         if (selProp.GetComponent<Property>().Card.type == "Wonder")
         {
             if (selProp.GetComponent<Property>().Card.wonderBonus >= 100)
@@ -30,7 +31,10 @@ public class delConfirm : MonoBehaviour
         selProp.GetComponent<Draggable>().rebuildPlots(selProp.GetComponent<Property>().Card, selProp.GetComponent<Draggable>().XY);
         selProp.transform.parent = null;
         Destroy(selProp);
-        statsObj.GetComponent<Statistics>().updateStats(diffmoney: refundValue);
+        if (moveToggle.GetComponent<Toggle>().isOn == false)
+        {
+            statsObj.GetComponent<Statistics>().updateStats(diffmoney: refundValue);
+        }
         saveloadobj.GetComponent<saveloadsystem>().saveGame();
         closePanel();
     }

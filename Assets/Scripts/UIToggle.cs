@@ -8,7 +8,7 @@ public class UIToggle : MonoBehaviour
 {
 
     [SerializeField]
-    GameObject shopToggle, plotToggle, roadToggle, deleteToggle, ronaldToggle, storageToggle, luckToggle, ShopMenu, hqMenu, infoPanel, pendingParent, ppDrag, delPanel, contractPanel, expPopup, failExpPopup, convertMoneyPanel, dailyBonusPanel, missionPanel, storageMenu, instantRentPanel;
+    GameObject shopToggle, plotToggle, roadToggle, deleteToggle, ronaldToggle, storageToggle, luckToggle, signToggle, moveToggle, ShopMenu, hqMenu, infoPanel, pendingParent, ppDrag, delPanel, contractPanel, expPopup, failExpPopup, convertMoneyPanel, dailyBonusPanel, missionPanel, storageMenu, instantRentPanel;
 
     GameObject selectedToggle;
     public GameObject[] toggles;
@@ -52,6 +52,7 @@ public class UIToggle : MonoBehaviour
             ronaldToggle.GetComponent<Toggle>().isOn = false;
             storageToggle.GetComponent<Toggle>().isOn = false;
             luckToggle.GetComponent<Toggle>().isOn = false;
+            moveToggle.GetComponent<Toggle>().isOn = false;
             storageMenu.SetActive(false);
             print("disabling grid");
             map.SwapTile(greenGrass, tileGrass); //disable grid
@@ -64,6 +65,7 @@ public class UIToggle : MonoBehaviour
             ronaldToggle.GetComponent<Toggle>().isOn = false;
             storageToggle.GetComponent<Toggle>().isOn = false;
             luckToggle.GetComponent<Toggle>().isOn = false;
+            moveToggle.GetComponent<Toggle>().isOn = false;
             ShopMenu.SetActive(false);
             storageMenu.SetActive(false);
             if (roadToggle.GetComponent<Toggle>().isOn == true)
@@ -85,6 +87,7 @@ public class UIToggle : MonoBehaviour
             ronaldToggle.GetComponent<Toggle>().isOn = false;
             storageToggle.GetComponent<Toggle>().isOn = false;
             luckToggle.GetComponent<Toggle>().isOn = false;
+            moveToggle.GetComponent<Toggle>().isOn = false;
             ShopMenu.SetActive(false);
             storageMenu.SetActive(false);
             if (plotToggle.GetComponent<Toggle>().isOn == true)
@@ -106,6 +109,7 @@ public class UIToggle : MonoBehaviour
             ronaldToggle.GetComponent<Toggle>().isOn = false;
             storageToggle.GetComponent<Toggle>().isOn = false;
             luckToggle.GetComponent<Toggle>().isOn = false;
+            moveToggle.GetComponent<Toggle>().isOn = false;
             ShopMenu.SetActive(false);
             storageMenu.SetActive(false);
             if (deleteToggle.GetComponent<Toggle>().isOn == true)
@@ -127,6 +131,7 @@ public class UIToggle : MonoBehaviour
             deleteToggle.GetComponent<Toggle>().isOn = false;
             storageToggle.GetComponent<Toggle>().isOn = false;
             luckToggle.GetComponent<Toggle>().isOn = false;
+            moveToggle.GetComponent<Toggle>().isOn = false;
             ShopMenu.SetActive(false);
             storageMenu.SetActive(false);
             print("disabling grid");
@@ -139,6 +144,7 @@ public class UIToggle : MonoBehaviour
             shopToggle.GetComponent<Toggle>().isOn = false;
             deleteToggle.GetComponent<Toggle>().isOn = false;
             luckToggle.GetComponent<Toggle>().isOn = false;
+            moveToggle.GetComponent<Toggle>().isOn = false;
             ShopMenu.SetActive(false);
             print("disabling grid");
             map.SwapTile(greenGrass, tileGrass); //disable grid
@@ -150,6 +156,36 @@ public class UIToggle : MonoBehaviour
             shopToggle.GetComponent<Toggle>().isOn = false;
             deleteToggle.GetComponent<Toggle>().isOn = false;
             storageToggle.GetComponent<Toggle>().isOn = false;
+            moveToggle.GetComponent<Toggle>().isOn = false;
+            ShopMenu.SetActive(false);
+            print("disabling grid");
+            map.SwapTile(greenGrass, tileGrass); //disable grid
+        }
+        if (sel == signToggle)
+        {
+            roadToggle.GetComponent<Toggle>().isOn = false;
+            plotToggle.GetComponent<Toggle>().isOn = false;
+            shopToggle.GetComponent<Toggle>().isOn = false;
+            deleteToggle.GetComponent<Toggle>().isOn = false;
+            ronaldToggle.GetComponent<Toggle>().isOn = false;
+            storageToggle.GetComponent<Toggle>().isOn = false;
+            luckToggle.GetComponent<Toggle>().isOn = false;
+            moveToggle.GetComponent<Toggle>().isOn = false;
+            storageMenu.SetActive(false);
+            ShopMenu.SetActive(false);
+            print("disabling grid");
+            map.SwapTile(greenGrass, tileGrass); //disable grid
+        }
+        if (sel == moveToggle)
+        {
+            roadToggle.GetComponent<Toggle>().isOn = false;
+            plotToggle.GetComponent<Toggle>().isOn = false;
+            shopToggle.GetComponent<Toggle>().isOn = false;
+            deleteToggle.GetComponent<Toggle>().isOn = false;
+            ronaldToggle.GetComponent<Toggle>().isOn = false;
+            storageToggle.GetComponent<Toggle>().isOn = false;
+            luckToggle.GetComponent<Toggle>().isOn = false;
+            storageMenu.SetActive(false);
             ShopMenu.SetActive(false);
             print("disabling grid");
             map.SwapTile(greenGrass, tileGrass); //disable grid

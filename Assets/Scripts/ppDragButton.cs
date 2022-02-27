@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class ppDragButton : MonoBehaviour
 {
     [SerializeField]
-    private GameObject pendingParent, propParent, ppDrag, externalAudioPlayer, saveloadsystem, shopToggle, shopMenu, missionsPanel, storagePanel, storageToggle, storageController;
+    private GameObject pendingParent, propParent, ppDrag, externalAudioPlayer, saveloadsystem, shopToggle, shopMenu, missionsPanel, storagePanel, storageToggle, storageController, moveToggle, delConfirm;
 
     [SerializeField]
     private Statistics stats;
@@ -162,7 +162,6 @@ public class ppDragButton : MonoBehaviour
 
         if (pp.GetComponent<Draggable>().buildable == true && canBuild == true)
         {
-            
             removePlots(pp.Card, pp.GetComponent<Draggable>().XY);
             // Setting position and parent to main properties -----------
             pp.transform.position = new Vector3(pp.transform.position.x, pp.transform.position.y, getZ(pp.GetComponent<Draggable>().XY));
@@ -209,12 +208,12 @@ public class ppDragButton : MonoBehaviour
             {
                 pp.transform.GetChild(0).gameObject.AddComponent<BoxCollider2D>();
                 pp.transform.GetChild(0).gameObject.GetComponent<BoxCollider2D>().size = new Vector2(float.Parse(pp.Card.influence.Substring(0, 2)) - 0.2f, float.Parse(pp.Card.influence.Substring(pp.Card.influence.Length - 2)) - 0.2f);
-                pp.transform.GetChild(1).gameObject.AddComponent<BoxCollider2D>();
+                pp.transform.GetChild(1).gameObject.AddComponent<BoxCollider2D>().size = new Vector2((float)((double)pp.transform.GetChild(1).gameObject.AddComponent<BoxCollider2D>().size.x * 1.3), (float)((double)pp.transform.GetChild(1).gameObject.AddComponent<BoxCollider2D>().size.y * 1.3));
                 pp.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0; //hide commerce collect
 
                 pp.transform.GetChild(0).gameObject.SetActive(false);
             }
-            if (pp.Card.type == "Deco" && storageToggle.GetComponent<Toggle>().isOn == false)
+            if (pp.Card.type == "Deco" && storageToggle.GetComponent<Toggle>().isOn == false && moveToggle.GetComponent<Toggle>().isOn == false)
             {
                 pp.transform.GetChild(0).gameObject.AddComponent<BoxCollider2D>();
                 pp.transform.GetChild(0).gameObject.GetComponent<BoxCollider2D>().size = new Vector2(float.Parse(pp.Card.influence.Substring(0, 2)) - 0.2f, float.Parse(pp.Card.influence.Substring(pp.Card.influence.Length - 2)) - 0.2f);
@@ -232,7 +231,6 @@ public class ppDragButton : MonoBehaviour
             }
             if (pp.Card.type == "Wonder")
             {
-                
                 stats.GetComponent<Statistics>().builtWonders.Add(pp.Card.displayName);
                 if (pp.Card.wonderBonus >= 100) 
                 { 
@@ -320,6 +318,74 @@ public class ppDragButton : MonoBehaviour
             }
             // ------------------------------------------------------------------
 
+            // ---------- Move House delete old version -------------------------
+            if (moveToggle.GetComponent<Toggle>().isOn == true)
+            {
+                delConfirm.GetComponent<delConfirm>().selProp = Camera.main.GetComponent<SpriteDetector>().moveSelected;
+                delConfirm.GetComponent<delConfirm>().deleteProp();
+                pp.constructEnd = "na";
+                pp.constructStart = "na";
+                if (pp.Card.type == "House") // check to only do these thats only for houses
+                {
+                    pp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signTime = Camera.main.GetComponent<SpriteDetector>().moveSelected.transform.GetChild(0).gameObject.GetComponent<contractScript>().signTime;
+                    pp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signIndex = Camera.main.GetComponent<SpriteDetector>().moveSelected.transform.GetChild(0).gameObject.GetComponent<contractScript>().signIndex;
+                    pp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signCreationTime = Camera.main.GetComponent<SpriteDetector>().moveSelected.transform.GetChild(0).gameObject.GetComponent<contractScript>().signCreationTime;
+
+                    var dateAndTimeVar = System.DateTime.Now;
+                    //print("going check contract for " + pp.name + "which is signtime " + pp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signTime);
+                    if (pp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signTime == "notsigned")
+                    {
+                        pp.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2;
+                        pp.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
+                        print("notsigned");
+                    }
+                    else if (dateAndTimeVar >= DateTime.Parse(pp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signTime))
+                    {
+                        pp.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
+                        pp.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2;
+                        //print("sign over timea alre");
+                    }
+                    else if (dateAndTimeVar < DateTime.Parse(pp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signTime))
+                    {
+                        pp.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
+                        pp.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
+                    }
+                    else
+                    {
+                        pp.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
+                        pp.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2;
+                        //print("sign still ongoiing");
+                    }
+                }
+                else if (pp.Card.type == "Commerce")
+                {
+                    pp.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signTime = Camera.main.GetComponent<SpriteDetector>().moveSelected.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signTime;
+                    pp.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signCreationTime = Camera.main.GetComponent<SpriteDetector>().moveSelected.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signCreationTime;
+                    var dateAndTimeVar = System.DateTime.Now;
+                    //print("going check contract for " + pp.name + "which is signtime " + pp.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signTime);
+                    if (dateAndTimeVar >= DateTime.Parse(pp.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signTime))
+                    {
+                        pp.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2;
+                        //print("sign over time already");
+                    }
+                    else if (dateAndTimeVar < DateTime.Parse(pp.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signTime))
+                    {
+                        pp.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
+                    }
+                    else
+                    {
+                        pp.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
+                        //print("sign still ongoiing");
+                    }
+                }
+                else if (pp.Card.type == "Deco")
+                {
+                    pp.transform.GetChild(0).gameObject.SetActive(false);
+                    ppDrag.SetActive(false);
+                }
+                Camera.main.GetComponent<SpriteDetector>().moveSelected = null;
+            }
+
             if (storageToggle.GetComponent<Toggle>().isOn == true)
             {
                 storageToggle.GetComponent<Toggle>().isOn = false;
@@ -335,12 +401,14 @@ public class ppDragButton : MonoBehaviour
                 }
             }
 
+            
+
             // --------------------- Save Game ----------------------------------
             saveloadsystem.GetComponent<saveloadsystem>().saveGame();
             // ------------------------------------------------------------------
 
             // ------------ Type 1 Missions -------------------------------------
-            if (missionsPanel.GetComponent<missionParent>().missionList != null)
+            if (missionsPanel.GetComponent<missionParent>().missionList != null && moveToggle.GetComponent<Toggle>().isOn == false)
             {
                 foreach (var item in missionsPanel.GetComponent<missionParent>().missionList)
                 {
@@ -438,11 +506,16 @@ public class ppDragButton : MonoBehaviour
             shopMenu.SetActive(true);
             shopMenu.transform.localScale = Vector2.zero;
             shopMenu.transform.LeanScale(new Vector2(73.9463f, 73.9463f), 0.2f).setEaseOutBack();
-        } else
+        } else if (storageToggle.GetComponent<Toggle>().isOn == true)
         {
             storagePanel.SetActive(true);
             storagePanel.transform.localScale = Vector2.zero;
             storagePanel.transform.LeanScale(Vector2.one, 0.2f).setEaseOutBack();
+        }
+        if (moveToggle.GetComponent<Toggle>().isOn == true)
+        {
+            print("remove dark");
+            Camera.main.GetComponent<SpriteDetector>().moveSelected.GetComponent<SpriteRenderer>().material.color = Color.white;
         }
         // --------------------- Swapping to green border grass -------------
         map.SwapTile(greenGrass, tileGrass);

@@ -456,6 +456,7 @@ public class saveloadsystem : MonoBehaviour
             pp.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signTime = comSignTime;
             // add collider to commerce money ----------
             pp.transform.GetChild(1).gameObject.AddComponent<BoxCollider2D>();
+            pp.transform.GetChild(1).gameObject.AddComponent<BoxCollider2D>().size = new Vector2((float)((double)pp.transform.GetChild(1).gameObject.AddComponent<BoxCollider2D>().size.x * 1.3), (float)((double)pp.transform.GetChild(1).gameObject.AddComponent<BoxCollider2D>().size.y * 1.3));
             var dateAndTimeVar = System.DateTime.Now;
             //print("going check contract for " + pp.name + "which is signtime " + pp.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signTime);
             if (pp.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signTime == "notsigned")
@@ -520,6 +521,7 @@ public class saveloadsystem : MonoBehaviour
             {
                 Stats.GetComponent<Statistics>().wonderBonus += pp.Card.wonderBonus;
             }
+            print("add3");
             Stats.GetComponent<Statistics>().builtWonders.Add(pp.Card.displayName);
         }
 

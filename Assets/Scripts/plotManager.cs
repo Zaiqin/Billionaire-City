@@ -123,7 +123,7 @@ public class plotManager : MonoBehaviour
 
             if (clickedTile != null)
             {
-                print("clickedTile.name is " + clickedTile.name + ", tilebase is " + clickedTile);
+                //print("clickedTile.name is " + clickedTile.name + ", tilebase is " + clickedTile);
 
                 if (((i == 1) && clickedTile.name.Contains("greenGrass")) || ((i == 1) && (delete == true)) || ((i == 1) && forced == true) || (clickedTile.name.Contains("plot") && (i > 1)))
                 {
@@ -152,7 +152,7 @@ public class plotManager : MonoBehaviour
                             }
                         } else if (forced == true)
                         {
-                            print("forced set tile");
+                            //print("forced set tile");
                             map.SetTile(gridPosition, createdTile);
                         }
                     }
@@ -203,7 +203,7 @@ public class plotManager : MonoBehaviour
 
     public void belowFunction(Vector3Int input, bool delete, bool forced = false)
     {
-        print("belowFunction called");
+        //print("belowFunction called");
         int cycle = 1;
         int i = 1;
         Vector3Int gridPosition = input;
@@ -246,12 +246,12 @@ public class plotManager : MonoBehaviour
                     createdTile.name = calcTile;
                     if ((i == 1) && (delete == true))
                     {
-                        print("setting to noBelow");
+                        //print("setting to noBelow");
                         map.SetTile(gridPosition, Resources.Load<TileBase>("roadTiles/noBelow"));
                     }
                     else
                     {
-                        print("setting to createdTile");
+                        //print("setting to createdTile");
                         map.SetTile(gridPosition, createdTile);
                     }
                 }
