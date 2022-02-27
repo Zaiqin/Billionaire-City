@@ -70932,6 +70932,7 @@ MonoBehaviour:
   storageToggle: {fileID: 88028603}
   luckToggle: {fileID: 773584274}
   signContractorToggle: {fileID: 133501747}
+  moveToggle: {fileID: 174387926}
   particle: {fileID: 1477764395}
 --- !u!61 &514689984
 BoxCollider2D:

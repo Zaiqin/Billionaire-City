@@ -8,7 +8,7 @@ public class tutorialParent : MonoBehaviour
     public int tutorialPage = 0;
     public Text descText, title;
     public GameObject button, cover, dailyBonus, arrow;
-    public GameObject shopToggle, plotToggle, roadToggle, deleteToggle, ronaldToggle, storageToggle, luckToggle, signContractorToggle;
+    public GameObject shopToggle, plotToggle, roadToggle, deleteToggle, ronaldToggle, storageToggle, luckToggle, signContractorToggle, moveToggle;
     public ParticleSystem particle;
 
     List<string> tutorialList = new List<string>() {
@@ -22,6 +22,7 @@ public class tutorialParent : MonoBehaviour
      "This is the Storage tool. This is where you can see all the items that are in your storage. These items are free to use.",
      "This is the Lucky Draw panel. You can spin the wheel for 1 Gold each and win various prizes!",
      "This is the Signing Contractor tool. This is where you can sign all the houses in your city in one click. \n\nNote that it takes time to calculate and has a taxation of 20% of the signing cost and 1 Gold",
+     "This is the Move tool. \n\nUse this tool to move properties around in your city.",
      "Congratulations for finishing the tutorial! You have now mastered the basics of money making! \n\nGood Luck and all the best!"
     };
 
@@ -36,6 +37,7 @@ public class tutorialParent : MonoBehaviour
      "Storage Tool",
      "Lucky Draw Panel",
      "Contractor Tool",
+     "Move Tool",
      "Congratulations!"
     };
 
@@ -93,6 +95,8 @@ public class tutorialParent : MonoBehaviour
                     arrow.transform.eulerAngles = new Vector3(0, 180, 0); break;
             case 9: arrow.transform.position = new Vector3(signContractorToggle.transform.position.x - arrow.GetComponent<BoxCollider2D>().bounds.size.x - plotToggle.GetComponent<CircleCollider2D>().bounds.size.x / 4, signContractorToggle.transform.position.y, 0);
                     arrow.transform.eulerAngles = new Vector3(0, 180, 0); break;
+            case 10: arrow.transform.position = new Vector3(moveToggle.transform.position.x - arrow.GetComponent<BoxCollider2D>().bounds.size.x - plotToggle.GetComponent<CircleCollider2D>().bounds.size.x / 4, moveToggle.transform.position.y, 0);
+                     arrow.transform.eulerAngles = new Vector3(0, 180, 0); break;
             default: arrow.transform.position = new Vector3(0, (Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0))).y + arrow.GetComponent<BoxCollider2D>().bounds.size.y, 0); arrow.transform.eulerAngles = new Vector3(0, 0, 0); break;
         }
     }
