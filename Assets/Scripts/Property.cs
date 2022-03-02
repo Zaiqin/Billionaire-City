@@ -218,47 +218,6 @@ public class Property : MonoBehaviour, IPointerClickHandler
             this.gameObject.GetComponent<SpriteRenderer>().color = Color.red;
 
         }
-        else if (this.transform.parent == propParent.transform && GameObject.Find("Canvas").GetComponent<toggleMaster>().checkAllOff() == true && GameObject.Find("moveContractorToggle").GetComponent<Toggle>().isOn == false)
-        {
-            if ((this.Card.type == "House" && this.gameObject.transform.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder != 2 && this.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder != 2 && this.gameObject.transform.GetChild(3).GetComponent<SpriteRenderer>().sortingOrder != 2)
-                || (this.Card.type == "Commerce" && this.gameObject.transform.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder != 2)
-                || (this.Card.type == "Deco")
-                || (this.Card.type == "Wonder")
-                || (this.GetComponent<Property>().constructEnd != null && this.GetComponent<Property>().constructEnd != "na"))
-            {
-                    infoPanel.SetActive(true);
-                    infoPanel.transform.localScale = Vector2.zero;
-                    infoPanel.transform.LeanScale(Vector2.one, 0.2f).setEaseOutBack();
-                    infoPanel.GetComponent<infoScript>().selProp = this.gameObject;
-                    if (infoPanel.GetComponent<infoScript>().highlightedProp != null)
-                    {
-                        if (infoPanel.GetComponent<infoScript>().highlightedProp.transform.childCount > 4 && infoPanel.GetComponent<infoScript>().highlightedProp.name != this.gameObject.name)
-                        {
-                            print("Destroy this");
-                            Destroy(infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(4).gameObject);
-                        }
-                    }
-                    infoPanel.GetComponent<infoScript>().initInfo();
-
-                    print("show info Panel");
-                    infoPanel.GetComponent<infoScript>().rightSide = true;
-                    infoPanel.transform.position = new Vector3(0.2f + this.gameObject.transform.position.x + (infoPanel.GetComponent<BoxCollider2D>().bounds.size.x / 2) + float.Parse(this.GetComponent<Property>().Card.space.Substring(0, 1)), this.gameObject.transform.position.y + (infoPanel.GetComponent<BoxCollider2D>().bounds.size.y / 4) + 1f, 0f);
-                    if (infoPanel.transform.position.x + (infoPanel.GetComponent<BoxCollider2D>().bounds.size.x / 2) + 0.6f > (Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0))).x)
-                    {
-                        print("show infoPanel on left side of house");
-                        infoPanel.GetComponent<infoScript>().rightSide = false;
-                        infoPanel.transform.position = new Vector3(-0.2f + this.gameObject.transform.position.x - (infoPanel.GetComponent<BoxCollider2D>().bounds.size.x / 2), this.gameObject.transform.position.y + (infoPanel.GetComponent<BoxCollider2D>().bounds.size.y / 4) + 1f, 0f);
-                    }
-                    print("info localpos is " + infoPanel.transform.localPosition);
-                    /*infoPanel.transform.localScale = Vector2.zero;
-                    infoPanel.transform.LeanScale(Vector2.one, 0.1f);*/
-            }
-            GameObject hqmenu = GameObject.Find("HQStats");
-            if (hqmenu != null)
-            {
-                hqmenu.SetActive(false);
-            }
-        }
         if (this.Card.type == "House" && GameObject.Find("moveContractorToggle").GetComponent<Toggle>().isOn == false)
         {
             if (this.transform.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder == 0 && this.gameObject.transform.GetChild(3).GetComponent<SpriteRenderer>().sortingOrder != 2 && this.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder == 0 && this.transform.childCount <= 4 && this.transform.parent.name == "Properties" && GameObject.Find("Canvas").GetComponent<toggleMaster>().checkAllOff() == true)
@@ -286,6 +245,47 @@ public class Property : MonoBehaviour, IPointerClickHandler
             GameObject influence = this.transform.GetChild(0).gameObject;
             influence.SetActive(true);
             influence.GetComponent<influence>().detectInfluence();
+        }
+        if (this.transform.parent == propParent.transform && GameObject.Find("Canvas").GetComponent<toggleMaster>().checkAllOff() == true && GameObject.Find("moveContractorToggle").GetComponent<Toggle>().isOn == false)
+        {
+            if ((this.Card.type == "House" && this.gameObject.transform.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder != 2 && this.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder != 2 && this.gameObject.transform.GetChild(3).GetComponent<SpriteRenderer>().sortingOrder != 2)
+                || (this.Card.type == "Commerce" && this.gameObject.transform.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder != 2)
+                || (this.Card.type == "Deco")
+                || (this.Card.type == "Wonder")
+                || (this.GetComponent<Property>().constructEnd != null && this.GetComponent<Property>().constructEnd != "na"))
+            {
+                infoPanel.SetActive(true);
+                infoPanel.transform.localScale = Vector2.zero;
+                infoPanel.transform.LeanScale(Vector2.one, 0.2f).setEaseOutBack();
+                infoPanel.GetComponent<infoScript>().selProp = this.gameObject;
+                if (infoPanel.GetComponent<infoScript>().highlightedProp != null)
+                {
+                    if (infoPanel.GetComponent<infoScript>().highlightedProp.transform.childCount > 4 && infoPanel.GetComponent<infoScript>().highlightedProp.name != this.gameObject.name)
+                    {
+                        print("Destroy this");
+                        Destroy(infoPanel.GetComponent<infoScript>().highlightedProp.transform.GetChild(4).gameObject);
+                    }
+                }
+                infoPanel.GetComponent<infoScript>().initInfo();
+
+                print("show info Panel");
+                infoPanel.GetComponent<infoScript>().rightSide = true;
+                infoPanel.transform.position = new Vector3(0.2f + this.gameObject.transform.position.x + (infoPanel.GetComponent<BoxCollider2D>().bounds.size.x / 2) + float.Parse(this.GetComponent<Property>().Card.space.Substring(0, 1)), this.gameObject.transform.position.y + (infoPanel.GetComponent<BoxCollider2D>().bounds.size.y / 4) + 1f, 0f);
+                if (infoPanel.transform.position.x + (infoPanel.GetComponent<BoxCollider2D>().bounds.size.x / 2) + 0.6f > (Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0))).x)
+                {
+                    print("show infoPanel on left side of house");
+                    infoPanel.GetComponent<infoScript>().rightSide = false;
+                    infoPanel.transform.position = new Vector3(-0.2f + this.gameObject.transform.position.x - (infoPanel.GetComponent<BoxCollider2D>().bounds.size.x / 2), this.gameObject.transform.position.y + (infoPanel.GetComponent<BoxCollider2D>().bounds.size.y / 4) + 1f, 0f);
+                }
+                print("info localpos is " + infoPanel.transform.localPosition);
+                /*infoPanel.transform.localScale = Vector2.zero;
+                infoPanel.transform.LeanScale(Vector2.one, 0.1f);*/
+            }
+            GameObject hqmenu = GameObject.Find("HQStats");
+            if (hqmenu != null)
+            {
+                hqmenu.SetActive(false);
+            }
         }
     }
 
