@@ -162,7 +162,7 @@ public class SpriteDetector : MonoBehaviour
         {
             print("hit a property in spritedetector");
 
-            if (hit.collider.GetComponent<Property>().Card.type == "Commerce")
+            if (hit.collider.GetComponent<Property>().Card.type == "Commerce" && hit.collider.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signTime != "notsigned")
             {
                 var diff = DateTime.Parse(hit.collider.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signTime) - System.DateTime.Now;
 

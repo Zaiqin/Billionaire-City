@@ -50,7 +50,7 @@ public class Property : MonoBehaviour, IPointerClickHandler
             money.name = "Money";
             SpriteRenderer moneyrenderer = money.AddComponent<SpriteRenderer>();
             Sprite moneySprite = Resources.Load<Sprite>("moneyPickup");
-            moneyrenderer.sprite = Sprite.Create(moneySprite.texture, new Rect(0, 0, moneySprite.texture.width, moneySprite.texture.height), new Vector2(0.5f, 0.5f), 980);
+            moneyrenderer.sprite = Sprite.Create(moneySprite.texture, new Rect(0, 0, moneySprite.texture.width, moneySprite.texture.height), new Vector2(0.5f, 0.5f), 130);
             money.AddComponent<scaleLerper>();
             moneyrenderer.sortingOrder = 0; // Hides it
             money.transform.parent = this.transform;
