@@ -265,6 +265,7 @@ public class ppDragButton : MonoBehaviour
                 {
                     stats.GetComponent<Statistics>().wonderBonus += pp.Card.wonderBonus;
                 }
+                shopToggle.GetComponent<shopButton>().requireReload = true;
             }
             
             if (pp.Card.type != "Deco")
