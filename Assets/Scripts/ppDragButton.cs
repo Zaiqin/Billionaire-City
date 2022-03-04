@@ -224,20 +224,29 @@ public class ppDragButton : MonoBehaviour
                     print("sign time is " + datetime);
                 }
             }
-            if (pp.Card.type == "Deco" && storageToggle.GetComponent<Toggle>().isOn == false && moveToggle.GetComponent<Toggle>().isOn == false)
+            if (pp.Card.type == "Deco")
             {
-                pp.transform.GetChild(0).gameObject.AddComponent<BoxCollider2D>();
-                pp.transform.GetChild(0).gameObject.GetComponent<BoxCollider2D>().size = new Vector2(float.Parse(pp.Card.influence.Substring(0, 2)) - 0.2f, float.Parse(pp.Card.influence.Substring(pp.Card.influence.Length - 2)) - 0.2f);
-                shopToggle.GetComponent<Toggle>().isOn = true;
-                GameObject a = Instantiate(pp.gameObject);
-                a.transform.parent = pendingParent.transform;
-                pendingParent.transform.GetChild(0).gameObject.transform.position = new Vector3(a.transform.position.x, a.transform.position.y, -8);
-                pendingParent.transform.GetChild(0).GetComponent<Draggable>().dragEnabled = true;
-                a.GetComponent<Property>().Card = pp.Card;
-                a.GetComponent<BlinkingProperty>().invokeStart();
-                Destroy(a.transform.GetChild(0).GetComponent<BoxCollider2D>());
-                pp.transform.GetChild(0).gameObject.SetActive(false);
-                pp.constructEnd = "na"; pp.constructStart = "na";
+                if (storageToggle.GetComponent<Toggle>().isOn == false && moveToggle.GetComponent<Toggle>().isOn == false)
+                {
+                    pp.transform.GetChild(0).gameObject.AddComponent<BoxCollider2D>();
+                    pp.transform.GetChild(0).gameObject.GetComponent<BoxCollider2D>().size = new Vector2(float.Parse(pp.Card.influence.Substring(0, 2)) - 0.2f, float.Parse(pp.Card.influence.Substring(pp.Card.influence.Length - 2)) - 0.2f);
+                    shopToggle.GetComponent<Toggle>().isOn = true;
+                    GameObject a = Instantiate(pp.gameObject);
+                    a.transform.parent = pendingParent.transform;
+                    pendingParent.transform.GetChild(0).gameObject.transform.position = new Vector3(a.transform.position.x, a.transform.position.y, -8);
+                    pendingParent.transform.GetChild(0).GetComponent<Draggable>().dragEnabled = true;
+                    a.GetComponent<Property>().Card = pp.Card;
+                    a.GetComponent<BlinkingProperty>().invokeStart();
+                    Destroy(a.transform.GetChild(0).GetComponent<BoxCollider2D>());
+                    pp.transform.GetChild(0).gameObject.SetActive(false);
+                    pp.constructEnd = "na"; pp.constructStart = "na";
+                } else if (moveToggle.GetComponent<Toggle>().isOn == true)
+                {
+                    pp.transform.GetChild(0).gameObject.AddComponent<BoxCollider2D>();
+                    pp.transform.GetChild(0).gameObject.GetComponent<BoxCollider2D>().size = new Vector2(float.Parse(pp.Card.influence.Substring(0, 2)) - 0.2f, float.Parse(pp.Card.influence.Substring(pp.Card.influence.Length - 2)) - 0.2f);
+                    pp.transform.GetChild(0).gameObject.SetActive(false);
+                    pp.constructEnd = "na"; pp.constructStart = "na";
+                }
 
             }
             if (pp.Card.type == "Wonder")
@@ -527,6 +536,7 @@ public class ppDragButton : MonoBehaviour
         {
             print("remove dark");
             Camera.main.GetComponent<SpriteDetector>().moveSelected.GetComponent<SpriteRenderer>().material.color = Color.white;
+            Camera.main.GetComponent<SpriteDetector>().moveSelected = null;
         }
         // --------------------- Swapping to green border grass -------------
         map.SwapTile(greenGrass, tileGrass);

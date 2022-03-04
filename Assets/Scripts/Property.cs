@@ -218,19 +218,6 @@ public class Property : MonoBehaviour, IPointerClickHandler
             this.gameObject.GetComponent<SpriteRenderer>().color = Color.red;
 
         }
-        if (this.Card.type == "House" && GameObject.Find("moveContractorToggle").GetComponent<Toggle>().isOn == false)
-        {
-            if (this.transform.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder == 0 && this.gameObject.transform.GetChild(3).GetComponent<SpriteRenderer>().sortingOrder != 2 && this.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder == 0 && this.transform.childCount <= 4 && this.transform.parent.name == "Properties" && GameObject.Find("Canvas").GetComponent<toggleMaster>().checkAllOff() == true)
-            {
-                GameObject decoObj = Instantiate(Resources.Load<GameObject>("decoObj"), new Vector3(this.transform.position.x + (float.Parse(this.Card.space.Substring(0, 1))) / 2, this.transform.position.y, -5f), Quaternion.identity) as GameObject;
-                decoObj.transform.parent = this.gameObject.transform;
-                decoObj.transform.GetChild(1).GetComponent<TextMesh>().text = "+" + bonus.ToString() + "%";
-            }
-            if (this.transform.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder == 2)
-            {
-                this.transform.GetChild(1).GetComponent<moneyPickupScript>().collectMoney();
-            }
-        }
         if (this.Card.type == "Commerce" && GameObject.Find("moveContractorToggle").GetComponent<Toggle>().isOn == false && this.transform.parent.name == "Properties" && GameObject.Find("Canvas").GetComponent<toggleMaster>().checkAllOff() == true && this.gameObject.transform.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder != 2)
         {
             print("2");
@@ -238,13 +225,6 @@ public class Property : MonoBehaviour, IPointerClickHandler
             influence.SetActive(true);
             influence.GetComponent<influence>().detectInfluence();
             GameObject.Find("Main Camera").GetComponent<SpriteDetector>().selectedCommerce = this.gameObject;
-        }
-        if (this.Card.type == "Deco" && this.transform.parent.name == "Properties" && GameObject.Find("Canvas").GetComponent<toggleMaster>().checkAllOff() == true && GameObject.Find("moveContractorToggle").GetComponent<Toggle>().isOn == false)
-        {
-            print("clicked in deco");
-            GameObject influence = this.transform.GetChild(0).gameObject;
-            influence.SetActive(true);
-            influence.GetComponent<influence>().detectInfluence();
         }
         if (this.transform.parent == propParent.transform && GameObject.Find("Canvas").GetComponent<toggleMaster>().checkAllOff() == true && GameObject.Find("moveContractorToggle").GetComponent<Toggle>().isOn == false)
         {
@@ -287,6 +267,27 @@ public class Property : MonoBehaviour, IPointerClickHandler
                 hqmenu.SetActive(false);
             }
         }
+        if (this.Card.type == "House" && GameObject.Find("moveContractorToggle").GetComponent<Toggle>().isOn == false)
+        {
+            if (this.transform.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder == 0 && this.gameObject.transform.GetChild(3).GetComponent<SpriteRenderer>().sortingOrder != 2 && this.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder == 0 && this.transform.childCount <= 4 && this.transform.parent.name == "Properties" && GameObject.Find("Canvas").GetComponent<toggleMaster>().checkAllOff() == true)
+            {
+                GameObject decoObj = Instantiate(Resources.Load<GameObject>("decoObj"), new Vector3(this.transform.position.x + (float.Parse(this.Card.space.Substring(0, 1))) / 2, this.transform.position.y, -5f), Quaternion.identity) as GameObject;
+                decoObj.transform.parent = this.gameObject.transform;
+                decoObj.transform.GetChild(1).GetComponent<TextMesh>().text = "+" + bonus.ToString() + "%";
+            }
+            if (this.transform.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder == 2)
+            {
+                this.transform.GetChild(1).GetComponent<moneyPickupScript>().collectMoney();
+            }
+        }
+        if (this.Card.type == "Deco" && this.transform.parent.name == "Properties" && GameObject.Find("Canvas").GetComponent<toggleMaster>().checkAllOff() == true && GameObject.Find("moveContractorToggle").GetComponent<Toggle>().isOn == false)
+        {
+            print("clicked in deco");
+            GameObject influence = this.transform.GetChild(0).gameObject;
+            influence.SetActive(true);
+            influence.GetComponent<influence>().detectInfluence();
+        }
+        
     }
 
     private void Update()

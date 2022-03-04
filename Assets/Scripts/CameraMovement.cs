@@ -124,6 +124,10 @@ public class CameraMovement : MonoBehaviour
                 infoPanel.GetComponent<infoScript>().selProp.transform.GetChild(0).GetComponent<influence>().removeHighlights();
             }
         }
+        if (this.GetComponent<SpriteDetector>().moveSelected != null)
+        {
+            this.GetComponent<SpriteDetector>().moveSelected.GetComponent<SpriteRenderer>().material.color = Color.gray;
+        }
     }
 
     void setDrag()
