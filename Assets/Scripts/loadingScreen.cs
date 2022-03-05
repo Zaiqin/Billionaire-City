@@ -23,7 +23,7 @@ public class loadingScreen : MonoBehaviour
         extAudio.GetComponent<AudioSource>().PlayOneShot(introAudio);
 
         bgPan.GetComponent<CanvasGroup>().LeanAlpha(1f, 3f);
-        bgPan.transform.LeanMoveLocalY(titleImage.transform.position.y - 400, 25f);
+        bgPan.transform.LeanMoveLocalY(titleImage.transform.position.y - 350, 25f);
         titleImage.GetComponent<CanvasGroup>().LeanAlpha(1f, 1f);
         titleImage.transform.LeanScale(new Vector2(1.6f, 1.6f), 6f);
         yield return new WaitForSeconds(10f);
@@ -33,7 +33,7 @@ public class loadingScreen : MonoBehaviour
         bgPan.GetComponent<CanvasGroup>().LeanAlpha(0.2f, 1.5f);
         yield return new WaitForSeconds(2f);
 
-        t.GetComponent<Text>().text = "Created by Phua Zai Qin";
+        t.GetComponent<Text>().text = "Created by ZQStudios";
         t.GetComponent<CanvasGroup>().LeanAlpha(1f, 0.5f);
         yield return new WaitForSeconds(3f);
         t.GetComponent<CanvasGroup>().LeanAlpha(0f, 0.5f);
