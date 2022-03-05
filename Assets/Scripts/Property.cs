@@ -190,11 +190,11 @@ public class Property : MonoBehaviour, IPointerClickHandler
                 if (refund >= 100000000)
                 {
                     string temp = refund.ToString("#,##0");
-                    delPopup.transform.GetChild(1).GetComponent<Text>().text = "$" + temp.Substring(0, temp.Length - 8) + "M";
+                    delPopup.transform.GetChild(4).GetComponent<Text>().text = "$" + temp.Substring(0, temp.Length - 8) + "M";
                 }
                 else
                 {
-                    delPopup.transform.GetChild(1).GetComponent<Text>().text = "$" + refund.ToString("#,##0");
+                    delPopup.transform.GetChild(4).GetComponent<Text>().text = "$" + refund.ToString("#,##0");
                 }
                 print("refund convert from gold is " + refund);
             }
@@ -204,11 +204,11 @@ public class Property : MonoBehaviour, IPointerClickHandler
                 if (refund >= 100000000)
                 {
                     string temp = refund.ToString("#,##0");
-                    delPopup.transform.GetChild(1).GetComponent<Text>().text = "$" + temp.Substring(0, temp.Length - 8) + "M";
+                    delPopup.transform.GetChild(4).GetComponent<Text>().text = "$" + temp.Substring(0, temp.Length - 8) + "M";
                 }
                 else
                 {
-                    delPopup.transform.GetChild(1).GetComponent<Text>().text = "$" + refund.ToString("#,##0");
+                    delPopup.transform.GetChild(4).GetComponent<Text>().text = "$" + refund.ToString("#,##0");
                 }
                 print("refund is " + refund);
             }
