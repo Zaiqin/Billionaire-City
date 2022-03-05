@@ -101,7 +101,7 @@ public class DemoCell : MonoBehaviour, ICell
                 secondImg.sprite = size;
                 thirdImg.sprite = radius;
                 fourthImg.enabled = false;
-                firstText.text = propertyCard.decoBonus.ToString() + "%";
+                firstText.text = propertyCard.decoBonus.ToString() + "% Bonus";
                 secondText.text = propertyCard.space;
                 thirdText.text = propertyCard.influence;
                 fourthText.text = "";
