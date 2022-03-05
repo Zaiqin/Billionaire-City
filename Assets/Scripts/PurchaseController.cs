@@ -60,7 +60,7 @@ public class PurchaseController : MonoBehaviour
 
         // unhide propertyDrag buttons and placing it at grid center of property
         ppDrag.SetActive(true);
-        ppDrag.transform.position = new Vector3(pp.transform.position.x + (float.Parse(prop.space.Substring(0, 1))) / 2, pp.transform.position.y - 1f, ppDrag.transform.position.z);
+        ppDrag.transform.position = new Vector3(pp.transform.position.x + (float.Parse(prop.space.Substring(0, 1))) / 2, pp.transform.position.y - 0.5f, ppDrag.transform.position.z);
         
     }
 

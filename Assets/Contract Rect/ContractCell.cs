@@ -18,6 +18,8 @@ public class ContractCell : MonoBehaviour, ICell
     public Text xpText;
     public Text tenantsText;
     public Text costText;
+    public Text timeText;
+    public Text titleText;
 
     public long signAllCost;
 
@@ -153,7 +155,7 @@ public class ContractCell : MonoBehaviour, ICell
     public void ConfigureCell(Sprite bgSprite, PropertyCard pCard, int cellIndex, GameObject selProp, bool contractor, bool goCalc)
     {
         _cellIndex = cellIndex;
-        bgImage.sprite = bgSprite;
+        //bgImage.sprite = bgSprite;
 
         this.contractor = contractor;
 
@@ -236,6 +238,46 @@ public class ContractCell : MonoBehaviour, ICell
                     costText.text = "$" + totalCost.ToString("#,##0");
                 }
             }
+        }
+        switch (cellIndex)
+        {
+            case 0:
+                titleText.text = "Visitors";
+                timeText.text = "3 mins"; 
+                break;
+            case 1:
+                titleText.text = "Backpackers";
+                timeText.text = "30 mins";
+                break;
+            case 2:
+                titleText.text = "Tourists";
+                timeText.text = "1 hr";
+                break;
+            case 3:
+                titleText.text = "Globetrotters";
+                timeText.text = "4 hrs";
+                break;           
+            case 4:
+                titleText.text = "Officers";
+                timeText.text = "8 hrs";
+                break;
+            case 5:
+                titleText.text = "Executives";
+                timeText.text = "12 hrs";
+                break;
+            case 6:
+                titleText.text = "Managers";
+                timeText.text = "1 day";
+                break;
+            case 7:
+                titleText.text = "Directors";
+                timeText.text = "2 days";
+                break;
+            case 8:
+                titleText.text = "Officials";
+                timeText.text = "3 days";
+                break;
+            default: break;
         }
     }
 
