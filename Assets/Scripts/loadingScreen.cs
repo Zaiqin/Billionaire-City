@@ -6,16 +6,24 @@ using UnityEngine.UI;
 public class loadingScreen : MonoBehaviour
 {
     public AudioSource cam;
-    public GameObject t, bgPan, titleImage, cover, skipCover, extAudio, tutorialScreen;
+    public GameObject t, bgPan, titleImage, cover, skipCover, extAudio, tutorialScreen, internetObj, webObj;
     public AudioClip introAudio;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        //Invoke("closeIntro", 10.0f);
-        StartCoroutine(Intro());
+        if (Application.internetReachability == NetworkReachability.NotReachable)
+        {
+            internetObj.SetActive(true);
+            skipCover.SetActive(true);
+        }
+        else
+        {
+            webObj.GetComponent<webDownloader>().downloadStats();
+            StartCoroutine(Intro());
 
-        cover.SetActive(true);
+            cover.SetActive(true);
+        }
     }
 
     private IEnumerator Intro()
@@ -92,6 +100,7 @@ public class loadingScreen : MonoBehaviour
 
     void closeIntro()
     {
+        print("closing intro");
         if (tutorialScreen.activeSelf == false)
         {
             cover.SetActive(false);
@@ -102,6 +111,9 @@ public class loadingScreen : MonoBehaviour
 
     public void skipIntro()
     {
-        StartCoroutine(skipIntroAnim());
+        if (internetObj.activeSelf == false)
+        {
+            StartCoroutine(skipIntroAnim());
+        }
     }
 }

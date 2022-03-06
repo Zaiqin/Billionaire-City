@@ -70,7 +70,7 @@ public class saveloadsystem : MonoBehaviour
     public GameObject PropertiesParent, Stats, expPopup, cityText, hq, dailyBonus, ppDragButton, Astar, missionParent, storageController;
     public GameObject cover, tutorialPanel, loadingScreen;
     public InputField nameField;
-    public void Start()
+    public void StartGame()
     {
         //print("Attempting to Load Save Game");
         string testString = FileHandler.ReadRawFromJSON("propsSave.json");

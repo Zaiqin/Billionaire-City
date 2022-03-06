@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public class CSVReader : MonoBehaviour
 {
-    [SerializeField]
-    private TextAsset textAssetData;
+    public GameObject saveloadobj, statsObj;
+    public TextAsset textAssetData;
     public List<Mission> missionList = new List<Mission>();
 
     public Dictionary<int, long> levelValues = new Dictionary<int, long>();
@@ -49,8 +49,8 @@ public class CSVReader : MonoBehaviour
         //print("No of property sprites in resource folder: " + propSprites.Count);
 
         //Setup for reading CSV files ----------------------------------------------------------------------
-        string TitleLine = textAssetData.text.Split(new string[] { "\r\n" }, StringSplitOptions.None)[0];
-        string[] data = textAssetData.text.Split(new string[] { ",", "\r\n" }, StringSplitOptions.None);
+        string TitleLine = textAssetData.text.Split(new string[] { "\n" }, StringSplitOptions.None)[0]; //If use local excel change to \r\n
+        string[] data = textAssetData.text.Split(new string[] { ",", "\n" }, StringSplitOptions.None);  //If use local excel change to \r\n
         int cols = 1;
         
         //To find out how many kinds of Attributes ---------------------------------------------------------
@@ -299,6 +299,8 @@ public class CSVReader : MonoBehaviour
         print("max deco reach after calc is " + maxDecoReach);
 
         print("Completed reading CSV data");
+        saveloadobj.GetComponent<saveloadsystem>().StartGame();
+        statsObj.GetComponent<Statistics>().initStats();
     }
 
     public static void RemoveAt<T>(ref T[] arr, int index)

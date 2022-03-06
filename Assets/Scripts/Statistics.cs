@@ -51,7 +51,7 @@ public class Statistics : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    public void initStats()
     {
         levelValues = csvObj.GetComponent<CSVReader>().levelValues;
         updateStats();

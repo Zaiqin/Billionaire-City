@@ -25,9 +25,13 @@ public class RecyclableScrollerDemo : MonoBehaviour, IRecyclableScrollRectDataSo
     //Recyclable scroll rect's data source must be assigned in Awake.
     private void Awake()
     {
+        _recyclableScrollRect.DataSource = this;
+    }
+
+    public void initCSV()
+    {
         CSVObject.ReadCSV();
         pCardArrays = CSVObject.propertyCardArrays;
-        _recyclableScrollRect.DataSource = this;
     }
 
     #region DATA-SOURCE
