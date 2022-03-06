@@ -347,14 +347,14 @@ public class Property : MonoBehaviour, IPointerClickHandler
                 {
                     this.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2;
                 }
-                else if (Card.type == "Commerce" && this.gameObject.transform.parent.GetChild(1).GetComponent<commercePickupScript>().signTime == "notsigned")
+                else if (Card.type == "Commerce" && this.gameObject.transform.GetChild(1).GetComponent<commercePickupScript>().signTime == "notsigned")
                 {
                     DateTime theTime;
                     theTime = DateTime.Now.AddMinutes(3);
                     print("signing property commerce again");
                     string datetime = theTime.ToString("yyyy/MM/dd HH:mm:ss");
-                    this.gameObject.transform.parent.GetChild(1).GetComponent<commercePickupScript>().signTime = datetime;
-                    this.gameObject.transform.parent.GetChild(1).GetComponent<commercePickupScript>().signCreationTime = System.DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                    this.gameObject.transform.GetChild(1).GetComponent<commercePickupScript>().signTime = datetime;
+                    this.gameObject.transform.GetChild(1).GetComponent<commercePickupScript>().signCreationTime = System.DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                     print("sign time is " + datetime);
                 }
             }
