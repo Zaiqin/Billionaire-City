@@ -217,8 +217,15 @@ public class CSVReader : MonoBehaviour
             }
             // -----------------------------------------------------------------------------------------------
             CardDatabase.Add(tempArray[i].displayName, tempArray[i]);
+            //print("Adding Card " + tempArray[i].displayName + " to card database");
             // END OF INITIALISATION OF PROPERTY, BELOW IS TO DETECT LAST OF EACH TYPE OF PROPERTY ----------
 
+            if (tempArray[i].limited != null && tempArray[i].limited == "ENDED")
+            {
+                print("Removing " + tempArray[i].displayName + " from shop");
+                RemoveAt(ref tempArray, i);
+                i--;
+            }
             // IF REACH LAST OF EACH TYPE, RESET i SO THAT WHEN IT LOOPS AGAIN IT IS i=0, SO NEXT ARRAY WILL START FROM i=0.
             if (data[cols * (masterNo + 2) + 17] == "LAST HOUSE")
             {
@@ -294,4 +301,15 @@ public class CSVReader : MonoBehaviour
         print("Completed reading CSV data");
     }
 
+    public static void RemoveAt<T>(ref T[] arr, int index)
+    {
+        for (int a = index; a < arr.Length - 1; a++)
+        {
+            // moving elements downwards, to fill the gap at [index]
+            arr[a] = arr[a + 1];
+        }
+        // finally, let's decrement Array's size by one
+        Array.Resize(ref arr, arr.Length - 1);
+        //print("There is now " + arr.Length);
+    }
 }

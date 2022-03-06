@@ -35,7 +35,7 @@ public class levelUp : MonoBehaviour
                 for (int i = oldLevel+1; i <= newLevel; i++)
                 {
                     //print("checking for level " + i);
-                    if (entry.Value.level == i)
+                    if (entry.Value.level == i && entry.Value.limited != "ENDED")
                     {
                         print("unlocked " + entry.Value.displayName);
                         spriteList.Add(entry.Value.bgImage);
