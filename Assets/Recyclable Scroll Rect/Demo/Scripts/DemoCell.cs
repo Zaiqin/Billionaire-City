@@ -17,6 +17,7 @@ public class DemoCell : MonoBehaviour, ICell
     public Button buyButton;
     public Button infoButton;
     public GameObject infoParent;
+    public GameObject limited;
     public Image infoBG;
     public Sprite infoBg2;
     public Sprite infoBg3;
@@ -153,6 +154,13 @@ public class DemoCell : MonoBehaviour, ICell
         } else
         {
             lockParent.SetActive(false);
+        }
+        if (propertyCard.limited == "YES")
+        {
+            limited.SetActive(true);
+        } else
+        {
+            limited.SetActive(false);
         }
     }
 

@@ -155,8 +155,9 @@ public class CSVReader : MonoBehaviour
             tempArray[i].xponeday = string.IsNullOrEmpty(data[(cols * (masterNo + 2)) + 29]) ? 0 : int.Parse(data[(cols * (masterNo + 2)) + 29]);
             tempArray[i].xptwodays = string.IsNullOrEmpty(data[(cols * (masterNo + 2)) + 30]) ? 0 : int.Parse(data[(cols * (masterNo + 2)) + 30]);
             tempArray[i].xpthreedays = string.IsNullOrEmpty(data[(cols * (masterNo + 2)) + 31]) ? 0 : int.Parse(data[(cols * (masterNo + 2)) + 31]);
+            tempArray[i].limited = string.IsNullOrEmpty(data[(cols * (masterNo + 2)) + 32]) ? "" : data[(cols * (masterNo + 2)) + 32];
             //-- Level values and First/last level column ---
-            tempArray[i].wonderBonus = string.IsNullOrEmpty(data[(cols * (masterNo + 2)) + 34]) ? 0 : int.Parse(data[(cols * (masterNo + 2)) + 34]);
+            tempArray[i].wonderBonus = string.IsNullOrEmpty(data[(cols * (masterNo + 2)) + 35]) ? 0 : int.Parse(data[(cols * (masterNo + 2)) + 35]);
             //---------------------------------
 
             //--- Determine type of property ------
@@ -254,14 +255,14 @@ public class CSVReader : MonoBehaviour
         for (int i = 1; i < data.Length; i++)
         {
             //print("reading " + data[(cols * (i)) + 32]);
-            levelValues.Add(i, long.Parse(data[(cols * (i)) + 32]));
+            levelValues.Add(i, long.Parse(data[(cols * (i)) + 33]));
             /* FormatException: Input string was not in a correct format.
              * 
              * To fix issue, make sure levels in csv file do not have the E+11 to it, but in full numbers
              * select the level values with E+xx, format cells > numbers > decimal places = 0
              * 
              */
-            if (data[(cols * (i)) + 33] == "Last Level")
+            if (data[(cols * (i)) + 34] == "Last Level")
             {
                 //print("reached last level");
                 break;
@@ -272,8 +273,8 @@ public class CSVReader : MonoBehaviour
         
         for (int i = 1; i < data.Length; i++)
         {
-            missionList.Add(new Mission(data[(cols * (i)) + 35], data[(cols * (i)) + 36], int.Parse(data[(cols * (i)) + 37]), data[(cols * (i)) + 38], false));
-            if (data[(cols * (i)) + 39] == "Last Mission"){
+            missionList.Add(new Mission(data[(cols * (i)) + 36], data[(cols * (i)) + 37], int.Parse(data[(cols * (i)) + 38]), data[(cols * (i)) + 39], false));
+            if (data[(cols * (i)) + 40] == "Last Mission"){
                 print("There are " + i + " Missions");
                 break;
             }

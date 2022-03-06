@@ -34,6 +34,7 @@ public class PropertyCard
     public int xponeday;
     public int xptwodays;
     public int xpthreedays;
+    public string limited;
     public int wonderBonus;
     public Sprite bgImage;
     public Sprite propImage;
