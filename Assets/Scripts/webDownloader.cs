@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -16,16 +15,6 @@ public class webDownloader : MonoBehaviour
         StartCoroutine(GetText());
     }
 
-    TextAsset ConvertStringToTextAsset(string text)
-    {
-        string temporaryTextFileName = "TemporaryTextFile";
-        File.WriteAllText(Application.dataPath + "/Resources/" + temporaryTextFileName + ".txt", text);
-        AssetDatabase.SaveAssets();
-        AssetDatabase.Refresh();
-        TextAsset textAsset = Resources.Load(temporaryTextFileName) as TextAsset;
-        return textAsset;
-    }
-
     IEnumerator GetText()
     {
         UnityWebRequest www = UnityWebRequest.Get("https://zaiqin.github.io/ZQStudios/BCstats.csv");
@@ -35,13 +24,13 @@ public class webDownloader : MonoBehaviour
         if (www.result == UnityWebRequest.Result.ConnectionError)
         {
             Debug.Log(www.error);
+            Application.Quit();
         }
         else
         {
             // Show results as text
             print(www.downloadHandler.text);
-            TextAsset asset = ConvertStringToTextAsset(www.downloadHandler.text);
-            csvObj.GetComponent<CSVReader>().textAssetData = asset;
+            csvObj.GetComponent<CSVReader>().csvText = www.downloadHandler.text;
             scroller.GetComponent<RecyclableScrollerDemo>().initCSV();
         }
     }

@@ -8,6 +8,7 @@ public class CSVReader : MonoBehaviour
 {
     public GameObject saveloadobj, statsObj;
     public TextAsset textAssetData;
+    public string csvText;
     public List<Mission> missionList = new List<Mission>();
 
     public Dictionary<int, long> levelValues = new Dictionary<int, long>();
@@ -49,8 +50,8 @@ public class CSVReader : MonoBehaviour
         //print("No of property sprites in resource folder: " + propSprites.Count);
 
         //Setup for reading CSV files ----------------------------------------------------------------------
-        string TitleLine = textAssetData.text.Split(new string[] { "\n" }, StringSplitOptions.None)[0]; //If use local excel change to \r\n
-        string[] data = textAssetData.text.Split(new string[] { ",", "\n" }, StringSplitOptions.None);  //If use local excel change to \r\n
+        string TitleLine = csvText.Split(new string[] { "\n" }, StringSplitOptions.None)[0]; //If use local excel change to \r\n
+        string[] data = csvText.Split(new string[] { ",", "\n" }, StringSplitOptions.None);  //If use local excel change to \r\n
         int cols = 1;
         
         //To find out how many kinds of Attributes ---------------------------------------------------------
