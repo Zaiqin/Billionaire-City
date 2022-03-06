@@ -421,16 +421,19 @@ public class Property : MonoBehaviour, IPointerClickHandler
             //print("going check contract for " + pp.name + "which is signtime " + pp.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signTime);
             if (pp.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signTime == "notsigned")
             {
-                //print("notsigned, thus signing now");
-                pp.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
+                if (pp.constructEnd == "na")
+                {
+                    //print("notsigned, thus signing now");
+                    pp.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
 
-                DateTime theTime;
-                theTime = DateTime.Now.AddMinutes(3);
-                //print("signing property commerce again");
-                string datetime = theTime.ToString("yyyy/MM/dd HH:mm:ss");
-                pp.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signTime = datetime;
-                pp.transform.GetChild(1).GetComponent<commercePickupScript>().signCreationTime = System.DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
-                //print("sign time is " + datetime);
+                    DateTime theTime;
+                    theTime = DateTime.Now.AddMinutes(3);
+                    //print("signing property commerce again");
+                    string datetime = theTime.ToString("yyyy/MM/dd HH:mm:ss");
+                    pp.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signTime = datetime;
+                    pp.transform.GetChild(1).GetComponent<commercePickupScript>().signCreationTime = System.DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                    //print("sign time is " + datetime);
+                }
 
             }
             else if (dateAndTimeVar >= DateTime.Parse(pp.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signTime))
