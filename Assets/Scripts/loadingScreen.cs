@@ -12,6 +12,7 @@ public class loadingScreen : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        skipCover.SetActive(true);
         if (Application.internetReachability == NetworkReachability.NotReachable)
         {
             internetObj.SetActive(true);
@@ -27,7 +28,7 @@ public class loadingScreen : MonoBehaviour
     {
         wheel.GetComponent<CanvasGroup>().LeanAlpha(0f, 0.5f);
         StartCoroutine(Intro());
-
+        skipCover.SetActive(false);
         cover.SetActive(true);
     }
 

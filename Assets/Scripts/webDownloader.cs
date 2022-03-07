@@ -34,6 +34,7 @@ public class webDownloader : MonoBehaviour
             {
                 loadingScreen.GetComponent<loadingScreen>().internetObj.SetActive(true);
                 loadingScreen.transform.GetChild(5).gameObject.SetActive(false);
+                loadingScreen.transform.GetChild(3).gameObject.SetActive(true);
                 loadingScreen.GetComponent<loadingScreen>().internetObj.transform.GetChild(0).GetComponent<Text>().text = "Outdated version\n\n\nPlease update your game in the Google Play store to version " + www.downloadHandler.text + "\n";
             }
             else
