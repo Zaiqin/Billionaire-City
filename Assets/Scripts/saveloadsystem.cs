@@ -342,6 +342,8 @@ public class saveloadsystem : MonoBehaviour
 
             // Load storage ----
             storageController.GetComponent<RecyclableScrollerStorage>().storageList = FileHandler.ReadListFromJSON<string>("storage.json");
+
+            loadingScreen.GetComponent<loadingScreen>().startIntro();
         }
         
     }

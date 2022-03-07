@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class loadingScreen : MonoBehaviour
 {
     public AudioSource cam;
-    public GameObject t, bgPan, titleImage, cover, skipCover, extAudio, tutorialScreen, internetObj, webObj;
+    public GameObject t, bgPan, titleImage, cover, skipCover, extAudio, tutorialScreen, internetObj, webObj, wheel;
     public AudioClip introAudio;
 
     // Start is called before the first frame update
@@ -20,14 +20,25 @@ public class loadingScreen : MonoBehaviour
         else
         {
             webObj.GetComponent<webDownloader>().downloadStats();
-            StartCoroutine(Intro());
-
-            cover.SetActive(true);
         }
+    }
+
+    public void startIntro()
+    {
+        wheel.GetComponent<CanvasGroup>().LeanAlpha(0f, 0.5f);
+        StartCoroutine(Intro());
+
+        cover.SetActive(true);
+    }
+
+    private void FixedUpdate()
+    {
+        wheel.transform.Rotate(0, 0, 360 * Time.deltaTime);
     }
 
     private IEnumerator Intro()
     {
+        yield return new WaitForSeconds(0.5f);
         extAudio.GetComponent<AudioSource>().PlayOneShot(introAudio);
 
         bgPan.GetComponent<CanvasGroup>().LeanAlpha(1f, 3f);
@@ -61,7 +72,7 @@ public class loadingScreen : MonoBehaviour
 
         bgPan.GetComponent<CanvasGroup>().LeanAlpha(0f, 0.3f);
         yield return new WaitForSeconds(0.3f);
-        this.gameObject.GetComponent<CanvasGroup>().LeanAlpha(0f, 1f);
+        this.gameObject.GetComponent<CanvasGroup>().LeanAlpha(0f, 0.5f);
         
         while (extAudio.GetComponent<AudioSource>().volume > 0.01f)
         {
@@ -71,7 +82,7 @@ public class loadingScreen : MonoBehaviour
         extAudio.GetComponent<AudioSource>().Stop();
         extAudio.GetComponent<AudioSource>().volume = 1.0f;
 
-        yield return new WaitForSeconds(1.5f);
+        //yield return new WaitForSeconds(0.5f);
         closeIntro();
     }
 
@@ -93,8 +104,8 @@ public class loadingScreen : MonoBehaviour
         extAudio.GetComponent<AudioSource>().Stop();
         extAudio.GetComponent<AudioSource>().volume = 1.0f;
 
-        this.gameObject.GetComponent<CanvasGroup>().LeanAlpha(0f, 0.5f);
-        yield return new WaitForSeconds(0.5f);
+        this.gameObject.GetComponent<CanvasGroup>().LeanAlpha(0f, 0.2f);
+        yield return new WaitForSeconds(0.2f);
         closeIntro();
     }
 
@@ -106,6 +117,7 @@ public class loadingScreen : MonoBehaviour
             cover.SetActive(false);
         }
         this.gameObject.SetActive(false);
+        extAudio.GetComponent<AudioSource>().volume = 1.0f;
         cam.Play();
     }
 
