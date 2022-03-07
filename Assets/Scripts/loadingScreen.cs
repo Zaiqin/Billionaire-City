@@ -19,7 +19,7 @@ public class loadingScreen : MonoBehaviour
         }
         else
         {
-            webObj.GetComponent<webDownloader>().downloadStats();
+            webObj.GetComponent<webDownloader>().getVersion();
         }
     }
 

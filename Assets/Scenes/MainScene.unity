@@ -78215,7 +78215,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6231ad9ea7473495885940f989d631de, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8a8b75dcee9d93042bb4c46ebd9c0c58, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -94571,7 +94571,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   csvObj: {fileID: 1673960463}
   scroller: {fileID: 1279366258}
-  localAsset: {fileID: 4900000, guid: 55344fc88d7fb40edba2b548f7a9ae65, type: 3}
+  loadingScreen: {fileID: 1787093364}
 --- !u!4 &1597933679
 Transform:
   m_ObjectHideFlags: 0
