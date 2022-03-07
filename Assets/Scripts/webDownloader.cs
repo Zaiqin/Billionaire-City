@@ -30,7 +30,7 @@ public class webDownloader : MonoBehaviour
         {
             // Show results as text
             print("Local Version " + Application.version + ", Server version " + www.downloadHandler.text);
-            if (Application.version != www.downloadHandler.text)
+            if (float.Parse(Application.version) < float.Parse(www.downloadHandler.text))
             {
                 loadingScreen.GetComponent<loadingScreen>().internetObj.SetActive(true);
                 loadingScreen.transform.GetChild(5).gameObject.SetActive(false);
