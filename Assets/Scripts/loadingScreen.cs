@@ -8,6 +8,7 @@ public class loadingScreen : MonoBehaviour
     public AudioSource cam;
     public GameObject t, bgPan, titleImage, cover, skipCover, extAudio, tutorialScreen, internetObj, webObj, wheel;
     public AudioClip introAudio;
+    public bool canSkip = false;
 
     // Start is called before the first frame update
     void Awake()
@@ -39,6 +40,8 @@ public class loadingScreen : MonoBehaviour
 
     private IEnumerator Intro()
     {
+        canSkip = true;
+
         yield return new WaitForSeconds(0.5f);
         extAudio.GetComponent<AudioSource>().PlayOneShot(introAudio);
 
@@ -106,7 +109,7 @@ public class loadingScreen : MonoBehaviour
         extAudio.GetComponent<AudioSource>().volume = 1.0f;
 
         this.gameObject.GetComponent<CanvasGroup>().LeanAlpha(0f, 0.2f);
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.3f);
         closeIntro();
     }
 
@@ -124,7 +127,7 @@ public class loadingScreen : MonoBehaviour
 
     public void skipIntro()
     {
-        if (internetObj.activeSelf == false)
+        if (canSkip == true)
         {
             StartCoroutine(skipIntroAnim());
         }

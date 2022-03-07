@@ -108,6 +108,7 @@ public class saveloadsystem : MonoBehaviour
             loadSaveGame();
         }
         missionParent.GetComponent<missionParent>().initMissions();
+        loadingScreen.GetComponent<loadingScreen>().startIntro();
     }
 
     [ContextMenu("Save Game")]
@@ -343,7 +344,6 @@ public class saveloadsystem : MonoBehaviour
             // Load storage ----
             storageController.GetComponent<RecyclableScrollerStorage>().storageList = FileHandler.ReadListFromJSON<string>("storage.json");
 
-            loadingScreen.GetComponent<loadingScreen>().startIntro();
         }
         
     }
