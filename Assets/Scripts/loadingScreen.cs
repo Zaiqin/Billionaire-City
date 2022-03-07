@@ -62,6 +62,12 @@ public class loadingScreen : MonoBehaviour
         t.GetComponent<CanvasGroup>().LeanAlpha(0f, 0.5f);
         yield return new WaitForSeconds(0.5f);
 
+        t.GetComponent<Text>().text = "Music by Pix_universes";
+        t.GetComponent<CanvasGroup>().LeanAlpha(1f, 0.5f);
+        yield return new WaitForSeconds(3f);
+        t.GetComponent<CanvasGroup>().LeanAlpha(0f, 0.5f);
+        yield return new WaitForSeconds(0.5f);
+
         t.GetComponent<Text>().text = "All rights reserved to Digital Chocolate";
         t.GetComponent<CanvasGroup>().LeanAlpha(1f, 0.5f);
         yield return new WaitForSeconds(3f);
