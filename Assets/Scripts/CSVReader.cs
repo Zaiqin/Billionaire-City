@@ -11,6 +11,7 @@ public class CSVReader : MonoBehaviour
     public TextAsset textAssetData;
     public string csvText;
     public List<Mission> missionList = new List<Mission>();
+    public bool needToDownload = false;
 
     public Dictionary<int, long> levelValues = new Dictionary<int, long>();
 
@@ -28,11 +29,19 @@ public class CSVReader : MonoBehaviour
 
     public List<string> ratios = new List<string>();
 
-    public void ReadCSV()
+    public IEnumerator ReadCSV()
     {
         //print("Reading CSV File");
-        Directory.CreateDirectory(Application.persistentDataPath + "/properties");
-        Directory.CreateDirectory(Application.persistentDataPath + "/propertyCards");
+        if (!Directory.Exists(Application.persistentDataPath + "/properties"))
+        {
+            print("No property sprites in app");
+            Directory.CreateDirectory(Application.persistentDataPath + "/properties");
+            Directory.CreateDirectory(Application.persistentDataPath + "/propertyCards");
+            needToDownload = true;
+        } else
+        {
+            print("Property files are present in app");
+        }
 
         // Creation of Dictionaries to hold Sprites that are loaded from file -----------------------------
         Dictionary<String, Sprite> bgSprites = new Dictionary<string, Sprite>();
@@ -196,33 +205,18 @@ public class CSVReader : MonoBehaviour
                 float rN = float.Parse(tempArray[i].space.Substring(0, 1)) / float.Parse(tempArray[i].space.Substring(tempArray[i].space.Length - 1));
 
                 ratios.Add(rN.ToString());
-    }
+            }
 
-            // Addition of PropertyCard Image and Property Image ---------------------------------------------
-            // Addition of Property Card ie bgImage ---------------------------------
-            if (bgSprites.ContainsKey(bgImagePath)) //check if cannot find url
+            if (needToDownload == true)
             {
-                tempArray[i].bgImage = bgSprites[bgImagePath];
-                webDL.GetComponent<webDownloader>().getImage(bgImagePath,"propertyCards");
-                //tempArray[i].propImage = (Sprite)Resources.Load(Application.persistentDataPath + "/propertyCards/" + bgImagePath + ".png");
+                print("Fetching " + bgImagePath);
+                yield return StartCoroutine(webDL.GetComponent<webDownloader>().DownloadImage("https://zaiqin.github.io/ZQStudios/propertyCards/" + bgImagePath + ".png", bgImagePath, "propertyCards"));
+                yield return StartCoroutine(webDL.GetComponent<webDownloader>().DownloadImage("https://zaiqin.github.io/ZQStudios/properties/" + propImagePath + ".png", propImagePath, "properties"));
             }
-            else
-            {
-                tempArray[i].bgImage = bgSprites["bungalowCard"];
-                print("Cannot locate card sprite for " + bgImagePath);
-            }
-            // Addition of Property Image ie propImage ------------------------------------
-            if (propSprites.ContainsKey(propImagePath)) //check if cannot find url
-            {
-                tempArray[i].propImage = propSprites[propImagePath];
-                webDL.GetComponent<webDownloader>().getImage(propImagePath,"properties");
-                //tempArray[i].propImage = (Sprite)Resources.Load(Application.persistentDataPath + "/properties/" + propImagePath + ".png");
-            }
-            else
-            {
-                tempArray[i].propImage = propSprites["bungalow"];
-                print("Cannot locate property sprite for " + propImagePath);
-            }
+            string path = Application.persistentDataPath + "/propertyCards/" + bgImagePath + ".png";
+            tempArray[i].bgImage = LoadSprite(path);
+            string path2 = Application.persistentDataPath + "/properties/" + propImagePath + ".png";
+            tempArray[i].propImage = LoadSprite(path2);
             // -----------------------------------------------------------------------------------------------
             CardDatabase.Add(tempArray[i].displayName, tempArray[i]);
             //print("Adding Card " + tempArray[i].displayName + " to card database");
@@ -321,5 +315,19 @@ public class CSVReader : MonoBehaviour
         // finally, let's decrement Array's size by one
         Array.Resize(ref arr, arr.Length - 1);
         //print("There is now " + arr.Length);
+    }
+
+    private Sprite LoadSprite(string path)
+    {
+        if (string.IsNullOrEmpty(path)) return null;
+        if (System.IO.File.Exists(path))
+        {
+            byte[] bytes = System.IO.File.ReadAllBytes(path);
+            Texture2D texture = new Texture2D(1, 1);
+            texture.LoadImage(bytes);
+            Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+            return sprite;
+        }
+        return null;
     }
 }

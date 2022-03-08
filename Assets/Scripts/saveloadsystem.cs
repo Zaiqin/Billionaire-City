@@ -68,7 +68,7 @@ public class saveloadsystem : MonoBehaviour
     public CSVReader csv;
     public Tilemap map;
     public GameObject PropertiesParent, Stats, expPopup, cityText, hq, dailyBonus, ppDragButton, Astar, missionParent, storageController;
-    public GameObject cover, tutorialPanel, loadingScreen;
+    public GameObject cover, tutorialPanel, loadingScreen, webDL;
     public InputField nameField;
     public void StartGame()
     {
@@ -107,6 +107,7 @@ public class saveloadsystem : MonoBehaviour
             //Do your stuff here
             loadSaveGame();
         }
+        webDL.GetComponent<webDownloader>().downloadSpriteVer();
         missionParent.GetComponent<missionParent>().initMissions();
         loadingScreen.GetComponent<loadingScreen>().startIntro();
     }

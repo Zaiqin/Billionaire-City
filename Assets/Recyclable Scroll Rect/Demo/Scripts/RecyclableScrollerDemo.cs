@@ -30,7 +30,7 @@ public class RecyclableScrollerDemo : MonoBehaviour, IRecyclableScrollRectDataSo
 
     public void initCSV()
     {
-        CSVObject.ReadCSV();
+        StartCoroutine(CSVObject.ReadCSV());
         pCardArrays = CSVObject.propertyCardArrays;
     }
 

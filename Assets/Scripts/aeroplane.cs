@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class aeroplane : MonoBehaviour
 {
+    public GameObject loadingScreen;
     // Start is called before the first frame update
     void Start()
     {
@@ -11,12 +12,15 @@ public class aeroplane : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    { 
-        this.transform.position = Vector3.MoveTowards(this.transform.position, new Vector3(-50f, 0f, -8f), 2f * Time.deltaTime);
-
-        if (this.transform.position.x == -50f)
+    {
+        if (loadingScreen.activeSelf == false)
         {
-            Destroy(this.gameObject);
+            this.transform.position = Vector3.MoveTowards(this.transform.position, new Vector3(-50f, 0f, -8f), 2f * Time.deltaTime);
+
+            if (this.transform.position.x == -50f)
+            {
+                Destroy(this.gameObject);
+            }
         }
     }
 }

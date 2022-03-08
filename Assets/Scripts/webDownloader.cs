@@ -7,18 +7,12 @@ using UnityEngine.UI;
 
 public class webDownloader : MonoBehaviour
 {
-    public GameObject csvObj;
-    public GameObject scroller;
-    public GameObject loadingScreen;
+    public GameObject csvObj, scroller, loadingScreen, dlButton;
+    public UnityWebRequest spriteWeb;
 
-    [ContextMenu("Fetch image")]
-    public void getImage(string path, string folder)
+    public IEnumerator DownloadImage(string MediaUrl, string rawPath, string folder)
     {
-        StartCoroutine(DownloadImage("https://zaiqin.github.io/ZQStudios/"+folder+"/"+path+".png",path, folder));
-    }
-    IEnumerator DownloadImage(string MediaUrl, string rawPath, string folder)
-    {
-        print("downloading " + MediaUrl);
+        //print("downloading " + MediaUrl);
         UnityWebRequest request = UnityWebRequestTexture.GetTexture(MediaUrl);
         yield return request.SendWebRequest();
         if (request.result == UnityWebRequest.Result.ConnectionError)
@@ -29,15 +23,18 @@ public class webDownloader : MonoBehaviour
 
             Texture2D tex = ((DownloadHandlerTexture)request.downloadHandler).texture;
             Sprite sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(tex.width / 2, tex.height / 2));
-            saveImage(sprite, rawPath, folder);
+            yield return saveImage(sprite, rawPath, folder);
+            //print("yield return saveImage");
         }
     }
 
-    public void saveImage(Sprite itemBGSprite, string filename, string folder)
+    public IEnumerator saveImage(Sprite itemBGSprite, string filename, string folder)
     {
         Texture2D itemBGTex = itemBGSprite.texture;
         byte[] itemBGBytes = itemBGTex.EncodeToPNG();
         File.WriteAllBytes(Application.persistentDataPath + "/" + folder + "/" + filename + ".png", itemBGBytes);
+        yield return new WaitUntil(() => File.Exists(Application.persistentDataPath + "/" + folder + "/" + filename + ".png"));
+        //print("yield return saveImage2");
     }
 
     public void getVersion()
@@ -68,17 +65,73 @@ public class webDownloader : MonoBehaviour
             }
             else
             {
-                downloadStats();
+                UnityWebRequest w = UnityWebRequest.Get("https://zaiqin.github.io/ZQStudios/spriteVersion.txt");
+                yield return w.SendWebRequest();
+
+                if (w.result == UnityWebRequest.Result.ConnectionError)
+                {
+                    Debug.Log(w.error);
+                    Application.Quit();
+                }
+                else
+                {
+                    if (File.Exists(Application.persistentDataPath+"/spriteVersion.txt") == false)
+                    {
+                        if (Directory.Exists(Application.persistentDataPath + "/properties") == true)
+                        {
+                            Directory.Delete(Application.persistentDataPath + "/properties",true);
+                        }
+                    }
+                    // Show results as text
+                    if (Directory.Exists(Application.persistentDataPath + "/properties") == false || int.Parse(File.ReadAllText(Application.persistentDataPath + "/spriteVersion.txt")) < int.Parse(w.downloadHandler.text))
+                    {
+                            loadingScreen.GetComponent<loadingScreen>().internetObj.SetActive(true);
+                            loadingScreen.transform.GetChild(5).gameObject.SetActive(false);
+                            loadingScreen.transform.GetChild(3).gameObject.SetActive(true);
+                            dlButton.SetActive(true);
+                            spriteWeb = w;
+                            if (Directory.Exists(Application.persistentDataPath + "/properties") == false)
+                            {
+                                loadingScreen.GetComponent<loadingScreen>().internetObj.transform.GetChild(0).GetComponent<Text>().text = "Downloads required\n\n\nThe game needs to download assets and files during the first install.\nProceed?\n";
+                            }
+                            else
+                            {
+                                loadingScreen.GetComponent<loadingScreen>().internetObj.transform.GetChild(0).GetComponent<Text>().text = "New updates!!\n\n\nDo you wish to download new assets in the game?\n";
+                                csvObj.GetComponent<CSVReader>().needToDownload = true;
+                            }
+                    }
+                    else
+                    {
+                        downloadStats();
+                    }
+                }
             }
+        }
+    }
+
+    public void dl()
+    {
+        dlButton.SetActive(false);
+        loadingScreen.GetComponent<loadingScreen>().internetObj.SetActive(false);
+        loadingScreen.transform.GetChild(5).gameObject.SetActive(true);
+        loadingScreen.transform.GetChild(3).gameObject.SetActive(true);
+        downloadStats();
+    }
+
+    public void downloadSpriteVer()
+    {
+        if (spriteWeb != null)
+        {
+            File.WriteAllText(Application.persistentDataPath + "/spriteVersion.txt", spriteWeb.downloadHandler.text);
         }
     }
 
     public void downloadStats()
     {
-        StartCoroutine(GetText());
+        StartCoroutine(GetCSV());
     }
 
-    IEnumerator GetText()
+    IEnumerator GetCSV()
     {
         UnityWebRequest www = UnityWebRequest.Get("https://zaiqin.github.io/ZQStudios/BCstats.csv");
         yield return www.SendWebRequest();
