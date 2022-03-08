@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.UI;
+using System.IO;
 
 public class CSVReader : MonoBehaviour
 {
-    public GameObject saveloadobj, statsObj;
+    public GameObject saveloadobj, statsObj, webDL;
     public TextAsset textAssetData;
     public string csvText;
     public List<Mission> missionList = new List<Mission>();
@@ -30,6 +31,8 @@ public class CSVReader : MonoBehaviour
     public void ReadCSV()
     {
         //print("Reading CSV File");
+        Directory.CreateDirectory(Application.persistentDataPath + "/properties");
+        Directory.CreateDirectory(Application.persistentDataPath + "/propertyCards");
 
         // Creation of Dictionaries to hold Sprites that are loaded from file -----------------------------
         Dictionary<String, Sprite> bgSprites = new Dictionary<string, Sprite>();
@@ -200,6 +203,8 @@ public class CSVReader : MonoBehaviour
             if (bgSprites.ContainsKey(bgImagePath)) //check if cannot find url
             {
                 tempArray[i].bgImage = bgSprites[bgImagePath];
+                webDL.GetComponent<webDownloader>().getImage(bgImagePath,"propertyCards");
+                //tempArray[i].propImage = (Sprite)Resources.Load(Application.persistentDataPath + "/propertyCards/" + bgImagePath + ".png");
             }
             else
             {
@@ -210,6 +215,8 @@ public class CSVReader : MonoBehaviour
             if (propSprites.ContainsKey(propImagePath)) //check if cannot find url
             {
                 tempArray[i].propImage = propSprites[propImagePath];
+                webDL.GetComponent<webDownloader>().getImage(propImagePath,"properties");
+                //tempArray[i].propImage = (Sprite)Resources.Load(Application.persistentDataPath + "/properties/" + propImagePath + ".png");
             }
             else
             {

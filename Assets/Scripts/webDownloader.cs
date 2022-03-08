@@ -11,6 +11,35 @@ public class webDownloader : MonoBehaviour
     public GameObject scroller;
     public GameObject loadingScreen;
 
+    [ContextMenu("Fetch image")]
+    public void getImage(string path, string folder)
+    {
+        StartCoroutine(DownloadImage("https://zaiqin.github.io/ZQStudios/"+folder+"/"+path+".png",path, folder));
+    }
+    IEnumerator DownloadImage(string MediaUrl, string rawPath, string folder)
+    {
+        print("downloading " + MediaUrl);
+        UnityWebRequest request = UnityWebRequestTexture.GetTexture(MediaUrl);
+        yield return request.SendWebRequest();
+        if (request.result == UnityWebRequest.Result.ConnectionError)
+            Debug.Log(request.error);
+        else
+        {
+            // ImageComponent.texture = ((DownloadHandlerTexture) request.downloadHandler).texture;
+
+            Texture2D tex = ((DownloadHandlerTexture)request.downloadHandler).texture;
+            Sprite sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(tex.width / 2, tex.height / 2));
+            saveImage(sprite, rawPath, folder);
+        }
+    }
+
+    public void saveImage(Sprite itemBGSprite, string filename, string folder)
+    {
+        Texture2D itemBGTex = itemBGSprite.texture;
+        byte[] itemBGBytes = itemBGTex.EncodeToPNG();
+        File.WriteAllBytes(Application.persistentDataPath + "/" + folder + "/" + filename + ".png", itemBGBytes);
+    }
+
     public void getVersion()
     {
         StartCoroutine(DownloadVersion());

@@ -73148,6 +73148,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   saveloadobj: {fileID: 0}
   statsObj: {fileID: 0}
+  webDL: {fileID: 0}
   textAssetData: {fileID: 0}
   csvText: 
   maxDecoReach: 0
@@ -77276,6 +77277,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   saveloadobj: {fileID: 0}
   statsObj: {fileID: 0}
+  webDL: {fileID: 0}
   textAssetData: {fileID: 0}
   csvText: 
   maxDecoReach: 0
@@ -81078,6 +81080,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   saveloadobj: {fileID: 0}
   statsObj: {fileID: 0}
+  webDL: {fileID: 0}
   textAssetData: {fileID: 0}
   csvText: 
   maxDecoReach: 0
@@ -85832,6 +85835,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   saveloadobj: {fileID: 0}
   statsObj: {fileID: 0}
+  webDL: {fileID: 0}
   textAssetData: {fileID: 0}
   csvText: 
   maxDecoReach: 0
@@ -96074,6 +96078,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   saveloadobj: {fileID: 25462474}
   statsObj: {fileID: 973017964}
+  webDL: {fileID: 1597933677}
   textAssetData: {fileID: 4900000, guid: 55344fc88d7fb40edba2b548f7a9ae65, type: 3}
   csvText: 
   maxDecoReach: 0
