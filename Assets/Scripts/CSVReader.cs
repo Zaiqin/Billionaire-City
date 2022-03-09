@@ -7,7 +7,7 @@ using System.IO;
 
 public class CSVReader : MonoBehaviour
 {
-    public GameObject saveloadobj, statsObj, webDL;
+    public GameObject saveloadobj, statsObj, webDL, dlBar;
     public TextAsset textAssetData;
     public string csvText;
     public List<Mission> missionList = new List<Mission>();
@@ -38,6 +38,7 @@ public class CSVReader : MonoBehaviour
             Directory.CreateDirectory(Application.persistentDataPath + "/properties");
             Directory.CreateDirectory(Application.persistentDataPath + "/propertyCards");
             needToDownload = true;
+            dlBar.SetActive(true);
         } else
         {
             print("Property files are present in app");
@@ -212,6 +213,7 @@ public class CSVReader : MonoBehaviour
                 print("Fetching " + bgImagePath);
                 yield return StartCoroutine(webDL.GetComponent<webDownloader>().DownloadImage("https://zaiqin.github.io/ZQStudios/propertyCards/" + bgImagePath + ".png", bgImagePath, "propertyCards"));
                 yield return StartCoroutine(webDL.GetComponent<webDownloader>().DownloadImage("https://zaiqin.github.io/ZQStudios/properties/" + propImagePath + ".png", propImagePath, "properties"));
+                dlBar.transform.GetChild(0).GetComponent<Image>().fillAmount = (float)((float)masterNo / (float)totalNoOfProperties);
             }
             string path = Application.persistentDataPath + "/propertyCards/" + bgImagePath + ".png";
             tempArray[i].bgImage = LoadSprite(path);

@@ -54,39 +54,43 @@ public class CameraMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (loadingGroup.activeSelf == false)
         {
-            //print("set drag to false");
-            dragging = false;
-        }
-        if (Input.touchCount == 2 && startOnGrid == true && ShopMenu.activeSelf == false && cover.activeSelf == false)
-        {
-            Touch touchZero = Input.GetTouch(0);
-            Touch touchOne = Input.GetTouch(1);
+            if (Input.GetMouseButtonDown(0))
+            {
+                //print("set drag to false");
+                dragging = false;
+            }
+            if (Input.touchCount == 2 && startOnGrid == true && ShopMenu.activeSelf == false && cover.activeSelf == false)
+            {
+                Touch touchZero = Input.GetTouch(0);
+                Touch touchOne = Input.GetTouch(1);
 
-            Vector2 touchZeroPrevPos = touchZero.position - touchZero.deltaPosition;
-            Vector2 touchOnePrevPos = touchOne.position - touchOne.deltaPosition;
+                Vector2 touchZeroPrevPos = touchZero.position - touchZero.deltaPosition;
+                Vector2 touchOnePrevPos = touchOne.position - touchOne.deltaPosition;
 
-            float prevMagnitude = (touchZeroPrevPos - touchOnePrevPos).magnitude;
-            float currentMagnitude = (touchZero.position - touchOne.position).magnitude;
+                float prevMagnitude = (touchZeroPrevPos - touchOnePrevPos).magnitude;
+                float currentMagnitude = (touchZero.position - touchOne.position).magnitude;
 
-            float difference = currentMagnitude - prevMagnitude;
+                float difference = currentMagnitude - prevMagnitude;
 
-            zoom(difference * 0.01f);
-        } else if (Input.GetMouseButton(0) && fingerZoom == false)
-        {
-            PanCamera(); //called when mouse button is pressed down and remains down
+                zoom(difference * 0.01f);
+            }
+            else if (Input.GetMouseButton(0) && fingerZoom == false)
+            {
+                PanCamera(); //called when mouse button is pressed down and remains down
+            }
+            if (Input.GetMouseButtonUp(0))
+            {
+                startOnGrid = false;
+                Invoke("setDrag", 0.01f);
+            }
+            if (Input.touchCount == 0)
+            {
+                fingerZoom = false;
+            }
+            //print("dragging is " + dragging);
         }
-        if (Input.GetMouseButtonUp(0))
-        {
-            startOnGrid = false;
-            Invoke("setDrag", 0.01f);
-        }
-        if (Input.touchCount == 0)
-        {
-            fingerZoom = false;
-        }
-        //print("dragging is " + dragging);
     }
 
     void zoom(float increment)

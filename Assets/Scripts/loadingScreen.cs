@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class loadingScreen : MonoBehaviour
 {
     public AudioSource cam;
-    public GameObject t, bgPan, titleImage, cover, skipCover, extAudio, tutorialScreen, internetObj, webObj, wheel;
+    public GameObject t, bgPan, titleImage, cover, skipCover, extAudio, tutorialScreen, internetObj, webObj, wheel, dlBar;
     public AudioClip introAudio;
     public bool canSkip = false;
 
@@ -31,6 +31,7 @@ public class loadingScreen : MonoBehaviour
         StartCoroutine(Intro());
         skipCover.SetActive(false);
         cover.SetActive(true);
+        dlBar.SetActive(false);
     }
 
     private void FixedUpdate()
@@ -57,12 +58,6 @@ public class loadingScreen : MonoBehaviour
         yield return new WaitForSeconds(2f);
 
         t.GetComponent<Text>().text = "Created by ZQStudios";
-        t.GetComponent<CanvasGroup>().LeanAlpha(1f, 0.5f);
-        yield return new WaitForSeconds(3f);
-        t.GetComponent<CanvasGroup>().LeanAlpha(0f, 0.5f);
-        yield return new WaitForSeconds(0.5f);
-
-        t.GetComponent<Text>().text = "Music by Pix_universes";
         t.GetComponent<CanvasGroup>().LeanAlpha(1f, 0.5f);
         yield return new WaitForSeconds(3f);
         t.GetComponent<CanvasGroup>().LeanAlpha(0f, 0.5f);

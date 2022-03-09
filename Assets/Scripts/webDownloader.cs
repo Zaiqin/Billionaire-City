@@ -115,6 +115,7 @@ public class webDownloader : MonoBehaviour
         loadingScreen.GetComponent<loadingScreen>().internetObj.SetActive(false);
         loadingScreen.transform.GetChild(5).gameObject.SetActive(true);
         loadingScreen.transform.GetChild(3).gameObject.SetActive(true);
+        loadingScreen.transform.GetChild(7).gameObject.SetActive(true);
         downloadStats();
     }
 

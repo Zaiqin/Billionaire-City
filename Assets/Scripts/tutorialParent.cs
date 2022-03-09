@@ -22,7 +22,7 @@ public class tutorialParent : MonoBehaviour
      "This is the Storage tool. This is where you can see all the items that are in your storage. These items are free to use.",
      "This is the Lucky Draw panel. You can spin the wheel for 1 Gold each and win various prizes!",
      "This is the Signing Contractor tool. This is where you can sign all the houses in your city in one click. \n\nNote that it takes time to calculate and has a taxation of 20% of the signing cost and 1 Gold",
-     "This is the Move tool. \n\nUse this tool to move properties around in your city.",
+     "This is the Move tool. \n\nUse this tool to move properties around in your city. When activated, tap on a property to move it to another plot.",
      "Congratulations for finishing the tutorial! You have now mastered the basics of money making! \n\nGood Luck and all the best!"
     };
 
