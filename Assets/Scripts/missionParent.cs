@@ -30,9 +30,10 @@ public class missionParent : MonoBehaviour
     public Text rewardText;
     public bool extended = false;
     public int chosenIndex;
-    public GameObject missionController, stats, saveObj, claimButton, exclaimButton, storageController;
+    public GameObject missionController, stats, saveObj, claimButton, exclaimButton, storageController, extAudio;
     public Image rewardImage;
     public Sprite money, gold;
+    public AudioClip sound;
 
     public CSVReader CSVObject;
     private Dictionary<string, PropertyCard> database;
@@ -92,6 +93,7 @@ public class missionParent : MonoBehaviour
         missionController.GetComponent<RecyclableScrollerMission>().missionlist = missionList;
         saveObj.GetComponent<saveloadsystem>().saveMissions();
         exclaimButton.SetActive(true);
+        extAudio.GetComponent<AudioSource>().PlayOneShot(sound);
     }
 
     public void closePanel()

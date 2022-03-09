@@ -6767,9 +6767,11 @@ MonoBehaviour:
   claimButton: {fileID: 185937601}
   exclaimButton: {fileID: 833860550}
   storageController: {fileID: 835569546}
+  extAudio: {fileID: 1820829991}
   rewardImage: {fileID: 192705362}
   money: {fileID: 21300000, guid: cc10f08c0bc1bdb4e9fb4bd813b56e16, type: 3}
   gold: {fileID: 21300000, guid: 7eb9620ab3816354ea8f15c94cc2f4cc, type: 3}
+  sound: {fileID: 8300000, guid: 024b969c6e50193489cba7594e11e681, type: 3}
   CSVObject: {fileID: 1673960464}
   doneMissionList: []
   pendingMissionList: []

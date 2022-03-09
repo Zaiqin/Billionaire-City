@@ -326,7 +326,7 @@ public class plotManager : MonoBehaviour
             Vector3Int gridPosition = map.WorldToCell(mousePosition);
 
             Tile clickedTile = map.GetTile<Tile>(gridPosition);
-            if (clickedTile.name.Contains("plot"))
+            if (clickedTile.name.Contains("plot") && Camera.main.GetComponent<CameraMovement>().dragging == false)
             {
                 myFx.PlayOneShot(deleteSound);
                 plotFunction(gridPosition, true);
