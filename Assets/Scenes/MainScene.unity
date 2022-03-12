@@ -67353,7 +67353,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 684264866}
-  m_RootOrder: 16
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -73421,7 +73421,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 684264866}
-  m_RootOrder: 15
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -75019,10 +75019,10 @@ RectTransform:
   - {fileID: 1894786388}
   - {fileID: 1313183350}
   - {fileID: 1236580334}
-  - {fileID: 1687505832}
   - {fileID: 609095924}
-  - {fileID: 312946996}
+  - {fileID: 1687505832}
   - {fileID: 1673079906}
+  - {fileID: 312946996}
   - {fileID: 939407642}
   - {fileID: 1704485279}
   - {fileID: 1041286202}
@@ -76388,6 +76388,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   luckPanel: {fileID: 684264863}
+  csvObj: {fileID: 1673960463}
+  rew1: {fileID: 2012817204}
+  rew3: {fileID: 189998436}
+  rew5: {fileID: 609095925}
+  rew6: {fileID: 1673079907}
+  rew7: {fileID: 939407643}
 --- !u!114 &773584278
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96273,7 +96279,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 684264866}
-  m_RootOrder: 17
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -97001,7 +97007,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 684264866}
-  m_RootOrder: 14
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
