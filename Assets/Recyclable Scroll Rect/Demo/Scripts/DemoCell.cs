@@ -181,8 +181,14 @@ public class DemoCell : MonoBehaviour, ICell
     {
         print("Buying " + _propertyCard.propName + " which costs " + _propertyCard.cost);
         GameObject shopMenu = GameObject.FindGameObjectWithTag("ShopMenu");
-        
-        stats = GameObject.FindGameObjectWithTag("Stats").GetComponent<Statistics>();
+
+        closePanel();
+        shopMenu.GetComponent<PurchaseController>().purchaseProperty(_propertyCard);
+        // --------------------- Swapping to green border grass -------------
+        map = GameObject.Find("Tilemap").GetComponent<Tilemap>();
+        map.SwapTile(tileGrass, greenGrass);
+        // ------------------------------------------------------------------
+        /*stats = GameObject.FindGameObjectWithTag("Stats").GetComponent<Statistics>();
         print("money now is " + stats.returnStats()[0]);
 
         int deduction = 0;
@@ -225,7 +231,7 @@ public class DemoCell : MonoBehaviour, ICell
                 map.SwapTile(tileGrass, greenGrass);
                 // ------------------------------------------------------------------
             }
-        }
+        }*/
 
     }
 

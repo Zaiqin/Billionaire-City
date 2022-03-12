@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class ppDragButton : MonoBehaviour
 {
     [SerializeField]
-    private GameObject pendingParent, propParent, ppDrag, externalAudioPlayer, saveloadsystem, shopToggle, shopMenu, missionsPanel, storagePanel, storageToggle, storageController, moveToggle, delConfirm;
+    private GameObject pendingParent, propParent, ppDrag, externalAudioPlayer, saveloadsystem, shopToggle, shopMenu, missionsPanel, storagePanel, storageToggle, storageController, moveToggle, delConfirm, globalInsuff;
 
     [SerializeField]
     private Statistics stats;
@@ -20,6 +20,7 @@ public class ppDragButton : MonoBehaviour
     public Tilemap map;
     public TileBase greenGrass, tileGrass;
     public GameObject floatingValue, hq, astar;
+    public Sprite insuffMoney, insuffGold;
 
     public float getZ(float[] coords) //range of y is 3 to -3, range of x is -44 to 45
     {
@@ -134,29 +135,29 @@ public class ppDragButton : MonoBehaviour
         pp = pendingParent.transform.GetChild(0).gameObject.GetComponent<Property>();
 
         bool canBuild = true;
-
-        if (pp.Card.type == "Deco")
+        int deduction = 0;
+        if (pp.Card.cost.Contains("Gold"))
         {
-            int deduction = 0;
-            if (pp.Card.cost.Contains("Gold"))
+            deduction = int.Parse(pp.Card.cost.Remove(pp.Card.cost.Length - 5));
+            print("deducting " + deduction + " gold");
+            if (stats.returnStats()[1] < deduction)
             {
-                deduction = int.Parse(pp.Card.cost.Remove(pp.Card.cost.Length - 5));
-                print("deducting " + deduction + " gold");
-                if (stats.returnStats()[1] < deduction)
-                {
-                    print("insufficient gold");
-                    canBuild = false;
-                }
+                print("insufficient gold");
+                canBuild = false;
+                globalInsuff.SetActive(true);
+                globalInsuff.transform.GetChild(0).GetComponent<Image>().sprite = insuffGold;
             }
-            else
+        }
+        else
+        {
+            deduction = int.Parse(pp.Card.cost);
+            print("deducting $" + deduction);
+            if (stats.returnStats()[0] < deduction)
             {
-                deduction = int.Parse(pp.Card.cost);
-                print("deducting $" + deduction);
-                if (stats.returnStats()[0] < deduction)
-                {
-                    print("insufficient money");
-                    canBuild = false;
-                }
+                print("insufficient money");
+                canBuild = false;
+                globalInsuff.SetActive(true);
+                globalInsuff.transform.GetChild(0).GetComponent<Image>().sprite = insuffMoney;
             }
         }
 

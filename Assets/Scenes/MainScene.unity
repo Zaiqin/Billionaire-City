@@ -1473,6 +1473,7 @@ MonoBehaviour:
   missionPanel: {fileID: 273355504}
   storageMenu: {fileID: 1056730518}
   instantRentPanel: {fileID: 1177463635}
+  globalInsuff: {fileID: 349422163}
   toggles: []
   map: {fileID: 280726322}
   greenGrass: {fileID: 11400000, guid: 68a3091ae6a3000469a13bd060a098ad, type: 2}
@@ -2117,6 +2118,7 @@ MonoBehaviour:
   missionPanel: {fileID: 273355504}
   storageMenu: {fileID: 1056730518}
   instantRentPanel: {fileID: 1177463635}
+  globalInsuff: {fileID: 349422163}
   toggles: []
   map: {fileID: 280726322}
   greenGrass: {fileID: 11400000, guid: 68a3091ae6a3000469a13bd060a098ad, type: 2}
@@ -3442,6 +3444,7 @@ MonoBehaviour:
   missionPanel: {fileID: 273355504}
   storageMenu: {fileID: 1056730518}
   instantRentPanel: {fileID: 1177463635}
+  globalInsuff: {fileID: 349422163}
   toggles: []
   map: {fileID: 280726322}
   greenGrass: {fileID: 11400000, guid: 68a3091ae6a3000469a13bd060a098ad, type: 2}
@@ -4103,6 +4106,7 @@ MonoBehaviour:
   missionPanel: {fileID: 273355504}
   storageMenu: {fileID: 1056730518}
   instantRentPanel: {fileID: 1177463635}
+  globalInsuff: {fileID: 349422163}
   toggles: []
   map: {fileID: 280726322}
   greenGrass: {fileID: 11400000, guid: 68a3091ae6a3000469a13bd060a098ad, type: 2}
@@ -4276,6 +4280,7 @@ MonoBehaviour:
   storageController: {fileID: 835569546}
   moveToggle: {fileID: 174387926}
   delConfirm: {fileID: 1707686260}
+  globalInsuff: {fileID: 349422163}
   stats: {fileID: 973017965}
   buildSound: {fileID: 8300000, guid: af8e188edf22047efbe5414eb16f16df, type: 3}
   touchSound: {fileID: 8300000, guid: bd5423d63b2c64bff84c70238339e6d6, type: 3}
@@ -4286,6 +4291,8 @@ MonoBehaviour:
     type: 3}
   hq: {fileID: 502592024}
   astar: {fileID: 68398485}
+  insuffMoney: {fileID: 21300000, guid: 0a111b1eb03fd4c29abbb4a4325c5b94, type: 3}
+  insuffGold: {fileID: 21300000, guid: c7d4beb0d7593448ebb53d0e895e26a5, type: 3}
 --- !u!82 &184177508
 AudioSource:
   m_ObjectHideFlags: 0
@@ -67151,6 +67158,7 @@ MonoBehaviour:
   missionPanel: {fileID: 273355504}
   storageMenu: {fileID: 1056730518}
   instantRentPanel: {fileID: 1177463635}
+  globalInsuff: {fileID: 349422163}
   toggles: []
   map: {fileID: 280726322}
   greenGrass: {fileID: 11400000, guid: 68a3091ae6a3000469a13bd060a098ad, type: 2}
@@ -73067,6 +73075,7 @@ MonoBehaviour:
   missionPanel: {fileID: 273355504}
   storageMenu: {fileID: 1056730518}
   instantRentPanel: {fileID: 1177463635}
+  globalInsuff: {fileID: 349422163}
   toggles: []
   map: {fileID: 280726322}
   greenGrass: {fileID: 11400000, guid: 68a3091ae6a3000469a13bd060a098ad, type: 2}
@@ -76429,6 +76438,7 @@ MonoBehaviour:
   missionPanel: {fileID: 273355504}
   storageMenu: {fileID: 1056730518}
   instantRentPanel: {fileID: 1177463635}
+  globalInsuff: {fileID: 349422163}
   toggles: []
   map: {fileID: 280726322}
   greenGrass: {fileID: 11400000, guid: 68a3091ae6a3000469a13bd060a098ad, type: 2}
@@ -78024,6 +78034,7 @@ MonoBehaviour:
   missionPanel: {fileID: 273355504}
   storageMenu: {fileID: 1056730518}
   instantRentPanel: {fileID: 1177463635}
+  globalInsuff: {fileID: 349422163}
   toggles: []
   map: {fileID: 280726322}
   greenGrass: {fileID: 11400000, guid: 68a3091ae6a3000469a13bd060a098ad, type: 2}
@@ -94446,6 +94457,7 @@ MonoBehaviour:
   missionPanel: {fileID: 273355504}
   storageMenu: {fileID: 1056730518}
   instantRentPanel: {fileID: 1177463635}
+  globalInsuff: {fileID: 349422163}
   toggles: []
   map: {fileID: 280726322}
   greenGrass: {fileID: 11400000, guid: 68a3091ae6a3000469a13bd060a098ad, type: 2}
@@ -95162,6 +95174,7 @@ MonoBehaviour:
   storageController: {fileID: 835569546}
   moveToggle: {fileID: 174387926}
   delConfirm: {fileID: 1707686260}
+  globalInsuff: {fileID: 349422163}
   stats: {fileID: 973017965}
   buildSound: {fileID: 8300000, guid: af8e188edf22047efbe5414eb16f16df, type: 3}
   touchSound: {fileID: 8300000, guid: bd5423d63b2c64bff84c70238339e6d6, type: 3}
@@ -95172,6 +95185,8 @@ MonoBehaviour:
     type: 3}
   hq: {fileID: 502592024}
   astar: {fileID: 68398485}
+  insuffMoney: {fileID: 21300000, guid: 0a111b1eb03fd4c29abbb4a4325c5b94, type: 3}
+  insuffGold: {fileID: 21300000, guid: c7d4beb0d7593448ebb53d0e895e26a5, type: 3}
 --- !u!82 &1612019530
 AudioSource:
   m_ObjectHideFlags: 0
