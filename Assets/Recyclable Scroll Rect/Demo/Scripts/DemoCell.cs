@@ -11,17 +11,11 @@ using static CSVReader;
 public class DemoCell : MonoBehaviour, ICell
 {
     //UI
-    public Image bgImage;
-    public Sprite buyButtonFadedSprite;
-    public Sprite buyButtonSprite;
-    public Button buyButton;
-    public Button infoButton;
-    public GameObject infoParent;
-    public GameObject limited;
-    public Image infoBG;
-    public Sprite infoBg2;
-    public Sprite infoBg3;
-    public Sprite infoBg4;
+    public Image bgImage, infoBG, propertyImage;
+    public Sprite buyButtonFadedSprite, buyButtonSprite, infoBg2, infoBg3, infoBg4, money, gold, cardBase;
+    public Button buyButton, infoButton;
+    public GameObject infoParent, limited, priceIcon;
+    public Text cardName, cardXP, cardCost;
 
     //Info Panel
     public Image firstImg;
@@ -72,6 +66,39 @@ public class DemoCell : MonoBehaviour, ICell
 
         _cellIndex = cellIndex;
         _propertyCard = propertyCard;
+        bgImage.sprite = cardBase;
+        cardName.text = propertyCard.displayName;
+        if (propertyCard.displayName.Length > 22)
+        {
+            cardName.fontSize = 20;
+        } else if (propertyCard.displayName.Length > 15)
+        {
+            cardName.fontSize = 24;
+        } else
+        {
+            cardName.fontSize = 26;
+        }
+        cardXP.text = propertyCard.XP.ToString("#,##0") + " XP";
+        propertyImage.sprite = propertyCard.propImage;
+        if (propertyCard.cost.Contains("Gold"))
+        {
+            int amt = int.Parse(propertyCard.cost.Remove(propertyCard.cost.Length - 5));
+            cardCost.text = amt.ToString("#,##0") + " Gold";
+            priceIcon.GetComponent<Image>().sprite = gold;
+        }
+        else
+        {
+            priceIcon.GetComponent<Image>().sprite = money;
+            if (long.Parse(propertyCard.cost) >= 10000000)
+            {
+                string temp = long.Parse(propertyCard.cost).ToString("#,##0");
+                cardCost.text = "$" + temp.Substring(0, temp.Length - 8) + "M";
+            }
+            else
+            {
+                cardCost.text = "$" + long.Parse(propertyCard.cost).ToString("#,##0");
+            }
+        }
 
         switch (propertyType)
         {
@@ -144,7 +171,6 @@ public class DemoCell : MonoBehaviour, ICell
                 break;
             default: break;
         }
-        bgImage.sprite = propertyCard.bgImage;
 
         //print("in democell, level is " + stats.returnStats()[2]);
         if (propertyCard.level > stats.returnStats()[2])
