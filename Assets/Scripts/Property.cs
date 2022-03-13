@@ -688,7 +688,7 @@ public class commercePickupScript : MonoBehaviour, IPointerClickHandler
             foreach (Collider2D item in infList)
             {
                 GameObject obj = GameObject.Find(item.name);
-                if (obj.transform.GetChild(0).GetComponent<contractScript>().signTime != "notsigned")
+                if (obj.transform.GetChild(0).GetComponent<contractScript>().signTime != "notsigned" && obj.transform.GetChild(3).GetComponent<SpriteRenderer>().sortingOrder == 0)
                 {
                     switch (obj.transform.GetChild(0).GetComponent<contractScript>().signIndex)
                     {

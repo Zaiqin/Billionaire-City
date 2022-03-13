@@ -101,7 +101,14 @@ public class Statistics : MonoBehaviour
                     levelUpScreen.transform.LeanScale(new Vector2(68f,68f), 0.2f).setEaseOutBack();
                     levelUpScreen.transform.GetChild(3).GetComponent<RecyclableScrollRect>().ReloadData();
                     levelUpScreen.transform.GetChild(0).GetComponent<Text>().text = "Level " + level.ToString();
-                    levelUpScreen.transform.GetChild(1).GetComponent<Text>().text = this.GetComponent<levelUp>().noOfCards + " items unlocked";
+                    if (this.GetComponent<levelUp>().noOfCards == 1)
+                    {
+                        levelUpScreen.transform.GetChild(1).GetComponent<Text>().text = "1 item unlocked";
+                    }
+                    else
+                    {
+                        levelUpScreen.transform.GetChild(1).GetComponent<Text>().text = this.GetComponent<levelUp>().noOfCards + " items unlocked";
+                    }
                     levelUpScreen.transform.GetChild(1).gameObject.SetActive(true);
                     levelUpScreen.transform.GetChild(4).gameObject.SetActive(false);
                     shopButton.GetComponent<shopButton>().requireReload = true;

@@ -180,7 +180,7 @@ public class infoScript : MonoBehaviour
             {
                 GameObject obj = GameObject.Find(item.name);
                 //print("adding "+item.name +" with signTime " + GameObject.Find(item.name).transform.GetChild(0).GetComponent<contractScript>().signTime);
-                if (obj.transform.GetChild(0).GetComponent<contractScript>().signTime != "notsigned")
+                if (obj.transform.GetChild(0).GetComponent<contractScript>().signTime != "notsigned" && obj.transform.GetChild(3).GetComponent<SpriteRenderer>().sortingOrder == 0)
                 {
 
                     switch (obj.transform.GetChild(0).GetComponent<contractScript>().signIndex)
@@ -409,7 +409,7 @@ public class infoScript : MonoBehaviour
             {
                 GameObject obj = GameObject.Find(item.name);
                 //print("adding "+item.name +" with signTime " + GameObject.Find(item.name).transform.GetChild(0).GetComponent<contractScript>().signTime);
-                if (obj.transform.GetChild(0).GetComponent<contractScript>().signTime != "notsigned")
+                if (obj.transform.GetChild(0).GetComponent<contractScript>().signTime != "notsigned" && obj.transform.GetChild(3).GetComponent<SpriteRenderer>().sortingOrder == 0)
                 {
 
                     switch (obj.transform.GetChild(0).GetComponent<contractScript>().signIndex)

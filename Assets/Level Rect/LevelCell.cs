@@ -28,18 +28,18 @@ public class LevelCell : MonoBehaviour, ICell
         _cellIndex = cellIndex;
         bgImage.sprite = cardBase;
 
-        /*cardName.text = propertyCard.displayName;
+        cardName.text = propertyCard.displayName;
         if (propertyCard.displayName.Length > 22)
         {
-            cardName.fontSize = 20;
+            cardName.fontSize = 11;
         }
         else if (propertyCard.displayName.Length > 15)
         {
-            cardName.fontSize = 24;
+            cardName.fontSize = 15;
         }
         else
         {
-            cardName.fontSize = 26;
+            cardName.fontSize = 17;
         }
         cardXP.text = propertyCard.XP.ToString("#,##0") + " XP";
         propertyImage.sprite = propertyCard.propImage;
@@ -61,8 +61,7 @@ public class LevelCell : MonoBehaviour, ICell
             {
                 cardCost.text = "$" + long.Parse(propertyCard.cost).ToString("#,##0");
             }
-        }*/
-
+        }
     }
 
 }

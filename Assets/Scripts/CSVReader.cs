@@ -44,24 +44,6 @@ public class CSVReader : MonoBehaviour
             print("Property files are present in app");
         }
 
-        // Creation of Dictionaries to hold Sprites that are loaded from file -----------------------------
-        Dictionary<String, Sprite> bgSprites = new Dictionary<string, Sprite>();
-        Dictionary<String, Sprite> propSprites = new Dictionary<string, Sprite>();
-        // Loading all Property Card Sprites from Resources without order ---------------------------------
-        Sprite[] unsortedPropCardSprites = Resources.LoadAll<Sprite>("propertyCards");
-        for (int i = 0; i < unsortedPropCardSprites.Length; i++)
-        {
-            bgSprites.Add(unsortedPropCardSprites[i].name, unsortedPropCardSprites[i]);
-        }
-        //print("No of propertyCard sprites in resource folder: " + bgSprites.Count);
-        //Loading all Property Sprites from Resources without order ---------------------------------------
-        Sprite[] unsortedPropSprites = Resources.LoadAll<Sprite>("properties");
-        for (int i = 0; i < unsortedPropSprites.Length; i++)
-        {
-            propSprites.Add(unsortedPropSprites[i].name, unsortedPropSprites[i]);
-        }
-        //print("No of property sprites in resource folder: " + propSprites.Count);
-
         //Setup for reading CSV files ----------------------------------------------------------------------
         string TitleLine = csvText.Split(new string[] { "\n" }, StringSplitOptions.None)[0]; //If use local excel change to \r\n
         string[] data = csvText.Split(new string[] { ",", "\n" }, StringSplitOptions.None);  //If use local excel change to \r\n
@@ -211,7 +193,6 @@ public class CSVReader : MonoBehaviour
             if (needToDownload == true)
             {
                 print("Fetching " + propImagePath);
-                //yield return StartCoroutine(webDL.GetComponent<webDownloader>().DownloadImage("https://zaiqin.github.io/ZQStudios/propertyCards/" + bgImagePath + ".png", bgImagePath, "propertyCards"));
                 yield return StartCoroutine(webDL.GetComponent<webDownloader>().DownloadImage("https://zaiqin.github.io/ZQStudios/properties/" + propImagePath + ".png", propImagePath, "properties"));
                 dlBar.transform.GetChild(0).GetComponent<Image>().fillAmount = (float)((float)masterNo / (float)totalNoOfProperties);
             }
