@@ -30,7 +30,7 @@ public class missionParent : MonoBehaviour
     public Text rewardText;
     public bool extended = false;
     public int chosenIndex;
-    public GameObject missionController, stats, saveObj, claimButton, exclaimButton, storageController, extAudio;
+    public GameObject missionController, stats, saveObj, claimButton, exclaimButton, storageController, extAudio, missionCompletePanel;
     public Image rewardImage;
     public Sprite money, gold;
     public AudioClip sound;
@@ -94,6 +94,9 @@ public class missionParent : MonoBehaviour
         saveObj.GetComponent<saveloadsystem>().saveMissions();
         exclaimButton.SetActive(true);
         extAudio.GetComponent<AudioSource>().PlayOneShot(sound);
+        missionCompletePanel.SetActive(true);
+        missionCompletePanel.GetComponent<missionPopup>().func(m.msnName);
+        
     }
 
     public void closePanel()
