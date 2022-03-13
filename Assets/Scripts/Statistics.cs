@@ -163,6 +163,10 @@ public class Statistics : MonoBehaviour
                     {
                         missionsPanel.GetComponent<missionParent>().completeMission(item);
                     }
+                    else if (item.msnName == "The One" && money >= 295000000)
+                    {
+                        missionsPanel.GetComponent<missionParent>().completeMission(item);
+                    }
                     else if (item.msnName == "Youre a Millionaire I")
                     {
                         HQ.GetComponent<HQstats>().calcHQ();
@@ -223,6 +227,14 @@ public class Statistics : MonoBehaviour
                     {
                         HQ.GetComponent<HQstats>().calcHQ();
                         if (HQ.GetComponent<HQstats>().totalLong >= 900000000)
+                        {
+                            missionsPanel.GetComponent<missionParent>().completeMission(item);
+                        }
+                    }
+                    else if (item.msnName == "Tesla to the Moon")
+                    {
+                        HQ.GetComponent<HQstats>().calcHQ();
+                        if (HQ.GetComponent<HQstats>().totalLong >= 137000000000)
                         {
                             missionsPanel.GetComponent<missionParent>().completeMission(item);
                         }
