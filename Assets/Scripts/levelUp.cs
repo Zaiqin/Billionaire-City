@@ -7,19 +7,6 @@ public class levelUp : MonoBehaviour
     public GameObject csvObj;
     public int noOfCards;
     public List<PropertyCard> cardList = new List<PropertyCard>();
-    public 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void calcLevelUp(int oldLevel, int newLevel)
     {

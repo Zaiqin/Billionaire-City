@@ -15,11 +15,6 @@ public class influence : MonoBehaviour, IPointerClickHandler
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
-
     [ContextMenu("Show Influence")]
     public void detectInfluence(bool invisible = false)
     {

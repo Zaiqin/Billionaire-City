@@ -13,11 +13,6 @@ public class detectDecoInf : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
-
     [ContextMenu("Show Influence")]
     public void detectInfluence()
     {

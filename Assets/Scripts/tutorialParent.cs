@@ -47,12 +47,6 @@ public class tutorialParent : MonoBehaviour
         arrow.transform.position = new Vector3(0, (Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0))).y + arrow.GetComponent<BoxCollider2D>().bounds.size.y, 0); arrow.transform.eulerAngles = new Vector3(0, 0, 0);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void nextPage()
     {
         tutorialPage++;
@@ -83,7 +77,7 @@ public class tutorialParent : MonoBehaviour
         arrow.transform.eulerAngles = new Vector3(0, 0, 0);
         switch (tutorialPage)
         {
-            case 1: arrow.transform.position = new Vector3(GameObject.Find("HQ").gameObject.transform.position.x - GameObject.Find("HQ").GetComponent<BoxCollider2D>().bounds.size.x, GameObject.Find("HQ").gameObject.transform.position.y - GameObject.Find("HQ").GetComponent<BoxCollider2D>().bounds.size.y/2, 0); arrow.transform.eulerAngles = new Vector3(0, 180, 0); break;
+            case 1: arrow.transform.position = new Vector3(GameObject.Find("HQ").gameObject.transform.position.x - GameObject.Find("HQ").GetComponent<BoxCollider2D>().bounds.size.x/2 - GameObject.Find("HQ").GetComponent<BoxCollider2D>().bounds.size.x / 3, GameObject.Find("HQ").gameObject.transform.position.y - GameObject.Find("HQ").GetComponent<BoxCollider2D>().bounds.size.y/4, 0); arrow.transform.eulerAngles = new Vector3(0, 180, 0); break;
             case 2: arrow.transform.position = new Vector3(plotToggle.transform.position.x + arrow.GetComponent<BoxCollider2D>().bounds.size.x + plotToggle.GetComponent<CircleCollider2D>().bounds.size.x/4, plotToggle.transform.position.y, 0); break;
             case 3: arrow.transform.position = new Vector3(shopToggle.transform.position.x + arrow.GetComponent<BoxCollider2D>().bounds.size.x + plotToggle.GetComponent<CircleCollider2D>().bounds.size.x / 4, shopToggle.transform.position.y, 0); break;
             case 4: arrow.transform.position = new Vector3(roadToggle.transform.position.x + arrow.GetComponent<BoxCollider2D>().bounds.size.x + plotToggle.GetComponent<CircleCollider2D>().bounds.size.x / 4, roadToggle.transform.position.y, 0); break;

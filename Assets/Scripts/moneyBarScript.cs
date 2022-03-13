@@ -23,10 +23,4 @@ public class moneyBarScript : MonoBehaviour, IPointerClickHandler
         moneyBar.transform.GetChild(0).GetComponent<Text>().text = this.transform.parent.transform.GetChild(0).GetComponent<Text>().text;
         goldBar.transform.GetChild(0).GetComponent<Text>().text = GameObject.Find("GoldBar").transform.GetChild(0).GetComponent<Text>().text;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

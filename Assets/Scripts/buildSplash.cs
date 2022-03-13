@@ -9,10 +9,4 @@ public class buildSplash : MonoBehaviour
     {
         Destroy(gameObject, 0.45f);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

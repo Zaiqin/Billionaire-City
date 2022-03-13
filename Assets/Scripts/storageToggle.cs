@@ -57,16 +57,4 @@ public class storageToggle : MonoBehaviour
         StorageMenu.SetActive(false);
         StorageMenu.transform.localScale = Vector2.one;
     }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }

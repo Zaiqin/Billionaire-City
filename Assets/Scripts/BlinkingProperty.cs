@@ -11,11 +11,6 @@ public class BlinkingProperty : MonoBehaviour
         //InvokeRepeating("StartBlink", 0f, 0.5f);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
-
     [ContextMenu("startRepeating")]
     public void invokeStart()
     {

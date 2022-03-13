@@ -7,17 +7,6 @@ public class toggleMaster : MonoBehaviour
 {
     public Toggle shopToggle, plotToggle, roadToggle, deleteToggle, storageToggle;
     public GameObject cover;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public bool checkAllOff()
     {

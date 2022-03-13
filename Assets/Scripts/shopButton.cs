@@ -51,16 +51,4 @@ public class shopButton : MonoBehaviour
         ShopMenu.SetActive(false);
         ShopMenu.transform.localScale = new Vector2(73.9463f, 73.9463f);
     }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

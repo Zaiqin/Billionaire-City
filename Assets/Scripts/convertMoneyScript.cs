@@ -7,18 +7,6 @@ public class convertMoneyScript : MonoBehaviour
 {
     public GameObject stats, moneyBar, goldBar, convMoneyBar, convGoldBar;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void convert()
     {
         if (stats.GetComponent<Statistics>().gold >= 1)

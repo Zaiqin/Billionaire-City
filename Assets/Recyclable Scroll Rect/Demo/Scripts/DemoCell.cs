@@ -153,7 +153,7 @@ public class DemoCell : MonoBehaviour, ICell
                 {
                     thirdText.text = (((float)propertyCard.wonderBonus) / 100).ToString() + "% Rent x2";
                 }
-                else if (propertyCard.wonderBonus > 10)
+                else if (propertyCard.wonderBonus >= 10)
                 {
                     thirdText.text = (((float)propertyCard.wonderBonus) / 10).ToString() + "% Commerce";
                 }

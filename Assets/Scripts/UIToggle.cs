@@ -19,18 +19,6 @@ public class UIToggle : MonoBehaviour
     [SerializeField]
     private TileBase greenGrass, tileGrass;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void toggleToggles(GameObject sel)
     {
         print("Selected " + sel);

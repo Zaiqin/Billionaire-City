@@ -32,16 +32,4 @@ public class luckToggle : MonoBehaviour
         luckPanel.SetActive(false);
         luckPanel.transform.localScale = Vector2.one;
     }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

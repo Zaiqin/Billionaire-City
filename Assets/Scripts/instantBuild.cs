@@ -8,17 +8,6 @@ public class instantBuild : MonoBehaviour
     public GameObject save, infoPanel, stats, extAudio, missionsPanel;
     public AudioClip constSound;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void instantButton()
     {

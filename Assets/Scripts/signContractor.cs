@@ -7,18 +7,6 @@ public class signContractor : MonoBehaviour
 {
     public GameObject props, signController, closeButton, cover;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void signAll()
     {
         print("Called sign all");

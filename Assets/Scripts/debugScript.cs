@@ -12,10 +12,4 @@ public class debugScript : MonoBehaviour
     {
         this.GetComponent<Text>().text = FileHandler.GetPath("propsSave.json");
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

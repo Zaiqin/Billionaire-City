@@ -29,12 +29,6 @@ public class HQstats : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void calcHQ()
     {
         print("calculating hq");

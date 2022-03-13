@@ -9,10 +9,4 @@ public class contractValue : MonoBehaviour
     {
         Destroy(gameObject, 0.6f);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

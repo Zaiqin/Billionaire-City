@@ -14,11 +14,6 @@ public class expScript : MonoBehaviour, IPointerClickHandler
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
-
     public void OnPointerClick(PointerEventData eventData)
     {
         if (cam.GetComponent<CameraMovement>().dragging == false && GameObject.Find("Canvas").GetComponent<toggleMaster>().checkAllOff() == true)

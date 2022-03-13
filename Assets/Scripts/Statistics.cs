@@ -57,12 +57,6 @@ public class Statistics : MonoBehaviour
         updateStats();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public long[] returnStats()
     {
         long[] stats = new long[4] { money, gold, level, xp };
