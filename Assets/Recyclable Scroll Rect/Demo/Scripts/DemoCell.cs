@@ -42,7 +42,6 @@ public class DemoCell : MonoBehaviour, ICell
     private int _cellIndex;
 
     private PropertyCard _propertyCard;
-    public ShopInsuff shopInsuffController;
     public Statistics stats;
 
     public Tilemap map;
@@ -53,9 +52,6 @@ public class DemoCell : MonoBehaviour, ICell
     {
         buyButton.GetComponent<Button>().onClick.AddListener(buyListener);
         infoButton.GetComponent<Button>().onClick.AddListener(infoListener);
-
-        shopInsuffController = GameObject.FindGameObjectWithTag("ShopInsuff").GetComponent<ShopInsuff>();
-        shopInsuffController.turnOffInsuff();
         
     }
 
@@ -213,52 +209,6 @@ public class DemoCell : MonoBehaviour, ICell
         // --------------------- Swapping to green border grass -------------
         map = GameObject.Find("Tilemap").GetComponent<Tilemap>();
         map.SwapTile(tileGrass, greenGrass);
-        // ------------------------------------------------------------------
-        /*stats = GameObject.FindGameObjectWithTag("Stats").GetComponent<Statistics>();
-        print("money now is " + stats.returnStats()[0]);
-
-        int deduction = 0;
-        if (_propertyCard.cost.Contains("Gold"))
-        {
-            deduction = int.Parse(_propertyCard.cost.Remove(_propertyCard.cost.Length - 5));
-            print("deducting " + deduction + " gold");
-            if (stats.returnStats()[1] < deduction)
-            {
-                print("insufficient gold");
-                shopInsuffController.turnOnInsuff(type: "gold");
-            }
-            else
-            {
-                print("enough gold");
-                closePanel();
-                shopMenu.GetComponent<PurchaseController>().purchaseProperty(_propertyCard);
-                // --------------------- Swapping to green border grass -------------
-                map = GameObject.Find("Tilemap").GetComponent<Tilemap>();
-                map.SwapTile(tileGrass, greenGrass);
-                // ------------------------------------------------------------------
-
-            }
-        } else
-        {
-            deduction = int.Parse(_propertyCard.cost);
-            print("deducting $" + deduction);
-            if (stats.returnStats()[0] < deduction)
-            {
-                print("insufficient money");
-                shopInsuffController.turnOnInsuff(type: "money");
-            }
-            else
-            {
-                print("enough money");
-                closePanel();
-                shopMenu.GetComponent<PurchaseController>().purchaseProperty(_propertyCard);
-                // --------------------- Swapping to green border grass -------------
-                map = GameObject.Find("Tilemap").GetComponent<Tilemap>();
-                map.SwapTile(tileGrass, greenGrass);
-                // ------------------------------------------------------------------
-            }
-        }*/
-
     }
 
     void infoListener()

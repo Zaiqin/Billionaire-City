@@ -36,7 +36,7 @@ public class CSVReader : MonoBehaviour
         {
             print("No property sprites in app");
             Directory.CreateDirectory(Application.persistentDataPath + "/properties");
-            Directory.CreateDirectory(Application.persistentDataPath + "/propertyCards");
+            //Directory.CreateDirectory(Application.persistentDataPath + "/propertyCards");
             needToDownload = true;
             dlBar.SetActive(true);
         } else
@@ -210,13 +210,13 @@ public class CSVReader : MonoBehaviour
 
             if (needToDownload == true)
             {
-                print("Fetching " + bgImagePath);
-                yield return StartCoroutine(webDL.GetComponent<webDownloader>().DownloadImage("https://zaiqin.github.io/ZQStudios/propertyCards/" + bgImagePath + ".png", bgImagePath, "propertyCards"));
+                print("Fetching " + propImagePath);
+                //yield return StartCoroutine(webDL.GetComponent<webDownloader>().DownloadImage("https://zaiqin.github.io/ZQStudios/propertyCards/" + bgImagePath + ".png", bgImagePath, "propertyCards"));
                 yield return StartCoroutine(webDL.GetComponent<webDownloader>().DownloadImage("https://zaiqin.github.io/ZQStudios/properties/" + propImagePath + ".png", propImagePath, "properties"));
                 dlBar.transform.GetChild(0).GetComponent<Image>().fillAmount = (float)((float)masterNo / (float)totalNoOfProperties);
             }
-            string path = Application.persistentDataPath + "/propertyCards/" + bgImagePath + ".png";
-            tempArray[i].bgImage = LoadSprite(path);
+            //string path = Application.persistentDataPath + "/propertyCards/" + bgImagePath + ".png";
+            //tempArray[i].bgImage = LoadSprite(path);
             string path2 = Application.persistentDataPath + "/properties/" + propImagePath + ".png";
             tempArray[i].propImage = LoadSprite(path2);
             // -----------------------------------------------------------------------------------------------

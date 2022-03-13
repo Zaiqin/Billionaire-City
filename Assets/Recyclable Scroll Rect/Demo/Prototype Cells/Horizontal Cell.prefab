@@ -182,7 +182,6 @@ MonoBehaviour:
   time: {fileID: 21300000, guid: 112e0331aee1b4fc59583abe89c83845, type: 3}
   lockParent: {fileID: 6522840718833781442}
   levelReq: {fileID: 5729122264442699020}
-  shopInsuffController: {fileID: 0}
   stats: {fileID: 0}
   map: {fileID: 0}
   greenGrass: {fileID: 11400000, guid: 68a3091ae6a3000469a13bd060a098ad, type: 2}

@@ -54,7 +54,7 @@ public class RecyclableScrollerLevel : CSVReader, IRecyclableScrollRectDataSourc
         //print("Clicked on a " + pCard.displayName + "'s contract");
         var item = cell as LevelCell;
 
-        List<Sprite> list = stats.GetComponent<levelUp>().spriteList;
+        List<PropertyCard> list = stats.GetComponent<levelUp>().cardList;
 
         item.ConfigureCell(list[index], index);
     }

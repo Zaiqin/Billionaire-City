@@ -145,7 +145,7 @@ public class missionParent : MonoBehaviour
             rewardImage.sprite = database[missionList[index].msnReward.Substring(4, missionList[index].msnReward.Length-4)].propImage;
         } else if (missionList[index].msnReward.Contains("Gold"))
         {
-            rewardText.text = missionList[index].msnReward.Substring(0, missionList[index].msnReward.Length - 5);
+            rewardText.text = missionList[index].msnReward.Substring(0, missionList[index].msnReward.Length - 5) + " Gold";
             rewardImage.sprite = gold;
         } else
         {

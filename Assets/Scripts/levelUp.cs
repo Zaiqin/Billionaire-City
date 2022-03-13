@@ -6,7 +6,7 @@ public class levelUp : MonoBehaviour
 {
     public GameObject csvObj;
     public int noOfCards;
-    public List<Sprite> spriteList = new List<Sprite>();
+    public List<PropertyCard> cardList = new List<PropertyCard>();
     public 
 
     // Start is called before the first frame update
@@ -24,7 +24,7 @@ public class levelUp : MonoBehaviour
     public void calcLevelUp(int oldLevel, int newLevel)
     {
         noOfCards = 0;
-        spriteList.Clear();
+        cardList.Clear();
         //print("oldLevel is " + oldLevel + ", newLevel is " + newLevel);
         //print("calc for level" + newLevel);
         foreach (KeyValuePair<string, PropertyCard> entry in csvObj.GetComponent<CSVReader>().CardDatabase)
@@ -38,7 +38,7 @@ public class levelUp : MonoBehaviour
                     if (entry.Value.level == i && entry.Value.limited != "ENDED")
                     {
                         print("unlocked " + entry.Value.displayName);
-                        spriteList.Add(entry.Value.bgImage);
+                        cardList.Add(entry.Value);
                         noOfCards += 1;
                     }
                 }
@@ -49,7 +49,7 @@ public class levelUp : MonoBehaviour
                 if (entry.Value.level == newLevel)
                 {
                     print("unlocked " + entry.Value.displayName);
-                    spriteList.Add(entry.Value.bgImage);
+                    cardList.Add(entry.Value);
                     noOfCards += 1;
                 }
             }
