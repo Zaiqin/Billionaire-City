@@ -25,7 +25,7 @@ public class plotManager : MonoBehaviour
     public AudioSource myFx;
     public AudioClip deleteSound;
 
-    public GameObject floatingValue, hq, splashObject, saveObj, pendingParent;
+    public GameObject floatingValue, hq, splashObject, saveObj, pendingParent, cover;
 
     public Camera mainCam;
 
@@ -341,7 +341,7 @@ public class plotManager : MonoBehaviour
             Tile aclickedTile = map.GetTile<Tile>(agridPosition);
             //print("clicked on tile: " + aclickedTile.name + " at position: " + agridPosition);
 
-            if (aclickedTile.name.Contains("plot") && plotToggle.isOn == false && roadToggle.isOn == false && deleteToggle.isOn == false && shopToggle.GetComponent<Toggle>().isOn == false && pendingParent.transform.childCount == 0 && startInUI == false && mainCam.GetComponent<CameraMovement>().dragging == false)
+            if (aclickedTile.name.Contains("plot") && cover.activeSelf == false && plotToggle.isOn == false && roadToggle.isOn == false && deleteToggle.isOn == false && shopToggle.GetComponent<Toggle>().isOn == false && pendingParent.transform.childCount == 0 && startInUI == false && mainCam.GetComponent<CameraMovement>().dragging == false)
             {
                 shopToggle.GetComponent<UIToggle>().toggleToggles(shopToggle);
                 shopToggle.GetComponent<shopButton>().shopToggle.isOn = true;
