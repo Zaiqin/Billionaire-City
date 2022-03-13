@@ -11,6 +11,7 @@ public class CSVReader : MonoBehaviour
     public TextAsset textAssetData;
     public string csvText;
     public List<Mission> missionList = new List<Mission>();
+    public GameObject redeem;
     public bool needToDownload = false;
 
     public Dictionary<int, long> levelValues = new Dictionary<int, long>();
@@ -271,6 +272,19 @@ public class CSVReader : MonoBehaviour
                 break;
             }
         }
+
+        Dictionary<string, string> codes = new Dictionary<string, string>();
+        for (int i = 1; i < data.Length; i++)
+        {
+            if (data[(cols * (i)) + 41] == "No Code")
+            {
+                print("There are " + (i-1) + " Codes");
+                break;
+            }
+            codes.Add(data[(cols * (i)) + 41], data[(cols * (i)) + 42]);
+            print("Added code: " + data[(cols * (i)) + 41]);
+        }
+        redeem.GetComponent<redeemCode>().codes = codes;
 
         //print("end of csv, max reach is " + maxDecoReach);
         print("max deco reach is " + maxDecoReach);

@@ -16,6 +16,7 @@ public class DemoCell : MonoBehaviour, ICell
     public Button buyButton, infoButton;
     public GameObject infoParent, limited, priceIcon;
     public Text cardName, cardXP, cardCost;
+    public AudioClip touch;
 
     //Info Panel
     public Image firstImg;
@@ -64,7 +65,7 @@ public class DemoCell : MonoBehaviour, ICell
         _propertyCard = propertyCard;
         bgImage.sprite = cardBase;
         cardName.text = propertyCard.displayName;
-        if (propertyCard.displayName.Length > 22)
+        /*if (propertyCard.displayName.Length > 22)
         {
             cardName.fontSize = 20;
         } else if (propertyCard.displayName.Length > 15)
@@ -73,7 +74,7 @@ public class DemoCell : MonoBehaviour, ICell
         } else
         {
             cardName.fontSize = 26;
-        }
+        }*/
         cardXP.text = propertyCard.XP.ToString("#,##0") + " XP";
         propertyImage.sprite = propertyCard.propImage;
         if (propertyCard.cost.Contains("Gold"))
@@ -209,6 +210,8 @@ public class DemoCell : MonoBehaviour, ICell
         // --------------------- Swapping to green border grass -------------
         map = GameObject.Find("Tilemap").GetComponent<Tilemap>();
         map.SwapTile(tileGrass, greenGrass);
+
+        GameObject.Find("ExternalAudioPlayer").GetComponent<AudioSource>().PlayOneShot(touch);
     }
 
     void infoListener()
@@ -224,6 +227,7 @@ public class DemoCell : MonoBehaviour, ICell
             closeinfoPanel();
         }
         print("Space: "+ _propertyCard.space+"\nNo of tenants: "+ _propertyCard.tenants + " Earnings in 3mins: $" + _propertyCard.threemins);
+        GameObject.Find("ExternalAudioPlayer").GetComponent<AudioSource>().PlayOneShot(touch);
     }
 
     public void closeinfoPanel()

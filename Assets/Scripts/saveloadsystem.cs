@@ -36,9 +36,10 @@ public class statsSaveForm
     public int noOfPlots;
     public int noDailyCollected;
     public string lastDailyCollected;
-    public statsSaveForm(long m, long g, long l, long x, string n, int p, int noD, string lastD)
+    public bool muted;
+    public statsSaveForm(long m, long g, long l, long x, string n, int p, int noD, string lastD, bool mut)
     {
-        money = m; gold = g; level = l; xp = x; cityName = n; noOfPlots = p; noDailyCollected = noD; lastDailyCollected = lastD;
+        money = m; gold = g; level = l; xp = x; cityName = n; noOfPlots = p; noDailyCollected = noD; lastDailyCollected = lastD; muted = mut;
     }
 }
 
@@ -59,7 +60,6 @@ public class tileSaveForm
         {
             texName = texture;
         }
-            
     }
 }
 
@@ -68,7 +68,7 @@ public class saveloadsystem : MonoBehaviour
     public CSVReader csv;
     public Tilemap map;
     public GameObject PropertiesParent, Stats, expPopup, cityText, hq, dailyBonus, ppDragButton, Astar, missionParent, storageController;
-    public GameObject cover, tutorialPanel, loadingScreen, webDL;
+    public GameObject cover, tutorialPanel, loadingScreen, webDL, reedem;
     public InputField nameField;
     public void StartGame()
     {
@@ -139,45 +139,12 @@ public class saveloadsystem : MonoBehaviour
             }
         }
         FileHandler.SaveToJSON<propertySaveForm>(propSaveList, "propsSave.json");
-
-        // ------------ Saving stats -------------------------------
-        statsSaveForm statsSaveObj = new statsSaveForm(Stats.GetComponent<Statistics>().money, Stats.GetComponent<Statistics>().gold, Stats.GetComponent<Statistics>().level, Stats.GetComponent<Statistics>().xp, cityText.GetComponent<Text>().text, Stats.GetComponent<Statistics>().noOfPlots, Stats.GetComponent<Statistics>().noDailyCollected, Stats.GetComponent<Statistics>().lastDailyCollected);
-        FileHandler.SaveToJSON<statsSaveForm>(statsSaveObj, "statsSave.json");
-
-        // ------------ Saving tilemap -------------------------------
-        List<tileSaveForm> tileSaveList = new List<tileSaveForm>();
-        BoundsInt bounds = map.cellBounds;
-        for (int x = bounds.xMin; x < bounds.xMax; x++)
-        {
-            for (int y = bounds.yMin; y < bounds.yMax; y++)
-            {
-                Vector3Int pos = new Vector3Int(x, y, 0);
-                TileBase tile = map.GetTile(pos);
-                if (tile != null)
-                {
-                    tileSaveForm tF = new tileSaveForm(pos, tile.name);
-                    tileSaveList.Add(tF);
-                }
-            }
-        }
-        FileHandler.SaveToJSON<tileSaveForm>(tileSaveList, "tileSave.json");
-
-        // ------------- Save Expansions ---------------------
-        List<string> delExpList = expPopup.GetComponent<expansion>().deletedExp;
-        FileHandler.SaveToJSON<string>(delExpList, "deletedExp.json");
-        print("Game saved");
-
-        // ------------- Save Missions ---------------------
-        List<string> doneMissionList = missionParent.GetComponent<missionParent>().doneMissionList;
-        FileHandler.SaveToJSON<string>(doneMissionList, "doneMission.json");
-        List<string> pendingMissionList = missionParent.GetComponent<missionParent>().pendingMissionList;
-        FileHandler.SaveToJSON<string>(pendingMissionList, "pendingMission.json");
-        print("Game saved");
-
-        // ------------- Save Storage ---------------------
-        List<string> storageList = storageController.GetComponent<RecyclableScrollerStorage>().storageList;
-        FileHandler.SaveToJSON<string>(storageList, "storage.json");
-        print("Storage saved");
+        saveStats();
+        saveTilemap();
+        saveExp();
+        saveMissions();
+        saveStorage();
+        saveCode();
     }
 
     public void saveStorage()
@@ -201,7 +168,7 @@ public class saveloadsystem : MonoBehaviour
     public void saveStats()
     {
         print("Saving Stats");
-        statsSaveForm statsSaveObj = new statsSaveForm(Stats.GetComponent<Statistics>().money, Stats.GetComponent<Statistics>().gold, Stats.GetComponent<Statistics>().level, Stats.GetComponent<Statistics>().xp, cityText.GetComponent<Text>().text, Stats.GetComponent<Statistics>().noOfPlots, Stats.GetComponent<Statistics>().noDailyCollected, Stats.GetComponent<Statistics>().lastDailyCollected);
+        statsSaveForm statsSaveObj = new statsSaveForm(Stats.GetComponent<Statistics>().money, Stats.GetComponent<Statistics>().gold, Stats.GetComponent<Statistics>().level, Stats.GetComponent<Statistics>().xp, cityText.GetComponent<Text>().text, Stats.GetComponent<Statistics>().noOfPlots, Stats.GetComponent<Statistics>().noDailyCollected, Stats.GetComponent<Statistics>().lastDailyCollected, Stats.GetComponent<Statistics>().muted);
         FileHandler.SaveToJSON<statsSaveForm>(statsSaveObj, "statsSave.json");
         print("Stats saved");
     }
@@ -228,7 +195,19 @@ public class saveloadsystem : MonoBehaviour
         FileHandler.SaveToJSON<tileSaveForm>(tileSaveList, "tileSave.json");
         print("Tilemap saved");
     }
-    
+
+    public void saveCode()
+    {
+        print("Saving Codes");
+        List<string> usedCodes = new List<string>();
+        foreach (var item in reedem.GetComponent<redeemCode>().usedCodes)
+        {
+            usedCodes.Add(item);
+        }
+        FileHandler.SaveToJSON<string>(usedCodes, "usedCodes.json");
+        print("Codes saved");
+    }
+
     [ContextMenu("Save Expansions")]
     public void saveExp()
     {
@@ -282,6 +261,7 @@ public class saveloadsystem : MonoBehaviour
             Stats.GetComponent<Statistics>().setStats(statsObj.money, statsObj.gold, statsObj.level, statsObj.xp);
             Stats.GetComponent<Statistics>().cityName = statsObj.cityName;
             Stats.GetComponent<Statistics>().noOfPlots = statsObj.noOfPlots;
+            Stats.GetComponent<Statistics>().muted = statsObj.muted;
 
             if (statsObj.noDailyCollected == 5)
             {
@@ -295,7 +275,11 @@ public class saveloadsystem : MonoBehaviour
             }
             print("loaded name is " + statsObj.cityName);
             nameField.text = statsObj.cityName;
-            
+
+            // ------------ Loading Codes ------------------
+            List<string> usedlist = FileHandler.ReadListFromJSON<string>("usedCodes.json");
+            reedem.GetComponent<redeemCode>().usedCodes = usedlist;
+
             // ------------ Loading Expansions -------------
             expPopup.GetComponent<expansion>().deletedExp = FileHandler.ReadListFromJSON<string>("deletedExp.json");
             long cost = 0;

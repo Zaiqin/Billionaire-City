@@ -14,6 +14,7 @@ public class Statistics : MonoBehaviour
     public int noOfPlots;
     public int noDailyCollected;
     public string lastDailyCollected;
+    public bool muted;
     // ---------------------------
 
     public long expCost;
@@ -40,7 +41,7 @@ public class Statistics : MonoBehaviour
     public GameObject saveloadobj, shopButton, HQ, missionsPanel;
 
     private Dictionary<int, long> levelValues;
-    [SerializeField] private GameObject csvObj, levelUpScreen, externalAudioPlayer, inputText;
+    [SerializeField] private GameObject csvObj, levelUpScreen, externalAudioPlayer, inputText, muteSwitch;
     [SerializeField] private ParticleSystem particle;
     [SerializeField] private AudioClip levelUp;
 
@@ -54,6 +55,13 @@ public class Statistics : MonoBehaviour
     public void initStats()
     {
         levelValues = csvObj.GetComponent<CSVReader>().levelValues;
+        print("init stats");
+        if (muted == true)
+        {
+            muteSwitch.GetComponent<Toggle>().isOn = true;
+            Camera.main.GetComponent<AudioSource>().volume = 0f;
+            externalAudioPlayer.GetComponent<AudioSource>().volume = 0f;
+        }
         updateStats();
     }
 

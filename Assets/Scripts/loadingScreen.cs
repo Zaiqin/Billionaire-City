@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class loadingScreen : MonoBehaviour
 {
     public AudioSource cam;
-    public GameObject t, bgPan, titleImage, cover, skipCover, extAudio, tutorialScreen, internetObj, webObj, wheel, dlBar;
+    public GameObject t, bgPan, titleImage, cover, skipCover, extAudio, tutorialScreen, internetObj, webObj, wheel, dlBar, stats;
     public AudioClip introAudio;
     public bool canSkip = false;
 
@@ -85,7 +85,6 @@ public class loadingScreen : MonoBehaviour
             yield return null;
         }
         extAudio.GetComponent<AudioSource>().Stop();
-        extAudio.GetComponent<AudioSource>().volume = 1.0f;
 
         //yield return new WaitForSeconds(0.5f);
         closeIntro();
@@ -107,7 +106,6 @@ public class loadingScreen : MonoBehaviour
             yield return null;
         }
         extAudio.GetComponent<AudioSource>().Stop();
-        extAudio.GetComponent<AudioSource>().volume = 1.0f;
 
         this.gameObject.GetComponent<CanvasGroup>().LeanAlpha(0f, 0.2f);
         yield return new WaitForSeconds(0.3f);
@@ -122,7 +120,13 @@ public class loadingScreen : MonoBehaviour
             cover.SetActive(false);
         }
         this.gameObject.SetActive(false);
-        extAudio.GetComponent<AudioSource>().volume = 1.0f;
+        if (stats.GetComponent<Statistics>().muted == false)
+        {
+            extAudio.GetComponent<AudioSource>().volume = 1.0f;
+        } else
+        {
+            extAudio.GetComponent<AudioSource>().volume = 0f;
+        }
         cam.Play();
     }
 

@@ -8,7 +8,7 @@ public class UIToggle : MonoBehaviour
 {
 
     [SerializeField]
-    GameObject shopToggle, plotToggle, roadToggle, deleteToggle, ronaldToggle, storageToggle, luckToggle, signToggle, moveToggle, ShopMenu, hqMenu, infoPanel, pendingParent, ppDrag, delPanel, contractPanel, expPopup, failExpPopup, convertMoneyPanel, dailyBonusPanel, missionPanel, storageMenu, instantRentPanel, globalInsuff;
+    GameObject shopToggle, plotToggle, roadToggle, deleteToggle, ronaldToggle, storageToggle, luckToggle, signToggle, moveToggle, settingsToggle, ShopMenu, hqMenu, infoPanel, pendingParent, ppDrag, delPanel, contractPanel, expPopup, failExpPopup, convertMoneyPanel, dailyBonusPanel, missionPanel, storageMenu, instantRentPanel, globalInsuff;
 
     GameObject selectedToggle;
     public GameObject[] toggles;
@@ -175,6 +175,21 @@ public class UIToggle : MonoBehaviour
             luckToggle.GetComponent<Toggle>().isOn = false;
             storageMenu.SetActive(false);
             ShopMenu.SetActive(false);
+            print("disabling grid");
+            map.SwapTile(greenGrass, tileGrass); //disable grid
+        }
+        if (sel == settingsToggle)
+        {
+            roadToggle.GetComponent<Toggle>().isOn = false;
+            plotToggle.GetComponent<Toggle>().isOn = false;
+            shopToggle.GetComponent<Toggle>().isOn = false;
+            deleteToggle.GetComponent<Toggle>().isOn = false;
+            storageToggle.GetComponent<Toggle>().isOn = false;
+            luckToggle.GetComponent<Toggle>().isOn = false;
+            moveToggle.GetComponent<Toggle>().isOn = false;
+            ronaldToggle.GetComponent<Toggle>().isOn = false;
+            ShopMenu.SetActive(false);
+            storageMenu.SetActive(false);
             print("disabling grid");
             map.SwapTile(greenGrass, tileGrass); //disable grid
         }
