@@ -136,28 +136,31 @@ public class ppDragButton : MonoBehaviour
 
         bool canBuild = true;
         int deduction = 0;
-        if (pp.Card.cost.Contains("Gold"))
+        if (moveToggle.GetComponent<Toggle>().isOn == false)
         {
-            deduction = int.Parse(pp.Card.cost.Remove(pp.Card.cost.Length - 5));
-            print("deducting " + deduction + " gold");
-            if (stats.returnStats()[1] < deduction)
+            if (pp.Card.cost.Contains("Gold"))
             {
-                print("insufficient gold");
-                canBuild = false;
-                globalInsuff.SetActive(true);
-                globalInsuff.transform.GetChild(0).GetComponent<Image>().sprite = insuffGold;
+                deduction = int.Parse(pp.Card.cost.Remove(pp.Card.cost.Length - 5));
+                print("deducting " + deduction + " gold");
+                if (stats.returnStats()[1] < deduction)
+                {
+                    print("insufficient gold");
+                    canBuild = false;
+                    globalInsuff.SetActive(true);
+                    globalInsuff.transform.GetChild(0).GetComponent<Image>().sprite = insuffGold;
+                }
             }
-        }
-        else
-        {
-            deduction = int.Parse(pp.Card.cost);
-            print("deducting $" + deduction);
-            if (stats.returnStats()[0] < deduction)
+            else
             {
-                print("insufficient money");
-                canBuild = false;
-                globalInsuff.SetActive(true);
-                globalInsuff.transform.GetChild(0).GetComponent<Image>().sprite = insuffMoney;
+                deduction = int.Parse(pp.Card.cost);
+                print("deducting $" + deduction);
+                if (stats.returnStats()[0] < deduction)
+                {
+                    print("insufficient money");
+                    canBuild = false;
+                    globalInsuff.SetActive(true);
+                    globalInsuff.transform.GetChild(0).GetComponent<Image>().sprite = insuffMoney;
+                }
             }
         }
 

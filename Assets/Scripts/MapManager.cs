@@ -20,7 +20,6 @@ public class MapManager : MonoBehaviour
     [SerializeField]
     private Toggle roadToggle, deleteToggle;
 
-    public AudioSource myFx;
     public AudioClip deleteSound;
 
     [SerializeField]

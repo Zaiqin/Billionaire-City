@@ -22,10 +22,9 @@ public class plotManager : MonoBehaviour
     [SerializeField]
     private Toggle plotToggle, deleteToggle, roadToggle;
 
-    public AudioSource myFx;
     public AudioClip deleteSound;
 
-    public GameObject floatingValue, hq, splashObject, saveObj, pendingParent, cover;
+    public GameObject floatingValue, hq, splashObject, saveObj, pendingParent, cover, extAudio;
 
     public Camera mainCam;
 
@@ -328,7 +327,7 @@ public class plotManager : MonoBehaviour
             Tile clickedTile = map.GetTile<Tile>(gridPosition);
             if (clickedTile.name.Contains("plot") && Camera.main.GetComponent<CameraMovement>().dragging == false)
             {
-                myFx.PlayOneShot(deleteSound);
+                extAudio.GetComponent<AudioSource>().PlayOneShot(deleteSound);
                 plotFunction(gridPosition, true);
             }
         }

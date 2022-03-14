@@ -75,53 +75,62 @@ public class ContractCell : MonoBehaviour, ICell
     {
         long[] result = new long[4]; // income, tenants, xp, cost
 
-        result[1] = pCard.tenants * (cellIndex+1);
+        //result[1] = pCard.tenants * (cellIndex+1);
 
         int tempIncome = 0;
         switch (cellIndex)
         {
             case 0:
                 tempIncome = pCard.threemins;
+                result[1] = pCard.tenants;
                 result[2] = pCard.xpthreemins;
                 result[3] = 100;
                 break;
             case 1:
                 tempIncome = pCard.thirtymins;
+                result[1] = pCard.tenants;
                 result[2] = pCard.xpthirtymins;
                 result[3] = 580;
                 break;
             case 2:
                 tempIncome = pCard.onehour;
+                result[1] = pCard.tenants+1;
                 result[2] = pCard.xponehour;
                 result[3] = 870;
                 break;
             case 3:
                 tempIncome = pCard.fourhours;
+                result[1] = pCard.tenants + 1;
                 result[2] = pCard.xpfourhours;
                 result[3] = 1250;
                 break;
             case 4:
                 tempIncome = pCard.eighthours;
+                result[1] = pCard.tenants + 2;
                 result[2] = pCard.xpeighthours;
                 result[3] = 1450;
                 break;
             case 5:
                 tempIncome = pCard.twelvehours;
+                result[1] = pCard.tenants + 2;
                 result[2] = pCard.xptwelvehours;
                 result[3] = 4350;
                 break;
             case 6:
                 tempIncome = pCard.oneday;
+                result[1] = pCard.tenants + 3;
                 result[2] = pCard.xponeday;
                 result[3] = 5800;
                 break;
             case 7:
                 tempIncome = pCard.twodays;
+                result[1] = pCard.tenants +3;
                 result[2] = pCard.xptwodays;
                 result[3] = 7250;
                 break;
             case 8:
                 tempIncome = pCard.threedays;
+                result[1] = pCard.tenants + 4;
                 result[2] = pCard.xpthreedays;
                 result[3] = 10000;
                 break;
@@ -164,8 +173,8 @@ public class ContractCell : MonoBehaviour, ICell
             long[] res = calcContract(pCard, cellIndex, selProp);
 
             incomeText.text = "$" + res[0].ToString("#,##0");
-            xpText.text = res[1].ToString("#,##0") + " XP";
-            tenantsText.text = res[2].ToString("#,##0");
+            tenantsText.text = res[1].ToString("#,##0");
+            xpText.text = res[2].ToString("#,##0") + " XP";
             costText.text = "$" + res[3].ToString("#,##0");
 
         } else
@@ -191,8 +200,8 @@ public class ContractCell : MonoBehaviour, ICell
                         print("Need to sign " + child.name);
                         long[] res = calcContract(child.GetComponent<Property>().Card, cellIndex, child.gameObject);
                         totalIncome += res[0];
-                        totalXP += res[1];
-                        totalTenants += res[2];
+                        totalTenants += res[1];
+                        totalXP += res[2];
                         totalCost += res[3];
                     }
                 }

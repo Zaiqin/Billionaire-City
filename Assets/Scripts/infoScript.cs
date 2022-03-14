@@ -145,7 +145,21 @@ public class infoScript : MonoBehaviour
                         // Contract ongoing and income is less than 100M
                         incomeText.GetComponent<Text>().text = "$" + finalProfit.ToString("#,##0");
                     }
-                    int Tenants = (selProp.GetComponent<Property>().Card.tenants) * (selProp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signIndex + 1);
+                    int extra = 0;
+                    switch (selProp.transform.GetChild(0).gameObject.GetComponent<contractScript>().signIndex)
+                    {
+                        case 0: extra = 0; break;
+                        case 1: extra = 0; break;
+                        case 2: extra = 1; break;
+                        case 3: extra = 1; break;
+                        case 4: extra = 2; break;
+                        case 5: extra = 2; break;
+                        case 6: extra = 3; break;
+                        case 7: extra = 3; break;
+                        case 8: extra = 4; break;
+                        default: break;
+                    }
+                    int Tenants = selProp.GetComponent<Property>().Card.tenants + extra;
                     tenantsText.GetComponent<Text>().text = Tenants.ToString();
                     xpText.GetComponent<Text>().text = xpVal.ToString("#,##0") + " XP";
                 }
@@ -185,17 +199,31 @@ public class infoScript : MonoBehaviour
 
                     switch (obj.transform.GetChild(0).GetComponent<contractScript>().signIndex)
                     {
-                        case 1: finalIncome += (long)(obj.GetComponent<Property>().Card.tenants * 2) * selProp.GetComponent<Property>().Card.rentPerTenant; break;
-                        case 2: finalIncome += (long)(obj.GetComponent<Property>().Card.tenants * 3) * selProp.GetComponent<Property>().Card.rentPerTenant; break;
-                        case 3: finalIncome += (long)(obj.GetComponent<Property>().Card.tenants * 4) * selProp.GetComponent<Property>().Card.rentPerTenant; break;
-                        case 4: finalIncome += (long)(obj.GetComponent<Property>().Card.tenants * 5) * selProp.GetComponent<Property>().Card.rentPerTenant; break;
-                        case 5: finalIncome += (long)(obj.GetComponent<Property>().Card.tenants * 6) * selProp.GetComponent<Property>().Card.rentPerTenant; break;
-                        case 6: finalIncome += (long)(obj.GetComponent<Property>().Card.tenants * 7) * selProp.GetComponent<Property>().Card.rentPerTenant; break;
-                        case 7: finalIncome += (long)(obj.GetComponent<Property>().Card.tenants * 8) * selProp.GetComponent<Property>().Card.rentPerTenant; break;
-                        case 8: finalIncome += (long)(obj.GetComponent<Property>().Card.tenants * 9) * selProp.GetComponent<Property>().Card.rentPerTenant; break;
+                        case 1: finalIncome += (long)(obj.GetComponent<Property>().Card.tenants) * selProp.GetComponent<Property>().Card.rentPerTenant; break;
+                        case 2: finalIncome += (long)(obj.GetComponent<Property>().Card.tenants + 1) * selProp.GetComponent<Property>().Card.rentPerTenant; break;
+                        case 3: finalIncome += (long)(obj.GetComponent<Property>().Card.tenants + 1) * selProp.GetComponent<Property>().Card.rentPerTenant; break;
+                        case 4: finalIncome += (long)(obj.GetComponent<Property>().Card.tenants + 2) * selProp.GetComponent<Property>().Card.rentPerTenant; break;
+                        case 5: finalIncome += (long)(obj.GetComponent<Property>().Card.tenants + 2) * selProp.GetComponent<Property>().Card.rentPerTenant; break;
+                        case 6: finalIncome += (long)(obj.GetComponent<Property>().Card.tenants + 3) * selProp.GetComponent<Property>().Card.rentPerTenant; break;
+                        case 7: finalIncome += (long)(obj.GetComponent<Property>().Card.tenants + 3) * selProp.GetComponent<Property>().Card.rentPerTenant; break;
+                        case 8: finalIncome += (long)(obj.GetComponent<Property>().Card.tenants + 4) * selProp.GetComponent<Property>().Card.rentPerTenant; break;
                         default: finalIncome += (long)obj.GetComponent<Property>().Card.tenants * selProp.GetComponent<Property>().Card.rentPerTenant; break;
                     }
-                    finalTenants += (obj.GetComponent<Property>().Card.tenants * (obj.transform.GetChild(0).GetComponent<contractScript>().signIndex + 1));
+                    int extra = 0;
+                    switch (obj.transform.GetChild(0).GetComponent<contractScript>().signIndex)
+                    {
+                        case 0: extra = 0; break;
+                        case 1: extra = 0; break;
+                        case 2: extra = 1; break;
+                        case 3: extra = 1; break;
+                        case 4: extra = 2; break;
+                        case 5: extra = 2; break;
+                        case 6: extra = 3; break;
+                        case 7: extra = 3; break;
+                        case 8: extra = 4; break;
+                        default: break;
+                    }
+                    finalTenants += obj.GetComponent<Property>().Card.tenants + extra;
                     //print("added " + (obj.GetComponent<Property>().Card.tenants * (obj.transform.GetChild(0).GetComponent<contractScript>().signIndex + 1)) + "tenants from " + obj);
 
                 }
@@ -414,17 +442,31 @@ public class infoScript : MonoBehaviour
 
                     switch (obj.transform.GetChild(0).GetComponent<contractScript>().signIndex)
                     {
-                        case 1: finalIncome += (long)(obj.GetComponent<Property>().Card.tenants * 2) * selProp.GetComponent<Property>().Card.rentPerTenant; break;
-                        case 2: finalIncome += (long)(obj.GetComponent<Property>().Card.tenants * 3) * selProp.GetComponent<Property>().Card.rentPerTenant; break;
-                        case 3: finalIncome += (long)(obj.GetComponent<Property>().Card.tenants * 4) * selProp.GetComponent<Property>().Card.rentPerTenant; break;
-                        case 4: finalIncome += (long)(obj.GetComponent<Property>().Card.tenants * 5) * selProp.GetComponent<Property>().Card.rentPerTenant; break;
-                        case 5: finalIncome += (long)(obj.GetComponent<Property>().Card.tenants * 6) * selProp.GetComponent<Property>().Card.rentPerTenant; break;
-                        case 6: finalIncome += (long)(obj.GetComponent<Property>().Card.tenants * 7) * selProp.GetComponent<Property>().Card.rentPerTenant; break;
-                        case 7: finalIncome += (long)(obj.GetComponent<Property>().Card.tenants * 8) * selProp.GetComponent<Property>().Card.rentPerTenant; break;
-                        case 8: finalIncome += (long)(obj.GetComponent<Property>().Card.tenants * 9) * selProp.GetComponent<Property>().Card.rentPerTenant; break;
+                        case 1: finalIncome += (long)(obj.GetComponent<Property>().Card.tenants) * selProp.GetComponent<Property>().Card.rentPerTenant; break;
+                        case 2: finalIncome += (long)(obj.GetComponent<Property>().Card.tenants + 1) * selProp.GetComponent<Property>().Card.rentPerTenant; break;
+                        case 3: finalIncome += (long)(obj.GetComponent<Property>().Card.tenants + 1) * selProp.GetComponent<Property>().Card.rentPerTenant; break;
+                        case 4: finalIncome += (long)(obj.GetComponent<Property>().Card.tenants + 2) * selProp.GetComponent<Property>().Card.rentPerTenant; break;
+                        case 5: finalIncome += (long)(obj.GetComponent<Property>().Card.tenants + 2) * selProp.GetComponent<Property>().Card.rentPerTenant; break;
+                        case 6: finalIncome += (long)(obj.GetComponent<Property>().Card.tenants + 3) * selProp.GetComponent<Property>().Card.rentPerTenant; break;
+                        case 7: finalIncome += (long)(obj.GetComponent<Property>().Card.tenants + 3) * selProp.GetComponent<Property>().Card.rentPerTenant; break;
+                        case 8: finalIncome += (long)(obj.GetComponent<Property>().Card.tenants + 4) * selProp.GetComponent<Property>().Card.rentPerTenant; break;
                         default: finalIncome += (long)obj.GetComponent<Property>().Card.tenants * selProp.GetComponent<Property>().Card.rentPerTenant; break;
                     }
-                    finalTenants += (obj.GetComponent<Property>().Card.tenants * (obj.transform.GetChild(0).GetComponent<contractScript>().signIndex + 1));
+                    int extra = 0;
+                    switch (obj.transform.GetChild(0).GetComponent<contractScript>().signIndex)
+                    {
+                        case 0: extra = 0; break;
+                        case 1: extra = 0; break;
+                        case 2: extra = 1; break;
+                        case 3: extra = 1; break;
+                        case 4: extra = 2; break;
+                        case 5: extra = 2; break;
+                        case 6: extra = 3; break;
+                        case 7: extra = 3; break;
+                        case 8: extra = 4; break;
+                        default: break;
+                    }
+                    finalTenants += obj.GetComponent<Property>().Card.tenants + extra;
                     //print("added " + (obj.GetComponent<Property>().Card.tenants * (obj.transform.GetChild(0).GetComponent<contractScript>().signIndex + 1)) + "tenants from " + obj);
 
                 }
