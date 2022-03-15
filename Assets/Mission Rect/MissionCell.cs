@@ -35,7 +35,7 @@ public class MissionCell : MonoBehaviour, ICell
     }
 
     //This is called from the SetCell method in DataSource
-    public void ConfigureCell(int cellIndex, string text, bool pending, int type)
+    public void ConfigureCell(int cellIndex, string text, bool pending, float type)
     {
         _cellIndex = cellIndex;
         missionName.text = text;
@@ -46,7 +46,8 @@ public class MissionCell : MonoBehaviour, ICell
         {
             bgImage.color = Color.white;
         }
-        switch (type)
+        
+        switch (Math.Truncate(type))
         {
             case 0: missionImg.sprite = type0; break;
             case 1: missionImg.sprite = type1; break;

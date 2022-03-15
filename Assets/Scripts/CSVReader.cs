@@ -266,7 +266,7 @@ public class CSVReader : MonoBehaviour
         
         for (int i = 1; i < data.Length; i++)
         {
-            missionList.Add(new Mission(data[(cols * (i)) + 36], data[(cols * (i)) + 37], int.Parse(data[(cols * (i)) + 38]), data[(cols * (i)) + 39], false));
+            missionList.Add(new Mission(data[(cols * (i)) + 36], data[(cols * (i)) + 37], float.Parse(data[(cols * (i)) + 38]), data[(cols * (i)) + 39], false, data[(cols * (i)) + 41]));
             if (data[(cols * (i)) + 40] == "Last Mission"){
                 print("There are " + i + " Missions");
                 break;
@@ -276,13 +276,13 @@ public class CSVReader : MonoBehaviour
         Dictionary<string, string> codes = new Dictionary<string, string>();
         for (int i = 1; i < data.Length; i++)
         {
-            if (data[(cols * (i)) + 41] == "No Code")
+            if (data[(cols * (i)) + 42] == "No Code")
             {
                 print("There are " + (i-1) + " Codes");
                 break;
             }
-            codes.Add(data[(cols * (i)) + 41], data[(cols * (i)) + 42]);
-            print("Added code: " + data[(cols * (i)) + 41]);
+            codes.Add(data[(cols * (i)) + 42], data[(cols * (i)) + 43]);
+            print("Added code: " + data[(cols * (i)) + 42]);
         }
         redeem.GetComponent<redeemCode>().codes = codes;
 

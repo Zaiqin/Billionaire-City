@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using PolyAndCode.UI;
+using System;
+
 public class Statistics : MonoBehaviour
 {
     // --- Saved properties ------
@@ -44,6 +46,8 @@ public class Statistics : MonoBehaviour
     [SerializeField] private GameObject csvObj, levelUpScreen, externalAudioPlayer, inputText, muteSwitch;
     [SerializeField] private ParticleSystem particle;
     [SerializeField] private AudioClip levelUp;
+
+    public List<Mission> typeZero = new List<Mission>();
 
     [ContextMenu("Input Values into Game")]
     public void inputValues()
@@ -151,6 +155,26 @@ public class Statistics : MonoBehaviour
         // Type 0 Missions --------------
         if (missionsPanel.GetComponent<missionParent>().missionList != null)
         {
+            foreach (var mission in typeZero)
+            {
+                print("cheching " + mission.msnName +"which type " + mission.msnType);
+                if (mission.msnType == (float)0.1 && mission.msnPending == false)
+                {
+                    print("checking type 0.1 with meta " + long.Parse(mission.msnMetadata));
+                    HQ.GetComponent<HQstats>().calcHQ();
+                    if (HQ.GetComponent<HQstats>().totalLong >= long.Parse(mission.msnMetadata))
+                    {
+                        missionsPanel.GetComponent<missionParent>().completeMission(mission);
+                    }
+                }
+                if (mission.msnType == (float)0.2 && money >= long.Parse(mission.msnMetadata) && mission.msnPending == false)
+                {
+                    print("checking type 0.2 with meta " + long.Parse(mission.msnMetadata));
+                    missionsPanel.GetComponent<missionParent>().completeMission(mission);
+                }
+            }
+
+            /*
             foreach (var item in missionsPanel.GetComponent<missionParent>().missionList)
             {
                 if (item.msnType == 0 && item.msnPending == false)
@@ -239,9 +263,9 @@ public class Statistics : MonoBehaviour
                             missionsPanel.GetComponent<missionParent>().completeMission(item);
                         }
                     }
-
                 }
             }
+            */
         }
     }
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,17 +8,19 @@ public class Mission
 {
     public string msnName;
     public string msnDesc;
-    public int msnType;
+    public float msnType;
     public string msnReward;
     public bool msnPending;
+    public string msnMetadata;
 
-    public Mission(string n, string d, int t, string r, bool b)
+    public Mission(string n, string d, float t, string r, bool b, string m)
     {
         msnName = n;
         msnDesc = d;
         msnType = t;
         msnReward = r;
         msnPending = b;
+        msnMetadata = m;
     }
 }
 
@@ -75,6 +78,15 @@ public class missionParent : MonoBehaviour
         }
         missionList = temp;
         missionController.GetComponent<RecyclableScrollerMission>().missionlist = missionList;
+        // Get each type lists ----
+        foreach (var item in missionList)
+        {
+            if (Math.Truncate(item.msnType) == 0)
+            {
+                stats.GetComponent<Statistics>().typeZero.Add(item);
+                print("added " + item.msnName);
+            }
+        }
         if (pendingMissionList.Count != 0)
         {
             exclaimButton.SetActive(true);
@@ -90,13 +102,16 @@ public class missionParent : MonoBehaviour
         print("complete mission " + m.msnName);
         m.msnPending = true;
         pendingMissionList.Add(m.msnName);
+        print("pending count is " + pendingMissionList.Count);
         missionController.GetComponent<RecyclableScrollerMission>().missionlist = missionList;
         saveObj.GetComponent<saveloadsystem>().saveMissions();
         exclaimButton.SetActive(true);
         extAudio.GetComponent<AudioSource>().PlayOneShot(sound);
         missionCompletePanel.SetActive(true);
+        print("pending count2 is " + pendingMissionList.Count);
         missionCompletePanel.GetComponent<missionPopup>().func(m.msnName);
-        
+        print("pending count4 is " + pendingMissionList.Count);
+
     }
 
     public void closePanel()
@@ -177,11 +192,16 @@ public class missionParent : MonoBehaviour
         {
             stats.GetComponent<Statistics>().updateStats(diffmoney: int.Parse(missionList[chosenIndex].msnReward));
         }
+        print("pending count7 is " + pendingMissionList.Count);
         pendingMissionList.Remove(missionList[chosenIndex].msnName);
+        print("pending count8 is " + pendingMissionList.Count);
         doneMissionList.Add(missionList[chosenIndex].msnName);
         missionList.Remove(missionList[chosenIndex]);
+        print("pending count9 is " + pendingMissionList.Count);
         saveObj.GetComponent<saveloadsystem>().saveMissions();
+        print("pending count10 is " + pendingMissionList.Count);
         missionController.GetComponent<RecyclableScrollerMission>().missionRect.ReloadData();
+        print("pending count11 is " + pendingMissionList.Count);
         descPanel.transform.LeanMoveLocalX(descPanel.transform.localPosition.x - 290, 0.2f).setEaseInBack();
         missionPanel.transform.LeanMoveLocalX(missionPanel.transform.localPosition.x + 132, 0.2f).setEaseInBack();
         extended = false;
@@ -192,5 +212,6 @@ public class missionParent : MonoBehaviour
         {
             exclaimButton.SetActive(false);
         }
+        print("pending count12 is " + pendingMissionList.Count);
     }
 }
