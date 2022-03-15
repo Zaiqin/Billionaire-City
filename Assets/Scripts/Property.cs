@@ -606,38 +606,14 @@ public class moneyPickupScript : MonoBehaviour, IPointerClickHandler
             GameObject missionsPanel = GameObject.Find("Stats").GetComponent<Statistics>().missionsPanel;
             if (missionsPanel.GetComponent<missionParent>().missionList != null)
             {
-                foreach (var item in missionsPanel.GetComponent<missionParent>().missionList)
+                foreach (var item in missionsPanel.GetComponent<missionParent>().typeSix)
                 {
-                    if (item.msnType == 6 && item.msnPending == false)
+                    string propName = item.msnMetadata.Substring(3, item.msnMetadata.Length - 3);
+                    int count = int.Parse(item.msnMetadata.Substring(0, 3));
+                    print("displayname is " + propName + ", countreq is " + count);
+                    if (propCard.propName == propName && totalDecoBonus >= count && item.msnPending == false)
                     {
-                        if (item.msnName == "Pimp the House I" && propCard.propName == "bungalow" && totalDecoBonus >= 12)
-                        {
-                            missionsPanel.GetComponent<missionParent>().completeMission(item);
-                        }
-                        else if (item.msnName == "Pimp the House II" && propCard.propName == "bungalow" && totalDecoBonus >= 16)
-                        {
-                            missionsPanel.GetComponent<missionParent>().completeMission(item);
-                        }
-                        else if (item.msnName == "Pimp the House III" && propCard.propName == "townhouse" && totalDecoBonus >= 30)
-                        {
-                            missionsPanel.GetComponent<missionParent>().completeMission(item);
-                        }
-                        else if (item.msnName == "Pimp the House IV" && propCard.propName == "townhouse" && totalDecoBonus >= 60)
-                        {
-                            missionsPanel.GetComponent<missionParent>().completeMission(item);
-                        }
-                        else if (item.msnName == "Pimp the Villa" && propCard.propName == "villa" && totalDecoBonus >= 90)
-                        {
-                            missionsPanel.GetComponent<missionParent>().completeMission(item);
-                        }
-                        else if (item.msnName == "Pimp the Colonial" && propCard.propName == "colonialhouse" && totalDecoBonus >= 360)
-                        {
-                            missionsPanel.GetComponent<missionParent>().completeMission(item);
-                        }
-                        else if (item.msnName == "Pimp the Chateau" && propCard.propName == "chateau" && totalDecoBonus >= 90)
-                        {
-                            missionsPanel.GetComponent<missionParent>().completeMission(item);
-                        }
+                        missionsPanel.GetComponent<missionParent>().completeMission(item);
                     }
                 }
             }
@@ -746,42 +722,14 @@ public class commercePickupScript : MonoBehaviour, IPointerClickHandler
             GameObject missionsPanel = GameObject.Find("Stats").GetComponent<Statistics>().missionsPanel;
             if (missionsPanel.GetComponent<missionParent>().missionList != null)
             {
-                foreach (var item in missionsPanel.GetComponent<missionParent>().missionList)
+                foreach (var item in missionsPanel.GetComponent<missionParent>().typeFive)
                 {
-                    if (item.msnType == 5 && item.msnPending == false)
+                    string propName = item.msnMetadata.Substring(3, item.msnMetadata.Length - 3);
+                    int count = int.Parse(item.msnMetadata.Substring(0, 3));
+                    print("displayname is " + propName + ", countreq is " + count);
+                    if (propCard.propName == propName && finalTenants >= count && item.msnPending == false)
                     {
-                        if (item.msnName == "Pizzalicious Clients I" && propCard.propName == "pizzeria" && finalTenants >= 3)
-                        {
-                            missionsPanel.GetComponent<missionParent>().completeMission(item);
-                        }
-                        else if (item.msnName == "Pizzalicious Clients II" && propCard.propName == "pizzeria" && finalTenants >= 10)
-                        {
-                            missionsPanel.GetComponent<missionParent>().completeMission(item);
-                        }
-                        else if (item.msnName == "Pizzalicious Clients III" && propCard.propName == "pizzeria" && finalTenants >= 16)
-                        {
-                            missionsPanel.GetComponent<missionParent>().completeMission(item);
-                        }
-                        else if (item.msnName == "Coffeelicious Clients I" && propCard.propName == "coffeeshop" && finalTenants >= 12)
-                        {
-                            missionsPanel.GetComponent<missionParent>().completeMission(item);
-                        }
-                        else if (item.msnName == "Coffeelicious Clients II" && propCard.propName == "coffeeshop" && finalTenants >= 24)
-                        {
-                            missionsPanel.GetComponent<missionParent>().completeMission(item);
-                        }
-                        else if (item.msnName == "Florist's Clients" && propCard.propName == "flowershop" && finalTenants >= 30)
-                        {
-                            missionsPanel.GetComponent<missionParent>().completeMission(item);
-                        }
-                        else if (item.msnName == "Bowling Alley Clients" && propCard.propName == "bowling" && finalTenants >= 243)
-                        {
-                            missionsPanel.GetComponent<missionParent>().completeMission(item);
-                        }
-                        else if (item.msnName == "Pet Shop Clients" && propCard.propName == "petshop" && finalTenants >= 32)
-                        {
-                            missionsPanel.GetComponent<missionParent>().completeMission(item);
-                        }
+                        missionsPanel.GetComponent<missionParent>().completeMission(item);
                     }
                 }
             }

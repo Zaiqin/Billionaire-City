@@ -45,6 +45,9 @@ public class missionParent : MonoBehaviour
     public List<string> doneMissionList;
     public List<string> pendingMissionList;
 
+    public List<Mission> typeFive = new List<Mission>();
+    public List<Mission> typeSix = new List<Mission>();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -92,6 +95,22 @@ public class missionParent : MonoBehaviour
             if (Math.Truncate(item.msnType) == 1)
             {
                 ppDrag.GetComponent<ppDragButton>().typeOne.Add(item);
+                print("added " + item.msnName);
+            }
+        }
+        foreach (var item in missionList)
+        {
+            if (Math.Truncate(item.msnType) == 5)
+            {
+                typeFive.Add(item);
+                print("added " + item.msnName);
+            }
+        }
+        foreach (var item in missionList)
+        {
+            if (Math.Truncate(item.msnType) == 6)
+            {
+                typeSix.Add(item);
                 print("added " + item.msnName);
             }
         }
