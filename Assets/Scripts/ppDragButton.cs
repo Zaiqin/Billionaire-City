@@ -22,6 +22,8 @@ public class ppDragButton : MonoBehaviour
     public GameObject floatingValue, hq, astar;
     public Sprite insuffMoney, insuffGold;
 
+    public List<Mission> typeOne = new List<Mission>();
+
     public float getZ(float[] coords) //range of y is 3 to -3, range of x is -44 to 45
     {
         float[] c = new[] { coords[0], coords[1] }; //create new float array that is not connected to Draggable.XY
@@ -435,7 +437,46 @@ public class ppDragButton : MonoBehaviour
             // ------------ Type 1 Missions -------------------------------------
             if (missionsPanel.GetComponent<missionParent>().missionList != null && moveToggle.GetComponent<Toggle>().isOn == false)
             {
-                foreach (var item in missionsPanel.GetComponent<missionParent>().missionList)
+                if (missionsPanel.GetComponent<missionParent>().missionList != null)
+                {
+                    foreach (var mission in typeOne)
+                    {
+                        print("cheching " + mission.msnName + " with type " + mission.msnType);
+                        string displayName = mission.msnMetadata.Substring(3, mission.msnMetadata.Length - 3);
+                        int count = int.Parse(mission.msnMetadata.Substring(0, 3));
+                        print("displayname is " + displayName + ", countreq is " + count);
+                        
+                        if (count == 0)
+                        {
+                            if (mission.msnName == "Build I" && pCard.type == "House")
+                            {
+                                missionsPanel.GetComponent<missionParent>().completeMission(mission);
+                            }
+                            else if (pCard.displayName == displayName)
+                            {
+                                missionsPanel.GetComponent<missionParent>().completeMission(mission);
+                            }
+                        } else
+                        {
+                            int propCount = 0;
+                            foreach (Transform child in propParent.transform)
+                            {
+                                if (child.name != "HQ")
+                                {
+                                    if (child.GetComponent<Property>().Card.displayName == displayName)
+                                    {
+                                        propCount++;
+                                    }
+                                }
+                            }
+                            if (propCount >= count)
+                            {
+                                missionsPanel.GetComponent<missionParent>().completeMission(mission);
+                            }
+                        }
+                    }
+                }
+                /*foreach (var item in missionsPanel.GetComponent<missionParent>().missionList)
                 {
                     if (item.msnType == 1 && item.msnPending == false)
                     {
@@ -515,7 +556,7 @@ public class ppDragButton : MonoBehaviour
                             }
                         }
                     }
-                }
+                }*/
             }
 
         }

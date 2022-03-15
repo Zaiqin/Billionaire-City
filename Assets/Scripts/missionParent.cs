@@ -33,7 +33,7 @@ public class missionParent : MonoBehaviour
     public Text rewardText;
     public bool extended = false;
     public int chosenIndex;
-    public GameObject missionController, stats, saveObj, claimButton, exclaimButton, storageController, extAudio, missionCompletePanel;
+    public GameObject missionController, stats, saveObj, claimButton, exclaimButton, storageController, extAudio, missionCompletePanel, ppDrag;
     public Image rewardImage;
     public Sprite money, gold;
     public AudioClip sound;
@@ -84,6 +84,14 @@ public class missionParent : MonoBehaviour
             if (Math.Truncate(item.msnType) == 0)
             {
                 stats.GetComponent<Statistics>().typeZero.Add(item);
+                print("added " + item.msnName);
+            }
+        }
+        foreach (var item in missionList)
+        {
+            if (Math.Truncate(item.msnType) == 1)
+            {
+                ppDrag.GetComponent<ppDragButton>().typeOne.Add(item);
                 print("added " + item.msnName);
             }
         }
