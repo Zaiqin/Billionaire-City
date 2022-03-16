@@ -32,11 +32,12 @@ public class missionParent : MonoBehaviour
     public Text descTitle;
     public Text rewardText;
     public bool extended = false;
+    private bool moving = false;
     public int chosenIndex;
     public GameObject missionController, stats, saveObj, claimButton, exclaimButton, storageController, extAudio, missionCompletePanel, ppDrag;
     public Image rewardImage;
     public Sprite money, gold;
-    public AudioClip sound;
+    public AudioClip sound, cashSound;
 
     public CSVReader CSVObject;
     private Dictionary<string, PropertyCard> database;
@@ -129,15 +130,12 @@ public class missionParent : MonoBehaviour
         print("complete mission " + m.msnName);
         m.msnPending = true;
         pendingMissionList.Add(m.msnName);
-        print("pending count is " + pendingMissionList.Count);
         missionController.GetComponent<RecyclableScrollerMission>().missionlist = missionList;
         saveObj.GetComponent<saveloadsystem>().saveMissions();
         exclaimButton.SetActive(true);
         extAudio.GetComponent<AudioSource>().PlayOneShot(sound);
         missionCompletePanel.SetActive(true);
-        print("pending count2 is " + pendingMissionList.Count);
         missionCompletePanel.GetComponent<missionPopup>().func(m.msnName);
-        print("pending count4 is " + pendingMissionList.Count);
 
     }
 
@@ -166,21 +164,23 @@ public class missionParent : MonoBehaviour
     public void toggleDesc(int index)
     {
         claimButton.SetActive(false);
-        if (chosenIndex == index || extended == false)
+        if (moving == false)
         {
+            moving = true;
             if (extended == false)
             {
                 descPanel.transform.LeanMoveLocalX(descPanel.transform.localPosition.x + 290, 0.2f).setEaseOutBack();
                 missionPanel.transform.LeanMoveLocalX(missionPanel.transform.localPosition.x - 132, 0.2f).setEaseOutBack();
                 extended = true;
             }
-            else
+            else if (chosenIndex == index)
             {
                 descPanel.transform.LeanMoveLocalX(descPanel.transform.localPosition.x - 290, 0.2f).setEaseInBack();
                 missionPanel.transform.LeanMoveLocalX(missionPanel.transform.localPosition.x + 132, 0.2f).setEaseInBack();
                 extended = false;
             }
         }
+        StartCoroutine(descPanelToggle(extended));
         descTitle.text = missionList[index].msnName;
         descText.text = missionList[index].msnDesc;
         if (missionList[index].msnReward.Contains("Prop"))
@@ -204,6 +204,12 @@ public class missionParent : MonoBehaviour
         }
     }
 
+    private IEnumerator descPanelToggle(bool b)
+    {
+        yield return new WaitForSeconds(0.3f);
+        moving = false;
+    }
+
     public void claimReward()
     {
         if (missionList[chosenIndex].msnReward.Contains("Prop"))
@@ -219,16 +225,12 @@ public class missionParent : MonoBehaviour
         {
             stats.GetComponent<Statistics>().updateStats(diffmoney: int.Parse(missionList[chosenIndex].msnReward));
         }
-        print("pending count7 is " + pendingMissionList.Count);
+        
         pendingMissionList.Remove(missionList[chosenIndex].msnName);
-        print("pending count8 is " + pendingMissionList.Count);
         doneMissionList.Add(missionList[chosenIndex].msnName);
         missionList.Remove(missionList[chosenIndex]);
-        print("pending count9 is " + pendingMissionList.Count);
         saveObj.GetComponent<saveloadsystem>().saveMissions();
-        print("pending count10 is " + pendingMissionList.Count);
         missionController.GetComponent<RecyclableScrollerMission>().missionRect.ReloadData();
-        print("pending count11 is " + pendingMissionList.Count);
         descPanel.transform.LeanMoveLocalX(descPanel.transform.localPosition.x - 290, 0.2f).setEaseInBack();
         missionPanel.transform.LeanMoveLocalX(missionPanel.transform.localPosition.x + 132, 0.2f).setEaseInBack();
         extended = false;
@@ -239,6 +241,6 @@ public class missionParent : MonoBehaviour
         {
             exclaimButton.SetActive(false);
         }
-        print("pending count12 is " + pendingMissionList.Count);
+        extAudio.GetComponent<AudioSource>().PlayOneShot(cashSound);
     }
 }

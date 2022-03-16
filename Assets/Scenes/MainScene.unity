@@ -6807,6 +6807,7 @@ MonoBehaviour:
   money: {fileID: 21300000, guid: cc10f08c0bc1bdb4e9fb4bd813b56e16, type: 3}
   gold: {fileID: 21300000, guid: 7eb9620ab3816354ea8f15c94cc2f4cc, type: 3}
   sound: {fileID: 8300000, guid: 024b969c6e50193489cba7594e11e681, type: 3}
+  cashSound: {fileID: 8300000, guid: a04606f1a42c79f4e8c92aa5c17ce64b, type: 3}
   CSVObject: {fileID: 1673960464}
   doneMissionList: []
   pendingMissionList: []
@@ -71430,8 +71431,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 502592024}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.0011, y: 2.5695, z: 0.054}
-  m_LocalScale: {x: 2.5671892, y: 2.5671892, z: 0}
+  m_LocalPosition: {x: 0.003, y: 2.999, z: 0.054}
+  m_LocalScale: {x: 3.1184738, y: 3.1184738, z: 0}
   m_Children: []
   m_Father: {fileID: 2080538344}
   m_RootOrder: 0
@@ -71476,7 +71477,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 7f720bd5724313c439c2a785625fb062, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3a52a68c835fbf6448f036cabd4aa428, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -71500,18 +71501,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0003709793, y: -0.16693477}
+  m_Offset: {x: 0.0015059114, y: -0.27081615}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.56, y: 1.5}
+    oldSize: {x: 1.28, y: 1.51}
     newSize: {x: 1.91, y: 2.07}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.5552995, y: 1.1637722}
+  m_Size: {x: 1.2797264, y: 0.9711746}
   m_EdgeRadius: 0
 --- !u!114 &502592028
 MonoBehaviour:
