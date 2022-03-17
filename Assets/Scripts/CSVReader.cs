@@ -12,7 +12,7 @@ public class CSVReader : MonoBehaviour
     public string csvText;
     public List<Mission> missionList = new List<Mission>();
     public GameObject redeem;
-    public bool needToDownload = false;
+    public bool needToDownload;
 
     public Dictionary<int, long> levelValues = new Dictionary<int, long>();
 
@@ -325,6 +325,16 @@ public class CSVReader : MonoBehaviour
             Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
             return sprite;
         }
+        if (File.Exists(Application.persistentDataPath + "/spriteVersion.txt") == false)
+        {
+            File.Delete(Application.persistentDataPath + "/spriteVersion.txt");
+        }
+        if (Directory.Exists(Application.persistentDataPath + "/properties") == true)
+        {
+            Directory.Delete(Application.persistentDataPath + "/properties", true);
+        }
+        print("crashing");
+        Application.Quit();
         return null;
     }
 }

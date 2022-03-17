@@ -82,7 +82,7 @@ public class webDownloader : MonoBehaviour
                             Directory.Delete(Application.persistentDataPath + "/properties",true);
                         }
                     }
-                    // Show results as text
+                    // If property folder exists or sprite version is less than server
                     if (Directory.Exists(Application.persistentDataPath + "/properties") == false || int.Parse(File.ReadAllText(Application.persistentDataPath + "/spriteVersion.txt")) < int.Parse(w.downloadHandler.text))
                     {
                             loadingScreen.GetComponent<loadingScreen>().internetObj.SetActive(true);
@@ -92,13 +92,13 @@ public class webDownloader : MonoBehaviour
                             spriteWeb = w;
                             if (Directory.Exists(Application.persistentDataPath + "/properties") == false)
                             {
-                                loadingScreen.GetComponent<loadingScreen>().internetObj.transform.GetChild(0).GetComponent<Text>().text = "Downloads required\n\n\nThe game needs to download assets and files during the first install.\nProceed?\n";
+                                loadingScreen.GetComponent<loadingScreen>().internetObj.transform.GetChild(0).GetComponent<Text>().text = "Downloads required\n\n\nThe game needs to download assets and files.\nProceed?\n";
                             }
                             else
                             {
                                 loadingScreen.GetComponent<loadingScreen>().internetObj.transform.GetChild(0).GetComponent<Text>().text = "New updates!!\n\n\nDo you wish to download new assets in the game?\n";
-                                csvObj.GetComponent<CSVReader>().needToDownload = true;
                             }
+                            csvObj.GetComponent<CSVReader>().needToDownload = true;
                     }
                     else
                     {
@@ -116,6 +116,10 @@ public class webDownloader : MonoBehaviour
         loadingScreen.transform.GetChild(5).gameObject.SetActive(true);
         loadingScreen.transform.GetChild(3).gameObject.SetActive(true);
         loadingScreen.transform.GetChild(7).gameObject.SetActive(true);
+        if (File.Exists(Application.persistentDataPath + "/spriteVersion.txt") == true)
+        {
+            File.Delete(Application.persistentDataPath + "/spriteVersion.txt");
+        }
         downloadStats();
     }
 

@@ -17,6 +17,10 @@ public class Property : MonoBehaviour, IPointerClickHandler
         // Adding propertySprite
         SpriteRenderer renderer = this.gameObject.AddComponent<SpriteRenderer>();
         renderer.sprite = pcard.propImage;
+        if (renderer.sprite == null)
+        {
+            print("null");
+        }
         renderer.sprite = Sprite.Create(pcard.propImage.texture, new Rect(0, 0, pcard.propImage.texture.width, pcard.propImage.texture.height), new Vector2(0f, 0f), 32);
         renderer.sortingOrder = 2;
 
