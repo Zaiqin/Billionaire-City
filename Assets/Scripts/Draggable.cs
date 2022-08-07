@@ -106,7 +106,7 @@ public class Draggable : MonoBehaviour
                 TileBase Tile = map.GetTile(new Vector3Int(x, y, 0));
                 print("tilename is " + Tile.name);
                 //print("checking " + x + "," + y);
-                if (Tile.name.Contains("road") || Tile.name.Contains("noBelow"))
+                if (Tile.name.Contains("road") || Tile.name.Contains("noBelow") || Tile.name.Contains("world"))
                 {
                     print("setting false deco");
                     result = false;
