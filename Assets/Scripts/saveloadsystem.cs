@@ -529,13 +529,15 @@ public class saveloadsystem : MonoBehaviour
             bool test = false;
             foreach (var item in alist)
             {
-                //print("testing " + new Vector3Int(item.x, item.y, 0) + " with name " + map.GetTile(new Vector3Int(item.x, item.y, 0)).name);
-                if (map.GetTile(new Vector3Int(item.x, item.y, 0)).name.Contains("road"))
+                if (map.GetTile(new Vector3Int(item.x, item.y, 0)) != null)
                 {
-                    //print("contain road");
-                    test = Astar.GetComponent<Astar>().AStarFunc(new Vector2Int(item.x, item.y), new Vector2Int(0, -1), map);
-                    print("test astar is " + test);
-                    break;
+                    if (map.GetTile(new Vector3Int(item.x, item.y, 0)).name.Contains("road"))
+                    {
+                        //print("contain road");
+                        test = Astar.GetComponent<Astar>().AStarFunc(new Vector2Int(item.x, item.y), new Vector2Int(0, -1), map);
+                        print("test astar is " + test);
+                        break;
+                    }
                 }
                 else
                 {

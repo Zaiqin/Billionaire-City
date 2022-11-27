@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class loadingScreen : MonoBehaviour
 {
     public AudioSource cam;
-    public GameObject t, bgPan, titleImage, cover, skipCover, extAudio, tutorialScreen, internetObj, webObj, wheel, dlBar, stats;
+    public GameObject t, bgPan, titleImage, cover, skipCover, extAudio, tutorialScreen, internetObj, webObj, wheel, dlBar, stats, errorCode;
     public AudioClip introAudio;
     public bool canSkip = false;
 
@@ -21,6 +21,7 @@ public class loadingScreen : MonoBehaviour
         }
         else
         {
+            print("call get version");
             webObj.GetComponent<webDownloader>().getVersion();
         }
     }
@@ -32,6 +33,7 @@ public class loadingScreen : MonoBehaviour
         skipCover.SetActive(false);
         cover.SetActive(true);
         dlBar.SetActive(false);
+        errorCode.GetComponent<CanvasGroup>().LeanAlpha(0f, 0.5f);
     }
 
     private void FixedUpdate()
