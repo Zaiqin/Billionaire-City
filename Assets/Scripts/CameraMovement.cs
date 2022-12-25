@@ -89,6 +89,14 @@ public class CameraMovement : MonoBehaviour
             {
                 fingerZoom = false;
             }
+            if (Input.GetAxis("Mouse ScrollWheel") > 0)
+            {
+                zoom(0.4f);
+            }
+            if (Input.GetAxis("Mouse ScrollWheel") < 0)
+            {
+                zoom(-0.4f);
+            }
             //print("dragging is " + dragging);
         }
     }

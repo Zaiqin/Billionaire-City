@@ -254,7 +254,13 @@ public class saveloadsystem : MonoBehaviour
             // ----------- Loading Properties ---------------
             foreach (var p in list)
             {
-                loadProperty(p.propName, new Vector2Int(p.locX, p.locY), p.signTime, p.signIndex, p.signCreationTime, p.comSignTime, p.comSignCreationTime, p.constructStart, p.constructEnd);
+                print("locX: " + p.locX + "locY: " + p.locY);
+                if (p.locX == 0 && p.locY == 0) // To prevent spawning in center of world
+                {
+                    print("Found erroneous property" + p.propName + p.locX + p.locY);
+                } else {
+                    loadProperty(p.propName, new Vector2Int(p.locX, p.locY), p.signTime, p.signIndex, p.signCreationTime, p.comSignTime, p.comSignCreationTime, p.constructStart, p.constructEnd);
+                }
                 //print("loaded: " + p.propName);
             }
             // ----------- Loading Statistics ---------------
