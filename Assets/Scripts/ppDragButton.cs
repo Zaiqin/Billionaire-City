@@ -248,6 +248,7 @@ public class ppDragButton : MonoBehaviour
                     pp.constructEnd = "na"; pp.constructStart = "na";
                 } else if (moveToggle.GetComponent<Toggle>().isOn == true)
                 {
+                    shopMenu.GetComponent<PurchaseController>().showUI();
                     pp.transform.GetChild(0).gameObject.AddComponent<BoxCollider2D>();
                     pp.transform.GetChild(0).gameObject.GetComponent<BoxCollider2D>().size = new Vector2(float.Parse(pp.Card.influence.Substring(0, 2)) - 0.2f, float.Parse(pp.Card.influence.Substring(pp.Card.influence.Length - 2)) - 0.2f);
                     pp.transform.GetChild(0).gameObject.SetActive(false);
@@ -276,6 +277,7 @@ public class ppDragButton : MonoBehaviour
             
             if (pp.Card.type != "Deco")
             {
+                shopMenu.GetComponent<PurchaseController>().showUI();
                 map.SwapTile(greenGrass, tileGrass);
                 ppDrag.SetActive(false);
                 string temp;
@@ -415,6 +417,7 @@ public class ppDragButton : MonoBehaviour
 
             if (storageToggle.GetComponent<Toggle>().isOn == true)
             {
+                shopMenu.GetComponent<PurchaseController>().showUI();
                 storageToggle.GetComponent<Toggle>().isOn = false;
                 storageController.GetComponent<RecyclableScrollerStorage>().deleteFromStorage(pCard.displayName);
                 pp.transform.GetChild(0).gameObject.AddComponent<BoxCollider2D>();
@@ -490,6 +493,7 @@ public class ppDragButton : MonoBehaviour
         Destroy(pendingParent.transform.GetChild(0).gameObject);
         externalAudioPlayer.GetComponent<AudioSource>().PlayOneShot(touchSound);
         ppDrag.SetActive(false);
+        shopMenu.GetComponent<PurchaseController>().showUI();
         if (shopToggle.GetComponent<Toggle>().isOn == true)
         {
             shopMenu.SetActive(true);

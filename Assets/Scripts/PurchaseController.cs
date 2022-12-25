@@ -13,9 +13,44 @@ public class PurchaseController : MonoBehaviour
 
     [SerializeField]
     public GameObject PropertiesParent, PendingPropertyParent, ppDrag;
+    public GameObject shopToggle, plotToggle, roadToggle, deleteToggle, ronaldToggle, storageToggle, luckToggle, signToggle, moveToggle, settingsToggle, moneyBar, goldBar, xpBar;
 
     [SerializeField]
     Sprite contractStarSprite;
+
+    public void hideUI()
+    {
+        shopToggle.SetActive(false);
+        plotToggle.SetActive(false);
+        roadToggle.SetActive(false);
+        deleteToggle.SetActive(false);
+        ronaldToggle.SetActive(false);
+        storageToggle.SetActive(false);
+        luckToggle.SetActive(false);
+        signToggle.SetActive(false);
+        moveToggle.SetActive(false);
+        settingsToggle.SetActive(false);
+        moneyBar.SetActive(false);
+        goldBar.SetActive(false);
+        xpBar.SetActive(false);
+    }
+
+    public void showUI()
+    {
+        shopToggle.SetActive(true);
+        plotToggle.SetActive(true);
+        roadToggle.SetActive(true);
+        deleteToggle.SetActive(true);
+        ronaldToggle.SetActive(true);
+        storageToggle.SetActive(true);
+        luckToggle.SetActive(true);
+        signToggle.SetActive(true);
+        moveToggle.SetActive(true);
+        settingsToggle.SetActive(true);
+        moneyBar.SetActive(true);
+        goldBar.SetActive(true);
+        xpBar.SetActive(true);
+    }
 
     public void purchaseProperty(PropertyCard prop) //called when buy button is pressed with sufficient balance
     {
@@ -40,6 +75,7 @@ public class PurchaseController : MonoBehaviour
         // adding components
         pp.gameObject.AddComponent<Draggable>();
         pp.GetComponent<Draggable>().dragEnabled = true;
+        pp.GetComponent<Draggable>().XY =  new [] { (float)(cellPos.x - 1), (float)(cellPos.y + 1)};
         pp.gameObject.AddComponent<BlinkingProperty>();
         bool check = pp.GetComponent<Draggable>().buildCheck(prop, new [] { (float)(cellPos.x - 1), (float)(cellPos.y + 1 )}, map);
         print("check is " + check);
@@ -61,7 +97,8 @@ public class PurchaseController : MonoBehaviour
         // unhide propertyDrag buttons and placing it at grid center of property
         ppDrag.SetActive(true);
         ppDrag.transform.position = new Vector3(pp.transform.position.x + (float.Parse(prop.space.Substring(0, 1))) / 2, pp.transform.position.y - 0.5f, ppDrag.transform.position.z);
-        
+
+        hideUI();
     }
 
     
