@@ -65,9 +65,9 @@ public class webDownloader : MonoBehaviour
         else
         {
             // Show results as text
-            print("Local Version " + Application.version + ", Server version " + www.downloadHandler.text);
+            print("Local Version " + float.Parse(Application.version.Substring(2)) + ", Server version " + float.Parse(www.downloadHandler.text.Substring(2)));
             loadingScreen.GetComponent<loadingScreen>().errorCode.GetComponent<Text>().text = "Loading (8/28)...";
-            if (float.Parse(Application.version) < float.Parse(www.downloadHandler.text))
+            if (float.Parse(Application.version.Substring(2)) < float.Parse(www.downloadHandler.text.Substring(2)))
             {
                 loadingScreen.GetComponent<loadingScreen>().errorCode.GetComponent<Text>().text = "Loading (9/28)...";
                 loadingScreen.GetComponent<loadingScreen>().errorCode.GetComponent<Text>().text = "Loading (10/28)...";
