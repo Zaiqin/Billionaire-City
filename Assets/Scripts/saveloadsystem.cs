@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using System;
+using UnityEngine.Networking;
 using UnityEngine.UI;
 using System.IO;
 
@@ -254,7 +255,7 @@ public class saveloadsystem : MonoBehaviour
             // ----------- Loading Properties ---------------
             foreach (var p in list)
             {
-                print("locX: " + p.locX + "locY: " + p.locY);
+                //print("locX: " + p.locX + "locY: " + p.locY);
                 if (p.locX == 0 && p.locY == 0) // To prevent spawning in center of world
                 {
                     print("Found erroneous property" + p.propName + p.locX + p.locY);

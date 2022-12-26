@@ -104,7 +104,7 @@ public class Draggable : MonoBehaviour
             for (int i = 0; i < spaceX * spaceY; i++)
             {
                 TileBase Tile = map.GetTile(new Vector3Int(x, y, 0));
-                print("tilename is " + Tile.name);
+                //print("tilename is " + Tile.name);
                 //print("checking " + x + "," + y);
                 if (Tile.name.Contains("road") || Tile.name.Contains("noBelow") || Tile.name.Contains("world"))
                 {
