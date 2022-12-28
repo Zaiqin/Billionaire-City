@@ -293,7 +293,8 @@ public class saveloadsystem : MonoBehaviour
             int countExp = 0;
             foreach (string s in FileHandler.ReadListFromJSON<string>("deletedExp.json"))
             {
-                Destroy(GameObject.Find(s));
+                GameObject.Find(s).SetActive(false);
+                //Destroy(GameObject.Find(s));
                 switch (countExp)
                 {
                     case 0: cost += 4000000; break;

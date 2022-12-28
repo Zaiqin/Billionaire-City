@@ -24,7 +24,7 @@ public class webDownloader : MonoBehaviour
 
             Texture2D tex = ((DownloadHandlerTexture)request.downloadHandler).texture;
             Sprite sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(tex.width / 2, tex.height / 2));
-            print("yield return saveImage");
+            //print("yield return saveImage");
             loadingScreen.GetComponent<loadingScreen>().errorCode.GetComponent<Text>().text = "Loading (2/28)...";
             yield return saveImage(sprite, rawPath, folder);
         }
@@ -35,7 +35,7 @@ public class webDownloader : MonoBehaviour
         Texture2D itemBGTex = itemBGSprite.texture;
         byte[] itemBGBytes = itemBGTex.EncodeToPNG();
         File.WriteAllBytes(Application.persistentDataPath + "/" + folder + "/" + filename + ".png", itemBGBytes);
-        print("yield return saveImage2");
+        //print("yield return saveImage2");
         loadingScreen.GetComponent<loadingScreen>().errorCode.GetComponent<Text>().text = "Loading (3/28)...";
         yield return new WaitUntil(() => File.Exists(Application.persistentDataPath + "/" + folder + "/" + filename + ".png"));
         

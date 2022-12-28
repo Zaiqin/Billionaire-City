@@ -95354,6 +95354,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cover: {fileID: 1435088136}
   dragCover: {fileID: 570490029}
+  PropertiesParent: {fileID: 2080538343}
+  expParent: {fileID: 962398197}
+  saveloadsystemobj: {fileID: 25462474}
+  expPopup: {fileID: 62597483}
+  map: {fileID: 280726322}
 --- !u!61 &1491175112
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -23,8 +23,11 @@ public class expansion : MonoBehaviour
         {
             foreach (Transform child in expCanvas.transform)
             {
-                expInts.Add(int.Parse(child.name.Substring(child.name.Length - 2)));
-                //print("added " + child.name);
+                if (child.transform.gameObject.activeSelf == true)
+                {
+                    expInts.Add(int.Parse(child.name.Substring(child.name.Length - 2)));
+                    print("added " + child.name);
+                }
             }
         }
     }
@@ -91,15 +94,16 @@ public class expansion : MonoBehaviour
         {
             foreach (int s in expInts)
             {
-                if (s > 10 && s < 20 ) { result = false; }
+                if (s > 10 && s < 20) { result = false; }
             }
         }
         else if (i > 30 && i < 40)
         {
-            foreach (int s in expInts)
-            {
-                if (s > 20 && s < 30) { result = false; }
-            }
+                foreach (int s in expInts)
+                {
+                    if (s > 20 && s < 30) { result = false; }
+                }
+            
         }
         else if (i > 40 && i < 50)
         {
