@@ -52,6 +52,34 @@ public class PurchaseController : MonoBehaviour
         xpBar.SetActive(true);
     }
 
+    public void visitNeighbour()
+    {
+        shopToggle.SetActive(false);
+        plotToggle.SetActive(false);
+        roadToggle.SetActive(false);
+        deleteToggle.SetActive(false);
+        ronaldToggle.SetActive(false);
+        storageToggle.SetActive(false);
+        luckToggle.SetActive(false);
+        signToggle.SetActive(false);
+        moveToggle.SetActive(false);
+        settingsToggle.SetActive(false);
+    }
+
+    public void quitNeighbour()
+    {
+        shopToggle.SetActive(true);
+        plotToggle.SetActive(true);
+        roadToggle.SetActive(true);
+        deleteToggle.SetActive(true);
+        ronaldToggle.SetActive(true);
+        storageToggle.SetActive(true);
+        luckToggle.SetActive(true);
+        signToggle.SetActive(true);
+        moveToggle.SetActive(true);
+        settingsToggle.SetActive(true);
+    }
+
     public void purchaseProperty(PropertyCard prop) //called when buy button is pressed with sufficient balance
     {
         print("spawning property into game");

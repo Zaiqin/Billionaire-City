@@ -364,7 +364,7 @@ public class saveloadsystem : MonoBehaviour
         print("Successfully Loaded New Game");
     }
 
-    public void loadProperty(string propName, Vector2Int pos, string signTime = "notsigned", int signIndex = -1, string signCreationTime = "notsigned", string comSignTime = "notsigned", string comSignCreationTime = "notsigned", string consStart = "na", string consEnd = "na") //propName must be the display form, not camelCase; eg Bungalow Luxury, not bungalowlux
+    public void loadProperty(string propName, Vector2Int pos, string signTime = "notsigned", int signIndex = -1, string signCreationTime = "notsigned", string comSignTime = "notsigned", string comSignCreationTime = "notsigned", string consStart = "na", string consEnd = "na", bool neighbour = false) //propName must be the display form, not camelCase; eg Bungalow Luxury, not bungalowlux
     {
         print("loading and spawning property into game from load save" + propName);
         PropertyCard prop = csv.CardDatabase[propName];
@@ -582,6 +582,13 @@ public class saveloadsystem : MonoBehaviour
                 }
             }
             // End of astar detection -------
+        }
+        if (neighbour == true)
+        {
+            foreach (Transform child in pp.transform)
+            {
+                GameObject.Destroy(child.gameObject);
+            }
         }
     }
 }

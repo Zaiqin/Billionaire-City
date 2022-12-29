@@ -11,8 +11,9 @@ public class SpriteDetector : MonoBehaviour
     [SerializeField]
     private GameObject infoPanel, hqMenu;
 
-    public GameObject selectedCommerce, dailyPanel, cover, Shop, pendingParent;
+    public GameObject selectedCommerce, dailyPanel, cover, Shop, pendingParent, neighbourBar;
     public GameObject moveSelected;
+    public bool inNeighbour = false;
 
     public Toggle deleteToggle, storageToggle, moveToggle;
 
@@ -58,6 +59,11 @@ public class SpriteDetector : MonoBehaviour
                 if (hita.collider.gameObject.layer == 5)
                 {
                     buttonDownLayer = 5;
+                }
+                if (hita.collider.gameObject.name == "neighbourBar" && inNeighbour == true)
+                {
+                    neighbourBar.GetComponent<neighbourScript>().OnButtonClick();
+                    inNeighbour = false;
                 }
             }
         }

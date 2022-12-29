@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class planeText : MonoBehaviour
 {
-    public GameObject textField, stats;
+    public GameObject textField, stats, dragCover;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,9 +15,16 @@ public class planeText : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (this.GetComponent<TextMesh>().text != stats.GetComponent<Statistics>().cityName)
+        if (dragCover.activeSelf == false)
         {
-            this.GetComponent<TextMesh>().text = stats.GetComponent<Statistics>().cityName;
+            if (this.GetComponent<TextMesh>().text != stats.GetComponent<Statistics>().cityName) 
+            {
+                this.GetComponent<TextMesh>().text = stats.GetComponent<Statistics>().cityName;
+            }
+        } else
+        {
+            this.GetComponent<TextMesh>().text = "Chocolate Fields";
         }
+        
     }
 }
