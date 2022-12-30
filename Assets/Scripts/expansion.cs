@@ -196,7 +196,7 @@ public class expansion : MonoBehaviour
                     x = xOrig; y += 1;
                 }
             }
-            Destroy(sel);
+            sel.SetActive(false);
             deletedExp.Add("expansion" + i);
             expInts.Remove(i);
             stats.GetComponent<Statistics>().updateStats(diffmoney: -cost);

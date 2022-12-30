@@ -16,11 +16,6 @@ public class aeroplane : MonoBehaviour
         if (loadingScreen.activeSelf == false)
         {
             this.transform.position = Vector3.MoveTowards(this.transform.position, new Vector3(-50f, 0f, -8f), 2f * Time.deltaTime);
-
-            if (this.transform.position.x == -50f)
-            {
-                Destroy(this.gameObject);
-            }
         }
     }
 }
