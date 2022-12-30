@@ -8,7 +8,7 @@ public class neighbourScript : MonoBehaviour
 {
 
     [SerializeField]
-    public GameObject cover, dragCover, PropertiesParent, expParent, saveloadsystemobj, expPopup, shop, cam, aeroplane, transitionCover;
+    public GameObject cover, dragCover, PropertiesParent, expParent, saveloadsystemobj, expPopup, shop, cam, aeroplane, transitionCover, backCityToggle;
     public Tilemap map;
     public void OnButtonClick()
     {
@@ -19,16 +19,18 @@ public class neighbourScript : MonoBehaviour
             transitionCover.SetActive(true);
             dragCover.SetActive(true);
             cover.SetActive(true);
-            shop.GetComponent<PurchaseController>().visitNeighbour();
             StartCoroutine(loadMap(true));
+            shop.GetComponent<PurchaseController>().visitNeighbour();
         }
         else
         {
             dragCover.SetActive(false);
             cover.SetActive(false);
             transitionCover.SetActive(true);
-            shop.GetComponent<PurchaseController>().quitNeighbour();
             StartCoroutine(loadMap(false));
+            GameObject.Find("ExternalAudioPlayer").GetComponent<AudioSource>().PlayOneShot(Resources.Load<AudioClip>("Audio/touchSound"));
+            shop.GetComponent<PurchaseController>().quitNeighbour();
+            
         }
     }
 
@@ -36,6 +38,14 @@ public class neighbourScript : MonoBehaviour
     {
         transitionCover.GetComponent<CanvasGroup>().LeanAlpha(1f, 0.5f);
         yield return new WaitForSeconds(0.5f);
+        if (neighbour == true)
+        {
+            backCityToggle.SetActive(true);
+        }
+        else
+        {
+            backCityToggle.SetActive(false);
+        }
         foreach (Transform child in PropertiesParent.transform)
         {
             if (child.name != "HQ")

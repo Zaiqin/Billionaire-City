@@ -60,7 +60,7 @@ public class SpriteDetector : MonoBehaviour
                 {
                     buttonDownLayer = 5;
                 }
-                if (hita.collider.gameObject.name == "neighbourBar" && inNeighbour == true)
+                if (hita.collider.gameObject.name == "backCityToggle" && inNeighbour == true)
                 {
                     neighbourBar.GetComponent<neighbourScript>().OnButtonClick();
                     inNeighbour = false;
