@@ -1091,8 +1091,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.14, y: 0.19}
-  m_SizeDelta: {x: 224.93, y: 47.8}
+  m_AnchoredPosition: {x: -0.01, y: 0.19}
+  m_SizeDelta: {x: 253.59, y: 47.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &47135591
 MonoBehaviour:
@@ -67197,7 +67197,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -128, y: 228.29997}
+  m_AnchoredPosition: {x: -111, y: 228.29997}
   m_SizeDelta: {x: 255.75, y: 36.07}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &287795616
@@ -77094,7 +77094,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -112.18, y: -2.8900151}
+  m_AnchoredPosition: {x: -117.87997, y: -2.8900151}
   m_SizeDelta: {x: 85.99, y: 81.64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &740176072
@@ -82510,8 +82510,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -501, y: -43}
-  m_SizeDelta: {x: 230, y: 54}
+  m_AnchoredPosition: {x: -486.08, y: -43}
+  m_SizeDelta: {x: 259.85, y: 54}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1078216402
 MonoBehaviour:
@@ -90359,7 +90359,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -114.2, y: -4}
+  m_AnchoredPosition: {x: -119.9, y: -4}
   m_SizeDelta: {x: 47.12, y: 32.33}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1466641800
@@ -101597,7 +101597,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -128, y: 264.3}
+  m_AnchoredPosition: {x: -111, y: 264.3}
   m_SizeDelta: {x: 255.75, y: 36.07}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1795949166
