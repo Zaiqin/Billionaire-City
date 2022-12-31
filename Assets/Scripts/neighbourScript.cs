@@ -12,6 +12,8 @@ public class neighbourScript : MonoBehaviour
     public Tilemap map;
     string prevCoyValue;
     string prevCoyName;
+
+    public AudioClip javaBg, prevBg;
     public void OnButtonClick()
     {
         
@@ -22,9 +24,9 @@ public class neighbourScript : MonoBehaviour
             dragCover.SetActive(true);
             cover.SetActive(true);
             StartCoroutine(loadMap(true));
-            shop.GetComponent<PurchaseController>().visitNeighbour();
             prevCoyValue = coyValue.GetComponent<Text>().text;
             prevCoyName = coyName.GetComponent<Text>().text;
+            prevBg = cam.GetComponent<AudioSource>().clip;
         }
         else
         {
@@ -34,7 +36,7 @@ public class neighbourScript : MonoBehaviour
             print("clicked back to city");
             StartCoroutine(loadMap(false));
             GameObject.Find("ExternalAudioPlayer").GetComponent<AudioSource>().PlayOneShot(Resources.Load<AudioClip>("Audio/touchSound"));
-            shop.GetComponent<PurchaseController>().quitNeighbour();
+            
             
         }
     }
@@ -48,9 +50,11 @@ public class neighbourScript : MonoBehaviour
             backCityToggle.SetActive(true);
             coyName.GetComponent<Text>().text = "Chocolate Fields";
             coyValue.GetComponent<Text>().text = "$100,000,000";
+            shop.GetComponent<PurchaseController>().visitNeighbour();
         }
         else
         {
+            shop.GetComponent<PurchaseController>().quitNeighbour();
             backCityToggle.SetActive(false);
         }
         foreach (Transform child in expParent.transform)
@@ -128,6 +132,12 @@ public class neighbourScript : MonoBehaviour
         {
             coyValue.GetComponent<Text>().text = prevCoyValue;
             coyName.GetComponent<Text>().text = prevCoyName;
+            cam.GetComponent<AudioSource>().clip = prevBg;
+            cam.GetComponent<AudioSource>().Play();
+        } else
+        {
+            cam.GetComponent<AudioSource>().clip = javaBg;
+            cam.GetComponent<AudioSource>().Play();
         }
         transitionCover.GetComponent<CanvasGroup>().LeanAlpha(0f, 0.5f);
         yield return new WaitForSeconds(0.5f);

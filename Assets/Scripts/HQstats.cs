@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class HQstats : MonoBehaviour
 {
     [SerializeField]
-    private GameObject hqMenu, shopMenu, infoPanel, externalAudioPlayer, dragButtons, PropertiesParent, coyValue, coyName;
+    private GameObject hqMenu, shopMenu, infoPanel, externalAudioPlayer, dragButtons, PropertiesParent, coyValue, coyName, neighbourRect;
 
     [SerializeField]
     private AudioClip touchSound;
@@ -56,10 +56,12 @@ public class HQstats : MonoBehaviour
         property.text = "$" + propValue.ToString("#,##0");
         land.text = "$" + ((stats.GetComponent<Statistics>().noOfPlots*1000) + stats.GetComponent<Statistics>().expCost).ToString("#,##0");
         totalLong = (stats.money + goldvalue + (stats.GetComponent<Statistics>().noOfPlots * 1000) + propValue + stats.GetComponent<Statistics>().expCost);
+        stats.coyValue = totalLong;
         total.text = "$" + (totalLong).ToString("#,##0");
         coyValue.GetComponent<Text>().text = total.text;
         coyName.GetComponent<Text>().text = stats.cityName;
         field.text = stats.cityName;
+        neighbourRect.GetComponent<RecyclableScrollerNeighbour>().userReloadData();
         print("money: " + stats.money.ToString("#,##0") + "gold:" + goldvalue.ToString("#,##0")+"propValue:"+ propValue.ToString("#,##0")+"plots:"+ (stats.GetComponent<Statistics>().noOfPlots * 1000) + "expCost:"+ stats.GetComponent<Statistics>().expCost);
     }
 

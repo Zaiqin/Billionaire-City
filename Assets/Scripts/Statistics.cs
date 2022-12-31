@@ -40,6 +40,8 @@ public class Statistics : MonoBehaviour
     public long inputLevel;
     public long inputXP;
 
+    public long coyValue;
+
     public GameObject saveloadobj, shopButton, HQ, missionsPanel;
 
     private Dictionary<int, long> levelValues;
