@@ -26,6 +26,17 @@ public static class FileHandler
         List<T> res = JsonHelper.FromJson<T>(content).ToList();
         return res;
     }
+
+    public static List<T> ReadListFromJSONString<T>(string content)
+    {
+        if (string.IsNullOrEmpty(content) || content == "{}")
+        {
+            return new List<T>();
+        }
+        List<T> res = JsonHelper.FromJson<T>(content).ToList();
+        return res;
+    }
+
     public static string ReadRawFromJSON(string filename)
     {
         string content = ReadFile(GetPath(filename));

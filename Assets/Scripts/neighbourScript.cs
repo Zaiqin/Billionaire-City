@@ -14,6 +14,7 @@ public class neighbourScript : MonoBehaviour
     string prevCoyName;
 
     public AudioClip javaBg, prevBg;
+    public string tileSaveRonald, propsSaveRonald, deletedExpRonald;
     public void OnButtonClick()
     {
         
@@ -65,8 +66,10 @@ public class neighbourScript : MonoBehaviour
         List<propertySaveForm> list = new List<propertySaveForm>();
         if (neighbour == true)
         {
-            tilelist = FileHandler.ReadListFromJSON<tileSaveForm>("Map/tileSave.json");
-            list = FileHandler.ReadListFromJSON<propertySaveForm>("Map/propsSave.json");
+            //tilelist = FileHandler.ReadListFromJSON<tileSaveForm>("tileSaveRonald.json");
+            //list = FileHandler.ReadListFromJSON<propertySaveForm>("propsSaveRonald.json");
+            tilelist = FileHandler.ReadListFromJSONString<tileSaveForm>(tileSaveRonald);
+            list = FileHandler.ReadListFromJSONString<propertySaveForm>(propsSaveRonald);
         } else
         {
             tilelist = FileHandler.ReadListFromJSON<tileSaveForm>("tileSave.json");
@@ -116,7 +119,7 @@ public class neighbourScript : MonoBehaviour
         }
         if (neighbour == true)
         {
-            expPopup.GetComponent<expansion>().deletedExp = FileHandler.ReadListFromJSON<string>("Map/deletedExp.json");
+            expPopup.GetComponent<expansion>().deletedExp = FileHandler.ReadListFromJSONString<string>(deletedExpRonald);
         }
         else
         {
@@ -124,6 +127,7 @@ public class neighbourScript : MonoBehaviour
         }
         foreach (string s in expPopup.GetComponent<expansion>().deletedExp)
         {
+            print("deleting " + s);
             GameObject.Find(s).SetActive(false);
         }
         expPopup.GetComponent<expansion>().updateSprite();

@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class webDownloader : MonoBehaviour
 {
-    public GameObject csvObj, scroller, loadingScreen, dlButton;
+    public GameObject csvObj, scroller, loadingScreen, dlButton, neighbourParent;
     public UnityWebRequest spriteWeb;
 
     public IEnumerator DownloadImage(string MediaUrl, string rawPath, string folder)
@@ -184,5 +184,14 @@ public class webDownloader : MonoBehaviour
             csvObj.GetComponent<CSVReader>().csvText = www.downloadHandler.text;
             scroller.GetComponent<RecyclableScrollerDemo>().initCSV();
         }
+        UnityWebRequest propRonald = UnityWebRequest.Get("https://zaiqin.github.io/ZQStudios/propsSaveRonald.json");
+        yield return propRonald.SendWebRequest();
+        neighbourParent.GetComponent<neighbourScript>().propsSaveRonald = propRonald.downloadHandler.text;
+        UnityWebRequest tileRonald = UnityWebRequest.Get("https://zaiqin.github.io/ZQStudios/tileSaveRonald.json");
+        yield return tileRonald.SendWebRequest();
+        neighbourParent.GetComponent<neighbourScript>().tileSaveRonald = tileRonald.downloadHandler.text;
+        UnityWebRequest expRonald = UnityWebRequest.Get("https://zaiqin.github.io/ZQStudios/deletedExpRonald.json");
+        yield return expRonald.SendWebRequest();
+        neighbourParent.GetComponent<neighbourScript>().deletedExpRonald = expRonald.downloadHandler.text;
     }
 }
