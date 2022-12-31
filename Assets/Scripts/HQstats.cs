@@ -32,7 +32,8 @@ public class HQstats : MonoBehaviour
     public void calcHQ()
     {
         print("calculating hq");
-        
+
+        stats.updateName();
         money.text = "$" + stats.money.ToString("#,##0");
         long goldvalue = stats.gold * 60000;
         gold.text = "$" + goldvalue.ToString("#,##0");

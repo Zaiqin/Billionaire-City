@@ -11,6 +11,7 @@ public class neighbourScript : MonoBehaviour
     public GameObject cover, dragCover, PropertiesParent, expParent, saveloadsystemobj, expPopup, shop, cam, aeroplane, transitionCover, backCityToggle, coyValue, coyName, hq, stats;
     public Tilemap map;
     string prevCoyValue;
+    string prevCoyName;
     public void OnButtonClick()
     {
         
@@ -23,6 +24,7 @@ public class neighbourScript : MonoBehaviour
             StartCoroutine(loadMap(true));
             shop.GetComponent<PurchaseController>().visitNeighbour();
             prevCoyValue = coyValue.GetComponent<Text>().text;
+            prevCoyName = coyName.GetComponent<Text>().text;
         }
         else
         {
@@ -125,6 +127,7 @@ public class neighbourScript : MonoBehaviour
         if (neighbour == false)
         {
             coyValue.GetComponent<Text>().text = prevCoyValue;
+            coyName.GetComponent<Text>().text = prevCoyName;
         }
         transitionCover.GetComponent<CanvasGroup>().LeanAlpha(0f, 0.5f);
         yield return new WaitForSeconds(0.5f);
