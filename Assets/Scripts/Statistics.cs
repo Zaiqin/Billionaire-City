@@ -151,6 +151,7 @@ public class Statistics : MonoBehaviour
         //print("xpFill is " + xpFill.fillAmount + "nextVal is " + nextVal + "xp is " + xp);
         print("Updated stats");
         saveloadobj.GetComponent<saveloadsystem>().saveStats();
+        HQ.GetComponent<HQstats>().calcHQ();
 
         // Type 0 Missions --------------
         if (missionsPanel.GetComponent<missionParent>().missionList != null)

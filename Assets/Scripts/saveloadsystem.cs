@@ -171,6 +171,7 @@ public class saveloadsystem : MonoBehaviour
         print("Saving Stats");
         statsSaveForm statsSaveObj = new statsSaveForm(Stats.GetComponent<Statistics>().money, Stats.GetComponent<Statistics>().gold, Stats.GetComponent<Statistics>().level, Stats.GetComponent<Statistics>().xp, cityText.GetComponent<Text>().text, Stats.GetComponent<Statistics>().noOfPlots, Stats.GetComponent<Statistics>().noDailyCollected, Stats.GetComponent<Statistics>().lastDailyCollected, Stats.GetComponent<Statistics>().muted);
         FileHandler.SaveToJSON<statsSaveForm>(statsSaveObj, "statsSave.json");
+        hq.GetComponent<HQstats>().calcHQ();
         print("Stats saved");
     }
 

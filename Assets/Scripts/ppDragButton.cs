@@ -96,7 +96,7 @@ public class ppDragButton : MonoBehaviour
         {
             //print("item " + item);
         }
-        print("totalNo is " + list.Count);
+        //print("totalNo is " + list.Count);
         return list;
     }
 

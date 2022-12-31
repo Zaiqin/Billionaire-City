@@ -8,8 +8,9 @@ public class neighbourScript : MonoBehaviour
 {
 
     [SerializeField]
-    public GameObject cover, dragCover, PropertiesParent, expParent, saveloadsystemobj, expPopup, shop, cam, aeroplane, transitionCover, backCityToggle;
+    public GameObject cover, dragCover, PropertiesParent, expParent, saveloadsystemobj, expPopup, shop, cam, aeroplane, transitionCover, backCityToggle, coyValue, coyName, hq, stats;
     public Tilemap map;
+    string prevCoyValue;
     public void OnButtonClick()
     {
         
@@ -21,12 +22,14 @@ public class neighbourScript : MonoBehaviour
             cover.SetActive(true);
             StartCoroutine(loadMap(true));
             shop.GetComponent<PurchaseController>().visitNeighbour();
+            prevCoyValue = coyValue.GetComponent<Text>().text;
         }
         else
         {
             dragCover.SetActive(false);
             cover.SetActive(false);
             transitionCover.SetActive(true);
+            print("clicked back to city");
             StartCoroutine(loadMap(false));
             GameObject.Find("ExternalAudioPlayer").GetComponent<AudioSource>().PlayOneShot(Resources.Load<AudioClip>("Audio/touchSound"));
             shop.GetComponent<PurchaseController>().quitNeighbour();
@@ -41,17 +44,12 @@ public class neighbourScript : MonoBehaviour
         if (neighbour == true)
         {
             backCityToggle.SetActive(true);
+            coyName.GetComponent<Text>().text = "Chocolate Fields";
+            coyValue.GetComponent<Text>().text = "$100,000,000";
         }
         else
         {
             backCityToggle.SetActive(false);
-        }
-        foreach (Transform child in PropertiesParent.transform)
-        {
-            if (child.name != "HQ")
-            {
-                GameObject.Destroy(child.gameObject);
-            }
         }
         foreach (Transform child in expParent.transform)
         {
@@ -80,6 +78,13 @@ public class neighbourScript : MonoBehaviour
             {
                 map.SetTile(pos, Resources.Load<TileBase>("plotTiles/" + item.texName));
                 //print("loaded plot" + item.texName + "at pos " + pos);
+            }
+        }
+        foreach (Transform child in PropertiesParent.transform)
+        {
+            if (child.name != "HQ")
+            {
+                GameObject.Destroy(child.gameObject);
             }
         }
         foreach (var p in list)
@@ -117,6 +122,10 @@ public class neighbourScript : MonoBehaviour
         }
         expPopup.GetComponent<expansion>().updateSprite();
         aeroplane.transform.position = new Vector3Int(25, 0, -8);
+        if (neighbour == false)
+        {
+            coyValue.GetComponent<Text>().text = prevCoyValue;
+        }
         transitionCover.GetComponent<CanvasGroup>().LeanAlpha(0f, 0.5f);
         yield return new WaitForSeconds(0.5f);
         transitionCover.SetActive(false);

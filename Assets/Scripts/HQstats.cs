@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class HQstats : MonoBehaviour
 {
     [SerializeField]
-    private GameObject hqMenu, shopMenu, infoPanel, externalAudioPlayer, dragButtons, PropertiesParent;
+    private GameObject hqMenu, shopMenu, infoPanel, externalAudioPlayer, dragButtons, PropertiesParent, coyValue, coyName;
 
     [SerializeField]
     private AudioClip touchSound;
@@ -32,6 +32,7 @@ public class HQstats : MonoBehaviour
     public void calcHQ()
     {
         print("calculating hq");
+        
         money.text = "$" + stats.money.ToString("#,##0");
         long goldvalue = stats.gold * 60000;
         gold.text = "$" + goldvalue.ToString("#,##0");
@@ -40,6 +41,7 @@ public class HQstats : MonoBehaviour
         {
             if (child.gameObject.GetComponent<Property>() != null)
             {
+                print("calculating: " + child.gameObject.name);
                 if (child.gameObject.GetComponent<Property>().Card.cost.Contains("Gold"))
                 {
                     propValue += int.Parse(child.gameObject.GetComponent<Property>().Card.cost.Remove(child.gameObject.GetComponent<Property>().Card.cost.Length - 5)) * 60000;
@@ -54,7 +56,10 @@ public class HQstats : MonoBehaviour
         land.text = "$" + ((stats.GetComponent<Statistics>().noOfPlots*1000) + stats.GetComponent<Statistics>().expCost).ToString("#,##0");
         totalLong = (stats.money + goldvalue + (stats.GetComponent<Statistics>().noOfPlots * 1000) + propValue + stats.GetComponent<Statistics>().expCost);
         total.text = "$" + (totalLong).ToString("#,##0");
+        coyValue.GetComponent<Text>().text = total.text;
+        coyName.GetComponent<Text>().text = stats.cityName;
         field.text = stats.cityName;
+        print("money: " + stats.money.ToString("#,##0") + "gold:" + goldvalue.ToString("#,##0")+"propValue:"+ propValue.ToString("#,##0")+"plots:"+ (stats.GetComponent<Statistics>().noOfPlots * 1000) + "expCost:"+ stats.GetComponent<Statistics>().expCost);
     }
 
     public void clickedHQ()
