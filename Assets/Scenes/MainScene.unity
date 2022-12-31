@@ -6675,6 +6675,8 @@ MonoBehaviour:
   moneyBar: {fileID: 22137331}
   goldBar: {fileID: 386740024}
   xpBar: {fileID: 1078216400}
+  coyName: {fileID: 1795949164}
+  coyValue: {fileID: 287768751}
   contractStarSprite: {fileID: 21300000, guid: 59559ec4009a4eb41965f0323396c0e2, type: 3}
 --- !u!1 &255242423
 GameObject:
