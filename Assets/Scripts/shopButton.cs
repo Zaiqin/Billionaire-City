@@ -7,7 +7,7 @@ using PolyAndCode.UI;
 
 public class shopButton : MonoBehaviour
 {
-    public GameObject ShopMenu, ppDrag;
+    public GameObject ShopMenu, ppDrag, tabGroup;
     public RecyclableScrollRect rect;
     public Toggle shopToggle;
 
@@ -27,6 +27,10 @@ public class shopButton : MonoBehaviour
             ShopMenu.SetActive(true);
             ShopMenu.transform.localScale = Vector2.zero;
             ShopMenu.transform.LeanScale(new Vector2(73.9463f, 73.9463f), 0.2f).setEaseOutBack();
+            if (tabGroup.GetComponent<TabGroup>().selectedTab.name == "Wonders Tab")
+            {
+                rect.ReloadData();
+            }
             if (requireReload == true)
             {
                 rect.ReloadData();

@@ -24,7 +24,7 @@ public class plotManager : MonoBehaviour
 
     public AudioClip deleteSound;
 
-    public GameObject floatingValue, hq, splashObject, saveObj, pendingParent, cover, extAudio;
+    public GameObject floatingValue, hq, splashObject, saveObj, pendingParent, cover, extAudio, tabGroup;
 
     public Camera mainCam;
 
@@ -347,6 +347,10 @@ public class plotManager : MonoBehaviour
                 shopToggle.GetComponent<shopButton>().ShopMenu.SetActive(true);
                 shopToggle.GetComponent<shopButton>().ShopMenu.transform.localScale = Vector2.zero;
                 shopToggle.GetComponent<shopButton>().ShopMenu.transform.LeanScale(new Vector2(73.9463f, 73.9463f), 0.2f).setEaseOutBack();
+                if (tabGroup.GetComponent<TabGroup>().selectedTab.name == "Wonders Tab")
+                {
+                    shopToggle.GetComponent<shopButton>().rect.ReloadData();
+                }
                 if (shopToggle.GetComponent<shopButton>().requireReload == true)
                 {
                     shopToggle.GetComponent<shopButton>().rect.ReloadData();
