@@ -35,7 +35,7 @@ public class NeighbourCell : MonoBehaviour, ICell
     private void touchListener()
     {
         print("touched neighbour in cellindex " + _cellIndex);
-        if (_cellIndex == 5)
+        if (itemTitle.text == "Ronald")
         {
             GameObject.Find("neighbourParent").GetComponent<neighbourScript>().OnButtonClick();
             GameObject.Find("ExternalAudioPlayer").GetComponent<AudioSource>().PlayOneShot(touchSound);
@@ -43,23 +43,27 @@ public class NeighbourCell : MonoBehaviour, ICell
     }
 
     //This is called from the SetCell method in DataSource
-    public void ConfigureCell(int cellIndex)
+    public void ConfigureCell(int cellIndex, int total)
     {
         Statistics stats = GameObject.Find("Stats").GetComponent<Statistics>();
         _cellIndex = cellIndex;
-        switch (cellIndex)
+        if (stats.coyValue > 100000000)
         {
-            case 4: itemTitle.text = stats.cityName;
+            if (cellIndex == 0)
+            {
+                itemTitle.text = stats.cityName;
                 levelBg.gameObject.SetActive(true);
                 profile.GetComponent<Image>().sprite = me;
                 string temp = stats.coyValue.ToString("#.##0");
                 if (stats.coyValue >= 1000000000000)
                 {
                     coyValue.text = "$" + (stats.coyValue / (double)1000000000).ToString("G5") + "B";
-                } else if (stats.coyValue >= 1000000000)
+                }
+                else if (stats.coyValue >= 1000000000)
                 {
                     coyValue.text = "$" + (stats.coyValue / (double)1000000000).ToString("G3") + "B";
-                } else if (stats.coyValue >= 1000000)
+                }
+                else if (stats.coyValue >= 1000000)
                 {
                     coyValue.text = "$" + (stats.coyValue / (double)1000000).ToString("G3") + "M";
                 }
@@ -71,22 +75,75 @@ public class NeighbourCell : MonoBehaviour, ICell
                 {
                     coyValue.text = "$" + stats.coyValue;
                 }
-                level.text = stats.level.ToString(); break;
-            case 5: itemTitle.text = "Ronald"; 
-                coyValue.text = "$100M"; 
-                level.text = "23"; 
-                levelBg.gameObject.SetActive(true); 
-                border.gameObject.SetActive(false); 
-                break;
-            default: 
-                profile.GetComponent<Image>().sprite = blank; 
-                itemTitle.text = ""; 
-                coyValue.text = ""; 
-                level.text = ""; 
-                levelBg.gameObject.SetActive(false); 
+                level.text = stats.level.ToString();
+            }
+            else if (cellIndex == 1)
+            {
+                itemTitle.text = "Ronald";
+                coyValue.text = "$100M";
+                level.text = "23";
+                levelBg.gameObject.SetActive(true);
                 border.gameObject.SetActive(false);
-                break;
+            }
+            else
+            {
+                profile.GetComponent<Image>().sprite = blank;
+                itemTitle.text = "";
+                coyValue.text = "";
+                level.text = "";
+                levelBg.gameObject.SetActive(false);
+                border.gameObject.SetActive(false);
+            }
+        } else
+        {
+            if (cellIndex == 0)
+            {
+                itemTitle.text = "Ronald";
+                coyValue.text = "$100M";
+                level.text = "23";
+                levelBg.gameObject.SetActive(true);
+                border.gameObject.SetActive(false);
+            }
+            else if (cellIndex == 1)
+            {
+                itemTitle.text = stats.cityName;
+                levelBg.gameObject.SetActive(true);
+                profile.GetComponent<Image>().sprite = me;
+                string temp = stats.coyValue.ToString("#.##0");
+                if (stats.coyValue >= 1000000000000)
+                {
+                    coyValue.text = "$" + (stats.coyValue / (double)1000000000).ToString("G5") + "B";
+                }
+                else if (stats.coyValue >= 1000000000)
+                {
+                    coyValue.text = "$" + (stats.coyValue / (double)1000000000).ToString("G3") + "B";
+                }
+                else if (stats.coyValue >= 1000000)
+                {
+                    coyValue.text = "$" + (stats.coyValue / (double)1000000).ToString("G3") + "M";
+                }
+                else if (stats.coyValue >= 1000)
+                {
+                    coyValue.text = "$" + (stats.coyValue / (double)1000).ToString("G3") + "K";
+                }
+                else
+                {
+                    coyValue.text = "$" + stats.coyValue;
+                }
+                level.text = stats.level.ToString();
+            }
+            else
+            {
+                profile.GetComponent<Image>().sprite = blank;
+                itemTitle.text = "";
+                coyValue.text = "";
+                level.text = "";
+                levelBg.gameObject.SetActive(false);
+                border.gameObject.SetActive(false);
+            }
         }
+        
+        
     }
 
 }

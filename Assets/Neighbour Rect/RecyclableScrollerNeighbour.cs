@@ -21,12 +21,14 @@ public class RecyclableScrollerNeighbour : CSVReader, IRecyclableScrollRectDataS
     private void Awake()
     {
         _recyclableScrollRect.DataSource = this;
-
     }
 
     public void userReloadData()
     {
-        neighbourRect.ReloadData();
+        if (neighbourRect.IsActive())
+        {
+            neighbourRect.ReloadData();
+        }
     }
 
     #region DATA-SOURCE
@@ -36,7 +38,7 @@ public class RecyclableScrollerNeighbour : CSVReader, IRecyclableScrollRectDataS
     /// </summary>
     public int GetItemCount()
     {
-        return 6;
+        return 5;
     }
 
     /// <summary>
@@ -51,7 +53,7 @@ public class RecyclableScrollerNeighbour : CSVReader, IRecyclableScrollRectDataS
         //print("Clicked on a " + pCard.displayName + "'s contract");
         var item = cell as NeighbourCell;
 
-        item.ConfigureCell(index);
+        item.ConfigureCell(index, GetItemCount());
     }
 
     #endregion
