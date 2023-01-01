@@ -15,7 +15,7 @@ public class CameraMovement : MonoBehaviour
 	private float zoomStep, minCamSize, maxCamSize;
 
     [SerializeField]
-    private GameObject ShopMenu, hqMenu, infoPanel, cover, loadingGroup, dragCover;
+    private GameObject ShopMenu, hqMenu, infoPanel, cover, loadingGroup;
 
 	private Vector3 dragOrigin;
     private bool startOnGrid;
@@ -198,16 +198,6 @@ public class CameraMovement : MonoBehaviour
             cam.transform.position = ClampCamera(cam.transform.position + difference);
             //cam.transform.position += difference;
             closePanels();
-            dragging = true;
-        }
-
-        if (Input.GetMouseButton(0) && startOnGrid == true && ShopMenu.activeSelf == false && difference != Vector3.zero && dragCover.activeSelf == true)
-        {
-            //print("origin " + dragOrigin + "newPosition " + cam.ScreenToWorldPoint(Input.mousePosition) + " =difference " + difference);
-            // move the camera by that dist
-
-            cam.transform.position = ClampCamera(cam.transform.position + difference);
-            //cam.transform.position += difference;
             dragging = true;
         }
 

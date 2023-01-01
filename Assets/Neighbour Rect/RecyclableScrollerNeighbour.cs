@@ -38,7 +38,7 @@ public class RecyclableScrollerNeighbour : CSVReader, IRecyclableScrollRectDataS
     /// </summary>
     public int GetItemCount()
     {
-        return 5;
+        return 6;
     }
 
     /// <summary>

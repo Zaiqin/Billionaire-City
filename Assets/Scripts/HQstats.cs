@@ -58,8 +58,11 @@ public class HQstats : MonoBehaviour
         totalLong = (stats.money + goldvalue + (stats.GetComponent<Statistics>().noOfPlots * 1000) + propValue + stats.GetComponent<Statistics>().expCost);
         stats.coyValue = totalLong;
         total.text = "$" + (totalLong).ToString("#,##0");
-        coyValue.GetComponent<Text>().text = total.text;
-        coyName.GetComponent<Text>().text = stats.cityName;
+        if (GameObject.Find("neighbourParent").transform.GetChild(3).gameObject.activeSelf == false)
+        {
+            coyValue.GetComponent<Text>().text = total.text;
+            coyName.GetComponent<Text>().text = stats.cityName;
+        }
         field.text = stats.cityName;
         neighbourRect.GetComponent<RecyclableScrollerNeighbour>().userReloadData();
         print("money: " + stats.money.ToString("#,##0") + "gold:" + goldvalue.ToString("#,##0")+"propValue:"+ propValue.ToString("#,##0")+"plots:"+ (stats.GetComponent<Statistics>().noOfPlots * 1000) + "expCost:"+ stats.GetComponent<Statistics>().expCost);
@@ -67,7 +70,7 @@ public class HQstats : MonoBehaviour
 
     public void clickedHQ()
     {
-        if (mainCam.GetComponent<CameraMovement>().dragging == false)
+        if (mainCam.GetComponent<CameraMovement>().dragging == false && GameObject.Find("neighbourParent").transform.GetChild(3).gameObject.activeSelf == false)
         {
             print("open hq");
             if (hqMenu.activeSelf == false && dragButtons.activeSelf == false)

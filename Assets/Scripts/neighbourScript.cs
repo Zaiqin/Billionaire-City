@@ -15,15 +15,14 @@ public class neighbourScript : MonoBehaviour
 
     public AudioClip javaBg, prevBg;
     public string tileSaveRonald, propsSaveRonald, deletedExpRonald;
-    public void OnButtonClick()
+    public void OnButtonClick(bool goHome)
     {
         
-        if (cover.activeSelf == false)
+        if (goHome == false)
         {
-            cam.GetComponent<SpriteDetector>().inNeighbour = true;
             transitionCover.SetActive(true);
-            dragCover.SetActive(true);
-            cover.SetActive(true);
+            //dragCover.SetActive(true);
+            //cover.SetActive(true);
             StartCoroutine(loadMap(true));
             prevCoyValue = coyValue.GetComponent<Text>().text;
             prevCoyName = coyName.GetComponent<Text>().text;
@@ -31,8 +30,8 @@ public class neighbourScript : MonoBehaviour
         }
         else
         {
-            dragCover.SetActive(false);
-            cover.SetActive(false);
+            //dragCover.SetActive(false);
+            //cover.SetActive(false);
             transitionCover.SetActive(true);
             print("clicked back to city");
             StartCoroutine(loadMap(false));

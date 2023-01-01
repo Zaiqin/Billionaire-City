@@ -18,6 +18,7 @@ public class NeighbourCell : MonoBehaviour, ICell
     public Image levelBg;
     public Text level;
     public Image border;
+    public Text ranking;
 
     public Sprite ronaldImage, xpStar, me, blank;
 
@@ -37,7 +38,10 @@ public class NeighbourCell : MonoBehaviour, ICell
         print("touched neighbour in cellindex " + _cellIndex);
         if (itemTitle.text == "Ronald")
         {
-            GameObject.Find("neighbourParent").GetComponent<neighbourScript>().OnButtonClick();
+            GameObject.Find("neighbourParent").GetComponent<neighbourScript>().OnButtonClick(false);
+            GameObject.Find("ExternalAudioPlayer").GetComponent<AudioSource>().PlayOneShot(touchSound);
+        } else {
+            GameObject.Find("neighbourParent").GetComponent<neighbourScript>().OnButtonClick(true);
             GameObject.Find("ExternalAudioPlayer").GetComponent<AudioSource>().PlayOneShot(touchSound);
         }
     }
@@ -45,6 +49,15 @@ public class NeighbourCell : MonoBehaviour, ICell
     //This is called from the SetCell method in DataSource
     public void ConfigureCell(int cellIndex, int total)
     {
+        if (cellIndex < 2)
+        {
+            ranking.gameObject.SetActive(true);
+            ranking.text = (cellIndex + 1).ToString();
+        } else
+        {
+            ranking.gameObject.SetActive(false);
+        }
+        
         Statistics stats = GameObject.Find("Stats").GetComponent<Statistics>();
         _cellIndex = cellIndex;
         if (stats.coyValue > 100000000)

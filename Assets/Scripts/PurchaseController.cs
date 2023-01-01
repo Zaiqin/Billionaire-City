@@ -70,6 +70,9 @@ public class PurchaseController : MonoBehaviour
         signToggle.SetActive(false);
         moveToggle.SetActive(false);
         settingsToggle.SetActive(false);
+        coyName.SetActive(true);
+        coyValue.SetActive(true);
+        neighbourBar.SetActive(true);
     }
 
     public void quitNeighbour()
@@ -84,6 +87,9 @@ public class PurchaseController : MonoBehaviour
         signToggle.SetActive(true);
         moveToggle.SetActive(true);
         settingsToggle.SetActive(true);
+        coyName.SetActive(true);
+        coyValue.SetActive(true);
+        neighbourBar.SetActive(true);
     }
 
     public void purchaseProperty(PropertyCard prop) //called when buy button is pressed with sufficient balance

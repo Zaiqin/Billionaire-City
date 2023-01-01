@@ -16,7 +16,7 @@ public class expScript : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (cam.GetComponent<CameraMovement>().dragging == false && GameObject.Find("Canvas").GetComponent<toggleMaster>().checkAllOff() == true)
+        if (cam.GetComponent<CameraMovement>().dragging == false && GameObject.Find("Canvas").GetComponent<toggleMaster>().checkAllOff() == true && GameObject.Find("neighbourParent").transform.GetChild(3).gameObject.activeSelf == false)
         {
             print("name is " + this.name);
 

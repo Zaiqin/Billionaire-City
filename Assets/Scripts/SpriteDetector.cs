@@ -13,7 +13,6 @@ public class SpriteDetector : MonoBehaviour
 
     public GameObject selectedCommerce, dailyPanel, cover, Shop, pendingParent, neighbourBar;
     public GameObject moveSelected;
-    public bool inNeighbour = false;
 
     public Toggle deleteToggle, storageToggle, moveToggle;
 
@@ -60,10 +59,9 @@ public class SpriteDetector : MonoBehaviour
                 {
                     buttonDownLayer = 5;
                 }
-                if (hita.collider.gameObject.name == "backCityToggle" && inNeighbour == true)
+                if (hita.collider.gameObject.name == "backCityToggle")
                 {
-                    neighbourBar.GetComponent<neighbourScript>().OnButtonClick();
-                    inNeighbour = false;
+                    neighbourBar.GetComponent<neighbourScript>().OnButtonClick(true);
                 }
             }
         }
@@ -167,63 +165,68 @@ public class SpriteDetector : MonoBehaviour
         } else if (hitProp == true && buttonDownLayer == 0 && moveToggle.isOn == false)
         {
             print("hit a property in spritedetector");
-
-            if (hit.collider.GetComponent<Property>().Card.type == "Commerce" && hit.collider.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signTime != "notsigned")
+            if (GameObject.Find("neighbourParent").transform.GetChild(3).gameObject.activeSelf == false)
             {
-                var diff = DateTime.Parse(hit.collider.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signTime) - System.DateTime.Now;
 
-                if (diff.TotalSeconds < 179)
+                if (hit.collider.GetComponent<Property>().Card.type == "Commerce" && hit.collider.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signTime != "notsigned")
+                {
+                    var diff = DateTime.Parse(hit.collider.transform.GetChild(1).gameObject.GetComponent<commercePickupScript>().signTime) - System.DateTime.Now;
+
+                    if (diff.TotalSeconds < 179)
+                    {
+                        hit.collider.gameObject.GetComponent<Property>().clickedPropertyFunc();
+                    }
+                }
+                else
                 {
                     hit.collider.gameObject.GetComponent<Property>().clickedPropertyFunc();
                 }
-            } else {
-                hit.collider.gameObject.GetComponent<Property>().clickedPropertyFunc();
-            }
 
-            if ((hit.collider.gameObject.name == "Money" || hit.collider.gameObject.name == "Contract") && deleteToggle.isOn == true)
-            {
-                if (buttonDownLayer == 0)
+                if ((hit.collider.gameObject.name == "Money" || hit.collider.gameObject.name == "Contract") && deleteToggle.isOn == true)
                 {
-                    print("showing del popup pressed on contract");
-                    GameObject delPopup = GameObject.Find("Canvas").transform.GetChild(1).gameObject;
-                    delPopup.SetActive(true);
-                    delPopup.transform.localScale = Vector2.zero;
-                    delPopup.transform.LeanScale(Vector2.one, 0.2f).setEaseOutBack();
-                    PropertyCard Card = hit.collider.gameObject.transform.parent.GetComponent<Property>().Card;
-                    // Deducting money ---------------
-                    long refund;
-                    if (Card.cost.Contains("Gold"))
+                    if (buttonDownLayer == 0)
                     {
-                        refund = (long)(21000 * double.Parse(Card.cost.Remove(Card.cost.Length - 5)));
-                        if (refund >= 100000000)
+                        print("showing del popup pressed on contract");
+                        GameObject delPopup = GameObject.Find("Canvas").transform.GetChild(1).gameObject;
+                        delPopup.SetActive(true);
+                        delPopup.transform.localScale = Vector2.zero;
+                        delPopup.transform.LeanScale(Vector2.one, 0.2f).setEaseOutBack();
+                        PropertyCard Card = hit.collider.gameObject.transform.parent.GetComponent<Property>().Card;
+                        // Deducting money ---------------
+                        long refund;
+                        if (Card.cost.Contains("Gold"))
                         {
-                            string temp = refund.ToString("#,##0");
-                            delPopup.transform.GetChild(4).GetComponent<Text>().text = "$" + temp.Substring(0, temp.Length - 8) + "M";
+                            refund = (long)(21000 * double.Parse(Card.cost.Remove(Card.cost.Length - 5)));
+                            if (refund >= 100000000)
+                            {
+                                string temp = refund.ToString("#,##0");
+                                delPopup.transform.GetChild(4).GetComponent<Text>().text = "$" + temp.Substring(0, temp.Length - 8) + "M";
+                            }
+                            else
+                            {
+                                delPopup.transform.GetChild(4).GetComponent<Text>().text = "$" + refund.ToString("#,##0");
+                            }
+                            print("refund convert from gold is " + refund);
                         }
                         else
                         {
-                            delPopup.transform.GetChild(4).GetComponent<Text>().text = "$" + refund.ToString("#,##0");
+                            refund = (long)(0.35 * double.Parse(Card.cost));
+                            if (refund >= 100000000)
+                            {
+                                string temp = refund.ToString("#,##0");
+                                delPopup.transform.GetChild(4).GetComponent<Text>().text = "$" + temp.Substring(0, temp.Length - 8) + "M";
+                            }
+                            else
+                            {
+                                delPopup.transform.GetChild(4).GetComponent<Text>().text = "$" + refund.ToString("#,##0");
+                            }
+                            print("refund is " + refund);
                         }
-                        print("refund convert from gold is " + refund);
+                        // -------------------------------
+                        delPopup.transform.GetChild(2).GetComponent<delConfirm>().refundValue = refund;
+                        delPopup.transform.GetChild(2).GetComponent<delConfirm>().selProp = hit.collider.gameObject.transform.parent.gameObject;
+                        hit.collider.gameObject.transform.parent.GetComponent<SpriteRenderer>().color = Color.red;
                     }
-                    else
-                    {
-                        refund = (long)(0.35 * double.Parse(Card.cost));
-                        if (refund >= 100000000)
-                        {
-                            string temp = refund.ToString("#,##0");
-                            delPopup.transform.GetChild(4).GetComponent<Text>().text = "$" + temp.Substring(0, temp.Length - 8) + "M";
-                        }
-                        else
-                        {
-                            delPopup.transform.GetChild(4).GetComponent<Text>().text = "$" + refund.ToString("#,##0");
-                        }
-                        print("refund is " + refund);
-                    }
-                    // -------------------------------
-                    delPopup.transform.GetChild(2).GetComponent<delConfirm>().refundValue = refund;
-                    delPopup.transform.GetChild(2).GetComponent<delConfirm>().selProp = hit.collider.gameObject.transform.parent.gameObject;
-                    hit.collider.gameObject.transform.parent.GetComponent<SpriteRenderer>().color = Color.red;
                 }
             }
         }
