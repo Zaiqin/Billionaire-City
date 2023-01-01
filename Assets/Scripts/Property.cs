@@ -311,13 +311,18 @@ public class Property : MonoBehaviour, IPointerClickHandler
             // Click on property of neighbours that is not commerce
             if (this.Card.type == "House")
             {
-                StartCoroutine(BoostCoroutine());
-                GameObject.Find("ExternalAudioPlayer").GetComponent<AudioSource>().PlayOneShot(Resources.Load<AudioClip>("Audio/money"));
-                GameObject.Find("Stats").GetComponent<Statistics>().updateStats(diffmoney: 10000);
-                GameObject alue = Instantiate(Resources.Load<GameObject>("floatingParent"), new Vector3(this.transform.position.x + (float.Parse(this.Card.space.Substring(0, 1)) / 2), this.transform.position.y + (float.Parse(this.Card.space.Substring(this.Card.space.Length - 1)) / 2), 0f), Quaternion.identity) as GameObject;
-                alue.transform.GetChild(0).GetComponent<TextMesh>().text = "+ $10,000";
-                alue.transform.GetChild(0).GetComponent<TextMesh>().color = new Color(168f / 255f, 255f / 255f, 4f / 255f);
-                //new Vector3(float.Parse(pcard.space.Substring(0, 1)) / 2, float.Parse(pcard.space.Substring(pcard.space.Length - 1)) / 2, 0f);
+                string str = GameObject.Find("boostBar").transform.GetChild(0).GetComponent<Text>().text;
+                int n = int.Parse(str.Substring(str.Length - 1));
+                if (n != 0)
+                {
+                    GameObject.Find("boostBar").transform.GetChild(0).GetComponent<Text>().text = "x " + (n - 1).ToString();
+                    StartCoroutine(BoostCoroutine());
+                    GameObject.Find("ExternalAudioPlayer").GetComponent<AudioSource>().PlayOneShot(Resources.Load<AudioClip>("Audio/money"));
+                    GameObject.Find("Stats").GetComponent<Statistics>().updateStats(diffmoney: 10000);
+                    GameObject alue = Instantiate(Resources.Load<GameObject>("floatingParent"), new Vector3(this.transform.position.x + (float.Parse(this.Card.space.Substring(0, 1)) / 2), this.transform.position.y + (float.Parse(this.Card.space.Substring(this.Card.space.Length - 1)) / 2), 0f), Quaternion.identity) as GameObject;
+                    alue.transform.GetChild(0).GetComponent<TextMesh>().text = "+ $10,000";
+                    alue.transform.GetChild(0).GetComponent<TextMesh>().color = new Color(168f / 255f, 255f / 255f, 4f / 255f);
+                }
             }
         }
     }

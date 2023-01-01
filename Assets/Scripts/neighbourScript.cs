@@ -8,7 +8,7 @@ public class neighbourScript : MonoBehaviour
 {
 
     [SerializeField]
-    public GameObject cover, dragCover, PropertiesParent, expParent, saveloadsystemobj, expPopup, shop, cam, aeroplane, transitionCover, backCityToggle, coyValue, coyName, hq, stats;
+    public GameObject cover, dragCover, PropertiesParent, expParent, saveloadsystemobj, expPopup, shop, cam, aeroplane, transitionCover, backCityToggle, coyValue, coyName, hq, stats, boostBar;
     public Tilemap map;
     string prevCoyValue;
     string prevCoyName;
@@ -24,9 +24,13 @@ public class neighbourScript : MonoBehaviour
             //dragCover.SetActive(true);
             //cover.SetActive(true);
             StartCoroutine(loadMap(true));
-            prevCoyValue = coyValue.GetComponent<Text>().text;
-            prevCoyName = coyName.GetComponent<Text>().text;
-            prevBg = cam.GetComponent<AudioSource>().clip;
+            if (cam.GetComponent<AudioSource>().clip.name != "javaBg")
+            {
+                prevCoyValue = coyValue.GetComponent<Text>().text;
+                prevCoyName = coyName.GetComponent<Text>().text;
+                prevBg = cam.GetComponent<AudioSource>().clip;
+            }
+            
         }
         else
         {
@@ -41,21 +45,23 @@ public class neighbourScript : MonoBehaviour
         }
     }
 
-    private IEnumerator loadMap(bool neighbour)
+    private IEnumerator loadMap(bool toNeighbour)
     {
         transitionCover.GetComponent<CanvasGroup>().LeanAlpha(1f, 0.5f);
         yield return new WaitForSeconds(0.5f);
-        if (neighbour == true)
+        if (toNeighbour == true)
         {
             backCityToggle.SetActive(true);
             coyName.GetComponent<Text>().text = "Chocolate Fields";
             coyValue.GetComponent<Text>().text = "$100,000,000";
             shop.GetComponent<PurchaseController>().visitNeighbour();
+            boostBar.SetActive(true);
         }
         else
         {
             shop.GetComponent<PurchaseController>().quitNeighbour();
             backCityToggle.SetActive(false);
+            boostBar.SetActive(false);
         }
         foreach (Transform child in expParent.transform)
         {
@@ -63,7 +69,7 @@ public class neighbourScript : MonoBehaviour
         }
         List<tileSaveForm> tilelist = new List<tileSaveForm>();
         List<propertySaveForm> list = new List<propertySaveForm>();
-        if (neighbour == true)
+        if (toNeighbour == true)
         {
             //tilelist = FileHandler.ReadListFromJSON<tileSaveForm>("tileSaveRonald.json");
             //list = FileHandler.ReadListFromJSON<propertySaveForm>("propsSaveRonald.json");
@@ -104,7 +110,7 @@ public class neighbourScript : MonoBehaviour
             }
             else
             {
-                if (neighbour == true)
+                if (toNeighbour == true)
                 {
                     saveloadsystemobj.GetComponent<saveloadsystem>().loadProperty(p.propName, new Vector2Int(p.locX, p.locY), p.signTime, p.signIndex, p.signCreationTime, p.comSignTime, p.comSignCreationTime, p.constructStart, p.constructEnd, true);
                 }
@@ -116,7 +122,7 @@ public class neighbourScript : MonoBehaviour
             }
             //print("loaded: " + p.propName);
         }
-        if (neighbour == true)
+        if (toNeighbour == true)
         {
             expPopup.GetComponent<expansion>().deletedExp = FileHandler.ReadListFromJSONString<string>(deletedExpRonald);
         }
@@ -131,7 +137,7 @@ public class neighbourScript : MonoBehaviour
         }
         expPopup.GetComponent<expansion>().updateSprite();
         aeroplane.transform.position = new Vector3Int(25, 0, -8);
-        if (neighbour == false)
+        if (toNeighbour == false)
         {
             coyValue.GetComponent<Text>().text = prevCoyValue;
             coyName.GetComponent<Text>().text = prevCoyName;
