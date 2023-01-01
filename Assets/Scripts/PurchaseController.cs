@@ -13,7 +13,7 @@ public class PurchaseController : MonoBehaviour
 
     [SerializeField]
     public GameObject PropertiesParent, PendingPropertyParent, ppDrag;
-    public GameObject shopToggle, plotToggle, roadToggle, deleteToggle, ronaldToggle, storageToggle, luckToggle, signToggle, moveToggle, settingsToggle, moneyBar, goldBar, xpBar, coyName, coyValue;
+    public GameObject shopToggle, plotToggle, roadToggle, deleteToggle, ronaldToggle, storageToggle, luckToggle, signToggle, moveToggle, settingsToggle, moneyBar, goldBar, xpBar, coyName, coyValue, neighbourBar;
 
     [SerializeField]
     Sprite contractStarSprite;
@@ -35,6 +35,7 @@ public class PurchaseController : MonoBehaviour
         xpBar.SetActive(false);
         coyName.SetActive(false);
         coyValue.SetActive(false);
+        neighbourBar.SetActive(false);
     }
 
     public void showUI()
@@ -54,6 +55,7 @@ public class PurchaseController : MonoBehaviour
         xpBar.SetActive(true);
         coyName.SetActive(true);
         coyValue.SetActive(true);
+        neighbourBar.SetActive(true);
     }
 
     public void visitNeighbour()

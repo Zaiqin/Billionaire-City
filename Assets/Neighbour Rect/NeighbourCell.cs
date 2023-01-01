@@ -17,8 +17,9 @@ public class NeighbourCell : MonoBehaviour, ICell
     public Text coyValue;
     public Image levelBg;
     public Text level;
+    public Image border;
 
-    public Sprite ronaldImage, xpStar, me;
+    public Sprite ronaldImage, xpStar, me, blank;
 
     [SerializeField]
     private AudioClip touchSound;
@@ -34,7 +35,7 @@ public class NeighbourCell : MonoBehaviour, ICell
     private void touchListener()
     {
         print("touched neighbour in cellindex " + _cellIndex);
-        if (_cellIndex == 1)
+        if (_cellIndex == 5)
         {
             GameObject.Find("neighbourParent").GetComponent<neighbourScript>().OnButtonClick();
             GameObject.Find("ExternalAudioPlayer").GetComponent<AudioSource>().PlayOneShot(touchSound);
@@ -48,7 +49,8 @@ public class NeighbourCell : MonoBehaviour, ICell
         _cellIndex = cellIndex;
         switch (cellIndex)
         {
-            case 0: itemTitle.text = stats.cityName;
+            case 4: itemTitle.text = stats.cityName;
+                levelBg.gameObject.SetActive(true);
                 profile.GetComponent<Image>().sprite = me;
                 string temp = stats.coyValue.ToString("#.##0");
                 if (stats.coyValue >= 1000000000000)
@@ -70,8 +72,20 @@ public class NeighbourCell : MonoBehaviour, ICell
                     coyValue.text = "$" + stats.coyValue;
                 }
                 level.text = stats.level.ToString(); break;
-            case 1: itemTitle.text = "Ronald"; coyValue.text = "$100M"; level.text = "23"; break;
-            default: itemTitle.text = "Player"; coyValue.text = "$919K"; level.text = "1"; break;
+            case 5: itemTitle.text = "Ronald"; 
+                coyValue.text = "$100M"; 
+                level.text = "23"; 
+                levelBg.gameObject.SetActive(true); 
+                border.gameObject.SetActive(false); 
+                break;
+            default: 
+                profile.GetComponent<Image>().sprite = blank; 
+                itemTitle.text = ""; 
+                coyValue.text = ""; 
+                level.text = ""; 
+                levelBg.gameObject.SetActive(false); 
+                border.gameObject.SetActive(false);
+                break;
         }
     }
 
