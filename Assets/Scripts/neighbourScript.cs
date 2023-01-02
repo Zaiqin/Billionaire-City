@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,7 @@ public class neighbourScript : MonoBehaviour
     public Tilemap map;
     string prevCoyValue;
     string prevCoyName;
+    public long prevCoyWorthDeductMoney;
 
     public AudioClip javaBg, prevBg;
     public string tileSaveRonald, propsSaveRonald, deletedExpRonald;
@@ -29,6 +31,7 @@ public class neighbourScript : MonoBehaviour
                 prevCoyValue = coyValue.GetComponent<Text>().text;
                 prevCoyName = coyName.GetComponent<Text>().text;
                 prevBg = cam.GetComponent<AudioSource>().clip;
+                prevCoyWorthDeductMoney = stats.GetComponent<Statistics>().coyValue - stats.GetComponent<Statistics>().money;
             }
             
         }
@@ -56,6 +59,20 @@ public class neighbourScript : MonoBehaviour
             coyValue.GetComponent<Text>().text = "$100,000,000";
             shop.GetComponent<PurchaseController>().visitNeighbour();
             boostBar.SetActive(true);
+            print("lastCOut: " + stats.GetComponent<Statistics>().lastBoostedCount);
+            if (stats.GetComponent<Statistics>().lastBoosted == null || stats.GetComponent<Statistics>().lastBoosted == "")
+            {
+                stats.GetComponent<Statistics>().lastBoosted = System.DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                stats.GetComponent<Statistics>().lastBoostedCount = 5;
+                GameObject.Find("boostBar").transform.GetChild(0).GetComponent<Text>().text = "x " + stats.GetComponent<Statistics>().lastBoostedCount.ToString();
+            } else if (stats.GetComponent<Statistics>().lastBoostedCount == 0 && (System.DateTime.Now.Date != DateTime.Parse(stats.GetComponent<Statistics>().lastBoosted).Date))
+            {
+                stats.GetComponent<Statistics>().lastBoostedCount = 5;
+                GameObject.Find("boostBar").transform.GetChild(0).GetComponent<Text>().text = "x " + stats.GetComponent<Statistics>().lastBoostedCount.ToString();
+            } else
+            {
+                GameObject.Find("boostBar").transform.GetChild(0).GetComponent<Text>().text = "x " + stats.GetComponent<Statistics>().lastBoostedCount.ToString();
+            }
         }
         else
         {

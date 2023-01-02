@@ -38,30 +38,34 @@ public class HQstats : MonoBehaviour
         long goldvalue = stats.gold * 60000;
         gold.text = "$" + goldvalue.ToString("#,##0");
         long propValue = 0;
-        foreach (Transform child in PropertiesParent.transform)
+        if (GameObject.Find("neighbourParent").transform.GetChild(3).gameObject.activeSelf == false) //At home
         {
-            if (child.gameObject.GetComponent<Property>() != null)
+            foreach (Transform child in PropertiesParent.transform)
             {
-                print("calculating: " + child.gameObject.name);
-                if (child.gameObject.GetComponent<Property>().Card.cost.Contains("Gold"))
+                if (child.gameObject.GetComponent<Property>() != null)
                 {
-                    propValue += int.Parse(child.gameObject.GetComponent<Property>().Card.cost.Remove(child.gameObject.GetComponent<Property>().Card.cost.Length - 5)) * 60000;
-                }
-                else
-                {
-                    propValue += int.Parse(child.gameObject.GetComponent<Property>().Card.cost);
+                    print("calculating: " + child.gameObject.name);
+                    if (child.gameObject.GetComponent<Property>().Card.cost.Contains("Gold"))
+                    {
+                        propValue += int.Parse(child.gameObject.GetComponent<Property>().Card.cost.Remove(child.gameObject.GetComponent<Property>().Card.cost.Length - 5)) * 60000;
+                    }
+                    else
+                    {
+                        propValue += int.Parse(child.gameObject.GetComponent<Property>().Card.cost);
+                    }
                 }
             }
-        }
-        property.text = "$" + propValue.ToString("#,##0");
-        land.text = "$" + ((stats.GetComponent<Statistics>().noOfPlots*1000) + stats.GetComponent<Statistics>().expCost).ToString("#,##0");
-        totalLong = (stats.money + goldvalue + (stats.GetComponent<Statistics>().noOfPlots * 1000) + propValue + stats.GetComponent<Statistics>().expCost);
-        stats.coyValue = totalLong;
-        total.text = "$" + (totalLong).ToString("#,##0");
-        if (GameObject.Find("neighbourParent").transform.GetChild(3).gameObject.activeSelf == false)
-        {
+            property.text = "$" + propValue.ToString("#,##0");
+            land.text = "$" + ((stats.GetComponent<Statistics>().noOfPlots * 1000) + stats.GetComponent<Statistics>().expCost).ToString("#,##0");
+            totalLong = (stats.money + goldvalue + (stats.GetComponent<Statistics>().noOfPlots * 1000) + propValue + stats.GetComponent<Statistics>().expCost);
+            stats.coyValue = totalLong;
+            total.text = "$" + (totalLong).ToString("#,##0");
             coyValue.GetComponent<Text>().text = total.text;
             coyName.GetComponent<Text>().text = stats.cityName;
+        } else
+        {
+            stats.coyValue = stats.money + GameObject.Find("neighbourParent").GetComponent<neighbourScript>().prevCoyWorthDeductMoney;
+            total.text = "$" + (totalLong).ToString("#,##0");
         }
         field.text = stats.cityName;
         neighbourRect.GetComponent<RecyclableScrollerNeighbour>().userReloadData();

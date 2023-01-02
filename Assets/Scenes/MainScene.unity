@@ -76819,6 +76819,7 @@ MonoBehaviour:
   stats: {fileID: 973017964}
   boostBar: {fileID: 1135111322}
   map: {fileID: 280726322}
+  prevCoyWorthDeductMoney: 0
   javaBg: {fileID: 8300000, guid: acbedf78e360fe74e9847fbc28a5167d, type: 3}
   prevBg: {fileID: 0}
   tileSaveRonald: 
@@ -80745,6 +80746,8 @@ MonoBehaviour:
   noDailyCollected: 0
   lastDailyCollected: 
   muted: 0
+  lastBoosted: 
+  lastBoostedCount: 0
   expCost: 0
   wonderBonus: 0
   wonderCommerceBonus: 0
@@ -83891,8 +83894,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -546.13, y: -139.15}
-  m_SizeDelta: {x: 190.93, y: 89.59}
+  m_AnchoredPosition: {x: -551.8, y: -140.6}
+  m_SizeDelta: {x: 162.82, y: 76.399}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1135111324
 MonoBehaviour:
@@ -88764,8 +88767,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 27.17, y: -4.4}
-  m_SizeDelta: {x: 72.21, y: 53.97}
+  m_AnchoredPosition: {x: 19, y: -3.6}
+  m_SizeDelta: {x: 64.78, y: 52.32}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1396901160
 MonoBehaviour:
@@ -88779,7 +88782,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0.077011965, g: 0.25490198, b: 0, a: 1}
+  m_EffectColor: {r: 0.039215688, g: 0.17254902, b: 0.25490198, a: 1}
   m_EffectDistance: {x: 2, y: -2}
   m_UseGraphicAlpha: 1
 --- !u!114 &1396901161
@@ -88819,7 +88822,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: ac69ead4238ee4edca81114c3ac1de6a, type: 3}
-    m_FontSize: 59
+    m_FontSize: 53
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 3

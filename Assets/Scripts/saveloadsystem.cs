@@ -38,9 +38,11 @@ public class statsSaveForm
     public int noDailyCollected;
     public string lastDailyCollected;
     public bool muted;
-    public statsSaveForm(long m, long g, long l, long x, string n, int p, int noD, string lastD, bool mut)
+    public string lastBoosted;
+    public int lastBoostedCount;
+    public statsSaveForm(long m, long g, long l, long x, string n, int p, int noD, string lastD, bool mut, string lastB, int lastBC)
     {
-        money = m; gold = g; level = l; xp = x; cityName = n; noOfPlots = p; noDailyCollected = noD; lastDailyCollected = lastD; muted = mut;
+        money = m; gold = g; level = l; xp = x; cityName = n; noOfPlots = p; noDailyCollected = noD; lastDailyCollected = lastD; muted = mut; lastBoosted = lastB; lastBoostedCount = lastBC;
     }
 }
 
@@ -169,7 +171,7 @@ public class saveloadsystem : MonoBehaviour
     public void saveStats()
     {
         print("Saving Stats");
-        statsSaveForm statsSaveObj = new statsSaveForm(Stats.GetComponent<Statistics>().money, Stats.GetComponent<Statistics>().gold, Stats.GetComponent<Statistics>().level, Stats.GetComponent<Statistics>().xp, cityText.GetComponent<Text>().text, Stats.GetComponent<Statistics>().noOfPlots, Stats.GetComponent<Statistics>().noDailyCollected, Stats.GetComponent<Statistics>().lastDailyCollected, Stats.GetComponent<Statistics>().muted);
+        statsSaveForm statsSaveObj = new statsSaveForm(Stats.GetComponent<Statistics>().money, Stats.GetComponent<Statistics>().gold, Stats.GetComponent<Statistics>().level, Stats.GetComponent<Statistics>().xp, cityText.GetComponent<Text>().text, Stats.GetComponent<Statistics>().noOfPlots, Stats.GetComponent<Statistics>().noDailyCollected, Stats.GetComponent<Statistics>().lastDailyCollected, Stats.GetComponent<Statistics>().muted, Stats.GetComponent<Statistics>().lastBoosted, Stats.GetComponent<Statistics>().lastBoostedCount);
         FileHandler.SaveToJSON<statsSaveForm>(statsSaveObj, "statsSave.json");
         hq.GetComponent<HQstats>().calcHQ();
         print("Stats saved");
@@ -281,6 +283,8 @@ public class saveloadsystem : MonoBehaviour
                 Stats.GetComponent<Statistics>().noDailyCollected = statsObj.noDailyCollected;
                 Stats.GetComponent<Statistics>().lastDailyCollected = statsObj.lastDailyCollected;
             }
+            Stats.GetComponent<Statistics>().lastBoosted = statsObj.lastBoosted;
+            Stats.GetComponent<Statistics>().lastBoostedCount = statsObj.lastBoostedCount;
             print("loaded name is " + statsObj.cityName);
             nameField.text = statsObj.cityName;
 

@@ -311,17 +311,22 @@ public class Property : MonoBehaviour, IPointerClickHandler
             // Click on property of neighbours that is not commerce
             if (this.Card.type == "House")
             {
-                string str = GameObject.Find("boostBar").transform.GetChild(0).GetComponent<Text>().text;
-                int n = int.Parse(str.Substring(str.Length - 1));
-                if (n != 0)
+                Statistics stats = GameObject.Find("Stats").GetComponent<Statistics>();
+                if (stats.lastBoostedCount != 0)
                 {
-                    GameObject.Find("boostBar").transform.GetChild(0).GetComponent<Text>().text = "x " + (n - 1).ToString();
                     StartCoroutine(BoostCoroutine());
-                    GameObject.Find("ExternalAudioPlayer").GetComponent<AudioSource>().PlayOneShot(Resources.Load<AudioClip>("Audio/money"));
-                    GameObject.Find("Stats").GetComponent<Statistics>().updateStats(diffmoney: 10000);
-                    GameObject alue = Instantiate(Resources.Load<GameObject>("floatingParent"), new Vector3(this.transform.position.x + (float.Parse(this.Card.space.Substring(0, 1)) / 2), this.transform.position.y + (float.Parse(this.Card.space.Substring(this.Card.space.Length - 1)) / 2), 0f), Quaternion.identity) as GameObject;
-                    alue.transform.GetChild(0).GetComponent<TextMesh>().text = "+ $10,000";
+                    GameObject alue = Instantiate(Resources.Load<GameObject>("floatingParent"), new Vector3(this.transform.position.x + (float.Parse(this.Card.space.Substring(0, 1)) / 2), this.transform.position.y + 3.4f + (float.Parse(this.Card.space.Substring(this.Card.space.Length - 1)) / 2), 0f), Quaternion.identity) as GameObject;
+                    alue.transform.GetChild(0).GetComponent<TextMesh>().text = "+ $1,000";
                     alue.transform.GetChild(0).GetComponent<TextMesh>().color = new Color(168f / 255f, 255f / 255f, 4f / 255f);
+                    GameObject xpValue = Instantiate(Resources.Load<GameObject>("floatingParent"), new Vector3(this.transform.position.x + (float.Parse(this.Card.space.Substring(0, 1)) / 2), this.transform.position.y + 2.8f + (float.Parse(this.Card.space.Substring(this.Card.space.Length - 1)) / 2), 0f), Quaternion.identity) as GameObject;
+                    xpValue.transform.GetChild(0).GetComponent<TextMesh>().text = "+ 15XP";
+                    xpValue.transform.GetChild(0).GetComponent<TextMesh>().color = Color.yellow;
+                    stats.GetComponent<Statistics>().lastBoostedCount -= 1;
+                    stats.GetComponent<Statistics>().lastBoosted = System.DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                    print("itis: " + stats.GetComponent<Statistics>().lastBoosted);
+                    GameObject.Find("boostBar").transform.GetChild(0).GetComponent<Text>().text = "x " + stats.GetComponent<Statistics>().lastBoostedCount.ToString();
+                    GameObject.Find("ExternalAudioPlayer").GetComponent<AudioSource>().PlayOneShot(Resources.Load<AudioClip>("Audio/money"));
+                    stats.updateStats(diffmoney: 1000, diffxp: 15);
                 }
             }
         }

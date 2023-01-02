@@ -168,6 +168,7 @@ public class ppDragButton : MonoBehaviour
 
         if (pp.GetComponent<Draggable>().buildable == true && canBuild == true)
         {
+            shopMenu.GetComponent<PurchaseController>().showUI();
             removePlots(pp.Card, pp.GetComponent<Draggable>().XY);
             // Setting position and parent to main properties -----------
             pp.transform.position = new Vector3(pp.transform.position.x, pp.transform.position.y, getZ(pp.GetComponent<Draggable>().XY));

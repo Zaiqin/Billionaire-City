@@ -15,16 +15,19 @@ public class planeText : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameObject.Find("neighbourParent").transform.GetChild(3).gameObject.activeSelf == false)
+        if (GameObject.Find("neighbourParent") != null)
         {
-            if (this.GetComponent<TextMesh>().text != stats.GetComponent<Statistics>().cityName) 
+            if (GameObject.Find("neighbourParent").transform.GetChild(3).gameObject.activeSelf == false)
             {
-                this.GetComponent<TextMesh>().text = stats.GetComponent<Statistics>().cityName;
+                if (this.GetComponent<TextMesh>().text != stats.GetComponent<Statistics>().cityName)
+                {
+                    this.GetComponent<TextMesh>().text = stats.GetComponent<Statistics>().cityName;
+                }
             }
-        } else
-        {
-            this.GetComponent<TextMesh>().text = "Chocolate Fields";
+            else
+            {
+                this.GetComponent<TextMesh>().text = "Chocolate Fields";
+            }
         }
-        
     }
 }

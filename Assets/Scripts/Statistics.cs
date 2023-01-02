@@ -17,6 +17,8 @@ public class Statistics : MonoBehaviour
     public int noDailyCollected;
     public string lastDailyCollected;
     public bool muted;
+    public string lastBoosted;
+    public int lastBoostedCount;
     // ---------------------------
 
     public long expCost;

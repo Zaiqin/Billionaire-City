@@ -41,7 +41,7 @@ public class NeighbourCell : MonoBehaviour, ICell
             GameObject.Find("neighbourParent").GetComponent<neighbourScript>().OnButtonClick(false);
             GameObject.Find("ExternalAudioPlayer").GetComponent<AudioSource>().PlayOneShot(touchSound);
         } else {
-            if (GameObject.Find("coyName").GetComponent<Text>().text == "Chocolate Fields") {
+            if (GameObject.Find("neighbourParent").transform.GetChild(3).gameObject.activeSelf == true) {
                 GameObject.Find("neighbourParent").GetComponent<neighbourScript>().OnButtonClick(true);
                 GameObject.Find("ExternalAudioPlayer").GetComponent<AudioSource>().PlayOneShot(touchSound);
             }
