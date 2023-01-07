@@ -36,7 +36,7 @@ public class loadingScreen : MonoBehaviour
         errorCode.GetComponent<CanvasGroup>().LeanAlpha(0f, 0.5f);
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         wheel.transform.Rotate(0, 0, 360 * Time.deltaTime);
     }
