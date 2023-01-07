@@ -155,6 +155,7 @@ public class neighbourScript : MonoBehaviour
         }
         expPopup.GetComponent<expansion>().updateSprite();
         aeroplane.transform.position = new Vector3Int(25, 0, -8);
+        aeroplane.GetComponent<aeroplane>().refreshAirplane();
         if (toNeighbour == false)
         {
             coyValue.GetComponent<Text>().text = prevCoyValue;

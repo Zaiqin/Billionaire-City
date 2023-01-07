@@ -130,6 +130,7 @@ public class loadingScreen : MonoBehaviour
             extAudio.GetComponent<AudioSource>().volume = 0f;
         }
         cam.Play();
+        GameObject.Find("airplane").GetComponent<aeroplane>().refreshAirplane();
     }
 
     public void skipIntro()

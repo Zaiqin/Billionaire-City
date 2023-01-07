@@ -44,7 +44,7 @@ public class HQstats : MonoBehaviour
             {
                 if (child.gameObject.GetComponent<Property>() != null)
                 {
-                    print("calculating: " + child.gameObject.name);
+                    //print("calculating: " + child.gameObject.name);
                     if (child.gameObject.GetComponent<Property>().Card.cost.Contains("Gold"))
                     {
                         propValue += int.Parse(child.gameObject.GetComponent<Property>().Card.cost.Remove(child.gameObject.GetComponent<Property>().Card.cost.Length - 5)) * 60000;
