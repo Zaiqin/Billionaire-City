@@ -543,7 +543,7 @@ public class contractScript : MonoBehaviour, IPointerClickHandler
                     Destroy(hProp.transform.GetChild(4).gameObject);
                 }
             }
-            Invoke("calc", 0.2f);
+            Invoke("calc", 0.3f);
         }
         
     }
