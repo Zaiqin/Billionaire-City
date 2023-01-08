@@ -33,7 +33,7 @@ public class signContractor : MonoBehaviour
             infoPanel.SetActive(false);
             contractController.GetComponent<RecyclableScrollerContract>().contractor = true;
             contractController.GetComponent<RecyclableScrollerContract>().goCalc = false;
-            contractController.GetComponent<RecyclableScrollerContract>().userReloadData();
+            //contractController.GetComponent<RecyclableScrollerContract>().userReloadData();
 
             GameObject.Find("SignController").GetComponent<signController>().selProperty = this.gameObject.transform.parent.gameObject;
 

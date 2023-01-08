@@ -338,7 +338,7 @@ public class Property : MonoBehaviour, IPointerClickHandler
         {
             //Debug.Log(Time.time + ">=" + nextUpdate);
             // Change the next update (current second+1)
-            nextUpdate = Mathf.FloorToInt(Time.time) + 0.1;
+            nextUpdate = Mathf.FloorToInt(Time.time) + 0.2;
             // Call your fonction
             checkConstruction();
 
@@ -366,6 +366,14 @@ public class Property : MonoBehaviour, IPointerClickHandler
                     }
                 }
             }
+            if (this.Card.type == "House")
+            {
+                if (this.gameObject.transform.GetChild(3).gameObject.GetComponent<SpriteRenderer>().sortingOrder == 2)
+                {
+                    this.gameObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
+                }
+            }
+                
         }
     }
 
@@ -521,7 +529,7 @@ public class contractScript : MonoBehaviour, IPointerClickHandler
             contractController.GetComponent<RecyclableScrollerContract>().selProp = this.transform.parent.gameObject;
             contractController.GetComponent<RecyclableScrollerContract>().contractor = false;
             contractController.GetComponent<RecyclableScrollerContract>().goCalc = false;
-            contractController.GetComponent<RecyclableScrollerContract>().userReloadData();
+            //contractController.GetComponent<RecyclableScrollerContract>().userReloadData();
 
             GameObject.Find("SignController").GetComponent<signController>().selProperty = this.gameObject.transform.parent.gameObject;
 
@@ -535,8 +543,15 @@ public class contractScript : MonoBehaviour, IPointerClickHandler
                     Destroy(hProp.transform.GetChild(4).gameObject);
                 }
             }
+            Invoke("calc", 0.2f);
         }
         
+    }
+
+    void calc()
+    {
+        GameObject contractController = GameObject.Find("Contract Scroll Controller");
+        contractController.GetComponent<RecyclableScrollerContract>().userReloadData();
     }
 
     private void Update()

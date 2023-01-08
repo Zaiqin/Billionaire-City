@@ -170,6 +170,10 @@ public class ContractCell : MonoBehaviour, ICell
 
         if (contractor == false)
         {
+            incomeText.text = "Pending...";
+            xpText.text = "Pending...";
+            tenantsText.text = "Pending...";
+            costText.text = "---";
             long[] res = calcContract(pCard, cellIndex, selProp);
 
             incomeText.text = "$" + res[0].ToString("#,##0");
