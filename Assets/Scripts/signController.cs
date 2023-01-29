@@ -31,7 +31,6 @@ public class signController : MonoBehaviour
             signToggle.GetComponent<Toggle>().isOn = false;
             print("signing property " + selProperty.name + "with sign index: " + i);
             selProperty.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
-            closePanel();
             string datetime = theTime.ToString("yyyy/MM/dd HH:mm:ss");
             selProperty.transform.GetChild(0).gameObject.GetComponent<contractScript>().signTime = datetime;
             selProperty.transform.GetChild(0).gameObject.GetComponent<contractScript>().signCreationTime = System.DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
@@ -41,6 +40,7 @@ public class signController : MonoBehaviour
             if (contractor == false)
             {
                 extAudio.GetComponent<AudioSource>().PlayOneShot(contractSound);
+                closePanel();
             }
 
             GameObject value = Instantiate(Resources.Load<GameObject>("floatingParent"), new Vector3(selProperty.transform.position.x + (float.Parse(selProperty.GetComponent<Property>().Card.space.Substring(0, 1))) / 2, selProperty.transform.position.y + 2.8f, -5f), Quaternion.identity) as GameObject;

@@ -63,6 +63,7 @@ public class ContractCell : MonoBehaviour, ICell
                 }
             }
             sc.GetComponent<signController>().extAudio.GetComponent<AudioSource>().PlayOneShot(sc.GetComponent<signController>().contractSound);
+            sc.GetComponent<signController>().closePanel();
         } else if (contractor == true && hasAtLeastOneToSign == true) {
             sc.GetComponent<signController>().insuff.SetActive(true);
         } else if (contractor == false)
@@ -71,7 +72,7 @@ public class ContractCell : MonoBehaviour, ICell
         }
     }
 
-    public long[] calcContract(PropertyCard pCard, int cellIndex, GameObject selProp)
+    public long[] calcContract(PropertyCard pCard, int cellIndex, GameObject selProp, bool contractor = false)
     {
         long[] result = new long[4]; // income, tenants, xp, cost
 
@@ -137,26 +138,33 @@ public class ContractCell : MonoBehaviour, ICell
             default: break;
         }
 
-        // ---- Checking what houses it affects ---------
-        selProp.transform.GetChild(2).gameObject.SetActive(true);
-        selProp.transform.GetChild(2).GetComponent<SpriteRenderer>().color = new Color(0f, 0f, 0f, 0f);
-        List<Collider2D> infList = selProp.transform.GetChild(2).GetComponent<detectDecoInf>().returnHighlights();
-        selProp.transform.GetChild(2).GetComponent<SpriteRenderer>().color = new Color(35f / 255f, 206f / 255f, 241f / 255f, 125f / 255f);
-        selProp.transform.GetChild(2).gameObject.SetActive(false);
-        //------------------------------------------------
-
-        int totalDecoBonus = 0;
-        foreach (Collider2D item in infList)
+        print("tempIncome: " + tempIncome);
+        if (contractor == false)
         {
-            totalDecoBonus += GameObject.Find(item.name).GetComponent<Property>().Card.decoBonus;
-        }
-        float percent = 1 + (((float)totalDecoBonus) / 100);
-        long finalProfit = (long)((float)tempIncome * percent);
-        float wonderPercent = 1 + (((float)(GameObject.Find("Stats").GetComponent<Statistics>().wonderBonus)) / 100);
-        finalProfit = (long)((float)finalProfit * wonderPercent);
-        print("profit is " + tempIncome + ", final profit is " + finalProfit);
+            // ---- Checking what houses it affects ---------
+            selProp.transform.GetChild(2).gameObject.SetActive(true);
+            selProp.transform.GetChild(2).GetComponent<SpriteRenderer>().color = new Color(0f, 0f, 0f, 0f);
+            List<Collider2D> infList = selProp.transform.GetChild(2).GetComponent<detectDecoInf>().returnHighlights();
+            selProp.transform.GetChild(2).GetComponent<SpriteRenderer>().color = new Color(35f / 255f, 206f / 255f, 241f / 255f, 125f / 255f);
+            selProp.transform.GetChild(2).gameObject.SetActive(false);
+            //------------------------------------------------
 
-        result[0] = finalProfit;
+            int totalDecoBonus = 0;
+            foreach (Collider2D item in infList)
+            {
+                totalDecoBonus += GameObject.Find(item.name).GetComponent<Property>().Card.decoBonus;
+            }
+            float percent = 1 + (((float)totalDecoBonus) / 100);
+            long finalProfit = (long)((float)tempIncome * percent);
+            float wonderPercent = 1 + (((float)(GameObject.Find("Stats").GetComponent<Statistics>().wonderBonus)) / 100);
+            finalProfit = (long)((float)finalProfit * wonderPercent);
+            print("profit is " + tempIncome + ", final profit is " + finalProfit);
+
+            result[0] = finalProfit;
+        } else
+        {
+            result[0] = tempIncome;
+        }
         return result;
     }
 
@@ -183,74 +191,81 @@ public class ContractCell : MonoBehaviour, ICell
 
         } else
         {
-            if (goCalc == false)
+            incomeText.text = "Pending...";
+            xpText.text = "Pending...";
+            tenantsText.text = "Pending...";
+            costText.text = "---";
+            long totalIncome = 0;
+            long totalXP = 0;
+            long totalTenants = 0;
+            long totalCost = 0;
+            GameObject props = GameObject.Find("Properties");
+            foreach (Transform child in props.transform)
             {
-                incomeText.text = "Pending...";
-                xpText.text = "Pending...";
-                tenantsText.text = "Pending...";
-                costText.text = "---";
+                if (child.GetComponent<Property>() != null && child.GetComponent<Property>().Card.type == "House" && child.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder == 2)
+                {
+                    print("Need to sign " + child.name);
+                    long[] res;
+                    if (goCalc == false)
+                    {
+                        res = calcContract(child.GetComponent<Property>().Card, cellIndex, child.gameObject, true);
+                    } else
+                    {
+                        res = calcContract(child.GetComponent<Property>().Card, cellIndex, child.gameObject, false);
+                    }
+                    
+                    totalIncome += res[0];
+                    totalTenants += res[1];
+                    totalXP += res[2];
+                    totalCost += res[3];
+                }
+            }
+
+            signAllCost = totalCost;
+            if (totalIncome >= 10000000)
+            {
+                string temp = totalIncome.ToString("#,##0");
+                incomeText.text = "$" + temp.Substring(0, temp.Length - 8) + "M++";
             }
             else
             {
-                long totalIncome = 0;
-                long totalXP = 0;
-                long totalTenants = 0;
-                long totalCost = 0;
-                GameObject props = GameObject.Find("Properties");
-                foreach (Transform child in props.transform)
-                {
-                    if (child.GetComponent<Property>() != null && child.GetComponent<Property>().Card.type == "House" && child.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder == 2)
-                    {
-                        print("Need to sign " + child.name);
-                        long[] res = calcContract(child.GetComponent<Property>().Card, cellIndex, child.gameObject);
-                        totalIncome += res[0];
-                        totalTenants += res[1];
-                        totalXP += res[2];
-                        totalCost += res[3];
-                    }
-                }
-
-                signAllCost = totalCost;
-                if (totalIncome >= 10000000)
-                {
-                    string temp = totalIncome.ToString("#,##0");
-                    incomeText.text = "$" + temp.Substring(0, temp.Length - 8) + "M";
-                }
-                else
-                {
-                    incomeText.text = "$" + totalIncome.ToString("#,##0");
-                }
-
-                if (totalXP >= 10000000)
-                {
-                    string temp = totalXP.ToString("#,##0");
-                    xpText.text = temp.Substring(0, temp.Length - 8) + "M XP";
-                }
-                else
-                {
-                    xpText.text = totalXP.ToString("#,##0") + " XP";
-                }
-
-                if (totalTenants >= 10000000)
-                {
-                    string temp = totalTenants.ToString("#,##0");
-                    tenantsText.text = temp.Substring(0, temp.Length - 8) + "M";
-                }
-                else
-                {
-                    tenantsText.text = totalTenants.ToString("#,##0");
-                }
-
-                if (totalCost >= 10000000)
-                {
-                    string temp = totalCost.ToString("#,##0");
-                    costText.text = "$" + temp.Substring(0, temp.Length - 8) + "M";
-                }
-                else
-                {
-                    costText.text = "$" + totalCost.ToString("#,##0");
-                }
+                incomeText.text = "$" + totalIncome.ToString("#,##0") + "++";
             }
+            if (goCalc == true)
+            {
+                incomeText.text = incomeText.text.Substring(0, incomeText.text.Length - 2);
+            }
+
+            if (totalXP >= 10000000)
+            {
+                string temp = totalXP.ToString("#,##0");
+                xpText.text = temp.Substring(0, temp.Length - 8) + "M XP";
+            }
+            else
+            {
+                xpText.text = totalXP.ToString("#,##0") + " XP";
+            }
+
+            if (totalTenants >= 10000000)
+            {
+                string temp = totalTenants.ToString("#,##0");
+                tenantsText.text = temp.Substring(0, temp.Length - 8) + "M";
+            }
+            else
+            {
+                tenantsText.text = totalTenants.ToString("#,##0");
+            }
+
+            if (totalCost >= 10000000)
+            {
+                string temp = totalCost.ToString("#,##0");
+                costText.text = "$" + temp.Substring(0, temp.Length - 8) + "M";
+            }
+            else
+            {
+                costText.text = "$" + totalCost.ToString("#,##0");
+            }
+            
         }
         switch (cellIndex)
         {

@@ -366,7 +366,7 @@ public class Property : MonoBehaviour, IPointerClickHandler
                     }
                 }
             }
-            if (this.Card.type == "House")
+            if (this.Card.type == "House" && this.gameObject.transform.childCount > 0)
             {
                 if (this.gameObject.transform.GetChild(3).gameObject.GetComponent<SpriteRenderer>().sortingOrder == 2)
                 {
@@ -528,8 +528,7 @@ public class contractScript : MonoBehaviour, IPointerClickHandler
             contractController.GetComponent<RecyclableScrollerContract>().pCard = propCard;
             contractController.GetComponent<RecyclableScrollerContract>().selProp = this.transform.parent.gameObject;
             contractController.GetComponent<RecyclableScrollerContract>().contractor = false;
-            contractController.GetComponent<RecyclableScrollerContract>().goCalc = false;
-            //contractController.GetComponent<RecyclableScrollerContract>().userReloadData();
+            contractController.GetComponent<RecyclableScrollerContract>().userReloadData();
 
             GameObject.Find("SignController").GetComponent<signController>().selProperty = this.gameObject.transform.parent.gameObject;
 
@@ -543,7 +542,7 @@ public class contractScript : MonoBehaviour, IPointerClickHandler
                     Destroy(hProp.transform.GetChild(4).gameObject);
                 }
             }
-            Invoke("calc", 0.3f);
+            //Invoke("calc", 0.2f);
         }
         
     }

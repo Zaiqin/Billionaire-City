@@ -291,20 +291,23 @@ public class MapManager : MonoBehaviour
                             foreach (var item in alist)
                             {
                                 //print("testing " + new Vector3Int(item.x, item.y, 0) + " with name " + map.GetTile(new Vector3Int(item.x, item.y, 0)).name);
-                                if (map.GetTile(new Vector3Int(item.x, item.y, 0)).name.Contains("road"))
+                                if (map.GetTile(new Vector3Int(item.x, item.y, 0)) != null)
                                 {
-                                    //print("contain road");
-                                    test = Astar.GetComponent<Astar>().AStarFunc(new Vector2Int(item.x, item.y), new Vector2Int(0, -1), map);
-                                    print("test astar is " + test);
-                                    if (test == true)
+                                    if (map.GetTile(new Vector3Int(item.x, item.y, 0)).name.Contains("road"))
                                     {
-                                        break;
+                                        //print("contain road");
+                                        test = Astar.GetComponent<Astar>().AStarFunc(new Vector2Int(item.x, item.y), new Vector2Int(0, -1), map);
+                                        print("test astar is " + test);
+                                        if (test == true)
+                                        {
+                                            break;
+                                        }
                                     }
-                                }
-                                else
-                                {
-                                    //print("no road");
-                                    test = false;
+                                    else
+                                    {
+                                        //print("no road");
+                                        test = false;
+                                    }
                                 }
                             }
                             if (test == true)

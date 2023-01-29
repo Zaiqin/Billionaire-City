@@ -48,11 +48,17 @@ public class signContractor : MonoBehaviour
                 }
             }
 
-            Invoke("calcAll", 0.3f);
+            Invoke("calcAll", 0.2f);
         }
     }
 
     void calcAll()
+    {
+        GameObject contractController = GameObject.Find("Contract Scroll Controller");
+        contractController.GetComponent<RecyclableScrollerContract>().userReloadData();
+    }
+
+    public void calcActual()
     {
         GameObject contractController = GameObject.Find("Contract Scroll Controller");
         contractController.GetComponent<RecyclableScrollerContract>().goCalc = true;

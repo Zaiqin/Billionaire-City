@@ -24,7 +24,7 @@ public class plotManager : MonoBehaviour
 
     public AudioClip deleteSound;
 
-    public GameObject floatingValue, hq, splashObject, saveObj, pendingParent, cover, extAudio, tabGroup;
+    public GameObject floatingValue, hq, splashObject, saveObj, pendingParent, cover, extAudio, tabGroup, boostBar;
 
     public Camera mainCam;
 
@@ -340,22 +340,24 @@ public class plotManager : MonoBehaviour
             Tile aclickedTile = map.GetTile<Tile>(agridPosition);
             //print("clicked on tile: " + aclickedTile.name + " at position: " + agridPosition);
 
-            if (aclickedTile.name.Contains("plot") && cover.activeSelf == false && plotToggle.isOn == false && roadToggle.isOn == false && deleteToggle.isOn == false && shopToggle.GetComponent<Toggle>().isOn == false && pendingParent.transform.childCount == 0 && startInUI == false && mainCam.GetComponent<CameraMovement>().dragging == false)
+            if (aclickedTile.name.Contains("plot") && cover.activeSelf == false && plotToggle.isOn == false && roadToggle.isOn == false && deleteToggle.isOn == false && shopToggle.GetComponent<Toggle>().isOn == false && pendingParent.transform.childCount == 0 && startInUI == false && mainCam.GetComponent<CameraMovement>().dragging == false && boostBar.activeSelf == false)
             {
-                shopToggle.GetComponent<UIToggle>().toggleToggles(shopToggle);
-                shopToggle.GetComponent<shopButton>().shopToggle.isOn = true;
-                shopToggle.GetComponent<shopButton>().ShopMenu.SetActive(true);
-                shopToggle.GetComponent<shopButton>().ShopMenu.transform.localScale = Vector2.zero;
-                shopToggle.GetComponent<shopButton>().ShopMenu.transform.LeanScale(new Vector2(73.9463f, 73.9463f), 0.2f).setEaseOutBack();
-                if (tabGroup.GetComponent<TabGroup>().selectedTab.name == "Wonders Tab")
-                {
-                    shopToggle.GetComponent<shopButton>().rect.ReloadData();
-                }
-                if (shopToggle.GetComponent<shopButton>().requireReload == true)
-                {
-                    shopToggle.GetComponent<shopButton>().rect.ReloadData();
-                    shopToggle.GetComponent<shopButton>().requireReload = false;
-                }
+                
+                    shopToggle.GetComponent<UIToggle>().toggleToggles(shopToggle);
+                    shopToggle.GetComponent<shopButton>().shopToggle.isOn = true;
+                    shopToggle.GetComponent<shopButton>().ShopMenu.SetActive(true);
+                    shopToggle.GetComponent<shopButton>().ShopMenu.transform.localScale = Vector2.zero;
+                    shopToggle.GetComponent<shopButton>().ShopMenu.transform.LeanScale(new Vector2(73.9463f, 73.9463f), 0.2f).setEaseOutBack();
+                    if (tabGroup.GetComponent<TabGroup>().selectedTab.name == "Wonders Tab")
+                    {
+                        shopToggle.GetComponent<shopButton>().rect.ReloadData();
+                    }
+                    if (shopToggle.GetComponent<shopButton>().requireReload == true)
+                    {
+                        shopToggle.GetComponent<shopButton>().rect.ReloadData();
+                        shopToggle.GetComponent<shopButton>().requireReload = false;
+                    }
+                
             }
             startInUI = false;
         }

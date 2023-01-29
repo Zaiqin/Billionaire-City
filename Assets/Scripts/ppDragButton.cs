@@ -235,6 +235,7 @@ public class ppDragButton : MonoBehaviour
             {
                 if (storageToggle.GetComponent<Toggle>().isOn == false && moveToggle.GetComponent<Toggle>().isOn == false)
                 {
+                    shopMenu.GetComponent<PurchaseController>().hideUI();
                     pp.transform.GetChild(0).gameObject.AddComponent<BoxCollider2D>();
                     pp.transform.GetChild(0).gameObject.GetComponent<BoxCollider2D>().size = new Vector2(float.Parse(pp.Card.influence.Substring(0, 2)) - 0.2f, float.Parse(pp.Card.influence.Substring(pp.Card.influence.Length - 2)) - 0.2f);
                     shopToggle.GetComponent<Toggle>().isOn = true;
