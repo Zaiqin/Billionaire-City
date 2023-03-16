@@ -1,5 +1,7 @@
 # Billionaire City
 
+<img src="https://play-lh.googleusercontent.com/KAwXsgRuEtdcXpJ2wlEdb4m4zlCPPigJqbYPQvK13Ib-GEvqJlsTJfuE1I9fUHK9oVo=w526-h296-rw">
+
 Based on the popular game Millionaire City, presenting to you.. Billionaire City!
 
 Billionaire City is a city building game where you build Properties and earn your way to a Billion Dollars.
